@@ -1,3 +1,8 @@
+# urls.py (ADAM)
+# !/usr/bin/env python3
+# coding=utf-8
+# ruiz-mercado.gerardo@epa.gov
+
 """ADAM URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:

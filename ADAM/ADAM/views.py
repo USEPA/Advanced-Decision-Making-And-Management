@@ -1,3 +1,8 @@
+# views.py (ADAM)
+# !/usr/bin/env python3
+# coding=utf-8
+# ruiz-mercado.gerardo@epa.gov
+
 # for the main page
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
