@@ -1,1 +1,0 @@
-*/15 * * * * cd /home/bitnami/ADAM && ./check.sh
