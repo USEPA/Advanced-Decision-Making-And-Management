@@ -7,7 +7,6 @@ import csv
 import shutil
 
 
-# Create your models here.
 class UserInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     organization = models.CharField(max_length=100, default=None)

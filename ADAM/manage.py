@@ -1,10 +1,17 @@
 #!/usr/bin/env python
-"""Django's command-line utility for administrative tasks."""
+"""
+Command-line utility for administrative tasks.
+
+# For more information about this file, visit
+# https://docs.djangoproject.com/en/2.1/ref/django-admin/
+"""
+
+# Run localhost VS Code. Check 'venv' hit 'F5' select 'Django'
+
 import os
 import sys
 
-
-def main():
+if __name__ == '__main__':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ADAM.settings')
     try:
         from django.core.management import execute_from_command_line
@@ -15,7 +22,3 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
     execute_from_command_line(sys.argv)
-
-
-if __name__ == '__main__':
-    main()

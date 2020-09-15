@@ -1,17 +1,22 @@
 from django.contrib import admin
 from .models import *
 
+
 class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ('id',)
+
 
 class TechnologyAdmin(admin.ModelAdmin):
     readonly_fields = ('id',)
 
+
 class CasestudyAdmin(admin.ModelAdmin):
     readonly_fields = ('id',)
 
+
 class CaseGroupAdmin(admin.ModelAdmin):
     readonly_fields = ('id',)
+
 
 # Register your models here.
 admin.site.register(UserInfo)

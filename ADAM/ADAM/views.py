@@ -15,18 +15,23 @@ import subprocess
 import os
 import sys
 
-def id_generator(size=20, chars=string.ascii_uppercase + string.digits): # to generate a random string as a pseudo id for tasks
+
+# to generate a random string as a pseudo id for tasks
+def id_generator(size=20, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
+
 def main(request):
-	return render(request, 'main.html')
+    return render(request, 'main.html')
+
 
 def getdata(request):
     if request.POST:
         data = request.POST
         id = data['id']
         state = id[6:].capitalize()
-        filename = os.path.join(settings.STATICFILES_DIRS[0], 'maindata/'+id+'.csv')
+        filename = os.path.join(
+            settings.STATICFILES_DIRS[0], 'maindata/' + id + '.csv')
         with open(filename, newline='') as csvfile:
             lsdata = list(csv.reader(csvfile))
         ls = lsdata[1:]
@@ -34,6 +39,7 @@ def getdata(request):
         return JsonResponse({'id': id, 'ls': ls})
     else:
         return HttpResponse("Invalid request!")
+
 
 def getbounds(request):
     if request.POST:
@@ -44,20 +50,26 @@ def getbounds(request):
     else:
         return HttpResponse("Invalid request!")
 
+
 def support(request):
-	return render(request, 'support.html')
+    return render(request, 'support.html')
+
 
 def whatisthis(request):
-	return render(request, 'whatisthis.html')
+    return render(request, 'whatisthis.html')
+
 
 def tryit(request):
     return render(request, 'tryit.html')
 
+
 def tryit_eg1(request):
     return render(request, 'tryit_eg1.html')
 
+
 def tryit_eg2(request):
-	return render(request, 'tryit_eg2.html')
+    return render(request, 'tryit_eg2.html')
+
 
 def beginsolveeg2(request):
     user = request.user
@@ -73,58 +85,77 @@ def beginsolveeg2(request):
         techdata = json.loads(data['techdata'])
         alphadata = json.loads(data['alphadata'])
         pseudoID = id_generator()
-        ## generate files and begin to solve and wait
-        nodefilename = settings.MEDIA_ROOT + '/public/eg2_node_'+ pseudoID + '.csv'
-        techfilename = settings.MEDIA_ROOT + '/public/eg2_tech_'+ pseudoID + '.csv'
-        supfilename = settings.MEDIA_ROOT + '/public/eg2_sup_'+ pseudoID + '.csv'
-        demfilename = settings.MEDIA_ROOT + '/public/eg2_dem_'+ pseudoID + '.csv'
-        sitefilename = settings.MEDIA_ROOT + '/public/eg2_site_'+ pseudoID + '.csv'
-        prodfilename = settings.MEDIA_ROOT + '/public/eg2_prod_'+ pseudoID + '.csv'
-        candfilename = settings.MEDIA_ROOT + '/public/eg2_cand_'+ pseudoID + '.csv'
-        alphafilename = settings.MEDIA_ROOT + '/public/eg2_alpha_'+ pseudoID + '.csv'
+        # generate files and begin to solve and wait
+        nodefilename = settings.MEDIA_ROOT + '/public/eg2_node_' + \
+            pseudoID + '.csv'
+        techfilename = settings.MEDIA_ROOT + '/public/eg2_tech_' + \
+            pseudoID + '.csv'
+        supfilename = settings.MEDIA_ROOT + '/public/eg2_sup_' + \
+            pseudoID + '.csv'
+        demfilename = settings.MEDIA_ROOT + '/public/eg2_dem_' + \
+            pseudoID + '.csv'
+        sitefilename = settings.MEDIA_ROOT + '/public/eg2_site_' + \
+            pseudoID + '.csv'
+        prodfilename = settings.MEDIA_ROOT + '/public/eg2_prod_' + \
+            pseudoID + '.csv'
+        candfilename = settings.MEDIA_ROOT + '/public/eg2_cand_' + \
+            pseudoID + '.csv'
+        alphafilename = settings.MEDIA_ROOT + '/public/eg2_alpha_' + \
+            pseudoID + '.csv'
         codepath = settings.MEDIA_ROOT + '/public/supply_chain_design_eg2.jl'
 
         with open(nodefilename, 'w') as csvfile:
-        	writer = csv.writer(csvfile, delimiter=',')
-        	writer.writerow(['#node', 'lat', 'lng'])
-        	for i in range(len(nodedata)):
-        		writer.writerow(nodedata[i])
+            writer = csv.writer(csvfile, delimiter=',')
+            writer.writerow(['#node', 'lat', 'lng'])
+            for i in range(len(nodedata)):
+                writer.writerow(nodedata[i])
+
         with open(supfilename, 'w') as csvfile:
-        	writer = csv.writer(csvfile, delimiter=',')
-        	writer.writerow(['#sup','node','prod','price','cap'])
-        	for i in range(len(supdata)):
-        		writer.writerow(supdata[i])
+            writer = csv.writer(csvfile, delimiter=',')
+            writer.writerow(['#sup', 'node', 'prod', 'price', 'cap'])
+            for i in range(len(supdata)):
+                writer.writerow(supdata[i])
+
         with open(demfilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
-            writer.writerow(['#dem','node','prod','price','cap'])
+            writer.writerow(['#dem', 'node', 'prod', 'price', 'cap'])
             for i in range(len(demdata)):
                 writer.writerow(demdata[i])
+
         with open(sitefilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
-            writer.writerow(['#site','node','tech', 'cap'])
+            writer.writerow(['#site', 'node', 'tech', 'cap'])
             for i in range(len(sitedata)):
                 writer.writerow(sitedata[i])
+
         with open(candfilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
-            writer.writerow(['#cand','node','tech'])
+            writer.writerow(['#cand', 'node', 'tech'])
             for i in range(len(canddata)):
                 writer.writerow(canddata[i])
+
         with open(prodfilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
-            writer.writerow(['#prod','name','transcost'])
+            writer.writerow(['#prod', 'name', 'transcost'])
             for i in range(len(proddata)):
                 writer.writerow(proddata[i])
+
         with open(techfilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
-            writer.writerow(['#tech','name','capmin','capmax','refprod','Kinv','Binv','Kop','Bop'])
+            writer.writerow(['#tech', 'name', 'capmin', 'capmax', 'refprod',
+                             'Kinv', 'Binv', 'Kop', 'Bop'])
             for i in range(len(techdata)):
                 writer.writerow(techdata[i])
+
         with open(alphafilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
             for i in range(len(alphadata)):
                 writer.writerow(alphadata[i])
 
-        cmd = ["/home/bitnami/julia-1.1.1/bin/julia", codepath, nodefilename, supfilename, demfilename, sitefilename, candfilename, prodfilename, techfilename, alphafilename, pseudoID]
+        cmd = [
+            "/home/bitnami/julia-1.1.1/bin/julia", codepath, nodefilename,
+            supfilename, demfilename, sitefilename, candfilename,
+            prodfilename, techfilename, alphafilename, pseudoID]
         print(cmd)
         p = subprocess.Popen(cmd, stderr=sys.stderr, stdout=sys.stdout)
 
@@ -134,108 +165,156 @@ def beginsolveeg2(request):
     else:
         return HttpResponse("Invalid request!")
 
+
 def eg2_results(request, id):
 
     error = 0
     id_string = id
 
-    nodefilename = settings.MEDIA_ROOT + '/public/eg2_node_'+ id_string + '.csv'
-    techfilename = settings.MEDIA_ROOT + '/public/eg2_tech_'+ id_string + '.csv'
-    supfilename = settings.MEDIA_ROOT + '/public/eg2_sup_'+ id_string + '.csv'
-    demfilename = settings.MEDIA_ROOT + '/public/eg2_dem_'+ id_string + '.csv'
-    candfilename = settings.MEDIA_ROOT + '/public/eg2_cand_'+ id_string + '.csv'
-    sitefilename = settings.MEDIA_ROOT + '/public/eg2_site_'+ id_string + '.csv'
-    prodfilename = settings.MEDIA_ROOT + '/public/eg2_prod_'+ id_string + '.csv'
-    #distfilename = settings.MEDIA_ROOT + '/public/eg2_dist_'+ id_string + '.csv'
-    alphafilename = settings.MEDIA_ROOT + '/public/eg2_alpha_'+ id_string + '.csv'
-    summaryfilename = settings.MEDIA_ROOT + '/public/results_summary_'+ id_string + '.csv'
+    nodefilename = settings.MEDIA_ROOT + '/public/eg2_node_' + \
+        id_string + '.csv'
+    techfilename = settings.MEDIA_ROOT + '/public/eg2_tech_' + \
+        id_string + '.csv'
+    supfilename = settings.MEDIA_ROOT + '/public/eg2_sup_' + \
+        id_string + '.csv'
+    demfilename = settings.MEDIA_ROOT + '/public/eg2_dem_' + \
+        id_string + '.csv'
+    candfilename = settings.MEDIA_ROOT + '/public/eg2_cand_' + \
+        id_string + '.csv'
+    sitefilename = settings.MEDIA_ROOT + '/public/eg2_site_' + \
+        id_string + '.csv'
+    prodfilename = settings.MEDIA_ROOT + '/public/eg2_prod_' + \
+        id_string + '.csv'
+    # distfilename = settings.MEDIA_ROOT + '/public/eg2_dist_' + \
+    # id_string + '.csv'
+    alphafilename = settings.MEDIA_ROOT + '/public/eg2_alpha_' + \
+        id_string + '.csv'
+    summaryfilename = settings.MEDIA_ROOT + '/public/results_summary_' + \
+        id_string + '.csv'
 
     transfilenamels = []
-    #for i in range(6):
-    #    name = settings.MEDIA_ROOT + '/public/eg2_trans' + str(i) + '_'+ id_string + '.csv'
+    # for i in range(6):
+    #    name = settings.MEDIA_ROOT + '/public/eg2_trans' + str(i) + \
+    #        '_' + id_string + '.csv'
     #    transfilenamels.append(name)
 
     transresultnamels = []
-    for i in [1,2,3,4,5]:
-        name = settings.MEDIA_ROOT + '/public/flow_results_p' + str(i) + '_'+ id_string + '.csv'
+    for i in [1, 2, 3, 4, 5]:
+        name = settings.MEDIA_ROOT + '/public/flow_results_p' + str(i) + \
+            '_' + id_string + '.csv'
         transresultnamels.append(name)
     distdata = []
 
     summary = ''
-    #try:
+    # try:
     with open(summaryfilename, newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
         for row in spamreader:
             summary += ': '.join(row)
             summary += '\n'
-    with open(prodfilename, newline = '') as csvfile:
-        data = list(csv.reader(csvfile))
-    prodlist = [{'prod_id': data[i][0], 'prodname': data[i][1], 'transcost': data[i][2], 'prodnote': ''} for i in range(1,len(data))]
-    with open(techfilename, newline = '') as csvfile:
-        data = list(csv.reader(csvfile))
-    techlist = [{'tech_id': data[i][0], 'techname': data[i][1], 'capmin': data[i][2], 'capmax': data[i][3], 'refprod': data[i][4], 'Kinv': data[i][5], 'Binv': data[i][6], 'Kop': data[i][7], 'Bop': data[i][8]} for i in range(1,len(data))]
-    with open(alphafilename, newline = '') as csvfile:
-        data = list(csv.reader(csvfile))
-    yieldlist = [data[0][0],data[0][1],data[0][2],data[1][0],data[1][2],data[1][3],data[2][0],data[2][2],data[2][4]]
-    with open(nodefilename, newline = '') as csvfile:
-        data = list(csv.reader(csvfile))
-    nodelist = [{'node': data[i][0], 'x': data[i][1], 'y': data[i][2], 'cand': 0, name: 'Anon.'} for i in range(1, len(data))]
 
-    with open(supfilename, newline = '') as csvfile:
+    with open(prodfilename, newline='') as csvfile:
+        data = list(csv.reader(csvfile))
+
+    prodlist = [
+        {'prod_id': data[i][0], 'prodname': data[i][1],
+         'transcost': data[i][2], 'prodnote': ''} for i in range(1, len(data))
+    ]
+
+    with open(techfilename, newline='') as csvfile:
+        data = list(csv.reader(csvfile))
+
+    techlist = [{
+        'tech_id': data[i][0], 'techname': data[i][1], 'capmin': data[i][2],
+        'capmax': data[i][3], 'refprod': data[i][4], 'Kinv': data[i][5],
+        'Binv': data[i][6], 'Kop': data[i][7], 'Bop': data[i][8]}
+        for i in range(1, len(data))]
+
+    with open(alphafilename, newline='') as csvfile:
+        data = list(csv.reader(csvfile))
+
+    yieldlist = [data[0][0], data[0][1], data[0][2], data[1][0],
+                 data[1][2], data[1][3], data[2][0], data[2][2], data[2][4]]
+
+    with open(nodefilename, newline='') as csvfile:
+        data = list(csv.reader(csvfile))
+
+    nodelist = [
+        {'node': data[i][0], 'x': data[i][1], 'y': data[i][2],
+         'cand': 0, name: 'Anon.'} for i in range(1, len(data))
+    ]
+
+    with open(supfilename, newline='') as csvfile:
         supdata = list(csv.reader(csvfile))
 
-    with open(demfilename, newline = '') as csvfile:
+    with open(demfilename, newline='') as csvfile:
         demdata = list(csv.reader(csvfile))
 
-    with open(sitefilename, newline = '') as csvfile:
+    with open(sitefilename, newline='') as csvfile:
         sitedata = list(csv.reader(csvfile))
 
     transdata = []
-    #for i in range(6):
+
+    # for i in range(6):
     #    name = transfilenamels[i]
-    #    with open(name, newline = '') as csvfile:
+    #    with open(name, newline='') as csvfile:
     #        data = list(csv.reader(csvfile))
-    #    data = [[data[i][j] for j in range(1, len(data[0]))] for i in range(1, len(data))]
+    #    data = [[data[i][j] for j in range(
+    #       1, len(data[0]))] for i in range(1, len(data))]
     #    transdata.append(data)
 
     transresult = []
     for i in range(5):
         name = transresultnamels[i]
-        with open(name, newline = '') as csvfile:
+        with open(name, newline='') as csvfile:
             data = list(csv.reader(csvfile))
-        data = [[data[i][j] for j in range(1, len(data[0]))] for i in range(1, len(data))]
+        data = [[
+            data[i][j] for j in range(1, len(data[0]))]
+            for i in range(1, len(data))]
         transresult.append(data)
 
-    #except:
+    # except:
     #    summary = 'Request not valid!'
     #    error = 1
-    #else:
+    # else:
     #    pass
-    return render(request, 'eg2_results.html', {'id': id_string, 'summary': summary, 'proddata': prodlist, 'techdata': techlist, 'yielddata':yieldlist, 'nodedata': nodelist, 'distdata': distdata, 'supdata': supdata, 'demdata': demdata, 'sitedata': sitedata, 'transdata': transdata, 'transresult': transresult})
+
+    return render(
+        request, 'eg2_results.html', {
+            'id': id_string, 'summary': summary, 'proddata': prodlist,
+            'techdata': techlist, 'yielddata': yieldlist, 'nodedata': nodelist,
+            'distdata': distdata, 'supdata': supdata, 'demdata': demdata,
+            'sitedata': sitedata, 'transdata': transdata,
+            'transresult': transresult
+            }
+        )
+
 
 def contact(request):
-	submitted = False
-	if request.method == 'POST':
-		form = ContactForm(request.POST)
-		if form.is_valid():
-			cd = form.cleaned_data
+    submitted = False
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
             # assert False
-			con = get_connection('django.core.mail.backends.console.EmailBackend')
-			send_mail(
-				cd['subject'],
-				'From: ' + cd['email'] + '\n' + cd['message'],
-				'email-host@xxx.com',
-				['service-email@xxx.com'], # service email
-				fail_silently = False)
-			send_mail(
-				'Message Received',
-				'We have reveived your message and will respond to you soon!',
-				'email-host@xxx.com',
-				[cd['email']], # service email
-				fail_silently = False)
-			return HttpResponseRedirect('/contact?submitted=True')
-	else:
-		form = ContactForm()
-		if 'submitted' in request.GET:
-			submitted = True
-		return render(request, 'contact.html', {'form': form, 'submitted': submitted})
+            con = get_connection(
+                'django.core.mail.backends.console.EmailBackend')
+            send_mail(
+                cd['subject'],
+                'From: ' + cd['email'] + '\n' + cd['message'],
+                'email-host@xxx.com',
+                ['service-email@xxx.com'],  # service email
+                fail_silently=False)
+            send_mail(
+                'Message Received',
+                'We have reveived your message and will respond to you soon!',
+                'email-host@xxx.com',
+                [cd['email']],  # service email
+                fail_silently=False)
+            return HttpResponseRedirect('/contact?submitted=True')
+    else:
+        form = ContactForm()
+        if 'submitted' in request.GET:
+            submitted = True
+        return render(request, 'contact.html',
+                      {'form': form, 'submitted': submitted})

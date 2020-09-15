@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
     'demo.apps.DemoConfig',
-    'main.apps.MainConfig',
+    'expert.apps.ExpertConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
