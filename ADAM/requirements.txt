@@ -1,0 +1,7 @@
+boto3
+django
+django-background-tasks
+django-storages
+django_extensions
+django_mysql
+mysql
