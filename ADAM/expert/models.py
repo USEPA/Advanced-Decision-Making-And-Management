@@ -1,3 +1,9 @@
+# models.py (expert)
+# !/usr/bin/env python3
+# coding=utf-8
+# ruiz-mercado.gerardo@epa.gov
+
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings

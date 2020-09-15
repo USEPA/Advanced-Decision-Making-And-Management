@@ -1,3 +1,9 @@
+# check.py
+# !/usr/bin/env python3
+# coding=utf-8
+# ruiz-mercado.gerardo@epa.gov
+
+
 from background_task import background
 from django.core.mail import send_mail, EmailMessage
 from django.utils import timezone

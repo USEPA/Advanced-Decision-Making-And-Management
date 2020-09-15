@@ -1,3 +1,9 @@
+# tasks.py (expert)
+# !/usr/bin/env python3
+# coding=utf-8
+# ruiz-mercado.gerardo@epa.gov
+
+
 # All background tasks
 from background_task import background
 from django.core.mail import send_mail

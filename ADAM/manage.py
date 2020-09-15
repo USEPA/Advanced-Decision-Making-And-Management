@@ -1,4 +1,9 @@
-#!/usr/bin/env python
+# manage.py
+# !/usr/bin/env python3
+# coding=utf-8
+# ruiz-mercado.gerardo@epa.gov
+
+
 """
 Command-line utility for administrative tasks.
 

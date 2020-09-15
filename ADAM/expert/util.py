@@ -1,3 +1,9 @@
+# util.py (expert)
+# !/usr/bin/env python3
+# coding=utf-8
+# ruiz-mercado.gerardo@epa.gov
+
+
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
