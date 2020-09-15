@@ -4,23 +4,33 @@
 # ruiz-mercado.gerardo@epa.gov
 
 
+"""Add docstring."""
+
 from django.contrib import admin
 from .models import *
 
 
 class ProductAdmin(admin.ModelAdmin):
+    """Add docstring."""
+
     readonly_fields = ('id',)
 
 
 class TechnologyAdmin(admin.ModelAdmin):
+    """Add docstring."""
+
     readonly_fields = ('id',)
 
 
 class CasestudyAdmin(admin.ModelAdmin):
+    """Add docstring."""
+
     readonly_fields = ('id',)
 
 
 class CaseGroupAdmin(admin.ModelAdmin):
+    """Add docstring."""
+
     readonly_fields = ('id',)
 
 

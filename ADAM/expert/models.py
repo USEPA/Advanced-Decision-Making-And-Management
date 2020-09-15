@@ -3,6 +3,8 @@
 # coding=utf-8
 # ruiz-mercado.gerardo@epa.gov
 
+"""Add docstring."""
+
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -14,11 +16,15 @@ import shutil
 
 
 class UserInfo(models.Model):
+    """Add docstring."""
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     organization = models.CharField(max_length=100, default=None)
 
 
 class CaseStudy(models.Model):
+    """Add docstring."""
+
     name = models.CharField(max_length=100, default='Case Study Scenario')
     timeunit = models.CharField(max_length=20, default='year')
     model_type = models.IntegerField(default=1)
@@ -71,9 +77,11 @@ class CaseStudy(models.Model):
     target_taskid = models.IntegerField(default=-1)
 
     def __str__(self):
+        """Add docstring."""
         return self.name
 
     def copyfiles(self, task):
+        """Add docstring."""
         user = task.user
         task_id = task.id
         folder = settings.MEDIA_ROOT + '/' + str(user.id) + '_' + \
@@ -93,6 +101,7 @@ class CaseStudy(models.Model):
         return
 
     def delete(self, *args, **kwargs):
+        """Add docstring."""
         try:
             path = settings.MEDIA_ROOT + '/casestudies/' + str(self.id) + \
                 '_' + self.name + '/'
@@ -106,6 +115,7 @@ class CaseStudy(models.Model):
         super(CaseStudy, self).delete(*args, **kwargs)
 
     def getprodlist(self):
+        """Add docstring."""
         folder = settings.MEDIA_ROOT + '/casestudies/' + str(self.id) + \
             '_' + self.name + '/'
         prodlist = []
@@ -119,6 +129,7 @@ class CaseStudy(models.Model):
         return prodlist
 
     def gettechlist(self):
+        """Add docstring."""
         folder = settings.MEDIA_ROOT + '/casestudies/' + str(self.id) + \
             '_' + self.name + '/'
         techlist = []
@@ -133,6 +144,8 @@ class CaseStudy(models.Model):
 
 
 class CaseGroup(models.Model):
+    """Add docstring."""
+
     name = models.CharField(max_length=100, default='Case Study')
     notes = models.CharField(default='', max_length=1000)
     published = models.BooleanField(default=False)
@@ -143,21 +156,29 @@ class CaseGroup(models.Model):
     )
 
     def __str__(self):
+        """Add docstring."""
         return self.name
 
 
 class GroupHasCase(models.Model):
+    """Add docstring."""
+
     casegroup = models.ForeignKey(CaseGroup, on_delete=models.CASCADE)
     casestudy = models.ForeignKey(CaseStudy, on_delete=models.CASCADE)
 
     def __str__(self):
+        """Add docstring."""
         return self.casegroup.name + '-' + self.casestudy.name
 
     class Meta:
+        """Add docstring."""
+
         unique_together = ["casegroup", "casestudy"]
 
 
 class OptTask(models.Model):
+    """Add docstring."""
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     task_name = models.CharField(max_length=100, default='New Task')
     task_pseudoid = models.CharField(max_length=20,
@@ -218,9 +239,11 @@ class OptTask(models.Model):
     tasktransfile = models.BooleanField(default=True)
 
     def __str__(self):
+        """Add docstring."""
         return self.user.username + '_' + self.task_name
 
     def getprodlist(self):
+        """Add docstring."""
         prod_list = []
         prodfile = self.prod_path
         try:
@@ -246,6 +269,7 @@ class OptTask(models.Model):
             return False
 
     def gettechlist(self):
+        """Add docstring."""
         tech_list = []
         techfile = self.tech_path
         try:
@@ -276,6 +300,7 @@ class OptTask(models.Model):
             return False
 
     def delete(self, *args, **kwargs):
+        """Add docstring."""
         try:
             path = settings.MEDIA_ROOT + '/' + str(self.user.id) + '_' + \
                 self.user.username + '/task_' + str(self.id) + '/'
@@ -290,17 +315,21 @@ class OptTask(models.Model):
 
 
 def filepath(instance, filename):
+    """Add docstring."""
     return '{0}_{1}/data_documents/{2}-{3}-{4}/{5}'.format(
         instance.user.id, instance.user.username, timezone.now().year,
         timezone.now().month, timezone.now().day, filename)
 
 
 def temppath(instance, filename):
+    """Add docstring."""
     return '{0}_{1}/temp_documents/{2}'.format(
         instance.user.id, instance.user.username, filename)
 
 
 class DataDocument(models.Model):
+    """Add docstring."""
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     TYPES = [
         ('Supply Data', 'Supply Data'),
@@ -318,15 +347,19 @@ class DataDocument(models.Model):
     notes = models.CharField(max_length=200, default='No Notes')
 
     def name(self):
+        """Add docstring."""
         return self.__class__.__name__
 
     def shortfilename(self):
+        """Add docstring."""
         return os.path.basename(self.docfile.name)
 
     def __str__(self):
+        """Add docstring."""
         return str(self.docfile)
 
     def delete(self, *args, **kwargs):
+        """Add docstring."""
         try:
             os.remove(os.path.join(settings.MEDIA_ROOT, self.docfile.name))
         except Exception:
@@ -335,28 +368,37 @@ class DataDocument(models.Model):
 
 
 class TempDocument(models.Model):
+    """Add docstring."""
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     docfile = models.FileField(upload_to=temppath)
     date_upload = models.DateTimeField('date uploaded')
 
     def name(self):
+        """Add docstring."""
         return self.__class__.__name__
 
     def shortfilename(self):
+        """Add docstring."""
         return os.path.basename(self.docfile.name)
 
     def __str__(self):
+        """Add docstring."""
         return str(self.docfile)
 
     def delete(self, *args, **kwargs):
+        """Add docstring."""
         os.remove(os.path.join(settings.MEDIA_ROOT, self.docfile.name))
         super(TempDocument, self).delete(*args, **kwargs)
 
     def datatype(self):
+        """Add docstring."""
         return "Temporary Files"
 
 
 class OptTaskResults(models.Model):
+    """Add docstring."""
+
     task = models.OneToOneField(OptTask, on_delete=models.CASCADE)
     summary = models.CharField(max_length=5000)
     resultspath = models.CharField(max_length=1000, default='')
@@ -364,6 +406,8 @@ class OptTaskResults(models.Model):
 
 # Technology and product database system
 class Product(models.Model):
+    """Add docstring."""
+
     name = models.CharField(max_length=100)
     transcost = models.FloatField(default=0.0)
     UNITS = [
@@ -386,9 +430,11 @@ class Product(models.Model):
     public = models.BooleanField(default=True)
 
     def __str__(self):
+        """Add docstring."""
         return self.name
 
     def onpublic(self):
+        """Add docstring."""
         for u in User.objects.all():
             b = u.userdatabase
             try:
@@ -399,6 +445,8 @@ class Product(models.Model):
 
 
 class Technology(models.Model):
+    """Add docstring."""
+
     name = models.CharField(max_length=100)
     capmin = models.FloatField(default=0.0)
     capmax = models.FloatField(default=0.0)
@@ -418,9 +466,11 @@ class Technology(models.Model):
     public = models.BooleanField(default=True)
 
     def __str__(self):
+        """Add docstring."""
         return self.name
 
     def refprod(self):
+        """Add docstring."""
         translist = Transformation.objects.filter(technology=self)
         min_y = 1
         refprod = None
@@ -430,6 +480,7 @@ class Technology(models.Model):
         return refprod
 
     def yields(self):
+        """Add docstring."""
         yields = []
         for p in self.prods.all():
             trans = Transformation.objects.filter(
@@ -438,6 +489,7 @@ class Technology(models.Model):
         return yields
 
     def onpublic(self):
+        """Add docstring."""
         for u in User.objects.all():
             b = u.userdatabase
             try:
@@ -448,18 +500,25 @@ class Technology(models.Model):
 
 
 class Transformation(models.Model):
+    """Add docstring."""
+
     technology = models.ForeignKey(Technology, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     transforming_coefficient = models.FloatField(default=0.0)
 
     def __str__(self):
+        """Add docstring."""
         return self.technology.name + '_' + self.product.name
 
     class Meta:
+        """Add docstring."""
+
         unique_together = ["technology", "product"]
 
 
 class PGraph(models.Model):
+    """Add docstring."""
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     date_create = models.DateTimeField('date create')
@@ -468,11 +527,14 @@ class PGraph(models.Model):
     pseudo_id = models.TextField(default="")
 
     def __str__(self):
+        """Add docstring."""
         return self.name
 
 
 # User's database system
 class UserDatabase(models.Model):
+    """Add docstring."""
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     prods = models.ManyToManyField(
         Product,
@@ -486,26 +548,37 @@ class UserDatabase(models.Model):
     )
 
     def __str__(self):
+        """Add docstring."""
         return self.user.username + ' database'
 
 
 class UserHasProd(models.Model):
+    """Add docstring."""
+
     userdatabase = models.ForeignKey(UserDatabase, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
+        """Add docstring."""
         return self.userdatabase.user.username + '_' + self.product.name
 
     class Meta:
+        """Add docstring."""
+
         unique_together = ["userdatabase", "product"]
 
 
 class UserHasTech(models.Model):
+    """Add docstring."""
+
     userdatabase = models.ForeignKey(UserDatabase, on_delete=models.CASCADE)
     technology = models.ForeignKey(Technology, on_delete=models.CASCADE)
 
     def __str__(self):
+        """Add docstring."""
         return self.userdatabase.user.username + '_' + self.technology.name
 
     class Meta:
+        """Add docstring."""
+
         unique_together = ["userdatabase", "technology"]

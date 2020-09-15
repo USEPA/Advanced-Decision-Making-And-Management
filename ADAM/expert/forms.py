@@ -3,6 +3,8 @@
 # coding=utf-8
 # ruiz-mercado.gerardo@epa.gov
 
+"""Add docstring."""
+
 
 from django import forms
 from django.forms import ModelForm
@@ -14,6 +16,8 @@ import csv
 
 
 class UserForm(forms.Form):
+    """Add docstring."""
+
     username = forms.CharField(
         label="Username",
         widget=forms.TextInput(
@@ -52,6 +56,7 @@ class UserForm(forms.Form):
         required=True)
 
     def clean(self):
+        """Add docstring."""
         # check if password matches
         password = self.cleaned_data['password']
         password_repeat = self.cleaned_data['password_repeat']
@@ -79,6 +84,8 @@ class UserForm(forms.Form):
 
 
 class LoginForm(forms.Form):
+    """Add docstring."""
+
     username = forms.CharField(
         label="Username",
         widget=forms.TextInput(
@@ -91,6 +98,7 @@ class LoginForm(forms.Form):
         required=True)
 
     def clean(self):
+        """Add docstring."""
         username = self.cleaned_data['username']
         try:
             user = User.objects.get(username=username)
@@ -102,6 +110,8 @@ class LoginForm(forms.Form):
 
 
 class TaskTypeForm(forms.Form):
+    """Add docstring."""
+
     Model_Type_List = (
         (1, 'Supply Chain Design'),
         # (2, 'Market Analysis'),
@@ -124,6 +134,8 @@ class TaskTypeForm(forms.Form):
 
 
 class TaskDataSelectionForm(forms.Form):
+    """Add docstring."""
+
     nodefile = forms.IntegerField(
         label='Select geographical data (.csv)', widget=forms.Select(
             attrs={'class': 'custom-select'}), required=True)
@@ -151,6 +163,8 @@ class TaskDataSelectionForm(forms.Form):
 
 
 class DataUploadForm(forms.Form):
+    """Add docstring."""
+
     datafile = forms.FileField(
         label='Upload a data file(.csv)', widget=forms.FileInput(
             attrs={'class': 'custom-file-input', 'onchange': 'UpdateLabel()'}),
@@ -174,12 +188,15 @@ class DataUploadForm(forms.Form):
 
 
 class TaskSelectionForm(forms.Form):
+    """Add docstring."""
+
     task_choice = forms.IntegerField(
         label='Select a completed task',
         widget=forms.Select(
             attrs={'class': 'custom-select'}), required=True)
 
     def __init__(self, *args, **kwargs):
+        """Add docstring."""
         self.user = kwargs.pop('user', None)
         super(TaskSelectionForm, self).__init__(*args, **kwargs)
         task_list = []
@@ -191,12 +208,15 @@ class TaskSelectionForm(forms.Form):
 
 
 class TaskSelectionForm2(forms.Form):
+    """Add docstring."""
+
     task_choice = forms.IntegerField(
         label='Select a completed task',
         widget=forms.Select(
             attrs={'class': 'custom-select'}), required=True)
 
     def __init__(self, *args, **kwargs):
+        """Add docstring."""
         self.user = kwargs.pop('user', None)
         super(TaskSelectionForm2, self).__init__(*args, **kwargs)
         task_list = []
@@ -206,12 +226,15 @@ class TaskSelectionForm2(forms.Form):
 
 
 class ProdSelectionForm(forms.Form):
+    """Add docstring."""
+
     prod_choice = forms.IntegerField(
         label='Select a product in this task:',
         widget=forms.Select(
             attrs={'class': 'custom-select'}), required=True)
 
     def __init__(self, *args, **kwargs):
+        """Add docstring."""
         self.task = kwargs.pop('task', None)
         super(ProdSelectionForm, self).__init__(*args, **kwargs)
         prod_list = []
@@ -232,6 +255,8 @@ class ProdSelectionForm(forms.Form):
 
 
 class SearchForm(forms.Form):
+    """Add docstring."""
+
     keywords = forms.CharField(
         widget=forms.TextInput(
             attrs={'placeholder': 'Type your keywords here',
@@ -240,7 +265,11 @@ class SearchForm(forms.Form):
 
 
 class ProductForm(ModelForm):
+    """Add docstring."""
+
     class Meta:
+        """Add docstring."""
+
         model = Product
         fields = ['name', 'unit', 'transcost', 'additionalinfo']
         labels = {
@@ -262,6 +291,8 @@ class ProductForm(ModelForm):
 
 
 class InOutNumForm(forms.Form):
+    """Add docstring."""
+
     Number_List = (
         (1, '1'),
         (2, '2'),
@@ -288,6 +319,8 @@ class InOutNumForm(forms.Form):
 
 
 class YieldInputForm(forms.Form):
+    """Add docstring."""
+
     product = forms.IntegerField(
         label='Product',
         widget=forms.Select(
@@ -308,11 +341,13 @@ class YieldInputForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
+        """Add docstring."""
         super(YieldInputForm, self).__init__(*args, **kwargs)
         self.fields['product'].widget.choices = list(
             Product.objects.all().values_list('id', 'name'))
 
     def clean(self):
+        """Add docstring."""
         yieldfactor = self.cleaned_data[yieldfactor]
         if yieldfactor >= 0:
             raise forms.ValidationError({
@@ -321,6 +356,8 @@ class YieldInputForm(forms.Form):
 
 
 class YieldOutputForm(forms.Form):
+    """Add docstring."""
+
     product = forms.IntegerField(
         label='Product',
         widget=forms.Select(
@@ -341,11 +378,13 @@ class YieldOutputForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
+        """Add docstring."""
         super(YieldOutputForm, self).__init__(*args, **kwargs)
         self.fields['product'].widget.choices = list(
             Product.objects.all().values_list('id', 'name'))
 
     def clean(self):
+        """Add docstring."""
         yieldfactor = self.cleaned_data[yieldfactor]
         if yieldfactor <= 0:
             raise forms.ValidationError({
@@ -354,8 +393,11 @@ class YieldOutputForm(forms.Form):
 
 
 class TechnologyForm(ModelForm):
+    """Add docstring."""
 
     class Meta:
+        """Add docstring."""
+
         model = Technology
         fields = ['name', 'capmin', 'capmax', 'invcost_fix', 'invcost_pro',
                   'opcost_fix', 'opcost_pro', 'notes']
@@ -392,6 +434,8 @@ class TechnologyForm(ModelForm):
 
 
 class FeedNumForm(forms.Form):
+    """Add docstring."""
+
     Number_List = (
         (1, '1'),
         (2, '2'),
@@ -412,6 +456,8 @@ class FeedNumForm(forms.Form):
 
 
 class ProdNumForm(forms.Form):
+    """Add docstring."""
+
     Number_List = (
         (1, '1'),
         (2, '2'),
@@ -432,6 +478,8 @@ class ProdNumForm(forms.Form):
 
 
 class Step2GraphCsvSelection(forms.Form):
+    """Add docstring."""
+
     Number_List = (
         (1, 'Use a Technology Graph'),
         (2, 'Use csv Files')
@@ -445,6 +493,8 @@ class Step2GraphCsvSelection(forms.Form):
 
 
 class Step2CsvFileSelection(forms.Form):
+    """Add docstring."""
+
     techlist = forms.IntegerField(
         label='Please choose technology data:', widget=forms.Select(
             attrs={'class': 'custom-select'}), required=True)
@@ -456,6 +506,7 @@ class Step2CsvFileSelection(forms.Form):
             attrs={'class': 'custom-select'}), required=True)
 
     def __init__(self, *args, **kwargs):
+        """Add docstring."""
         self.user = kwargs.pop('user', None)
         super(Step2CsvFileSelection, self).__init__(*args, **kwargs)
         tlist = [('0', 'Upload Technology Data')]
@@ -473,11 +524,14 @@ class Step2CsvFileSelection(forms.Form):
 
 
 class Step2TechGraphSelection(forms.Form):
+    """Add docstring."""
+
     graphlist = forms.IntegerField(
         label='Please choose a graph:', widget=forms.Select(
             attrs={'class': 'custom-select'}), required=True)
 
     def __init__(self, *args, **kwargs):
+        """Add docstring."""
         self.user = kwargs.pop('user', None)
         super(Step2TechGraphSelection, self).__init__(*args, **kwargs)
         glist = [('0', 'New Graph')]
@@ -487,6 +541,8 @@ class Step2TechGraphSelection(forms.Form):
 
 
 class Step3GraphCsvSelection(forms.Form):
+    """Add docstring."""
+
     Number_List2 = (
         (1, 'Cartesian coordinates (x-y)'),
         (2, 'Geographical coordinates (latitude-longitude)')
@@ -500,6 +556,8 @@ class Step3GraphCsvSelection(forms.Form):
 
 
 class VisualUploadForm(forms.Form):
+    """Add docstring."""
+
     nodefile = forms.FileField(
         label='Upload geographical data (.csv)',
         widget=forms.FileInput(

@@ -3,6 +3,8 @@
 # coding=utf-8
 # ruiz-mercado.gerardo@epa.gov
 
+"""Add docstring."""
+
 
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -984,6 +986,7 @@ def prodbaseeditprod(request):
 
 @login_required()
 def prodbasedeleteprod(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -997,7 +1000,7 @@ def prodbasedeleteprod(request):
 
 @login_required()
 def exp_techbase(request):
-    """Database System - Technology Database"""
+    """Database System - Technology Database."""
     user = request.user
     admin = user.is_staff
     prodlist = user.userdatabase.prods.all()
@@ -1058,6 +1061,7 @@ def exp_techbase(request):
 
 @login_required()
 def exp_techbase_graph(request, tech_id):
+    """Add docstring."""
     user = request.user
     tech = Technology.objects.get(pk=tech_id)
     return render(request, "exp_database_techgraph.html", {'tech': tech})
@@ -1065,6 +1069,7 @@ def exp_techbase_graph(request, tech_id):
 
 @login_required()
 def savefig_techbase(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -1086,6 +1091,7 @@ def savefig_techbase(request):
 
 @login_required()
 def techbaseaddtechnology(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -1132,6 +1138,7 @@ def techbaseaddtechnology(request):
 
 @login_required()
 def techbasedeletetech(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -1145,6 +1152,7 @@ def techbasedeletetech(request):
 
 @login_required()
 def techbaseedittech(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -1179,13 +1187,14 @@ def techbaseedittech(request):
 
 @login_required()
 def exp_user_profile(request):
-    """User Profile Modification"""
+    """User Profile Modification."""
     user = request.user
     return render(request, 'exp_user_profile.html', {'user': user})
 
 
 @login_required()
 def userprofileedit(request):
+    """Add docstring."""
     user = request.user
     if (request.POST):
         post_data = request.POST
@@ -1215,7 +1224,7 @@ def userprofileedit(request):
 
 @login_required()
 def exp_visualization_home(request):
-    """Visualization Tool - Home Page of Module"""
+    """Visualization Tool - Home Page of Module."""
     user = request.user
     if not user.is_authenticated:
         return redirect('expert:exp_login')
@@ -1252,13 +1261,14 @@ def exp_visualization_home(request):
 
 @login_required()
 def exp_visualization_geo(request):
-    """Visualization Tool - Visualize Uploaded Datafiles"""
+    """Visualization Tool - Visualize Uploaded Datafiles."""
     user = request.user
     return render(request, 'exp_visual_file.html', {'user': user})
 
 
 @login_required()
 def visualuploadedfile(request):
+    """Add docstring."""
     user = request.user
     if (request.POST):
         data = request.POST
@@ -1299,7 +1309,7 @@ def visualuploadedfile(request):
 
 @login_required()
 def exp_visualization_upload(request):
-    """Visualization Tool - Visualize Nodes and Flows"""
+    """Visualization Tool - Visualize Nodes and Flows."""
     user = request.user
     if (request.POST.get('upload_file_geo')):
         uf = VisualUploadForm(request.POST, request.FILES)
@@ -1346,7 +1356,7 @@ def exp_visualization_upload(request):
 
 @login_required()
 def exp_visualization_georesult(request, task_id):
-    """Visualization Tool - Visualize Task Results"""
+    """Visualization Tool - Visualize Task Results."""
     # need to impplement a function to read results
     user = request.user
     task = OptTask.objects.get(id=task_id)
@@ -1361,6 +1371,7 @@ def exp_visualization_georesult(request, task_id):
 
 @login_required()
 def readtaskresult(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -1384,6 +1395,7 @@ def readtaskresult(request):
 # """Visualization Tool - Visualize Model Data"""
 @login_required()
 def exp_visualization_modeldata(request, task_id):
+    """Add docstring."""
     user = request.user
     task = OptTask.objects.get(id=task_id)
     return render(
@@ -1392,6 +1404,7 @@ def exp_visualization_modeldata(request, task_id):
 
 # """Managing Case Study"""
 def exp_demomain(request):
+    """Add docstring."""
     user = request.user
     casestudy_list = CaseStudy.objects.all()
     casegroup_list = CaseGroup.objects.all()
@@ -1402,6 +1415,7 @@ def exp_demomain(request):
 
 @login_required()
 def exp_managecasestudy(request):
+    """Add docstring."""
     user = request.user
     if not user.is_staff:
         return redirect('expert:exp_login')
@@ -1414,6 +1428,7 @@ def exp_managecasestudy(request):
 
 @login_required()
 def groupcases(request):
+    """Add docstring."""
     user = request.user
     if not user.is_staff:
         return redirect('expert:exp_login')
@@ -1438,6 +1453,7 @@ def groupcases(request):
 
 @login_required()
 def deletecases(request):
+    """Add docstring."""
     user = request.user
     if not user.is_staff:
         return redirect('expert:exp_login')
@@ -1464,6 +1480,7 @@ def deletecases(request):
 
 @login_required()
 def renamecase(request):
+    """Add docstring."""
     user = request.user
     if not user.is_staff:
         return redirect('expert:exp_login')
@@ -1486,6 +1503,7 @@ def renamecase(request):
 
 @login_required()
 def editscenario(request):
+    """Add docstring."""
     user = request.user
     if not user.is_staff:
         return redirect('expert:exp_login')
@@ -1517,6 +1535,7 @@ def editscenario(request):
 
 @login_required()
 def publishcase(request):
+    """Add docstring."""
     user = request.user
     if not user.is_staff:
         return redirect('expert:exp_login')
@@ -1556,6 +1575,7 @@ def publishcase(request):
 
 @login_required()
 def exp_casestudydetail(request, case_id):
+    """Add docstring."""
     user = request.user
     taskgroup = CaseGroup.objects.get(pk=case_id)
     tasks = taskgroup.childrencase.all()
@@ -1576,6 +1596,7 @@ def exp_casestudydetail(request, case_id):
 
 @login_required()
 def casereadtransfiles(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -1597,6 +1618,7 @@ def casereadtransfiles(request):
 
 @login_required()
 def copycase(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -1640,6 +1662,7 @@ def copycase(request):
 
 @login_required()
 def exp_addcasestudy(request):
+    """Add docstring."""
     user = request.user
     if not user.is_staff:
         return redirect('expert:exp_login')
@@ -1655,6 +1678,7 @@ def exp_addcasestudy(request):
 
 @login_required()
 def makingcasestudy1(request):
+    """Add docstring."""
     user = request.user
     if not user.is_staff:
         return redirect('expert:exp_login')
@@ -1703,6 +1727,7 @@ def makingcasestudy1(request):
 
 @login_required()
 def exp_addcasestudy2(request):
+    """Add docstring."""
     user = request.user
     if not user.is_staff:
         return redirect('expert:exp_login')

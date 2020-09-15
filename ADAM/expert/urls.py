@@ -3,6 +3,8 @@
 # coding=utf-8
 # ruiz-mercado.gerardo@epa.gov
 
+"""Add docstring."""
+
 
 from django.urls import path
 from django.conf import settings

@@ -3,6 +3,8 @@
 # coding=utf-8
 # ruiz-mercado.gerardo@epa.gov
 
+"""Add docstring."""
+
 # for the main page
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
@@ -23,14 +25,17 @@ import sys
 
 # to generate a random string as a pseudo id for tasks
 def id_generator(size=20, chars=string.ascii_uppercase + string.digits):
+    """Add docstring."""
     return ''.join(random.choice(chars) for _ in range(size))
 
 
 def main(request):
+    """Add docstring."""
     return render(request, 'main.html')
 
 
 def getdata(request):
+    """Add docstring."""
     if request.POST:
         data = request.POST
         id = data['id']
@@ -47,6 +52,7 @@ def getdata(request):
 
 
 def getbounds(request):
+    """Add docstring."""
     if request.POST:
         data = request.POST
         id = data['id']
@@ -57,26 +63,32 @@ def getbounds(request):
 
 
 def support(request):
+    """Add docstring."""
     return render(request, 'support.html')
 
 
 def whatisthis(request):
+    """Add docstring."""
     return render(request, 'whatisthis.html')
 
 
 def tryit(request):
+    """Add docstring."""
     return render(request, 'tryit.html')
 
 
 def tryit_eg1(request):
+    """Add docstring."""
     return render(request, 'tryit_eg1.html')
 
 
 def tryit_eg2(request):
+    """Add docstring."""
     return render(request, 'tryit_eg2.html')
 
 
 def beginsolveeg2(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -172,7 +184,7 @@ def beginsolveeg2(request):
 
 
 def eg2_results(request, id):
-
+    """Add docstring."""
     error = 0
     id_string = id
 
@@ -296,6 +308,7 @@ def eg2_results(request, id):
 
 
 def contact(request):
+    """Add docstring."""
     submitted = False
     if request.method == 'POST':
         form = ContactForm(request.POST)

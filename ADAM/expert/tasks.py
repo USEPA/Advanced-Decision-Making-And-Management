@@ -3,6 +3,8 @@
 # coding=utf-8
 # ruiz-mercado.gerardo@epa.gov
 
+"""Add docstring."""
+
 
 # All background tasks
 from background_task import background
@@ -16,6 +18,7 @@ import subprocess
 
 @background(schedule=timezone.now())
 def notify_user(user_id, task_id):
+    """Add docstring."""
     user = User.objects.get(pk=user_id)
     task = OptTask.objects.get(pk=task_id)
     toemail = user.email
@@ -32,6 +35,7 @@ def notify_user(user_id, task_id):
 
 @background(schedule=timezone.now())
 def solveSC(task_id):
+    """Add docstring."""
     task = OptTask.objects.get(pk=task_id)
     p = subprocess.Popen([
         "julia", task.code_path, "media/" + task.node_path,
@@ -44,6 +48,7 @@ def solveSC(task_id):
 
 @background(schedule=timezone.now())
 def beginsolvenew(task_id):
+    """Add docstring."""
     task = OptTask.objects.get(pk=task_id)
     user = task.user
     userid = str(user.id)

@@ -4,6 +4,9 @@
 # ruiz-mercado.gerardo@epa.gov
 
 
+"""Add docstring."""
+
+
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
@@ -36,13 +39,13 @@ import operator
 
 # to generate a random string as a pseudo id for tasks
 def id_generator(size=20, chars=string.ascii_uppercase + string.digits):
-    """Generate random ID string"""
+    """Generate random ID string."""
     return ''.join(random.choice(chars) for _ in range(size))
 
 
 # need to be consistent with TaskCreationForm
 def codeselector(modeltype):
-    """Select code path based on model type"""
+    """Select code path based on model type."""
     if int(modeltype) == 1:  # supply chain design
         return "julia_script/supply_chain_design.jl"
     elif int(modeltype) == 2:  # market clearing
@@ -52,7 +55,7 @@ def codeselector(modeltype):
 
 
 def getcoef(unit):
-    """Get the coefficient based on time step"""
+    """Get the coefficient based on time step."""
     if unit == 'year':
         return 1.0
     elif unit == 'month':
@@ -64,7 +67,7 @@ def getcoef(unit):
 
 
 def timeselector(i):
-    """Map int selection with time step"""
+    """Map int selection with time step."""
     if int(i) == 1:
         return "year"
     elif int(i) == 2:
@@ -77,7 +80,7 @@ def timeselector(i):
 
 # to check if a string can be converted to a float
 def isfloat(value):
-    """Check if a string can be converted into float"""
+    """Check if a string can be converted into float."""
     try:
         float(value)
         return True
@@ -87,8 +90,9 @@ def isfloat(value):
 
 def readSupFile(user, path):
     """
-    Read a supply data file, specify user object and
-    datadocfile.docpath, return msg and data.
+    Read a supply data file.
+    
+    Specify user object and datadocfile.docpath, return msg and data.
     """
     # extract user accessible product
     UserProd = []
@@ -158,9 +162,10 @@ def readSupFile(user, path):
 
 def readTechFile(user, path, type, techids):
     """
-    Read a technology data file, specify user object, datadocfile.docpath,
-    data type  (Site or Candidate), and a string list of
-    available technology ids, return msg and data.
+    Read a technology data file.
+    
+    Specify user object, datadocfile.docpath, data type  (Site or Candidate),
+    and a string list of available technology ids, return msg and data.
     """
     # extract user accessible product
 
@@ -243,10 +248,11 @@ def readTechFile(user, path, type, techids):
 
 def readDemFile(user, path, prodids):
     """
-    Read a demand data file, specify user object, datadocfile.docpath,
-    and a string list of available product ids, return msg and data.
+    Read a demand data file.
+    
+    Specify user object, datadocfile.docpath, and a string list of available
+    product ids, return msg and data.
     """
-
     # extract user accessible product
     msg = []
     data = False
@@ -312,9 +318,10 @@ def readDemFile(user, path, prodids):
 
 def WriteTransfiles(task, transfile=True):
     """
-    Based on defined supply, demand, and technology data, generate 8 files
-    needed for julia script and transportation matrix for each product,
-    return node list, product list, and transportation matrices
+    Based on defined supply, demand, and technology data.
+    
+    Generate 8 files needed for julia script and transportation matrix for each
+    product, return node list, product list, and transportation matrices.
     """
     user = task.user
     task_id = task.id
@@ -653,8 +660,9 @@ def WriteTransfiles(task, transfile=True):
 
 def ReWriteTransData(task, prod_id, transdata):
     """
-    Rewrite transportation matrix file, specify task,
-    product id, and the new matrix.
+    Rewrite transportation matrix file.
+    
+    Specify task, product id, and the new matrix.
     """
     user = task.user
     folder = settings.MEDIA_ROOT + '/' + str(user.id) + '_' + \
@@ -678,8 +686,9 @@ def ReWriteTransData(task, prod_id, transdata):
 
 def ReadTaskData(task):
     """
-    Read transportation matrix files, specify task and return transportation
-    matrix, node list, and product list
+    Read transportation matrix files.
+    
+    Specify task and return transportation matrix, node list, and product list.
     """
     user = task.user
     task_id = task.id
@@ -701,6 +710,7 @@ def ReadTaskData(task):
 
 
 def ReadTransData(task, prodid):
+    """Add docstring."""
     user = task.user
     task_id = task.id
     folder = settings.MEDIA_ROOT + '/' + str(user.id) + '_' + \
@@ -711,6 +721,7 @@ def ReadTransData(task, prodid):
 
 
 def ReadCaseData(case):
+    """Add docstring."""
     case_id = case.id
     folder = settings.MEDIA_ROOT + '/casestudies/' + str(case.id) + '_' + \
         case.name + '/'
@@ -733,7 +744,7 @@ def ReadCaseData(case):
 
 
 def readNodeFile(nodepath):
-    """Read the node file generated, return msg and node data"""
+    """Read the node file generated, return msg and node data."""
     msg = []
     data = False
     try:
@@ -772,9 +783,10 @@ def readNodeFile(nodepath):
 
 def readFlowFile(nodedata, flowpath):
     """
-    Read the flow file uploaded, specify the corresponding node file and
-    tempdocument.docfile, return msg, lists of destinations,
-    origins, and flow amounts
+    Read the flow file uploaded.
+    
+    Specify the corresponding node file and tempdocument.docfile, return msg,
+    lists of destinations, origins, and flow amounts
     """
     msg = []
     flows = False
@@ -822,7 +834,7 @@ def readFlowFile(nodedata, flowpath):
 
 
 def ReadTaskResult(task):
-    """Read the task results, only transportation results for now"""
+    """Read the task results, only transportation results for now."""
     user = task.user
     task_id = task.id
     folder = settings.MEDIA_ROOT + '/' + str(user.id) + '_' + \
@@ -852,6 +864,7 @@ def ReadTaskResult(task):
 
 
 def ReadTaskResultBasic(task):
+    """Add docstring."""
     user = task.user
     task_id = task.id
     folder = settings.MEDIA_ROOT + '/' + str(user.id) + '_' + \
@@ -895,7 +908,7 @@ def ReadTaskResultBasic(task):
 
 
 def zipfiles(zipls, defaultfilename='download_datals_zip_'):
-    """Make a zip file and return its path"""
+    """Make a zip file and return its path."""
     randomstr = id_generator(size=10)
     zipfilename = settings.MEDIA_ROOT + '/public/' + defaultfilename + \
         randomstr + '.zip'
@@ -908,6 +921,7 @@ def zipfiles(zipls, defaultfilename='download_datals_zip_'):
 
 
 def writeModelData(task, checkls):
+    """Add docstring."""
     folder = settings.MEDIA_ROOT + '/public/'
     checkls = [int(i) for i in checkls]
     zipname = 'modeldata_' + str(task.id)
@@ -983,6 +997,7 @@ def writeModelData(task, checkls):
 
 
 def readModelData(task, mode, checkls=[]):
+    """Add docstring."""
     if mode == 'sup':
         supdata = [['#', 'Latitude', ',Longitude', 'Feed ID',
                     'Price', 'Capacity']]
