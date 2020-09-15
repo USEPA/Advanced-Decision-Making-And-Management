@@ -1,6 +1,7 @@
 # Advanced-Decision-Making-And-Management (ADAM)
 
-![ADAM](https://www.epa.gov/sites/production/files/2013-06/epa_seal_verysmall_trim.gif) Sample application is currently hosted @ <http://54.208.179.171:8000/>. Version 1.0 to be hosted on USEPA website.
+![ADAM](https://www.epa.gov/sites/production/files/2013-06/epa_seal_verysmall_trim.gif)
+Version 1.0 to be hosted on USEPA website @ https://adam.epa.gov.
 
 ***
 
