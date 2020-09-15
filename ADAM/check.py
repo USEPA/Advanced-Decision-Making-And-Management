@@ -3,6 +3,8 @@
 # coding=utf-8
 # ruiz-mercado.gerardo@epa.gov
 
+"""Add docstring."""
+
 
 from background_task import background
 from django.core.mail import send_mail, EmailMessage
@@ -22,6 +24,7 @@ import zipfile
 
 # get the id of the task given the output file names
 def getid(filename):
+    """Add docstring."""
     ff_id = ''
     s = -5
     while filename[s] != '_':

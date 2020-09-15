@@ -38,12 +38,13 @@ from .util import *
 
 # registered page - redirect to usermain
 def exp_registered(request):
-    """Main page - login/out, Register"""
+    """Main page - login/out, Register."""
     return render(request, 'exp_registered.html')
 
 
 # register page
 def exp_register(request):
+    """Add docstring."""
     fail = 0
     if (request.POST.get('user_register')):
         uf = UserForm(request.POST)
@@ -82,6 +83,7 @@ def exp_register(request):
 
 # login page
 def exp_login(request):
+    """Add docstring."""
     formfail = 0
     authfail = 0
     if (request.POST.get('user_login')):
@@ -123,6 +125,7 @@ def exp_login(request):
 
 # logout page, will redirect to expertmain
 def exp_logout(request):
+    """Add docstring."""
     user = request.user
     if user.is_authenticated:
         logout(request)
@@ -134,20 +137,21 @@ def exp_logout(request):
 # usermain page
 @login_required()
 def exp_usermain(request):
-    """User Dashboard"""
+    """User Dashboard."""
     user = request.user
     return render(request, 'exp_usermain.html', {'user': user})
 
 
 @login_required()
 def exp_advpanel(request):
+    """Add docstring."""
     user = request.user
     return render(request, 'exp_advpanel.html', {'user': user})
 
 
 @login_required()
 def exp_task_list(request):
-    """Task List and Creation"""
+    """Task List and Creation."""
     user = request.user
     tasklist = user.opttask_set.all()
     casels = CaseGroup.objects.all()
@@ -158,6 +162,7 @@ def exp_task_list(request):
 
 @login_required()
 def taskmanagedelete(request):
+    """Add docstring."""
     user = request.user
     success = False
     if (request.POST):
@@ -175,6 +180,7 @@ def taskmanagedelete(request):
 
 @login_required()
 def newmodel(request):
+    """Add docstring."""
     user = request.user
     success = False
     if (request.POST):
@@ -194,6 +200,7 @@ def newmodel(request):
 
 @login_required()
 def copymodel(request):
+    """Add docstring."""
     user = request.user
     success = False
     if (request.POST):
@@ -259,6 +266,7 @@ def copymodel(request):
 # """Step 1 - Model Type and Time Scope"""
 @login_required()
 def exp_task_step1(request, task_id):
+    """Add docstring."""
     user = request.user
     task = OptTask.objects.get(pk=task_id)
     task_is_user = task in user.opttask_set.all()
@@ -286,6 +294,7 @@ def exp_task_step1(request, task_id):
 # """Step 2 - Supply Data"""
 @login_required()
 def exp_task_step2new(request, task_id):
+    """Add docstring."""
     user = request.user
     task = OptTask.objects.get(pk=task_id)
     task_is_user = task in user.opttask_set.all()
@@ -300,6 +309,7 @@ def exp_task_step2new(request, task_id):
 
 @login_required()
 def step2supfileselection(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -313,6 +323,7 @@ def step2supfileselection(request):
 
 @login_required()
 def step2suploadmodeldata(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -326,6 +337,7 @@ def step2suploadmodeldata(request):
 
 @login_required()
 def step2supfileupload(request):
+    """Add docstring."""
     user = request.user
     if request.FILES:
         data = request.POST
@@ -342,6 +354,7 @@ def step2supfileupload(request):
 
 @login_required()
 def step2savesup(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -369,6 +382,7 @@ def step2savesup(request):
 # """Step3 - Technology Site and Candidate Data"""
 @login_required()
 def exp_task_step3new(request, task_id):
+    """Add docstring."""
     user = request.user
     task = OptTask.objects.get(pk=task_id)
     task_is_user = task in user.opttask_set.all()
@@ -383,6 +397,7 @@ def exp_task_step3new(request, task_id):
 
 @login_required()
 def step3techfileselection(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -400,6 +415,7 @@ def step3techfileselection(request):
 
 @login_required()
 def step3techloadmodeldata(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -416,6 +432,7 @@ def step3techloadmodeldata(request):
 
 @login_required()
 def step3techfileupload(request):
+    """Add docstring."""
     user = request.user
     if request.FILES:
         data = request.POST
@@ -432,6 +449,7 @@ def step3techfileupload(request):
 
 @login_required()
 def step3savetech(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -465,6 +483,7 @@ def step3savetech(request):
 # """Step4 - Demand Data"""
 @login_required()
 def exp_task_step4new(request, task_id):
+    """Add docstring."""
     user = request.user
     task = OptTask.objects.get(pk=task_id)
     task_is_user = task in user.opttask_set.all()
@@ -479,6 +498,7 @@ def exp_task_step4new(request, task_id):
 
 @login_required()
 def step4demfileselection(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -493,6 +513,7 @@ def step4demfileselection(request):
 
 @login_required()
 def step4demloadmodeldata(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -506,6 +527,7 @@ def step4demloadmodeldata(request):
 
 @login_required()
 def step4demfileupload(request):
+    """Add docstring."""
     user = request.user
     if request.FILES:
         data = request.POST
@@ -522,6 +544,7 @@ def step4demfileupload(request):
 
 @login_required()
 def step4savedem(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -549,6 +572,7 @@ def step4savedem(request):
 # """Step5 - Transportation Data"""
 @login_required()
 def exp_task_step5new(request, task_id):
+    """Add docstring."""
     user = request.user
     task = OptTask.objects.get(pk=task_id)
     task_is_user = task in user.opttask_set.all()
@@ -563,6 +587,7 @@ def exp_task_step5new(request, task_id):
 
 @login_required()
 def step5_writetransfiles(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -586,6 +611,7 @@ def step5_writetransfiles(request):
 
 
 def step5_skipthis(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -608,6 +634,7 @@ def step5_skipthis(request):
 
 @login_required()
 def step5_rewritetransfiles(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -635,6 +662,7 @@ def step5_rewritetransfiles(request):
 
 @login_required()
 def step5_readtransfiles(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -655,6 +683,7 @@ def step5_readtransfiles(request):
 
 @login_required()
 def step5_gettransdata(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -674,6 +703,7 @@ def step5_gettransdata(request):
 # """Step6 - Ready to go!"""
 @login_required()
 def exp_task_step6new(request, task_id):
+    """Add docstring."""
     user = request.user
     task = OptTask.objects.get(pk=task_id)
     task_is_user = task in user.opttask_set.all()
@@ -687,6 +717,7 @@ def exp_task_step6new(request, task_id):
 
 @login_required()
 def beginsolve(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -711,7 +742,7 @@ def beginsolve(request):
 
 @login_required()
 def exp_task_detail_new(request, task_id):
-    """Task Home Page"""
+    """Task Home Page."""
     user = request.user
     task = OptTask.objects.get(pk=task_id)
     task_is_user = task in user.opttask_set.all()
@@ -737,6 +768,7 @@ def exp_task_detail_new(request, task_id):
 
 @login_required()
 def exp_task_detail_reinitilize(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -779,6 +811,7 @@ def exp_task_detail_reinitilize(request):
 
 @login_required()
 def exp_task_detail_delete(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -792,6 +825,7 @@ def exp_task_detail_delete(request):
 
 @login_required()
 def load_model(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -847,6 +881,7 @@ def load_model(request):
 
 @login_required()
 def downloadmodeldata(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -860,6 +895,7 @@ def downloadmodeldata(request):
 
 
 def exp_task_results(request, task_id):
+    """Add docstring."""
     user = request.user
     task = OptTask.objects.get(pk=task_id)
     task_is_user = task in user.opttask_set.all()
@@ -877,7 +913,7 @@ def exp_task_results(request, task_id):
 
 @login_required()
 def exp_prodbase(request):
-    """Database System - Product Database"""
+    """Database System - Product Database."""
     user = request.user
     admin = user.is_staff
     if not user.is_authenticated:
@@ -937,6 +973,7 @@ def exp_prodbase(request):
 
 @login_required()
 def prodbaseaddproduct(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
@@ -966,6 +1003,7 @@ def prodbaseaddproduct(request):
 
 @login_required()
 def prodbaseeditprod(request):
+    """Add docstring."""
     user = request.user
     if request.POST:
         data = request.POST
