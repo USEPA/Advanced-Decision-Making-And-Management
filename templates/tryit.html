@@ -1,0 +1,58 @@
+{% extends "main.html" %}
+{% load static %}
+
+  {% block content %}
+
+
+
+  <section id="main">
+    <br/>
+
+        <div class="card text-center" id = 'outline'>
+          <div class="card-header">
+            <h4>ADAM tutorial</h4>
+          </div>
+          <div class="card-body">
+
+            <div class = "container">
+              <br/>
+              <div class = "row align-items-center">
+                <div class = "col">
+                  <img src = "{% static 'figure/tutorial/biogas-1.jpg'%}" width = 80%>
+                </div>
+                <div class = "col">
+                  <button class = "btn btn-light border btn-block" onclick="window.location = '/tryit/eg1'">Biogas from Waste</button>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <button class = "btn btn-light border btn-block" onclick="window.location = '/tryit/eg2'">Custom Model</button>
+                </div>
+                <div class = "col">
+                  <img src = "{% static 'figure/tutorial/nexus-1.jpg'%}" width = 80%>
+                </div>
+              </div>
+              <br/>
+            </div>
+          </div>
+        </div>
+        <div class="text-muted text-center">
+            <br/>
+            <div style = "font-size: 0.6em;">Copyright &copy 2019 Board of Regents of the University of Wisconsin System </div>
+        </div>
+        <br/>
+    </section>
+
+  {% endblock content %}
+
+{% block jscode %}
+<script>
+  function changecard(id1,id2){
+    $("#"+id1).fadeTo(300,0, function(){
+      $("#"+id1).css("display","none");
+      $("#"+id2).fadeTo(300,1);
+    });
+  }
+</script>
+
+{% endblock jscode %}

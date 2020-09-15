@@ -1,0 +1,595 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Welcome to Online Supply Chain Optimization Tool!</title>
+<link href="{% static 'jsfile/bootstrap-4.3.1-dist/css/bootstrap.css' %}" rel="stylesheet"/>
+<link href="{% static 'jsfile/nouislider.css' %}" rel="stylesheet"/>
+<link href="{% static 'cssfile/jquery/jquery-ui.css' %}" rel="stylesheet"/>
+<link href="{% static 'jsfile/alertifyjs/css/alertify.css' %}" rel="stylesheet"/>
+<link href="{% static 'jsfile/alertifyjs/css/themes/semantic.css' %}" rel="stylesheet"/>
+
+<script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+<script src="{% static 'jsfile/jquery/jquery-1.12.4.js' %}"></script>
+<script src="{% static 'jsfile/jquery/jquery-3.4.1.js' %}"></script>
+<script src="{% static 'jsfile/jquery/jquery-ui.js' %}"></script>
+<script src="{% static 'jsfile/alertifyjs/alertify.min.js' %}"></script>
+<script src="{% static 'jsfile/bootstrap-4.3.1-dist/js/popper.min.js' %}"></script>
+<script src="{% static 'jsfile/bootstrap-4.3.1-dist/js/bootstrap.js' %}"></script>
+<script>(function(H){H.className=H.className.replace(/\bno-js\b/,'')})(document.documentElement)</script>
+<script src="{% static 'jsfile/_uw-style.min.js' %}"></script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<link rel="stylesheet" href="{% static 'cssfile/fonts/uw160/fonts.0.0.1.css' %}">
+<link href="{% static 'cssfile/main.css' %}" rel="stylesheet" type="text/css"/>
+
+{% block extrahead %}
+{% endblock extrahead %}
+</head>
+
+<body>
+  <div id="wrapper">
+
+  <a class="uw-show-on-focus" href="#main" id="uw-skip-link">Skip to main content</a>
+  <!-- UW navbar -->
+  <div class="uw-global-bar" role="navigation">
+    <a class="uw-global-name-link" href="http://www.wisc.edu" aria-label="University home page">U<span>niversity <span class="uw-of">of</span> </span>W<span>isconsin</span>–Madison</a>
+  </div>
+  <br>
+  <!-- branding header -->
+<header id="branding" class="uw-header">
+  <div class = "container-fluid">
+    <div class = "row justify-content-between">
+      <div class = "col text-left">
+        <div class="uw-header-container">
+          <div class="uw-header-crest-title">
+            <div class="uw-header-crest">
+              <a href="/"><img class="uw-crest-svg" src="{% static 'figure/uw-crest.svg' %}" alt="Link to University of Wisconsin-Madison home page"></a>
+            </div>
+            <div class="uw-title-tagline">
+              <h1 id="site-title" class="uw-site-title">
+                <a href="/" rel="home">ADAM</a>
+              </h1>
+              <div id="site-description" class="uw-site-tagline">Advanced Decision-Making And Management</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class = "col-2 text-center">
+          <a href = "https://www.epa.gov/"><img src = "{% static 'figure/epa_logo_vert2.png' %}" height = "60"/></a>
+      </div>
+
+      <div class = "col-2 text-center">
+          <a href = "https://www.usda.gov/"><img src = "{% static 'figure/usda22.png' %}" height = "60"/></a>
+      </div>
+
+      <div class = "col text-right">
+        <button class="uw-mobile-menu-button-bar uw-mobile-menu-button-bar-reversed uw-is-closed " data-menu="uw-top-menus" aria-label="Open menu" aria-expanded="false" aria-controls="uw-top-menus">Menu<svg aria-hidden="true" focusable="false"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#uw-symbol-menu"></use></svg><svg aria-hidden="true" focusable="false"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#uw-symbol-close"></use></svg></button>
+
+        <div id="uw-top-menus" class="uw-is-visible uw-horizontal" aria-hidden="false">
+          <div class="uw-main-nav">
+            <nav class="uw-nav-menu uw-nav-menu-reverse" aria-label="Main Menu">
+              <ul id="uw-main-nav">
+                <li>
+                  <a href="/">Home</a>
+                </li>
+                <li>
+                  <a href="/whatisthis">About</a>
+                </li>
+                <li>
+                  <a href="/tryit">Tutorial</a>
+                </li>
+                <li>
+                  <a href="/expert/usermain">Dashboard</a>
+                </li>
+                <li>
+                  <a href="/contact">Contact</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+  {% block content %}
+  {% csrf_token %}
+
+<section id="main">
+    <br/>
+
+
+            <div class="row text-center">
+                <div class = "col-9">
+                  <div  id = "gfx_holder1" class = "border" style = "position: relative; width:100%; height: 520px;left:1%;box-shadow: 7px 7px 7px #d3d3d3">
+                  </div>
+                </div>
+
+                <div class = "col-3">
+                  <div class="card mb-3" id = "datalayercard" style = "height: 500px; top: 10px;border-width:2">
+                    <div class="card-header">
+                          <div class="spinner-grow align-middle float-left" style="color: #9A0001; width: 1.5rem; height: 1.5rem; visibility:hidden" role="status" >
+                            <span class="sr-only">Running</span>
+                          </div>
+                          <strong style = "color: #9A0001">Data Layers</strong>
+                          <div class="spinner-grow align-middle float-right" style="color: #9A0001; width: 1.5rem; height: 1.5rem; visibility:hidden" role="status"  id = "spinner">
+                            <span class="sr-only">Running</span>
+                          </div>
+                    </div>
+
+                    <div class="card-body text-left" style="padding-left:0; padding-right:0; overflow-y: scroll; z-index:1 " >
+                      <div style = "height:425px; background-color:#fff; overflow-x: hidden;">
+                        <div class = "container" style = "width:100%;padding-left:0; padding-right:0; z-index:2">
+
+
+                        <div class="custom-control custom-checkbox parent-toggler" data-toggle="collapse" href="#collapseCAFO" role="button" aria-expanded="false" aria-controls="collapseCAFO" id = 'cafoparent' style:"z-index:1000">
+                            <div class = "row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;" >
+                              <div class = "col-2">
+                                <img src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/softbank/145/cow-face_1f42e.png' class="align-top" style="width:23px">
+                              </div>
+                              <div class = "col-7">
+                                Large Dairy Farms
+                              </div>
+                              <div class = "col-2">
+                                <ion-icon name="add-outline" style="height: 23px;width:23px" id = 'cafoparenticon'></ion-icon>
+                              </div>
+                            </div>
+                        </div>
+
+
+
+                          <div class = "container" style = "padding-left:40px;;">
+                            <div class="collapse" id="collapseCAFO">
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="cafos_all" onchange="checkChangeAll('cafos')">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">All
+                                  </p>
+                                </label>
+                              </div>
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="cafos_wi" onchange="checkChange(this.id)">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Wisconsin
+                                  </p>
+                                </label>
+                              </div>
+
+
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="cafos_mn" onchange="checkChange(this.id)" >
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Minnesota
+                                  </p>
+                                </label>
+                              </div>
+
+
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="cafos_mi" onchange="checkChange(this.id)" >
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Michigan
+                                  </p>
+                                </label>
+                              </div>
+
+
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="cafos_oh" onchange="checkChange(this.id)" >
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Ohio
+                                  </p>
+                                </label>
+                              </div>
+
+
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="cafos_in" onchange="checkChange(this.id)" >
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Indiana
+                                  </p>
+                                </label>
+                              </div>
+
+
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="cafos_pa" onchange="checkChange(this.id)" >
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Pennsylvania
+                                  </p>
+                                </label>
+                              </div>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="custom-control custom-checkbox parent-toggler border-top" data-toggle="collapse" href="#collapseBEEF" role="button" aria-expanded="false" aria-controls="collapseBEEF" id = 'beefparent'>
+                          <div class = "row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;" >
+                            <div class = "col-2">
+                              <img src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/237/ox_1f402.png' class="align-top" style="width:23px">
+                            </div>
+                            <div class = "col-7">
+                              Large Beef Farms
+                            </div>
+                            <div class = "col-2">
+                              <ion-icon name="add-outline" style="height: 23px;width:23px" id = 'beefparenticon'></ion-icon>
+                            </div>
+                          </div>
+                        </div>
+
+                          <div class = "container" style = "padding-left:40px;">
+                            <div class="collapse" id="collapseBEEF">
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="beefs_all" onchange="checkChangeAll('beefs')">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">All
+                                  </p>
+                                </label>
+                              </div>
+
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="beefs_wi" onchange="checkChange(this.id)">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Wisconsin
+                                  </p>
+                                </label>
+                              </div>
+
+
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="beefs_mn" onchange="checkChange(this.id)">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Minnesota
+                                  </p>
+                                </label>
+                              </div>
+
+
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="beefs_mi" onchange="checkChange(this.id)" >
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Michigan
+                                  </p>
+                                </label>
+                              </div>
+
+
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="beefs_oh" onchange="checkChange(this.id)" >
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Ohio
+                                  </p>
+                                </label>
+                              </div>
+
+
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="beefs_in" onchange="checkChange(this.id)" >
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Indiana
+                                  </p>
+                                </label>
+                              </div>
+
+
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="beefs_pa" onchange="checkChange(this.id)" >
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Pennsylvania
+                                  </p>
+                                </label>
+                              </div>
+
+
+
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="custom-control custom-checkbox parent-toggler border-top" data-toggle="collapse" href="#collapseWWTP" role="button" aria-expanded="false" aria-controls="collapseWWTP" id = 'wwtpparent'>
+                          <div class = "row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;" >
+                            <div class = "col-2">
+                              <img src='https://image.flaticon.com/icons/svg/877/877656.svg' class="align-top" style="width:23px">
+                            </div>
+                            <div class = "col-7">
+                              Wastewater Plants
+                            </div>
+                            <div class = "col-2">
+                              <ion-icon name="add-outline" style="height: 23px;width:23px" id = 'wwtpparenticon'></ion-icon>
+                            </div>
+                          </div>
+                        </div>
+
+                          <div class = "container" style = "padding-left:40px;">
+                            <div class="collapse" id="collapseWWTP">
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="wwtps_all" onchange="checkChangeAll('wwtps')">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">All
+                                  </p>
+                                </label>
+                              </div>
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="wwtps_wi" onchange="checkChange(this.id)">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Wisconsin
+                                  </p>
+                                </label>
+                              </div>
+
+
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="wwtps_mn" >
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Minnesota
+                                  </p>
+                                </label>
+                              </div>
+
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="custom-control custom-checkbox parent-toggler border-top" data-toggle="collapse" href="#collapseBG" role="button" aria-expanded="false" aria-controls="collapseWWTP" id = 'bgparent'>
+                            <div class = "row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;" >
+                              <div class = "col-2">
+                                <img src='https://image.flaticon.com/icons/svg/542/542512.svg' class="align-top" style="width:23px">
+                              </div>
+                              <div class = "col-7">
+                                Biogas Facilities
+                              </div>
+                              <div class = "col-2">
+                                <ion-icon name="add-outline" style="height: 23px;width:23px" id = 'bgparenticon'></ion-icon>
+                              </div>
+                            </div>
+                        </div>
+
+                          <div class = "container" style = "padding-left:40px;">
+                            <div class="collapse" id="collapseBG">
+
+                              <div class="custom-control custom-checkbox">
+                              <input class="form-check-input" type="checkbox" value="" id="biogas_all" onchange="checkChangeAll('biogas')">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">All
+                                  </p>
+                                </label>
+                              </div>
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="biogas_wi" onchange="checkChange(this.id)">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Wisconsin
+                                  </p>
+                                </label>
+                              </div>
+
+
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="biogas_mn" onchange="checkChange(this.id)">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Minnesota
+                                  </p>
+                                </label>
+                              </div>
+
+
+                            </div>
+                        </div>
+
+
+
+                        <!--div class="custom-control custom-checkbox parent-toggler border-top" data-toggle="collapse" href="#collapseLAKE" role="button" aria-expanded="false" aria-controls="collapseLAKE" id = 'lakeparent'>
+
+                          <div class = "row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;" >
+                            <div class = "col-2">
+                              <img src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/google/241/speedboat_1f6a4.png' class="align-top" style="width:20px">
+                            </div>
+                            <div class = "col-7">
+                              Lakes
+                            </div>
+                            <div class = "col-2">
+                              <ion-icon name="add-outline" style="height: 23px;width:23px" id = 'lakeparenticon'></ion-icon>
+                            </div>
+                          </div>
+
+                        </div-->
+
+                          <!--div class = "container" style = "padding-left:40px;">
+                            <div class="collapse" id="collapseLAKE">
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="lake_erie" onchange="checkBound(this.id)">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Erie
+                                  </p>
+                                </label>
+                              </div>
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="lake_ontario" onchange="checkBound(this.id)">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Ontario
+                                  </p>
+                                </label>
+                              </div>
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="lake_superior" onchange="checkBound(this.id)">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Superior
+                                  </p>
+                                </label>
+                              </div>
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="lake_huron" onchange="checkBound(this.id)">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Huron
+                                  </p>
+                                </label>
+                              </div>
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="lake_michigan" onchange="checkBound(this.id)">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Michigan
+                                  </p>
+                                </label>
+                              </div>
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="lake_mendota" onchange="checkBound(this.id)">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Mendota (Madison)
+                                  </p>
+                                </label>
+                              </div>
+
+                              <div class="custom-control custom-checkbox">
+                                <input class="form-check-input" type="checkbox" value="" id="lake_stclaire" onchange="checkBound(this.id)">
+                                <label class="form-check-label">
+                                  <p  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake St. Claire (Detroit)
+                                  </p>
+                                </label>
+                              </div>
+
+
+                        </div>
+
+                      </div-->
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        <br>
+
+        <br/>
+        <div class = "text-center" style = "font-size: 0.6em;">Copyright &copy 2020 Board of Regents of the University of Wisconsin System </div>
+
+
+</section>
+
+<div id = "overlaycontainer" style="display: none">
+  <div id = "overlay">
+  </div>
+</div>
+  {% endblock content %}
+
+</div>
+</body>
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip({
+    html: true
+  });
+});
+</script>
+
+{% block jscode %}
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+<script src="{% static 'jsfile/Leaflet.PolylineDecorator-master/dist/leaflet.polylineDecorator.js' %}"></script>
+<link rel="stylesheet" href="{% static 'jsfile/leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.css' %}" />
+<script src="{% static 'jsfile/leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.js' %}"></script>
+<script src="{% static 'jsfile/leaflet.shapefile-gh-pages/catiline.js' %}"></script>
+<script id = "helper" helptext = "{% static 'jsfile/leaflet.shapefile-gh-pages/' %}" src="{% static 'jsfile/leaflet.shapefile-gh-pages/leaflet.shpfile.js' %}"></script>
+<script id = "helper2" helptext = "{% static 'maindata/' %}" src="{% static 'jsfile/mainpage/main.js' %}"></script>
+
+<script>
+$(function() {
+  initstep2();
+});
+
+/*$(".parent-toggler").hover(function(){
+    $( this ).animate({'color': '#9A0000'}, 180);
+}, function(){
+    $( this ).animate({'color': '#474747'}, 180);
+});*/
+
+$(".parent-toggler").click(function(){
+  ele = $(this)
+  if ( ele.css('font-weight') == 700 ) {
+    ele.css({'font-weight':700});
+      setTimeout(function(){ ele.css({'font-weight':700})}, 30)
+      setTimeout(function(){ ele.css({'font-weight':600})}, 60)
+      setTimeout(function(){ ele.css({'font-weight':500})},90)
+      setTimeout(function(){ ele.css({'font-weight':400})},120)
+
+      setTimeout(function(){
+        ele.css({'background-color':'#fff'})
+        ele.css({'color': '#474747'})
+      },120)
+      iconid = '#' + ele.attr('id') + 'icon'
+      $(iconid).attr('name', 'add-outline')
+      ele.css({'width': '100%'})
+      ele.css({'margin-left': '0'})
+  } else {
+
+    ele.css({'font-weight':400});
+      setTimeout(function(){ ele.css({'font-weight':400})}, 30)
+      setTimeout(function(){ ele.css({'font-weight':500})}, 60)
+      setTimeout(function(){ ele.css({'font-weight':600})},90)
+      setTimeout(function(){ ele.css({'font-weight':700})},120)
+
+      setTimeout(function(){
+        ele.css({'background-color':'#c5050c'})
+        ele.css({'color': 'white'})
+      },120)
+      iconid = '#' + ele.attr('id') + 'icon'
+      $(iconid).attr('name', 'remove-outline')
+      ele.css({'width': '105%'})
+      ele.css({'margin-left': '-2.5%'})
+
+      //ele.css({'position':'absolute'})
+
+  }
+});
+
+</script>
+<script type="text/javascript">
+  var intFrameHeight = window.innerHeight;
+  var mapheight = 520/760*intFrameHeight;
+  var cardheight = mapheight - 20;
+  $("#gfx_holder1").css('height', mapheight);
+  $("#datalayercard").css('height', cardheight)
+</script>
+{% endblock jscode %}
+</html>

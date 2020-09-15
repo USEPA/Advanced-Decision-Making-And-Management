@@ -1,0 +1,587 @@
+{% extends "main.html" %}
+{% load static %}
+
+  {% block content %}
+
+  <section id="main">
+    <br/>
+    <br/>
+
+        <div class="card text-center" style = "width:90%; left:5%; display:block" id = 'custom-0'>
+          <div class="card-header">
+            <h1>Custom Model</h1>
+          </div>
+          <div class="card-body">
+            <br/>
+            <div class = "container text-center" style = "width:50%; left:25%">
+              <div class = "col">
+
+                <button class = "btn btn-light border btn-block" onclick="changecard('custom-0', 'custom-1')">
+                  <ion-icon name="enter-outline" class = "iconpiclarger align-middle float-left" style = "color:black"></ion-icon>
+                  Before Start - Input and Output
+                  <ion-icon name="exit-outline" class = "iconpiclarger align-middle float-right" style = "color:black"></ion-icon>
+                </button>
+                <br/>
+                <br/>
+                <button class = "btn btn-light border btn-block" onclick="changecard('custom-0', 'custom-2')">
+                  <ion-icon name="options" class = "iconpiclarger align-middle float-left" style = "color:#9A0001"></ion-icon>
+                  Step 1 - Define Model Type
+                  <ion-icon name="options" class = "iconpiclarger align-middle float-right" style = "color:#9A0001"></ion-icon>
+                </button>
+                <br/>
+                <br/>
+                <button class = "btn btn-light border btn-block" onclick="changecard('custom-0', 'custom-3')">
+                  <ion-icon name="leaf" class = "iconpiclarger align-middle float-left" style = "color:green"></ion-icon>
+                  Step 2 - Define Supplier Data
+                  <ion-icon name="leaf" class = "iconpiclarger align-middle float-right" style = "color:green"></ion-icon>
+                </button>
+                <br/>
+                <br/>
+                <button class = "btn btn-light border btn-block" onclick="changecard('custom-0', 'custom-4')">
+                  <ion-icon name="cog" class = "iconpiclarger align-middle float-left" style = "color:#969600"></ion-icon>
+                  Step 3 - Define Technology Data
+                  <ion-icon name="cog" class = "iconpiclarger align-middle float-right" style = "color:#969600"></ion-icon>
+                </button>
+                <br/>
+                <br/>
+                <button class = "btn btn-light border btn-block" onclick="changecard('custom-0', 'custom-5')">
+                  <ion-icon name="cart" class = "iconpiclarger align-middle float-left" style = "color:grey"></ion-icon>
+                  Step 4 - Define Consumer Data
+                  <ion-icon name="cart" class = "iconpiclarger align-middle float-right" style = "color:grey"></ion-icon>
+                </button>
+                <br/>
+                <br/>
+                <button class = "btn btn-light border btn-block" onclick="changecard('custom-0', 'custom-6')">
+                  <ion-icon name="car" class = "iconpiclarger align-middle float-left" style = "color:#2d3889"></ion-icon>
+                  Step 5 - Define Transport Data
+                  <ion-icon name="car" class = "iconpiclarger align-middle float-right" style = "color:#2d3889"></ion-icon>
+                </button>
+                <br/>
+                <br/>
+                <button class = "btn btn-light border btn-block" onclick="changecard('custom-0','custom-7')">
+                  <ion-icon name="battery-full" class = "iconpiclarger align-middle float-left" style = "color:#e0e802"></ion-icon>
+                  Step 6 - Execute Model
+                  <ion-icon name="battery-full" class = "iconpiclarger align-middle float-right" style = "color:#e0e802"></ion-icon>
+                </button>
+              </div>
+            </div>
+            <br/>
+          </div>
+          <div class="card-footer text-muted">
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="window.location = '/tryit'">Tutorial Home</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="window.location = '/tryit/eg1'">Biogas from Waste</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);">Custom Model</button>
+          </div>
+        </div>
+
+
+
+        <div class="card text-center" style = "width:90%; left:5%; display:none" id = 'custom-1'>
+          <div class="card-header">
+            <button class = "btn btn-light border float-left " onclick="changecard('custom-1','custom-2')" style = "display:inline-block;visibility:hidden">Next</button>
+            <h3 style = "display:inline-block">Before Start - Input and Output</h3>
+            <button class = "btn btn-light border float-right" onclick="changecard('custom-1','custom-2')" style = "display:inline-block;">Next</button>
+          </div>
+          <div class="card-body">
+
+            <div class = "container text-left egdiv" >
+
+
+              <p class="card-text">
+               ADAM is a tool that helps you build and solve supply chain management and design models. The participants of a supply chain include consumers, suppliers, technology providers, and transportation providers.
+              </p>
+
+              <p class="card-text"> To construct a <strong>design model</strong>, one needs the following <strong>input data</strong>:</p>
+
+              <div class = "container text-left" style = "width: 70%; left: 15%" >
+                <ul class="list-group">
+                  <li class="list-group-item"><strong>•	Supplier Data</strong>:  Costs and capacities for suppliers. </li>
+                  <li class="list-group-item"><strong>•	Consumer Data</strong>:  Costs and capacities for consumers. </li>
+                  <li class="list-group-item"><strong>•	Tech Data</strong>:  Costs and capacities for technology providers. </li>
+                  <li class="list-group-item"><strong>•	Transport Data</strong>: Costs and capacities for transportation providers.</li>
+                </ul>
+              </div>
+              <br/>
+
+              <p class="card-text">
+               Given input data, a <strong>design model</strong> is solved to determine locations for new technologies and transactions of products that maximize the collective profit of all participants and that satisfy a given design budget.
+              </p>
+
+              <p class="card-text">
+               A design model provides the following <strong>output data</strong>:
+              </p>
+
+              <div class = "container text-left" style = "width: 70%; left: 15%" >
+                <ul class="list-group">
+                  <li class="list-group-item"><strong>•	Flow Data</strong>:  Flows supply, consumed, and processed at different locations as well as transport between locations. </li>
+                  <li class="list-group-item"><strong>•	Value Data</strong>:  Value of products at different locations. </li>
+                  <li class="list-group-item"><strong>•	Design Data</strong>:  Optimal location for new technologies.  </li>
+                </ul>
+              </div>
+
+              <p class="card-text">
+               Once you have created a model, you can save it so that this can be duplicated and loaded to change features.
+              </p>
+
+            </div>
+
+            <br/>
+
+            <button class = "btn btn-light border" onclick="changecard('custom-1','custom-2')" style = "float:right">Next</button>
+
+          </div>
+          <div class="card-footer text-muted">
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-1','custom-0')">Example Outline</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-1','custom-1')">Step 1</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-1','custom-2')">Step 2</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-1','custom-3')">Step 3</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-1','custom-4')">Step 4</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-1','custom-5')">Step 5</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-1','custom-6')">Step 6</button>
+          </div>
+        </div>
+
+
+
+
+        <div class="card" style = "width:90%; left:5%; display:none" id = 'custom-2'>
+          <div class="card-header text-center">
+            <button class = "btn btn-light border" onclick="changecard('custom-2','custom-1')" style = "display:inline-block;float:left">Previous</button>
+            <h1 style = "display:inline-block">Example 1 - Customized Model</h1>
+            <button class = "btn btn-light border" onclick="changecard('custom-2','custom-3')" style = "display:inline-block;float:right">Next</button>
+          </div>
+          <div class="card-body" id = "test_card_body">
+            <h4 class="card-title text-center">Step 2 - Define Processing Pathways</h4>
+
+            <p class="card-text" style = "text-align:left">
+              In this example, we will extend the previous technology structure in Example 1. This is often the case that the organic waste will be processed by multiple stages. And in this example, we consider the use of both biogas generation and separation. The separation step can occur after biogas generation, or directly execute on raw manure.
+            </p>
+
+            <p class="card-text" style = "text-align:left">
+              The technology structure is drawn on the canvas below. The information for separation technology is set arbitrarily. You can try to modify information by double click those elements (product, technology, and link in between).
+            </p>
+
+            <br/>
+
+            <div class = "canvas_hold" style = "height: 600px; width: 750px;">
+              <div id = "gfx_holder" style = "height: 600px; width: 750px">
+              </div>
+            </div>
+
+            <br/>
+            <p class="card-text" style = "text-align:left">
+              The information in the above graph is also summarized in the following table.
+            </p>
+
+
+            <table width = 100% border = "1" style = "text-align:center">
+              <tr>
+                <th>Tech Name</th>
+                <th>Capacity Range<br/>(tonne feed/year)</th>
+                <th>Investment Cost<br/>Fixed (USD)</th>
+                <th>Investment Cost Proportional<br/>(USD/(tonne feed/year))</th>
+                <th>Operational Cost<br/>Fixed (USD/year)</th>
+                <th>Operational Cost Proportional<br/>(USD/tonne feed)</th>
+              </tr>
+              <tr>
+                <td id = "t1_name">biogas generation</td>
+                <td id = "t1_cap">150000~250000</td>
+                <td id = "t1_invfix">1000000</td>
+                <td id = "t1_invpro">7.2</td>
+                <td id = "t1_opfix">60555</td>
+                <td id = "t1_oppro">3.2</td>
+              </tr>
+              <tr>
+                <td id = "t2_name">separation</td>
+                <td id = "t2_cap">0~100000</td>
+                <td id = "t2_invfix">100000</td>
+                <td id = "t2_invpro">2</td>
+                <td id = "t2_opfix">10000</td>
+                <td id = "t2_oppro">1</td>
+              </tr>
+              <tr>
+                <td id = "t3_name">separation2</td>
+                <td id = "t3_cap">0~100000</td>
+                <td id = "t3_invfix">100000</td>
+                <td id = "t3_invpro">2</td>
+                <td id = "t3_opfix">10000</td>
+                <td id = "t3_oppro">1</td>
+              </tr>
+            </table>
+            <br/>
+
+            <button class = "btn btn-light border" onclick="changecard('custom-2','custom-1')" style = "float:left">Previous</button>
+            <button class = "btn btn-light border" onclick="changecard('custom-2','custom-3')" style = "float:right">Next</button>
+
+          </div>
+          <div class="card-footer text-muted text-center">
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-2','custom-0')">Example Outline</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-2','custom-1')">Step 1</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-2','custom-2')">Step 2</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-2','custom-3')">Step 3</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-2','custom-4')">Step 4</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-2','custom-5')">Step 5</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-2','custom-6')">Step 6</button>
+          </div>
+        </div>
+
+
+
+        <div class="card" style = "width:90%; left:5%; display:none" id = 'custom-3'>
+          <div class="card-header text-center">
+            <button class = "btn btn-light border" onclick="changecard('custom-3','custom-2')" style = "display:inline-block;float:left">Previous</button>
+            <h1 style = "display:inline-block">Example 1 - Customized Model</h1>
+            <button class = "btn btn-light border" onclick="changecard('custom-3','custom-4'),initstep4()" style = "display:inline-block;float:right">Next</button>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title text-center">Step 3 - Define Geographical Layout</h4>
+
+            <p class="card-text text-left" style = "text-align:left">
+              In the following geographical map, we include 11 nodes. You can drag them around to define a specific layout.
+            </p>
+
+            <div class = "canvas_hold" style = "height: 600px; width: 750px;">
+              <div id = "gfx_holder2" style = "height: 600px; width: 750px">
+              </div>
+            </div>
+
+            <br/>
+            <p class="card-text text-left" style = "text-align:left">
+              The following distance matrix will change automatically as you drag nodes around.
+            </p>
+
+            <table width = 100% border = "1" id = "custom_dis_table">
+              <tr>
+                <th>-</th>
+                <th>n1</th>
+                <th>n2</th>
+                <th>n3</th>
+                <th>n4</th>
+                <th>n5</th>
+                <th>n6</th>
+                <th>n7</th>
+                <th>n8</th>
+                <th>n9</th>
+                <th>n10</th>
+                <th>n11</th>
+              </tr>
+            </table>
+            <br/>
+
+            <p id = "test_dis"> </p>
+
+            <button class = "btn btn-light border" onclick="changecard('custom-3','custom-2')" style = "float:left">Previous</button>
+            <button class = "btn btn-light border" onclick="changecard('custom-3','custom-4'), initstep4()" style = "float:right">Next</button>
+
+          </div>
+          <div class="card-footer text-muted text-center">
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-3','custom-0')">Example Outline</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-3','custom-1')">Step 1</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-3','custom-2')">Step 2</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-3','custom-3')">Step 3</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-3','custom-4'),initstep4()">Step 4</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-3','custom-5')">Step 5</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-3','custom-6')">Step 6</button>
+          </div>
+        </div>
+
+
+        <div class="card" style = "width:90%; left:5%; display:none" id = 'custom-4'>
+          <div class="card-header text-center">
+            <button class = "btn btn-light border" onclick="refreshalert()" style = "display:inline-block;float:left">Previous</button>
+            <h1 style = "display:inline-block">Example 1 - Customized Model</h1>
+            <button class = "btn btn-light border" onclick="changecard('custom-4','custom-5'), initstep5()" style = "display:inline-block;float:right">Next</button>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title text-center">Step 4 - Assign Supply, Demand, and Technology Site</h4>
+
+            <p class="card-text" style = "text-align:left" id = "custom_step4_warning">
+              You need to finish previous steps before you can modify this part.
+            </p>
+
+            <div class = "canvas_hold" style = "height: 600px; width: 750px;">
+              <div id = "gfx_holder3" style = "height: 600px; width: 750px; ">
+              </div>
+            </div>
+
+            <p id = "test_step4"></p>
+            <div id = "node_type_holder" style = "display:none">
+            </div>
+            <div id = "node_info_holder" style = "display:none">
+            </div>
+            <table width = 100% border = "1" id = "sup_data_table">
+              <tr>
+                <th>Supply #</th>
+                <th>Node</th>
+                <th>Product</th>
+                <th>Amount</th>
+                <th>Price</th>
+              </tr>
+            </table>
+
+            <br/>
+
+            <table width = 100% border = "1" id = "dem_data_table">
+              <tr>
+                <th>Demand #</th>
+                <th>Node</th>
+                <th>Product</th>
+                <th>Capacity</th>
+                <th>Price</th>
+              </tr>
+            </table>
+
+            <br/>
+
+            <table width = 100% border = "1" id = "sit_data_table">
+              <tr>
+                <th>Tech Site #</th>
+                <th>Node</th>
+                <th>Technology</th>
+                <th>Capacity</th>
+              </tr>
+            </table>
+
+            <button class = "btn btn-light border" onclick="refreshalert()" style = "float:left">Previous</button>
+            <button class = "btn btn-light border" onclick="changecard('custom-4','custom-5'), initstep5()" style = "float:right">Next</button>
+
+          </div>
+          <div class="card-footer text-muted text-center">
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-4','custom-0')">Example Outline</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-4','custom-1')">Step 1</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-4','custom-2')">Step 2</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="refreshalert()">Step 3</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-4','custom-4')">Step 4</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-4','custom-5'), initstep5()">Step 5</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-4','custom-6')">Step 6</button>
+          </div>
+        </div>
+
+
+
+
+        <div class="card" style = "width:90%; left:5%; display:none" id = 'custom-5'>
+          <div class="card-header text-center">
+            <button class = "btn btn-light border" onclick="changecard('custom-5','custom-4')" style = "display:inline-block;float:left">Previous</button>
+            <h1 style = "display:inline-block">Example 1 - Customized Model</h1>
+            <button class = "btn btn-light border" onclick="changecard('custom-5','custom-6'),initstep6()" style = "display:inline-block;float:right">Next</button>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title text-center">Step 5 - Define Transportation Layout</h4>
+
+            <p class="card-text" style = "text-align:left" id = "custom_step5_warning">
+              You need to finish previous steps before you can modify this part.
+            </p>
+
+            <p class="card-text" style = "text-align:left" id = "raw1transmapintro">
+            </p>
+
+            <div class = "canvas_hold" style = "height: 600px; width: 750px;">
+              <div id = "gfx_holder4" style = "height: 600px; width: 750px; ">
+              </div>
+            </div>
+            <br/>
+
+            <p class="card-text" style = "text-align:left" id = "int1transmapintro">
+            </p>
+
+            <div class = "canvas_hold" style = "height: 600px; width: 750px;">
+              <div id = "gfx_holder5" style = "height: 600px; width: 750px; ">
+              </div>
+            </div>
+            <br/>
+
+            <p class="card-text" style = "text-align:left" id = "fin2transmapintro">
+            </p>
+
+            <div class = "canvas_hold" style = "height: 600px; width: 750px;">
+              <div id = "gfx_holder6" style = "height: 600px; width: 750px; ">
+              </div>
+            </div>
+            <br/>
+
+            <p class="card-text" style = "text-align:left" id = "fin3transmapintro">
+            </p>
+
+            <div class = "canvas_hold" style = "height: 600px; width: 750px;">
+              <div id = "gfx_holder7" style = "height: 600px; width: 750px; ">
+              </div>
+            </div>
+            <br/>
+
+            <p class="card-text" style = "text-align:left" id = "fin4transmapintro">
+            </p>
+
+            <div class = "canvas_hold" style = "height: 600px; width: 750px;">
+              <div id = "gfx_holder8" style = "height: 600px; width: 750px; ">
+              </div>
+            </div>
+            <br/>
+
+            <p class="card-text" style = "text-align:left" id = "fin5transmapintro">
+            </p>
+
+            <div class = "canvas_hold" style = "height: 600px; width: 750px;">
+              <div id = "gfx_holder9" style = "height: 600px; width: 750px; ">
+              </div>
+            </div>
+            <br/>
+
+            <p id = "test_step5"></p>
+
+            <button class = "btn btn-light border" onclick="changecard('custom-5','custom-4')" style = "float:left">Previous</button>
+            <button class = "btn btn-light border" onclick="changecard('custom-5','custom-6'),initstep6()" style = "float:right">Next</button>
+
+          </div>
+          <div class="card-footer text-muted text-center">
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-5','custom-0')">Example Outline</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-5','custom-1')">Step 1</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-5','custom-2')">Step 2</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-5','custom-3')">Step 3</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-5','custom-4')">Step 4</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-5','custom-5')">Step 5</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-5','custom-6'),initstep6()">Step 6</button>
+          </div>
+        </div>
+
+
+
+        <div class="card text-center" style = "width:90%; left:5%; display:none" id = 'custom-6'>
+
+          <div class="card-header">
+            <button class = "btn btn-light border" onclick="changecard('custom-6','custom-5')" style = "display:inline-block;float:left">Previous</button>
+            <h1 style = "display:inline-block">Example 1 - Customized Model</h1>
+
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">Step 6 - Get Your Result</h4>
+
+            <p class="card-text" style = "text-align:left" id = "custom_step6_warning">
+              You need to finish previous steps before you can modify this part.
+            </p>
+
+            {% csrf_token %}
+            <button class = "btn btn-light border" onclick="changecard('custom-6','custom-5')" style = "float:left">Previous</button>
+
+          </div>
+          <div class="card-footer text-muted">
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-6','custom-0')">Example Outline</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-6','custom-1')">Step 1</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-6','custom-2')">Step 2</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-6','custom-3')">Step 3</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-6','custom-4')">Step 4</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-6','custom-5')">Step 5</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('custom-6','custom-6')">Step 6</button>
+          </div>
+        </div>
+
+
+        <div class="card text-center" style = "width:90%; left:5%; display:none" id = 'dashboard-0'>
+          <div class="card-header">
+            <h1>Introduction to Modules in Dashboard</h1>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">Introduction Outline</h4>
+            <p class="card-text">
+
+            </p>
+            <button class = "btn btn-light border" onclick="">Published Information</button>
+            <br/>
+            <br/>
+            <button class = "btn btn-light border" onclick="">Graph and Database System</button>
+            <br/>
+            <br/>
+            <button class = "btn btn-light border" onclick="">Data File Management</button>
+            <br/>
+            <br/>
+            <button class = "btn btn-light border" onclick="">Model Management</button>
+            <br/>
+            <br/>
+            <button class = "btn btn-light border" onclick="">Result Retrieve and Visualization</button>
+            <br/>
+            <br/>
+            <button class = "btn btn-light border" onclick="">Change User Information</button>
+
+          </div>
+          <div class="card-footer text-muted">
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('dashboard-0','outline')">Tutorial Home</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('dashboard-0','biogas-0')">Biogas from Waste</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="changecard('dashboard-0','custom-0')">Custom Model</button>
+            <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);">Intro to Dashboard</button>
+          </div>
+        </div>
+    <br/>
+    <br/>
+  </section>
+
+  <div style="display:none;">
+    <div class="productinfo">
+      <p> *Product name: </p>
+      <input class="ajs-input form-control" id="inpOne" type="text" />
+      <p> *Transportation cost [USD/tonne/km]: </p>
+      <input class="ajs-input form-control" id="inpTwo" type="number" step = 0.1 min = 0 />
+      <p> Additional information: </p>
+      <input class="ajs-input form-control" id="inpThree" type="text" />
+    </div>
+  </div>
+
+  <div style="display:none;">
+    <div class="technologyinfo">
+      <p> *Technology name: </p>
+      <input class="ajs-input" id="techOne" type="text" />
+      <p> *Minimum capacity [tonne main feed/year]: </p>
+      <input class="ajs-input" id="techTwo" type="number" step = 10 min = 0/>
+      <p> *Maximum capacity [tonne main feed/year]: </p>
+      <input class="ajs-input" id="techThree" type="number" step = 10 min = 0/>
+      <p> *Investment cost (fixed) [USD]: </p>
+      <input class="ajs-input" id="techFour" type="number" step = 10 min = 0 />
+      <p> *Investment cost (proportioanl) [USD/(tonne main feed/year)]: </p>
+      <input class="ajs-input" id="techFive" type="number" step = 10 min = 0 />
+      <p> *Operational cost (fixed) [USD/year]: </p>
+      <input class="ajs-input" id="techSix" type="number" step = 10 min = 0 />
+      <p> *Operational cost (proportioanl) [USD/tonne main feed]: </p>
+      <input class="ajs-input" id="techSeven" type="number" step = 10 min = 0 />
+      <p> Additional information: </p>
+      <input class="ajs-input" id="techEight" type="text" />
+    </div>
+  </div>
+
+  <div style="display:none;">
+    <div class="transforminfo">
+      <p> *Transformation coefficient: </p>
+      <input class="ajs-input" id="transform" type="number" step = 0.1 />
+    </div>
+  </div>
+
+  <div id = "overlaycontainer" style="display:none;">
+    <div id = "overlay">
+      <div class="text-center" style="position: relative; top: 40%; color:#474747;border-style: solid; background: rgba(255,255,255,1); width: 40%; left:30%">
+        <h2>Model is Running...</h2>
+        <br/>
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Running</span>
+        </div>
+        <br/>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
+
+{% block jscode %}
+<script>
+  function changecard(id1,id2){
+    $("#"+id1).fadeTo(300,0, function(){
+      $("#"+id1).css("display","none");
+      $("#"+id2).fadeTo(300,1);
+    });
+  }
+</script>
+<script src="{% static '/jsfile/draw2d-master/dist/draw2d.js' %}"></script>
+<script type = "module" src="{% static '/jsfile/draw2d-master/src/Canvas.js' %}"></script>
+<script src="{% static '/jsfile/draw2d-master/customize/MyConnection.js' %}"></script>
+<script src="{% static '/jsfile/draw2d-master/customize/MyTransConnection.js' %}"></script>
+<script src="{% static 'jsfile/tryitjsfile/custom_model.js' %}"></script>
+
+
+{% endblock jscode %}
+</html>

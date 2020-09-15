@@ -1,0 +1,112 @@
+{% extends "main.html" %}
+{% load static %}
+
+  {% block content %}
+
+
+  <section id="main">
+    <br/>
+    
+    <div class="card text-center" style = "width:90%; left:5%;" id = 'resultscard'>
+      <div class="card-header text-center">
+        <h4 style = "display:inline-block">Results of Custom Model</h4>
+      </div>
+      <div class="card-body">
+
+        <div class = "container text-left egdiv">
+
+          <p class="card-text" style = "text-align: left">
+            The optimal solution found is shown below. Click on the paths to show GIS routes.
+          </p>
+
+          <div class = "container text-center" style = "width: 100%;" >
+            <div class = "row">
+              <div class = "col">
+                <div id = "gfx_holder4" style = "position: relative; width:100%; height: 330px; box-shadow: 5px 5px 5px #d3d3d3;">
+                </div>
+              </div>
+
+              <div class = "col">
+                <div id = "gfx_holder5" style = "position: relative; width:100%; height: 330px; box-shadow: 5px 5px 5px #d3d3d3;">
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <br/>
+
+
+          <img src = "{% static 'figure/tutorial/eg1_tech.png' %}" style = "display:none" id = 'techpic1' >
+          <img src = "{% static 'figure/tutorial/eg1_tech2.png' %}" style = "display:none" id = 'techpic2' >
+          <img src = "{% static 'figure/tutorial/eg2_tech3.png' %}" style = "display:none" id = 'techpic3' >
+
+        </div>
+      </div>
+      <div class="card-footer text-muted">
+        <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="window.location = '/tryit'">Tutorial Home</button>
+        <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="window.location = '/tryit/eg1'">Biogas from Waste</button>
+        <button class = "btn border-0 text-muted" style = "background-color:rgba(0, 0, 0, 0);" onclick="window.location = '/tryit/eg2'">Custom Model</button>
+      </div>
+    </div>
+    <br/>
+    <br/>
+  </section>
+  {% endblock content %}
+
+{% block jscode %}
+  <script>
+
+  nodedatajs = []
+  supdatajs = []
+  demdatajs = []
+  sitedatajs = []
+  transresultjs = []
+
+  {% if nodedata %}
+    {% for item in nodedata %}
+      nodedatajs.push({node: '{{item.node}}', name: '{{item.name}}', x: {{item.x}}, y: {{item.y}}, cand: {{item.cand}}})
+    {% endfor %}
+  {% endif %}
+
+  {% if supdata %}
+    {% for row in supdata %}
+      supdatajs.push({{row|safe}})
+    {% endfor %}
+  {% endif %}
+
+  {% if demdata %}
+    {% for row in demdata %}
+      demdatajs.push({{row|safe}})
+    {% endfor %}
+  {% endif %}
+
+  {% if sitedata %}
+    {% for row in sitedata %}
+      sitedatajs.push({{row|safe}})
+    {% endfor %}
+  {% endif %}
+
+  {% if transresult %}
+    {% for dataset in transresult %}
+      var datasetjs = []
+      {% for row in dataset %}
+        datasetjs.push({{row|safe}})
+      {% endfor %}
+      transresultjs.push(datasetjs)
+    {% endfor %}
+  {% endif %}
+
+
+  </script>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+  <script src="{% static 'jsfile/Leaflet.PolylineDecorator-master/dist/leaflet.polylineDecorator.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'jsfile/leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.css' %}" />
+  <script src="{% static 'jsfile/leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.js' %}"></script>
+  <script src="{% static 'jsfile/tryitjsfile/generate_report.js' %}"></script>
+
+
+
+{% endblock jscode %}
+</html>
