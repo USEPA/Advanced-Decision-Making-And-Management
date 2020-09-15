@@ -61,7 +61,7 @@ def exp_register(request):
                     newitem = UserHasTech(userdatabase=new_base, technology=t)
                     newitem.save()
             new_base.save()
-            return redirect(reverse('main:exp_registered'))
+            return redirect(reverse('expert:exp_registered'))
         else:
             fail = 1
             context = {'userform': uf, 'fail': fail}
