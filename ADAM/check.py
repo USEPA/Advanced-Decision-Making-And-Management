@@ -43,7 +43,7 @@ for t in complete_list:
 
 
 # To check if a SC task has a corresponding results file
-path = 'your/path/to/store/julia_task_results' # subject to change
+path = 'your/path/to/store/julia_task_results'  # subject to change
 for root, dirs, files in os.walk(path):
     print(files)
     for filename in files:
