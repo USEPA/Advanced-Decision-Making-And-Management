@@ -1,11 +1,13 @@
 # NOTE: Pip must be updated separately from the requirements.txt with the command:
 #       python -m pip install --upgrade pip
-boto3
 django
 django-background-tasks
-django-storages
 django_extensions
-# django_mysql
-# mysql
 psycopg2
 pycodestyle
+
+# Removed for latest EPA version:
+# boto3
+# django_mysql
+# django-storages
+# mysql

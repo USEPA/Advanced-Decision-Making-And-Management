@@ -11,11 +11,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from ADAM.aws.conf import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -28,9 +26,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-
-# Application definition
-
 INSTALLED_APPS = [
     'demo.apps.DemoConfig',
     'expert.apps.ExpertConfig',
@@ -40,9 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages',
     'background_task',
     'django_extensions',
+    'ADAM',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +55,7 @@ ROOT_URLCONF = 'ADAM.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR + '/templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'ADAM.context_processors.selected_settings',
             ],
         },
     },
@@ -121,23 +117,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'ADAM', 'static')
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')]
+DOWNLOADS_DIR = os.path.join(BASE_DIR, '..', 'docs')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'ADAM', 'media')
 MEDIA_URL = '/media/'
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
-
 
 CORS_REPLACE_HTTPS_REFERER = False
 HOST_SCHEME = "http://"
@@ -145,7 +133,6 @@ SECURE_PROXY_SSL_HEADER = None
 SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.office365.com'
@@ -157,14 +144,21 @@ EMAIL_HOST_PASSWORD = 'email-password'
 LOGIN_URL = '/expert/login/'
 
 APP_NAME = 'ADAM'
+
 # Versioning will match Semantic Versioning 2.0.0:
 # https://semver.org/
-APP_VERSION = '1.0.0-beta'
-APP_DISCLAIMER = 'The information and data presented in this product ' + \
-    'were obtained from sources that are believed to be reliable. ' + \
-    'However, in many cases the quality of the information or data ' + \
-    'was not documented by those sources; therefore, no claim is ' + \
-    'made regarding their quality.'
+APP_VERSION = '0.0.1'
+APP_DISCLAIMER = 'The United States Environmental Protection Agency ' + \
+    '(EPA) GitHub project code is provided on an "as is" basis and the ' + \
+    'user assumes responsibility for its use. EPA has relinquished ' + \
+    'control of the information and no longer has responsibility to ' + \
+    'protect the integrity , confidentiality, or availability of the' + \
+    'information. Any reference to specific commercial products, ' + \
+    'processes, or services by service mark, trademark, manufacturer, ' + \
+    'or otherwise, does not constitute or imply their endorsement, ' + \
+    'recommendation or favoring by EPA. The EPA seal and logo shall ' + \
+    'not be used in any manner to imply endorsement of any commercial ' + \
+    'product or activity by EPA or the United States Government.'
 
 try:
     from .local_settings import *
