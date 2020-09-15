@@ -1,0 +1,50 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<section id="main">
+    {% csrf_token %}
+    <br/>
+
+    <div class="card text-center" style = "width:80%; left:10%; display: block">
+      <div class="card-header">
+        <h4>Registered!</h4>
+      </div>
+
+        <div class = "container" style = "width:40%; left:30%">
+          <br/>
+          <br/>
+          <p> Redirecting<span id = 'sp'>.</span></p>
+          <br/>
+          <div class="spinner-grow" style="width: 3rem; height: 3rem; color: #9A0001" role="status">
+            <span class="sr-only">Running</span>
+          </div>
+          <br/>
+          <br/>
+
+        </div>
+
+    </div>
+<br/>
+<br/>
+</section>
+{% endblock content %}
+
+{% block jscode %}
+<script>
+    onload=function () {
+        setInterval(go,500)
+    };
+    var x=1;
+    function go() {
+
+        if (x>=0){
+            content = $('#sp').html()
+            $('#sp').html(content + '.')
+        }else {
+            location.href= '/expert/usermain';
+        }
+        x--;
+    }
+</script>
+{% endblock jscode %}

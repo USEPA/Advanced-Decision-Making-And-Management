@@ -1,0 +1,104 @@
+{% extends "main.html" %}
+{% load static %}
+{% load tz %}
+{% block extrahead %}
+
+{% endblock extrahead %}
+
+{% block content %}
+
+<section id="main">
+  {% csrf_token %}
+  <br/>
+
+  <div class="card">
+
+    <div class="card-header">
+        <div class="row align-items-center">
+          <div class = "col text-left">
+            <div class = "btn-group">
+            <a  class = "btn btn-light" href = '/expert/usermain/'>
+              <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+            </a>
+            <a  class = "btn btn-light" href = '/expert/demo'>
+              <ion-icon name="book" class = "iconpiclarger align-middle"></ion-icon> Case Studies
+            </a>
+            </div>
+          </div>
+
+          <div class = "col text-center">
+            <h4 class = "card-title align-vertical text-body" >Add Case</h4>
+          </div>
+
+          <div class = "col text-right invisible">
+            <a  class = "btn btn-light" href = '/'>
+              <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+            </a>
+
+            <a  class = "btn btn-light" href = '/demo'>
+              <ion-icon name="library" class = "iconpiclarger align-middle"></ion-icon> Case Studies
+            </a>
+
+          </div>
+
+        </div>
+    </div>
+
+    <div class="card-body">
+      <br/>
+
+        <div class = "container text-center" style = "width:40%; left:30%">
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Case Name</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Case Name"  aria-describedby="basic-addon1" id = "casename">
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="selectmodel">Select Model</label>
+            </div>
+            <select class="custom-select" id="selectmodel">
+              {% for model in tasklist %}
+              <option value = "{{model.id}}">{{model.user.username}} - {{model.task_name}} </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <button class = "btn btn-light border" onclick="addcase()">Confirm</button>
+        </div>
+
+    </div>
+
+    <div id = "overlaycontainer" style="display:none;z-index: 1002">
+      <div id = "overlay">
+        <div class="text-center border rounded" style="position: relative; top: 40%; background: #F7F7F7; width: 40%; left:30%;">
+          <h4 id = "spinnertext">Generating Case Study</h4>
+          <br/>
+          <div class="spinner-grow" style="width: 3rem; height: 3rem; color: #9A0001" role="status">
+            <span class="sr-only">Running</span>
+          </div>
+          <br/>
+          <br/>
+          <p>Do not refresh...</p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <br/>
+  <br/>
+</section>
+{% endblock content %}
+{% block jscode %}
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+<script src="{% static 'jsfile/expertgraphedit/MakeCaseStudy.js' %}"></script>
+
+{% endblock jscode%}

@@ -1,0 +1,80 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+
+<section id="main">
+  {% csrf_token %}
+  <br/>
+
+  <div class="card" style = "min-width:950px">
+
+    <div class="card-header">
+        <div class="row align-items-center">
+          <div class = "col text-left">
+            <div class = "btn-group">
+              <a  class = "btn btn-light btn-sm" href = '/expert/usermain/'>
+                <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+              </a>
+              <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/'>
+                <ion-icon name="list" class = "iconpiclarger align-middle"></ion-icon> Model List
+              </a>
+              <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/{{task.id}}'>
+                <ion-icon name="aperture" class = "iconpiclarger align-middle"></ion-icon> {{task.task_name}}
+              </a>
+            </div>
+          </div>
+
+          <div class = "col text-center">
+            <h4 class = "card-title align-vertical text-body" >Model Type and Time Basis</h4>
+          </div>
+          <div class = "col text-right invisible">
+            <div class = "btn-group">
+              <a  class = "btn btn-light btn-sm" href = '/expert/usermain/'>
+                <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+              </a>
+              <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/'>
+                <ion-icon name="list" class = "iconpiclarger align-middle"></ion-icon> Model List
+              </a>
+              <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/{{task.id}}'>
+                <ion-icon name="aperture" class = "iconpiclarger align-middle"></ion-icon> {{task.task_name}}
+              </a>
+            </div>
+          </div>
+
+        </div>
+    </div>
+
+    <div class="card-body">
+      <br/>
+
+    <div class = "container "style="width: 40%; left: 30%">
+      <form method = "GET">
+          {% for field in modelform %}
+          <div class="input-group input-group-sm mb-3" >
+            <div class="input-group-prepend">
+              <span class="input-group-text">{{field.label}}</span>
+            </div>
+            {{field}}
+          </div>
+          <br/>
+          {% endfor %}
+        <input type="submit" value="Confirm" class = "btn btn-light border btn-block" name="confirm_type">
+      </form>
+      </div>
+      {% if fail %}
+      <br/>
+      <h3> Form not Valid! </h3>
+      {% endif %}
+
+
+    </div>
+  </div>
+  <br/>
+
+</section>
+{% endblock content %}
+
+{% block jscode %}
+
+{% endblock jscode %}

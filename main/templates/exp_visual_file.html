@@ -1,0 +1,124 @@
+{% extends "main.html" %}
+{% load static %}
+{% load tz %}
+{% block extrahead %}
+
+{% endblock extrahead %}
+
+{% block content %}
+<section id="main">
+{% csrf_token %}
+<br/>
+
+<div class="card">
+
+  <div class="card-header">
+      <div class="row align-items-center">
+        <div class = "col text-left">
+          <a  class = "btn btn-light" href = '/expert/usermain/'>
+            <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+          </a>
+          <a  class = "btn btn-light" href = '/expert/usermain/visualization'>
+            <ion-icon name="map-outline" class = "iconpiclarger align-middle"></ion-icon> Visualization Home
+          </a>
+        </div>
+
+        <div class = "col text-center">
+          <h4 class = "card-title align-vertical text-body" >Visualization Tool</h4>
+        </div>
+        <div class = "col text-right invisible">
+          <a  class = "btn btn-light" href = '/'>
+            <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+          </a>
+          <a  class = "btn btn-light" href = '/expert/usermain/visualization'>
+            <ion-icon name="map-outline" class = "iconpiclarger align-middle"></ion-icon> Visualization Home
+          </a>
+        </div>
+
+      </div>
+  </div>
+
+  <div class="card-body">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <script src="{% static 'jsfile/expertgraphedit/VisualFile.js' %}"></script>
+    <script src="{% static 'jsfile/Leaflet.PolylineDecorator-master/dist/leaflet.polylineDecorator.js' %}"></script>
+    <script type="text/javascript">
+        $(window).on('load',function () {
+          initgeomap();
+          prodlist = []
+          techlist_all = []
+          {% for item in user.userdatabase.userhasprod_set.all %}
+            data = {id: "{{item.product.id}}", name: "{{item.product.name}}", transcost: "{{item.product.transcost}}", unit: "{{item.product.unit}}", note: "{{item.product.additionalinfo}}", transformationset: []}
+
+            {% for trans in item.product.transformation_set.all %}
+              data.transformationset.push({techname: "{{trans.technology.name}}", yield: "{{trans.transforming_coefficient}}", techid: "{{trans.technology.id}}"})
+            {% endfor %}
+
+            prodlist.push(data)
+          {% endfor %}
+
+          {% for item in user.userdatabase.userhastech_set.all %}
+            data = {id: "{{item.technology.id}}", name: "{{item.technology.name}}", refprod: "{{item.technology.refproduct}}", capmin: "{{item.technology.capmin}}", capmax: "{{item.technology.capmax}}", invfix: "{{item.technology.invcost_fix}}", invpro:"{{item.technology.invcost_pro}}", opfix: "{{item.technology.opcost_fix}}",oppro: "{{item.technology.opcost_pro}}", png: "{{item.technology.pngsrc}}",  note: "{{item.product.additionalinfo}}", transformationset: []}
+
+            {% for trans in item.technology.transformation_set.all %}
+              data.transformationset.push({prodname: "{{trans.product.name}}", yield: "{{trans.transforming_coefficient}}", prodid: "{{trans.product.id}}"})
+            {% endfor %}
+
+            techlist_all.push(data)
+          {% endfor %}
+
+          techlist = techlist_all
+      });
+    </script>
+
+    <div class = "container" style = "width:100%;">
+      <div class="row">
+          <div class = "col-8">
+            <div  id = "gfx_holder" class = "border" style = "height: 450px; box-shadow: 5px 5px 5px #d3d3d3; width: 100%">
+            </div>
+          </div>
+
+          <div class = "col-4 text-center">
+            <div class="card mb-3" style = "height: 420px; top: 15px">
+              <div class="card-header">
+                    <div class="spinner-grow text-white align-middle float-left" style="width: 1.5rem; height: 1.5rem; visibility:hidden" role="status" >
+                      <span class="sr-only">Running</span>
+                    </div>
+                    <strong style = "color: #9A0001">Data Layers</strong>
+                    <div class="spinner-grow text-white align-middle float-right" style="width: 1.5rem; height: 1.5rem; visibility:hidden" role="status"  id = "spinner">
+                      <span class="sr-only">Running</span>
+                    </div>
+              </div>
+
+              <div class="card-body text-left overflow-auto">
+                <div class = "container" style = "width:100%" id = "cardcontainer">
+                  {% for file in user.datadocument_set.all %}
+                    <div class="custom-control custom-checkbox">
+                      <input class="form-check-input" type="checkbox" id = "check{{file.id}}" onchange="checkChange('{{file.datatype}}', {{file.id}})">
+                      <label class="form-check-label"> <p data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"> {{file.shortfilename}} ({{file.date_upload|date:'Y-m-d' }}) </p> </label>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id = "overlaycontainer" style="display:none;">
+        <div id = "overlay">
+        </div>
+      </div>
+
+
+  </div>
+    <br/>
+  </div>
+</section>
+{% endblock content %}
+{% block jscode %}
+
+{% endblock jscode%}

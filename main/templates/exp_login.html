@@ -1,0 +1,57 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+
+<section id="main">
+  <br/>
+  <div class="card text-center" style = "width:80%; left:10%; display: block">
+    <div class="card-header">
+      <h4>Login to ADAM</h4>
+    </div>
+        <br/>
+        {% if formfail %}
+          {% for field in loginform %}
+          {% for error in field.errors %}
+            <strong><p>{{error}}</p></strong>
+            <br/>
+          {% endfor %}
+          {% endfor %}
+        {% endif %}
+        {% if authfail %}
+          <strong><p>Your password is not correct.</p></strong>
+          <br/>
+        {% endif %}
+
+        <p>Do not have an account? Register <a href = "/expert/register" style = "text-decoration: underline; text-decoration-color: #700000;"><strong class="text-uppercase" style = "color: #9a0001">here</strong></a>.</p>
+        <br/>
+
+        <div class = "container" style = "width:50%; left:25%">
+          <form method="POST" style = "width:100%;">
+            {% csrf_token %}
+            {% for field in loginform %}
+            <div class="input-group mb-3" >
+              <div class="input-group-prepend">
+                <span class="input-group-text">{{field.label}}</span>
+              </div>
+              {{field}}
+            </div>
+            <br/>
+            {% endfor %}
+
+            <input type="submit" value="Login" class = "btn btn-light border btn-block" name="user_login">
+            <br/>
+            <br/>
+
+
+          </form>
+        </div>
+    </div>
+<br/>
+<br/>
+</section>
+{% endblock content %}
+
+{% block jscode %}
+
+{% endblock jscode %}

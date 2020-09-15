@@ -1,0 +1,80 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+
+<section id="main">
+  {% csrf_token %}
+  <br/>
+
+  <div class="card">
+
+    <div class="card-header">
+        <div class="row align-items-center">
+          <div class = "col text-left">
+            <div class = "btn-group">
+            <a  class = "btn btn-light" href = '/expert/usermain/'>
+              <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+            </a>
+            {% if user.is_staff %}
+            <a  class = "btn btn-light" href = '/expert/managecasestudy/'>
+              <ion-icon name="file-tray-stacked" class = "iconpiclarger align-middle"></ion-icon> Manage Cases
+            </a>
+            {% endif %}
+            </div>
+          </div>
+
+          <div class = "col text-center">
+            <h4 class = "card-title align-vertical text-body" >Case Studies</h4>
+          </div>
+
+          <div class = "col text-right invisible">
+            <a  class = "btn btn-light" href = '/'>
+              <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+            </a>
+            {% if user.is_staff %}
+            <a  class = "btn btn-light" href = '/expert/managecasestudy/'>
+              <ion-icon name="file-tray-stacked" class = "iconpiclarger align-middle"></ion-icon> Manage Cases
+            </a>
+            {% endif %}
+          </div>
+
+        </div>
+    </div>
+
+    <div class="card-body">
+      <br/>
+
+
+      <div class = "container text-center" style = "width:40%; left:30%">
+        <div class = "col">
+          <!--a class = "btn btn-light border btn-block" href = '/demo/simple'>Simple Example</a>
+          <br/>
+          <a class = "btn btn-light border btn-block" href = '/demo/nutrient'>Nutrient Balance</a>
+          <br/>
+          <a class = "btn btn-light border btn-block" href = '/demo/policy'>Policy Incentives</a>
+          <br/>
+          <a class = "btn btn-light border btn-block" href = '/expert/casestudydetail/5'>Toy Model</a>
+          <br/>
+          <a class = "btn btn-light border btn-block" href = '/expert/casestudydetail/2'>WI Nutrient Recovery</a>
+          <br/-->
+
+          {% for case in casegrouplist %}
+            {% if case.published %}
+              <a class = "btn btn-light border btn-block" href = '/expert/casestudydetail/{{case.id}}'>{{case.name}}</a>
+              <br/>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  <br/>
+  <br/>
+</section>
+{% endblock content %}
+
+{% block jscode %}
+
+{% endblock jscode %}

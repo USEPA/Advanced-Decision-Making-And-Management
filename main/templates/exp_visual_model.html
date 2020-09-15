@@ -1,0 +1,369 @@
+{% extends "main.html" %}
+{% load static %}
+{% load tz %}
+{% block extrahead %}
+
+{% endblock extrahead %}
+
+{% block content %}
+<section id="main">
+{% csrf_token %}
+<br/>
+
+
+<div class="card">
+
+  <div class="card-header">
+      <div class="row align-items-center">
+        <div class = "col text-left">
+          <a  class = "btn btn-light" href = '/expert/usermain/'>
+            <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+          </a>
+          <a  class = "btn btn-light" href = '/expert/usermain/visualization'>
+            <ion-icon name="map-outline" class = "iconpiclarger align-middle"></ion-icon> Visualization Home
+          </a>
+        </div>
+
+        <div class = "col text-center">
+          <h4 class = "card-title align-vertical text-body" >Visualization Tool</h4>
+        </div>
+        <div class = "col text-right invisible">
+          <a  class = "btn btn-light" href = '/'>
+            <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+          </a>
+          <a  class = "btn btn-light" href = '/expert/usermain/visualization'>
+            <ion-icon name="map-outline" class = "iconpiclarger align-middle"></ion-icon> Visualization Home
+          </a>
+        </div>
+
+      </div>
+  </div>
+
+  <div class="card-body">
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <script src="{% static 'jsfile/Leaflet.PolylineDecorator-master/dist/leaflet.polylineDecorator.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'jsfile/leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.css' %}" />
+    <script src="{% static 'jsfile/leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.js' %}"></script>
+    <script id = 'helper' time-unit="{{task.timeunit}}" model-type = "{{task.model_type}}" src="{% static 'jsfile/expertgraphedit/VisualResult.js' %}"></script>
+    <script src="{% static 'jsfile/Leaflet.PolylineDecorator-master/dist/leaflet.polylineDecorator.js' %}"></script>
+    <script src="{% static 'jsfile/Leaflet.heat-gh-pages/dist/leaflet-heat.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"></script>
+    <script src="{% static 'jsfile/leaflet-pixi-overlay-1.8.1/L.PixiOverlay.min.js' %}"></script>
+
+
+    <script type="text/javascript">
+      $(window).on('load',function () {
+        initgeomap()
+        prodlist = []
+        techlist = []
+        techlist_all = []
+        prodlist_ap = []
+        {% for item in user.userdatabase.userhasprod_set.all %}
+          data = {id: "{{item.product.id}}", name: "{{item.product.name}}", transcost: "{{item.product.transcost}}", unit: "{{item.product.unit}}", note: "{{item.product.additionalinfo}}", transformationset: []}
+
+          {% for trans in item.product.transformation_set.all %}
+            data.transformationset.push({techname: "{{trans.technology.name}}", yield: "{{trans.transforming_coefficient}}", techid: "{{trans.technology.id}}"})
+          {% endfor %}
+
+          prodlist.push(data)
+        {% endfor %}
+
+        {% for item in user.userdatabase.userhastech_set.all %}
+          data = {id: "{{item.technology.id}}", name: "{{item.technology.name}}", refprod: "{{item.technology.refproduct}}", capmin: "{{item.technology.capmin}}", capmax: "{{item.technology.capmax}}", invfix: "{{item.technology.invcost_fix}}", invpro:"{{item.technology.invcost_pro}}", opfix: "{{item.technology.opcost_fix}}",oppro: "{{item.technology.opcost_pro}}", png: "{{item.technology.pngsrc}}",  note: "{{item.product.additionalinfo}}", transformationset: []}
+
+          {% for trans in item.technology.transformation_set.all %}
+            data.transformationset.push({prodname: "{{trans.product.name}}", yield: "{{trans.transforming_coefficient}}", prodid: "{{trans.product.id}}"})
+          {% endfor %}
+
+          techlist_all.push(data)
+        {% endfor %}
+
+        markerls = []
+        supdata = false
+        techdata = false
+        demdata = false
+        arcset = []
+        html5Slider = false
+        colorls = ['black','blue','red','green','grey','orange','gold','#187cc2','#8b04f9','#09b7b7','#b74309','#2eff00','#f200ff']
+
+        {% if '2' in task.finished_steps %}
+          supdata = [['#','lat','lng','prod','price','cap']]
+          suplatls = {{task.supLatLs|safe}}
+          suplngls = {{task.supLngLs|safe}}
+          supcapls = {{task.supCapLs|safe}}
+          supbidls = {{task.supBidLs|safe}}
+          supprols = {{task.supProLs|safe}}
+          supnames = {{task.supNames|safe}}
+          for (i = 0; i < suplatls.length; i++){
+            item = [supnames[i], suplatls[i], suplngls[i], 'p' + supprols[i], supbidls[i],supcapls[i]]
+            supdata.push(item)
+          }
+          for (i = 0; i < suplatls.length; i++){
+            index = findProdIndexByID(supprols[i])
+            proditem = prodlist[index]
+            if (prodlist_ap.includes(proditem) == false) {
+              prodlist_ap.push(proditem)
+            }
+          }
+
+        {% endif %}
+
+        {% if '3' in task.finished_steps %}
+        techdata = [['#','lat','lng','tech','cap','type']]
+        sitelatls = {{task.siteLatLs|safe}}
+        sitelngls = {{task.siteLngLs|safe}}
+        sitetechls = {{task.siteTecLs|safe}}
+        sitecapls = {{task.siteCapLs|safe}}
+        sitenames = {{task.siteNames|safe}}
+
+        candlatls = {{task.candLatLs|safe}}
+        candlngls = {{task.candLngLs|safe}}
+        candtechls = {{task.candTecLs|safe}}
+        candnames = {{task.candNames|safe}}
+
+        for (i = 0; i < sitelatls.length; i++){
+          item = [sitenames[i], sitelatls[i], sitelngls[i], 't' + sitetechls[i], sitecapls[i], 'Technology Site Data']
+          techdata.push(item)
+        }
+        for (i = 0; i < candlatls.length; i++){
+          item = [candnames[i], candlatls[i], candlngls[i], 't' + candtechls[i],false, 'Technology Candidate Data']
+          techdata.push(item)
+        }
+
+        {% endif %}
+
+        {% if '4' in task.finished_steps %}
+          demdata = [['#','lat','lng','prod','price','cap']]
+          demlatls = {{task.demLatLs|safe}}
+          demlngls = {{task.demLngLs|safe}}
+          demcapls = {{task.demCapLs|safe}}
+          dembidls = {{task.demBidLs|safe}}
+          demprols = {{task.demProLs|safe}}
+          demnames = {{task.demNames|safe}}
+          for (i = 0; i < demlatls.length; i++){
+            item = [demnames[i], demlatls[i], demlngls[i], 'p' + demprols[i], dembidls[i],demcapls[i]]
+            demdata.push(item)
+          }
+        {% endif %}
+
+        if (supdata) {
+          for (i = 1; i < supdata.length; i++) {
+            var lat = supdata[i][1]
+            var lng = supdata[i][2]
+
+            var value = findMarkerByLatLng(lat,lng)
+            var flag = value[0]
+            var index = value[1]
+            if (flag) {
+              if (markerls[index].name.includes(supdata[i][0]) == false){
+                markerls[index].name = markerls[index].name + ' ' + supdata[i][0]
+                markerls[index].unbindTooltip()
+                var pop = markerls[index].bindTooltip("<b>"+markerls[index].name + "</b>")
+              }
+              markerls[index].data.push({name: supdata[i][3].slice(1), price: Number(supdata[i][4]), cap: Number(supdata[i][5])})
+            } else {
+              var name = supdata[i][0]
+              var data = [{name: supdata[i][3].slice(1), price: Number(supdata[i][4]), cap: Number(supdata[i][5])}]
+              var marker = newmarker(lat,lng,name,data)
+              markerls.push(marker)
+            }
+
+          }
+
+          techlist = techlist_all
+
+        }
+
+
+      if (techdata) {
+        for (var i = 0; i < markerls.length; i++){
+          markerls[i].removeFrom(mymap)
+        }
+
+        for (i = 1; i < techdata.length; i ++) {
+
+          var lat = Number(techdata[i][1])
+          var lng = Number(techdata[i][2])
+
+          var value = findMarkerByLatLng(lat,lng)
+          var flag = value[0]
+          var index = value[1]
+          if (flag) {
+            if (markerls[index].name.includes(techdata[i][0]) == false) {
+
+              markerls[index].name = techdata[i][0]
+              markerls[index].unbindTooltip()
+              var pop = markerls[index].bindTooltip("<b>"+markerls[index].name + "</b>")
+            }
+            var cap
+            try {
+              cap = Number(techdata[i][4])
+            } catch {
+              cap = 0
+            }
+            markerls[index].tech.push({type: techdata[i][5], name: techdata[i][3].slice(1), cap: cap})
+          } else {
+
+            var name = techdata[i][0]
+            var cap
+            try {
+              cap = Number(techdata[i][4])
+            } catch {
+              cap = 0
+            }
+            var tech = [{type: techdata[i][5], name: techdata[i][3].slice(1), cap: cap}]
+            var marker = newmarker(lat,lng,name,[],tech)
+            markerls.push(marker)
+
+          }
+        }
+
+        var selecttechs = [...new Set(sitetechls.concat(candtechls))];
+        for (i = 0; i < prodlist.length; i++){
+          item = prodlist[i]
+          flag = false
+          for (j = 0; j < selecttechs.length; j++ ) {
+            for (k = 0; k < item.transformationset.length; k++) {
+              if (Number(item.transformationset[k].techid) == Number(selecttechs[j]) && Number(item.transformationset[k].yield) > 0)
+              {
+                flag = true
+              }
+            }
+          }
+          if (flag && prodlist_ap.includes(item) == false) {
+            prodlist_ap.push(item)
+          }
+        }
+    }
+
+
+    if (demdata) {
+      for (i = 1; i < demdata.length; i++) {
+        var lat = demdata[i][1]
+        var lng = demdata[i][2]
+
+        var value = findMarkerByLatLng(lat,lng)
+        var flag = value[0]
+        var index = value[1]
+        if (flag) {
+          if (markerls[index].name.includes(demdata[i][0]) == false){
+            markerls[index].name = markerls[index].name + ' ' + demdata[i][0]
+            markerls[index].unbindTooltip()
+            var pop = markerls[index].bindTooltip("<b>"+markerls[index].name + "</b>")
+          }
+          markerls[index].demd.push({name: demdata[i][3].slice(1), price: Number(demdata[i][4]), cap: Number(demdata[i][5])})
+
+        } else {
+          var name = demdata[i][0]
+          var demd = [{name: demdata[i][3].slice(1), price: Number(demdata[i][4]), cap: Number(demdata[i][5])}]
+          var marker = newmarker(lat,lng,name,[],[],demd)
+          markerls.push(marker)
+        }
+
+      }
+    }
+
+    for (i = 0; i < markerls.length; i++) {
+      markerSetColor(markerls[i])
+      markerls[i].addTo(mymap)
+      markerls[i].dragging.disable()
+      markerls[i].off('contextmenu')
+      markerls[i].on('contextmenu',(event)=>{
+        alertify.alert('Delete', 'Cannot delete data', null);
+      })
+    }
+    changeZoom();
+
+    //readtransfiles({{task.id}})
+
+
+    });
+    </script>
+    <div class = "container" style = "width:100%;">
+      <div class="row">
+        <div  class = "canvas_hold" id = "canvas_holder" style = "height: 400px; box-shadow: 5px 5px 5px #d3d3d3;">
+          <div id = "gfx_holder" style = "position: relative; width:100%; height: 400px; z-index: 999">
+          </div>
+        </div>
+
+          <!--div class = "col-4 text-center">
+            <div class="card mb-3" style = "height: 420px; top: 15px">
+              <div class="card-header" >
+                    <div class="spinner-grow text-white align-middle float-left" style="width: 1.5rem; height: 1.5rem; visibility:hidden" role="status" >
+                      <span class="sr-only">Running</span>
+                    </div>
+                    <strong style = "color: #9A0001">Data Layers</strong>
+                    <div class="spinner-grow text-white align-middle float-right" style="width: 1.5rem; height: 1.5rem; visibility:hidden" role="status"  id = "spinner">
+                      <span class="sr-only">Running</span>
+                    </div>
+              </div>
+
+              <div class="card-body text-left overflow-auto">
+                <div class = "container" style = "width:100%" id = "cardcontainer">
+
+                </div>
+              </div
+
+            </div>
+          </div-->
+        </div>
+      </div>
+
+      <div id = "overlaycontainer" style="display:none;z-index: 1002">
+        <div id = "overlay">
+          <div class="text-center border rounded" style="position: relative; top: 40%; background: #F7F7F7; width: 40%; left:30%;">
+            <h4 id = "spinnertext">Saving Changes</h4>
+            <br/>
+            <div class="spinner-grow" style="width: 3rem; height: 3rem; color: #9A0001" role="status">
+              <span class="sr-only">Running</span>
+            </div>
+            <br/>
+            <br/>
+            <p>Do not refresh...</p>
+          </div>
+        </div>
+      </div>
+
+  </div>
+  </div>
+  <div class="text-muted text-center">
+      <br/>
+      <div style = "font-size: 0.6em;">Copyright &copy 2019 Board of Regents of the University of Wisconsin System </div>
+  </div>
+  <br/>
+  <br/>
+</section>
+{% endblock content %}
+{% block jscode %}
+
+<script type="text/javascript">
+  $(".parent-toggler").hover(function(){
+      $( this ).animate({'color': '#9A0000'}, 180);
+  }, function(){
+      $( this ).animate({'color': '#474747'}, 180);
+  });
+
+  $(".parent-toggler").click(function(){
+    ele = $(this)
+    if ( ele.css('font-weight') == 700 ) {
+      ele.css({'font-weight':700});
+        setTimeout(function(){ ele.css({'font-weight':700})}, 30)
+        setTimeout(function(){ ele.css({'font-weight':600})}, 60)
+        setTimeout(function(){ ele.css({'font-weight':500})},90)
+        setTimeout(function(){ ele.css({'font-weight':400})},120)
+    } else {
+
+      ele.css({'font-weight':400});
+        setTimeout(function(){ ele.css({'font-weight':400})}, 30)
+        setTimeout(function(){ ele.css({'font-weight':500})}, 60)
+        setTimeout(function(){ ele.css({'font-weight':600})},90)
+        setTimeout(function(){ ele.css({'font-weight':700})},120)
+    }
+  });
+</script>
+
+
+{% endblock jscode%}

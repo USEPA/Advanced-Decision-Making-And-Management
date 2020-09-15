@@ -1,0 +1,68 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+
+<section id="main">
+  <br/>
+  <div class="card text-center" style = "width:80%; left:10%; display: block">
+    <div class="card-header">
+      <h4>ADAM Registration</h4>
+    </div>
+    <br/>
+    {% if fail %}
+      {% for field in userform %}
+      {% for error in field.errors %}
+        <strong><p>{{error}}</p></strong>
+        <br/>
+      {% endfor %}
+      {% endfor %}
+    {% endif %}
+    <p>Already have an account? Login <a href = "/expert/login" style = "text-decoration: underline; text-decoration-color: #700000;"><strong class="text-uppercase" style = "color: #9a0001">here</strong></a>.</p>
+
+    <div class = "container" style = "width:50%; left:25%">
+      <form method="POST">
+        {% csrf_token %}
+        {% for field in userform %}
+        <div class="input-group mb-3" >
+          <div class="input-group-prepend">
+            <span class="input-group-text">{{field.label}}</span>
+          </div>
+          {{field}}
+        </div>
+        <br/>
+        {% endfor %}
+
+        <input type="submit" value="Resgister" class = "btn btn-light border btn-block" name="user_register">
+        <br/>
+
+      </form>
+    </div>
+</div>
+
+<br/>
+</section>
+{% endblock content %}
+
+{% block jscode %}
+<script>
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
+  </script>
+<script>
+  function hover(element) {
+  pic = element.getElementsByTagName('img')[0]
+  path = pic.src
+  newpath = path.slice(0, -4) + String(2) + '.png'
+  pic.setAttribute('src', newpath);
+}
+
+function unhover(element) {
+  pic = element.getElementsByTagName('img')[0]
+  path = pic.src
+  newpath = path.slice(0, -5) + '.png'
+  pic.setAttribute('src', newpath);
+}
+</script>
+{% endblock jscode %}

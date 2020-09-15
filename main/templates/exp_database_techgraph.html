@@ -1,0 +1,230 @@
+{% extends "main.html" %}
+{% load static %}
+{% load tz %}
+{% block extrahead %}
+
+
+{% endblock extrahead %}
+
+{% block content %}
+<section id="main">
+{% csrf_token %}
+<br/>
+
+<div class="card">
+
+  <div class="card-header">
+      <div class="row align-items-center">
+
+        <div class = "col text-center">
+          <h4 class = "card-title align-vertical text-body" >{{tech.name}}</h4>
+        </div>
+
+      </div>
+  </div>
+
+  <div class="card-body">
+
+    <br/>
+
+    <div  class = "canvas_hold" id = "canvas_holder" style = "border-style: solid; border-width: 2px;">
+      <div id = "gfx_holder">
+      </div>
+    </div>
+    <br/>
+    <br/>
+  </div>
+
+  <div style="display:none;">
+    <div class="productinfo">
+      <p> *Product name: </p>
+      <input class="ajs-input" id="inpOne" type="text"/>
+
+      <p> *Product unit: </p><select name="type" id = "transcostunit" class = "form-control"> <option value = "UNIT">UNIT</option> <option value = "metric tonne">metric tonne</option> <option value = "kg">kg</option> <option value = "lb">lb</option> <option value = "cubic meter">cubic meter</option> <option value = "liter">liter</option> <option value = "gallon">gallon</option> <option value = "kWh">kWh</option> <option value = "BTU">BTU</option> </select> <br/><br/>
+
+      <p> *Transportation cost USD/unit/km </p>
+      <input class="ajs-input" id="inpTwo" type="number" step = 0.1 min = 0 onchange="(this.value)"/>
+      <p> Additional information: </p>
+      <input class="ajs-input" id="inpThree" type="text" onchange="(this.value)" />
+    </div>
+  </div>
+
+  <div style="display:none;">
+    <div class="technologyinfo">
+      <p> *Technology name: </p>
+      <input class="ajs-input" id="techOne" type="text" onchange="(this.value)"/>
+
+      <p> *Reference product: </p> <br/> <div class = "selectdiv" ><select name="type" id = "refprod_select"> </select> </div> <br/><br/>
+
+      <p> *Minimum capacity [unit reference product/year]: </p>
+      <input class="ajs-input" id="techTwo" type="number" step = 10 min = 0 onchange="(this.value)"/>
+      <p> *Maximum capacity [unit reference product/year]: </p>
+      <input class="ajs-input" id="techThree" type="number" step = 10 min = 0 onchange="(this.value)" />
+      <p> *Investment cost (fixed) [USD]: </p>
+      <input class="ajs-input" id="techFour" type="number" step = 10 min = 0 onchange="(this.value)" />
+      <p> *Investment cost (proportioanl) [USD/(unit reference product/year)]: </p>
+      <input class="ajs-input" id="techFive" type="number" step = 10 min = 0 onchange="(this.value)" />
+      <p> *Operational cost (fixed) [USD/year]: </p>
+      <input class="ajs-input" id="techSix" type="number" step = 10 min = 0 onchange="(this.value)" />
+      <p> *Operational cost (proportioanl) [USD/unit reference product]: </p>
+      <input class="ajs-input" id="techSeven" type="number" step = 10 min = 0 onchange="(this.value)" />
+      <p> Additional information: </p>
+      <input class="ajs-input" id="techEight" type="text" onchange="(this.value)"/>
+    </div>
+  </div>
+
+  <div style="display:none;">
+    <div class="transforminfo">
+      <p> *Transformation coefficient: </p>
+      <input class="ajs-input" id="transform" type="number" step = 0.1 onchange="updateInput(this.value)"/>
+    </div>
+  </div>
+
+  <div id = "overlaycontainer" style="z-index: 1002">
+    <div id = "overlay">
+      <div class="text-center border rounded" style="position: relative; top: 40%; background: #F7F7F7; width: 40%; left:30%;">
+        <h4 id = "spinnertext">Generating Graph...</h4>
+        <br/>
+        <div class="spinner-grow" style="width: 3rem; height: 3rem; color: #9A0001" role="status">
+          <span class="sr-only">Running</span>
+        </div>
+        <br/>
+        <br/>
+        <p>Do not refresh...</p>
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <br/>
+  <br/>
+</section>
+{% endblock content %}
+{% block jscode %}
+<script src="{% static 'jsfile/draw2d-master/dist/draw2d.js' %}"></script>
+<script type = "module" src="{% static 'jsfile/draw2d-master/src/Canvas.js' %}"></script>
+<script src="{% static 'jsfile/draw2d-master/customize/MyConnection.js' %}"></script>
+<script src="{% static 'jsfile/draw2d-master/customize/MyTransConnection.js' %}"></script>
+<script src="{% static 'jsfile/expertgraphedit/graphedit.js' %}"></script>
+<script type="text/javascript">
+      $(window).on('load',function () {
+      initcanvas()
+      raw = []
+      final = []
+        {% for trans in tech.transformation_set.all %}
+          if (Number("{{trans.transforming_coefficient}}") < 0) {
+            raw.push({name:"{{trans.product.name}}", unit:"{{trans.product.get_unit_display}}", transcost:"{{trans.product.transcost}}", notes:"{{trans.product.additionalinfo|safe}}", yield: "{{trans.transforming_coefficient}}", prodid: "{{trans.product.id}}"})
+          } else {
+            final.push({name:"{{trans.product.name}}", unit:"{{trans.product.get_unit_display}}", transcost:"{{trans.product.transcost}}", notes:"{{trans.product.additionalinfo|safe}}", yield: "{{trans.transforming_coefficient}}", prodid: "{{trans.product.id}}"})
+          }
+        {% endfor %}
+
+      numraw = raw.length
+      numfinal = final.length
+      var yrawstep = 550 / (numraw + 1)
+      for (var i = 0; i < numraw; i++) {
+        var item = raw[i]
+        var yraw = 5 + (i+1) * yrawstep;
+        var figure = addprod("raw", addnotice = 0, y = yraw)
+        figure.add(new draw2d.shape.basic.Label({text:item.name, x:55, y:25, stroke:0}), new draw2d.layout.locator.BottomLocator());
+        figure.userData = {"name": item.name, "transcost": item.transcost, "addinfo": item.notes, "unit": item.unit}
+        raw[i].figure = figure
+      }
+      var yfinalstep = 550 / (numfinal + 1)
+      for (var i = 0; i < numfinal; i++) {
+        var item = final[i]
+        var yfinal = 5 + (i+1) * yfinalstep;
+        var figure = addprod("final", addnotice = 0, y = yfinal)
+        figure.add(new draw2d.shape.basic.Label({text:item.name, x:55, y:25, stroke:0}), new draw2d.layout.locator.BottomLocator());
+        figure.userData = {"name": item.name, "transcost": item.transcost, "addinfo": item.notes, "unit": item.unit }
+        final[i].figure = figure
+      }
+
+      var figure = addtec(addnotice = 0, y = 300)
+      figure.add(new draw2d.shape.basic.Label({text:"{{tech.name}}", x:55, y:25, stroke:0}), new draw2d.layout.locator.BottomLocator());
+      figure.userData = {"name": "{{tech.name}}", "capmin": "{{tech.capmin}}", "capmax": "{{tech.capmax}}", "invfix": "{{tech.invcost_fix}}", "invpro": "{{tech.invcost_pro}}", "opfix": "{{tech.opcost_fix}}", "oppro": "{{tech.opcost_pro}}", "addinfo": "{{tech.notes|safe}}", "refprod": "{{tech.refproduct}}"}
+      techfigure = figure
+
+      for (var i = 0; i < numraw; i++) {
+        var cnc = addconnection_tech(raw[i].figure.id, techfigure.id)
+        cnc.userData = {"yield": raw[i].yield}
+        raw[i].cnc = cnc
+        canvas.add(cnc)
+      }
+
+      for (var i = 0; i < numfinal; i++) {
+        var cnc = addconnection_tech(techfigure.id, final[i].figure.id)
+        cnc.userData = {"yield": final[i].yield}
+        final[i].cnc = cnc
+        canvas.add(cnc)
+      }
+
+      techfigure.userData = {"name": "{{tech.name}}", "capmin": "{{tech.capmin}}", "capmax": "{{tech.capmax}}", "invfix": "{{tech.invcost_fix}}", "invpro": "{{tech.invcost_pro}}", "opfix": "{{tech.opcost_fix}}", "oppro": "{{tech.opcost_pro}}", "addinfo": "{{tech.notes|safe}}", "refprod": "{{tech.refproduct}}"}
+
+      savefig_techbase({{tech.id}})
+
+    });
+
+function savefig_techbase(tech_id){
+  var rawstring = []
+  var finalstring = []
+  var techstring
+
+  for (var i = 0; i< raw.length; i++){
+    rawstring.push({name: raw[i].figure.userData.name, unit:raw[i].figure.userData.unit, transcost:raw[i].figure.userData.transcost, notes:raw[i].figure.userData.addinfo, yield: raw[i].cnc.userData.yield, prodid: raw[i].prodid})
+  }
+  rawstring = JSON.stringify(rawstring)
+
+  for (var i = 0; i< final.length; i++){
+    finalstring.push({name: final[i].figure.userData.name, unit:final[i].figure.userData.unit, transcost:final[i].figure.userData.transcost, notes:final[i].figure.userData.addinfo, yield: final[i].cnc.userData.yield, prodid: final[i].prodid})
+  }
+  finalstring = JSON.stringify(finalstring)
+
+  techstring = JSON.stringify(techfigure.userData)
+
+  var writer = new draw2d.io.json.Writer();
+  var testele = document.getElementById('test');
+  var graphdata
+  var graphdatastr
+  var pngwriter = new draw2d.io.png.Writer();
+  var pngsrc
+
+  var xCoords = [];
+  var yCoords = [];
+  canvas.getFigures().each(function(i,f){
+      var b = f.getBoundingBox();
+      xCoords.push(b.x, b.x+b.w);
+      yCoords.push(b.y, b.y+b.h);
+  });
+  var minX   = Math.min.apply(Math, xCoords)-45;
+  var minY   = Math.min.apply(Math, yCoords)-25;
+  var width  = Math.max.apply(Math, xCoords)-minX+45;
+  var height = Math.max.apply(Math, yCoords)-minY+25;
+
+  pngwriter.marshal(canvas, function(png){
+    pngsrc = png;
+  }, new draw2d.geo.Rectangle(minX,minY,width,height));
+
+  writer.marshal(canvas, function(json){
+      graphdata =json;
+      graphdatastr = JSON.stringify(json,null,2);
+  });
+
+  var el = document.getElementsByName("csrfmiddlewaretoken");
+  csrf_value = el[0].getAttribute("value");
+  jQuery.ajax({
+    method: "POST",
+    url: "/expert/ajax/savefig_techbase",
+    data: {type:"change", name: '', content: graphdatastr,csrfmiddlewaretoken: csrf_value, pngsrc: pngsrc, tech_id: tech_id, rawdata: rawstring, finaldata: finalstring, techdata: techstring},
+    proccessData: false,
+    success: function (data) {
+      if (data.msg) {
+        setTimeout(function(){location.href = '/expert/usermain/techbase?keywords=&list_tech=List+All+Tech'}, 300)
+      }
+    }
+      });
+}
+
+
+</script>
+{% endblock jscode%}

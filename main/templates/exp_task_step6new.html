@@ -1,0 +1,150 @@
+{% extends "main.html" %}
+{% load static %}
+
+  {% block content %}
+
+  <section id="main">
+    <br/>
+
+        <div class="card text-center" style = "min-width:950px">
+
+          <div class="card-header">
+              <div class="row align-items-center">
+                <div class = "col text-left">
+                  <div class = "btn-group">
+                    <a  class = "btn btn-light btn-sm" href = '/expert/usermain/'>
+                      <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+                    </a>
+                    <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/'>
+                      <ion-icon name="list" class = "iconpiclarger align-middle"></ion-icon> Model List
+                    </a>
+                    <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/{{task.id}}'>
+                      <ion-icon name="aperture" class = "iconpiclarger align-middle"></ion-icon> {{task.task_name}}
+                    </a>
+                  </div>
+                </div>
+
+                <div class = "col text-center">
+                  <h4 class = "card-title align-vertical text-body" >Run Model</h4>
+                </div>
+                <div class = "col text-right invisible">
+                  <div class = "btn-group">
+                    <a  class = "btn btn-light btn-sm" href = '/expert/usermain/'>
+                      <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+                    </a>
+                    <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/'>
+                      <ion-icon name="list" class = "iconpiclarger align-middle"></ion-icon> Model List
+                    </a>
+                    <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/{{task.id}}'>
+                      <ion-icon name="aperture" class = "iconpiclarger align-middle"></ion-icon> {{task.task_name}}
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+
+          <div class="card-body">
+
+            <div class = "container text-left egdiv">
+
+              <p class="card-text" style = "text-align: left">
+                If all input data has been provided, the following button will be activated.
+              </p>
+
+              <p class="card-text" style = "text-align: left">
+                Click the button to start running your case.
+              </p>
+
+
+              <div class = "container text-center" style = "width: 50%;" >
+
+              <br/>
+              <button id = "runbtn" class = "btn btn-light border btn-block" tabindex="-1" role="button" aria-disabled="true" onclick = "" disabled>
+                <ion-icon name="send" class = "iconpiclarger align-middle float-left" style = "black"></ion-icon>
+                {% if '6' in task.finished_steps %}
+                Rerun the Model
+                {% else %}
+                Run the model
+                {% endif %}
+                <ion-icon name="send" class = "iconpiclarger align-middle float-right" style = "black"></ion-icon>
+              </button>
+              <br/>
+              {% if '12345' in task.finished_steps %}
+                <script type="text/javascript">
+                  $('#runbtn').prop('disabled', false)
+                  $('#runbtn').attr('onclick', 'sendtask()');
+                </script>
+              {% endif %}
+
+              </div>
+
+            {% csrf_token %}
+
+            </div>
+            <br/>
+
+          </div>
+        </div>
+
+
+    <br/>
+    <br/>
+  </section>
+
+
+  <div id = "overlaycontainer" style="display:none">
+    <div id = "overlay">
+      <div class="text-center border rounded" style="position: relative; top: 180%; background: #F7F7F7; width: 40%; left:30%">
+        <h4>Model is Running...</h4>
+        <br/>
+        <div class="spinner-grow" style="width: 3rem; height: 3rem; color: #9A0001" role="status">
+          <span class="sr-only">Running</span>
+        </div>
+        <br/>
+        <br/>
+        <p>Do not refresh...</p>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
+
+{% block jscode %}
+<script>
+function loadspinner(){
+  $("#overlaycontainer").css("display","block");
+}
+// function ajax send a post, the server receive post and run the model
+function sendtask() {
+  taskid = {{task.id}}
+  alertify.confirm('Confirm', 'Begin running?',
+  function() {
+    var el = document.getElementsByName("csrfmiddlewaretoken");
+    csrf_value = el[0].getAttribute("value");
+    loadspinner()
+    jQuery.ajax({
+      method: "POST",
+      url: "/expert/ajax/beginsolve",
+      data: {csrfmiddlewaretoken: csrf_value, taskid: taskid},
+      success: function (data) {
+        if (data) {
+          if (data.msg.length > 0 ) {
+            for (var i = 0; i < data.error.length; i++){
+              $("#overlaycontainer").css("display","none");
+              alertify.error(data.error[i])
+            }
+          } else {
+            setTimeout(function(){
+            location.href='/expert/usermain/task/'+ taskid; }, 1500);
+          }
+          }
+        }
+    });
+  },
+  null).set('labels',{ok:'Yes', cancel:'Cancel'});
+}
+</script>
+
+
+{% endblock jscode %}
+</html>

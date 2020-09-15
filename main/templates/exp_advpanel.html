@@ -1,0 +1,151 @@
+{% extends "main.html" %}
+{% load static %}
+{% load tz %}
+{% block extrahead %}
+
+{% endblock extrahead %}
+
+{% block content %}
+
+<section id="main">
+  {% csrf_token %}
+
+  <br/>
+  <div class="card">
+
+    <div class="card-header">
+      <div class="row align-items-center">
+        <div class = "col text-left">
+          <a  class = "btn btn-light" href = '/expert/usermain/'>
+            <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+          </a>
+        </div>
+
+        <div class = "col text-center">
+          <h4 class = "card-title align-vertical text-body" >Developer Panel</h4>
+        </div>
+        <div class = "col text-right invisible">
+          <a  class = "btn btn-light" href = '/'>
+            <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <div class = "container" style = "width: 75%; left:12.5%">
+        <div class="row text-center">
+
+          <!--div class="col-sm" >
+              <div class="div-square module" data-toggle="tooltip" data-placement="top" title="Here you can find published case studies">
+                   <a href="/demo">
+                     <ion-icon name="book"></ion-icon>
+                     <h6>Case Studies</h6>
+                   </a>
+              </div>
+          </div>
+
+          <div class="col-sm">
+              <div class="div-square module" data-toggle="tooltip" data-placement="top" title="Here you can manage your own models">
+                   <a href="/expert/usermain/task" >
+                     <ion-icon name="list"></ion-icon>
+                     <h6>Manage Models</h6>
+                   </a>
+              </div>
+          </div-->
+
+          <!--div class="col-sm">
+              <div class="div-square module" data-toggle="tooltip" data-placement="top" title="Here you can manage your own modeling data">
+                   <a href="/expert/usermain/data" >
+                     <ion-icon name="bar-chart"></ion-icon>
+                     <h6>Manage Data</h6>
+                   </a>
+              </div>
+          </div-->
+
+          <div class="col-sm">
+              <div class="div-square module" data-toggle="tooltip" data-placement="top" title="Here you can enter the admin system">
+                   <a href = '/admin' >
+                     <ion-icon name="library"></ion-icon>
+                     <h6>Admin System</h6>
+                   </a>
+              </div>
+          </div>
+
+          <div class="col-sm">
+              <div class="div-square module" data-toggle="tooltip" data-placement="top" title="Here you can manage technology objects">
+                   <a href="/expert/usermain/techbase" >
+                     <ion-icon name="construct"></ion-icon>
+                     <h6>Manage Technologies</h6>
+                   </a>
+              </div>
+          </div>
+
+          <div class="col-sm text-center">
+              <div class="div-square module" data-toggle="tooltip" data-placement="top" title="Here you can manage product objects">
+                   <a href="/expert/usermain/prodbase" >
+                     <ion-icon name="leaf"></ion-icon>
+                     <h6>Manage Products</h6>
+                   </a>
+              </div>
+          </div>
+
+          <!--div class="col-sm">
+              <div class="div-square module">
+                   <a href="/expert/usermain/graph" >
+                     <ion-icon name="git-network"></ion-icon>
+                     <h6>Manage Graphs</h6>
+                   </a>
+              </div>
+          </div-->
+        </div>
+
+
+
+
+          <!--div class="col-sm">
+              <div class="div-square module" data-toggle="tooltip" data-placement="top" title="Here you can visualize your data and models">
+                   <a href="/expert/usermain/visualization" >
+                     <ion-icon name="map"></ion-icon>
+                     <h6>Visualization</h6>
+                   </a>
+              </div>
+          </div-->
+
+          <!--div class="col-sm">
+              <div class="div-square module">
+                   <a href="/expert/usermain/profile" >
+                     <ion-icon name="person"></ion-icon>
+                     <h6>My Profile</h6>
+                   </a>
+              </div>
+          </div-->
+    </div>
+  </div>
+</div>
+
+<div class="text-muted text-center">
+    <br/>
+    <div style = "font-size: 0.6em;">Copyright &copy 2019 Board of Regents of the University of Wisconsin System </div>
+</div>
+
+  <br/>
+  <br/>
+</section>
+{% endblock content %}
+{% block jscode %}
+<script>
+  $(".div-square module").hover(function(){
+      $( this ).animate({'color': '#000000'}, 180);
+  }, function(){
+      $( this ).animate({'color': '#474747'}, 180);
+  });
+
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+
+{% endblock jscode%}

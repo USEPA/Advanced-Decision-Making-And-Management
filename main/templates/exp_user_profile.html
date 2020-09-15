@@ -1,0 +1,220 @@
+{% extends "main.html" %}
+{% load static %}
+{% load tz %}
+{% block extrahead %}
+
+{% endblock extrahead %}
+
+{% block content %}
+<section id="main">
+  {% csrf_token %}
+  <br/>
+
+  <div class="card">
+
+    <div class="card-header">
+        <div class="row align-items-center">
+          <div class = "col text-left">
+            <a  class = "btn btn-light" href = '/expert/usermain/'>
+              <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+            </a>
+          </div>
+
+          <div class = "col text-center">
+            <h4 class = "card-title align-vertical text-body" >User Profile</h4>
+          </div>
+          <div class = "col text-right invisible">
+            <a  class = "btn btn-light" href = '/'>
+              <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+            </a>
+          </div>
+
+        </div>
+    </div>
+
+    <div class="card-body">
+      <br/>
+
+
+    <div class="container ">
+      <div class="row text-center">
+        <div class = "col">
+          <h5>Item</h5>
+        </div>
+        <div class = "col">
+          <h5>Content</h5>
+        </div>
+        <div class = "col">
+          <h5>Option</h5>
+        </div>
+      </div>
+
+      <div class="row text-center">
+        <div class = "col">
+          Username
+        </div>
+        <div class = "col">
+          {{user.username}}
+        </div>
+        <div class = "col">
+
+        </div>
+      </div>
+
+      <div class="row text-center">
+        <div class = "col">
+          First Name
+        </div>
+        <div class = "col">
+          {{user.first_name}}
+        </div>
+        <div class = "col">
+              <ion-icon name="create" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Change your first name" onclick = "changeinfo('First Name', '{{user.first_name}}')">
+              </ion-icon>
+        </div>
+      </div>
+
+      <div class="row text-center">
+        <div class = "col">
+          Last Name
+        </div>
+        <div class = "col">
+          {{user.last_name}}
+        </div>
+        <div class = "col">
+            <div class = "change_info" id = "last name">
+              <ion-icon name="create" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Change your last name" onclick = "changeinfo('Last Name', '{{user.last_name}}')">
+              </ion-icon>
+            </div>
+        </div>
+      </div>
+
+      <div class="row text-center">
+        <div class = "col">
+          Email
+        </div>
+        <div class = "col">
+          {{user.email}}
+        </div>
+        <div class = "col">
+            <div class = "change_info" id = "email">
+              <ion-icon name="create" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Change your email" onclick = "changeinfo('Email', '{{user.email}}')">
+              </ion-icon>
+            </div>
+        </div>
+      </div>
+
+      <div class="row text-center">
+        <div class = "col">
+          Password
+        </div>
+        <div class = "col">
+          <ion-icon name="finger-print" size="small"></ion-icon>
+        </div>
+        <div class = "col">
+          <ion-icon name="create" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Change your password" onclick = "changepw('password')">
+          </ion-icon>
+
+        </div>
+      </div>
+
+
+      <div class="row text-center">
+        <div class = "col">
+          Organization
+        </div>
+        <div class = "col">
+          {{user.userinfo.organization}}
+        </div>
+        <div class = "col">
+            <ion-icon name="create" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Change your organization" onclick = "changeinfo('Organization', '{{user.userinfo.organization}}')">
+            </ion-icon>
+        </div>
+      </div>
+
+    </div>
+
+</div>
+</div>
+
+  <br/>
+</section>
+{% endblock content %}
+{% block jscode %}
+<script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+<script>
+function changeinfo(type, value) {
+
+  var content = '<div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="inputGroup-sizing-default">' + type + '</span></div><input id = "inputval" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value = ' + value + ' placeholder = ' + type +'></div>'
+  var user_id = {{user.id}};
+  var infotype = type
+
+  alertify.confirm(content).set('title', 'Update your info').set('closable',false).set('oncancel', function(){
+    alertify.confirm().destroy();
+  }).set('onok', function(){
+    val = $('#inputval').val()
+    var el = document.getElementsByName("csrfmiddlewaretoken");
+    csrf_value = el[0].getAttribute("value");
+    if (String(infotype).includes('email')) {
+      if (val.includes('@')) {
+        jQuery.ajax({
+          method: "POST",
+          url: "/expert/ajax/userprofileedit",
+          data: {type:infotype, new_value: val, user: user_id,csrfmiddlewaretoken: csrf_value,},
+          success: function (data) {
+            if (data.success) {
+              window.location.reload();
+            }
+          }
+        })
+      } else {
+        alertify.error('Email Format Not Correct!');
+      }
+    } else {
+      jQuery.ajax({
+        method: "POST",
+        url: "/expert/ajax/userprofileedit",
+        data: {type:infotype, new_value: val, user: user_id,csrfmiddlewaretoken: csrf_value,},
+        success: function (data) {
+          if (data.success) {
+            window.location.reload();
+          }
+        }
+      })
+    }
+  })
+}
+
+function changepw(type) {
+  var content = '<div class="input-group mb-3"><div class="input-group-prepend" style = "flex: 0 0 30%;"><span class="input-group-text" id="inputGroup-sizing-default">New Password</span></div><input id = "inputval1" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></div><div class="input-group mb-3"><div class="input-group-prepend" style = "flex: 0 0 30%;"><span class="input-group-text" id="inputGroup-sizing-default">Retype</span></div><input id = "inputval2" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></div>'
+  var user_id = {{user.id}};
+  var infotype = type;
+
+  alertify.confirm(content).set('title', 'Update your info').set('closable',false).set('oncancel', function(){
+    alertify.confirm().destroy();
+  }).set('onok', function(){
+    var el = document.getElementsByName("csrfmiddlewaretoken");
+    csrf_value = el[0].getAttribute("value");
+    var inpOneVal = $('#inputval1').val();
+    var inpTwoVal = $('#inputval2').val();
+    if (inpOneVal === inpTwoVal) {
+      alertify.success('Password Changed!');
+      jQuery.ajax({
+        method: "POST",
+        url: "/expert/ajax/userprofileedit",
+        data: {type:infotype, new_value: inpOneVal, user: user_id,csrfmiddlewaretoken: csrf_value,},
+        success: function (data) {
+          if (data.success) {
+            window.location.reload();
+          }
+        }
+      })
+    } else {
+      alertify.error('Password Not Matching!');
+      setTimeout( function(){changepw(infotype);}, 500)
+    }
+  })
+
+}
+</script>
+{% endblock jscode%}

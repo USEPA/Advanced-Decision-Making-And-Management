@@ -1,0 +1,188 @@
+{% extends "main.html" %}
+{% load static %}
+{% load tz %}
+{% block extrahead %}
+
+{% endblock extrahead %}
+
+{% block content %}
+<section id="main">
+  {% csrf_token %}
+  <br/>
+
+  <div class="card">
+
+    <div class="card-header">
+        <div class="row align-items-center">
+          <div class = "col text-left">
+            <a  class = "btn btn-light" href = '/expert/usermain/'>
+              <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+            </a>
+          </div>
+
+          <div class = "col text-center">
+            <h4 class = "card-title align-vertical text-body" >Model List</h4>
+          </div>
+          <div class = "col text-right invisible">
+            <a  class = "btn btn-light" href = '/'>
+              <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+            </a>
+          </div>
+
+        </div>
+    </div>
+
+    <div class="card-body">
+
+      <div class = "container" style = "width: 40%; left: 30%">
+        <div class = "btn-group" style = "width: 100%">
+          <button class = "btn btn-light border" style = "width: 50%" onclick="newmodel()" data-toggle="tooltip" data-placement="top" title="Build a new blank model">New Model</button>
+          <button class = "btn btn-light border" style = "width: 50%" onclick="copymodel()" data-toggle="tooltip" data-placement="top" title="Copy a current model and save as a new model">Copy Model</button>
+        </div>
+      </div>
+      <br/>
+
+    {% if user.opttask_set.all %}
+    <div class = "row">
+      <table width = 100% class = "table text-center table-hover">
+        <thead>
+        <tr>
+          <th>Model Name</th>
+          <th>Creation Date</th>
+          <th>Model Type</th>
+          <th>Status</th>
+          <th>Options</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for task in user.opttask_set.all%}
+         <tr>
+           <td>
+             <a href = '/expert/usermain/task/{{task.id}}' class = "parent-toggler" style = "text-decoration: none; color:#474747 ">{{task.task_name}}
+             </a>
+          </td>
+           <td>{{task.date_create}} </td>
+           <td>
+             {% if task.model_type == 1 %}
+             Supply Chain Design
+             {% elif task.model_type == 2 %}
+             Market Analysis
+             {% elif task.model_type == 3 %}
+             Supply Chain Management
+             {% else %}
+             -
+             {% endif %}
+           </td>
+           <td>{{task.task_status}} </td>
+           <td>
+             <div >
+               <ion-icon name="trash" class = "iconpiclarge delete_confirm" id = "{{task.id}}" data-toggle="tooltip" data-placement="right" title="Delete this model">
+               </ion-icon>
+               <ion-icon name="reader" class = "iconpiclarge renote_dialog" data-toggle="tooltip" data-placement="right" title="{{task.notes}}" onclick = ''>
+               </ion-icon>
+             </div>
+           </td>
+         </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    {% else %}
+    <div class="row justify-content-between">
+        <div class="col-4">
+          <h6>You don't have any task.</h6>
+        </div>
+    </div>
+    {% endif %}
+  </div>
+  </div>
+  <br/>
+  <br/>
+</section>
+{% endblock content %}
+{% block jscode %}
+<script>
+$(".parent-toggler").hover(function(){
+      $( this ).animate({'color': '#9A0000'}, 180);
+  }, function(){
+      $( this ).animate({'color': '#474747'}, 180);
+  });
+
+$(function() {
+  $('.delete_confirm').click(function(event) {
+    var task_id = this.id;
+    alertify.confirm('Confirm', 'Are you sure to delete this task?',
+    function() {
+      var el = document.getElementsByName("csrfmiddlewaretoken");
+      csrf_value = el[0].getAttribute("value");
+      jQuery.ajax({
+        method: "POST",
+        url: "/expert/ajax/deletetask",
+        data: {type:'delete_task', task_id: task_id,csrfmiddlewaretoken: csrf_value},
+        success: function (data) {
+          if (data.success) {
+            window.location.reload();
+          }
+        }
+      })
+  },
+    null).set('labels',{ok:'Yes', cancel:'Cancel'}).set('closable', false);
+  });
+});
+
+function copymodel(){
+  content = '<div class="form-group"><label for="modelname">Model name:</label><input type="email" class="form-control" id="modelname"></div>'
+  content += '<div class="form-group"><label for="modelid">Choose the model to copy:</lable><select class = "form-control" id = "modelid">'
+  content += '<optgroup label="Your Models">'
+    {% for t in tasklist %}
+      {% if '1' in t.finished_steps %}
+        content += '<option value = "{{t.id}}"> {{t.task_name}} </option>'
+      {% endif %}
+    {% endfor %}
+    content += '</optgroup><optgroup label="Case Studies">'
+    {% for case in caselist %}
+      {% for s in case.childrencase.all %}
+      content += '<option value = "c{{s.id}}"> {{case.name}} (Scenario: {{s.name}}) </option>'
+      {% endfor %}
+    {% endfor %}
+
+  content += '</optgroup></select></div><div class="form-group"><label for="modelnotes">Model descriptions</label><textarea maxlength="1000" class="form-control" id="modelnotes" rows="5"></textarea></div>'
+  alertify.confirm(content).set('title','Copy Model').set('closable', false).set('labels',{ok:'Yes', cancel:'Cancel'}).set('onok', function(){
+    var el = document.getElementsByName("csrfmiddlewaretoken");
+    csrf_value = el[0].getAttribute("value");
+    jQuery.ajax({
+      method: "POST",
+      url: "/expert/ajax/copymodel",
+      data: {csrfmiddlewaretoken: csrf_value, loadid: $('#modelid').val(), modelname: $('#modelname').val(), modelnotes: $('#modelnotes').val()},
+      proccessData: false,
+      success: function (data) {
+        if (data.success) {
+          location.reload();
+        }
+      }
+    });
+  }).set('oncancel', function(){alertify.confirm().destroy()})
+}
+
+function newmodel(){
+  content = '<div class="form-group"><label for="modelname">Model name:</label><input type="email" class="form-control" id="modelname"></div>'
+
+  content += '<div class="form-group"><label for="modelnotes">Model descriptions</label><textarea  maxlength="1000" class="form-control" id="modelnotes" rows="5"></textarea></div>'
+  alertify.confirm(content).set('title','New Model').set('closable', false).set('labels',{ok:'Yes', cancel:'Cancel'}).set('onok', function(){
+    var el = document.getElementsByName("csrfmiddlewaretoken");
+    csrf_value = el[0].getAttribute("value");
+    jQuery.ajax({
+      method: "POST",
+      url: "/expert/ajax/newmodel",
+      data: {csrfmiddlewaretoken: csrf_value, modelname: $('#modelname').val(), modelnotes: $('#modelnotes').val()},
+      proccessData: false,
+      success: function (data) {
+        if (data.success) {
+          location.reload();
+        }
+      }
+    });
+  }).set('oncancel', function(){alertify.confirm().destroy()})
+}
+</script>
+{% endblock jscode%}

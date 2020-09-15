@@ -1,0 +1,373 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+
+<section id="main">
+  <br/>
+
+  <div class="card" style = "min-width:950px">
+
+    <div class="card-header">
+        <div class="row align-items-center">
+          <div class = "col text-left">
+            <div class = "btn-group">
+              <a  class = "btn btn-light btn-sm" href = '/expert/usermain/'>
+                <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+              </a>
+              <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/'>
+                <ion-icon name="list" class = "iconpiclarger align-middle"></ion-icon> Model List
+              </a>
+              <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/{{task.id}}'>
+                <ion-icon name="aperture" class = "iconpiclarger align-middle"></ion-icon> {{task.task_name}}
+              </a>
+            </div>
+          </div>
+
+          <div class = "col text-center">
+            <h4 class = "card-title align-vertical text-body" >Supply Data</h4>
+          </div>
+          <div class = "col text-right invisible">
+            <div class = "btn-group">
+              <a  class = "btn btn-light btn-sm" href = '/expert/usermain/'>
+                <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+              </a>
+              <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/'>
+                <ion-icon name="list" class = "iconpiclarger align-middle"></ion-icon> Model List
+              </a>
+              <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/{{task.id}}'>
+                <ion-icon name="aperture" class = "iconpiclarger align-middle"></ion-icon> {{task.task_name}}
+              </a>
+            </div>
+          </div>
+
+        </div>
+    </div>
+
+    <div class="card-body">
+
+
+  <div>
+
+
+      {% if '1' in task.finished_steps %}
+
+
+
+        <div style="display:none;">
+          <div class = "select_sup">
+
+            <br/>
+            <label for "supfileselection">Select a supply data file:</label>
+            <br/>
+            {% csrf_token %}
+            <select name="supfile" id = "supfileselection" class = "custom-select">
+              <option value="" disabled selected hidden>Select a supply file</option>
+              {% for file in user.datadocument_set.all %}
+                {% if file.datatype == "Supply Data" %}
+                  <option value = "{{file.id}}"> {{file}} </option>
+                {% endif %}
+              {% endfor %}
+            </select>
+
+            <br/>
+            <br/>
+
+          </div>
+        </div>
+
+          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+          <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+          <script id = 'helper' time-unit="{{task.timeunit}}" task-id = "{{task.id}}" src="{% static 'jsfile/expertgraphedit/EditStep2New.js' %}"></script>
+          <script type="text/javascript">
+              $(window).on('load',function () {
+                initgeomap()
+                prodlist = []
+                {% for item in user.userdatabase.userhasprod_set.all %}
+                  data = {id: "{{item.product.id}}", name: "{{item.product.name}}", transcost: "{{item.product.transcost}}", unit: "{{item.product.unit}}", note: "{{item.product.additionalinfo}}", transformationset: []}
+
+                  {% for trans in item.product.transformation_set.all %}
+                    data.transformationset.push({techname: "{{trans.technology.name}}", yield: "{{trans.transforming_coefficient}}"})
+                  {% endfor %}
+
+                  prodlist.push(data)
+                {% endfor %}
+
+                markerls = []
+                supdata = false
+
+                {% if msg %}
+                 {% for m in msg %}
+                  alertify.notify("{{m}}", 'error', 10, null);
+                 {% endfor %}
+                {% endif %}
+
+                {% if '2' in task.finished_steps %}
+                  supdata = [['#','lat','lng','prod','price','cap']]
+                  suplatls = {{task.supLatLs|safe}}
+                  suplngls = {{task.supLngLs|safe}}
+                  supcapls = {{task.supCapLs|safe}}
+                  supbidls = {{task.supBidLs|safe}}
+                  supprols = {{task.supProLs|safe}}
+                  supnames = {{task.supNames|safe}}
+                  for (i = 0; i < suplatls.length; i++){
+                    item = [supnames[i], suplatls[i], suplngls[i], 'p' + supprols[i], supbidls[i],supcapls[i]]
+                    supdata.push(item)
+                  }
+                {% endif %}
+
+                {% if supdata %}
+                  supdata = {{supdata|safe}}
+                {% endif %}
+
+                if (supdata) {
+                  for (i = 1; i < supdata.length; i++) {
+                    var lat = supdata[i][1]
+                    var lng = supdata[i][2]
+
+                    var value = findMarkerByLatLng(lat,lng)
+                    var flag = value[0]
+                    var index = value[1]
+                    if (flag) {
+                      if (supdata[i][0] != markerls[index].name){
+                        markerls[index].name = markerls[index].name + ' ' + supdata[i][0]
+                        markerls[index].unbindTooltip()
+                        var pop = markerls[index].bindTooltip("<b>"+markerls[index].name + "</b>")
+                      }
+                      markerls[index].data.push({name: supdata[i][3].slice(1), price: Number(supdata[i][4]), cap: Number(supdata[i][5])})
+                    } else {
+                      var name = supdata[i][0]
+                      var data = [{name: supdata[i][3].slice(1), price: Number(supdata[i][4]), cap: Number(supdata[i][5])}]
+                      var marker = newmarker(lat,lng,name,data)
+                      markerls.push(marker)
+                    }
+
+                  }
+                  for (i = 0; i < markerls.length; i++) {
+                    markerls[i].addTo(mymap)
+                  }
+                  changeZoom();
+                }
+
+            });
+          </script>
+
+          <div style="display:none;">
+          <div style="text-align: center" class = "sup_upload">
+            <a href = "{% static 'datatemplate/supdatatemp.csv' %}"><strong>Download template</strong></a>
+            <br/>
+            <br/>
+            <strong>Data format:</strong>
+            <br/>
+            <table width = 100% class = "table text-center">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Feed ID</th>
+                <th>Price</th>
+                <th>Capacity</th>
+              </tr>
+              </thead>
+              <tbody>
+               <tr>
+                 <td>s1</td>
+                 <td>56.1234</td>
+                 <td>87.6543</td>
+                 <td>p1</td>
+                 <td>10</td>
+                 <td>10000</td>
+               </tr>
+               <tr>
+                 <td>...</td>
+                 <td>...</td>
+                 <td>...</td>
+                 <td>...</td>
+                 <td>...</td>
+                 <td>...</td>
+               </tr>
+              </tbody>
+            </table>
+
+              <div class="card text-center" style = "background-color:#F5F5F5">
+                <div class="card-body">
+                  <h6 class = "card-title">{{dataupload.datafile.label}}</h6>
+                  <div class="input-group mb-3 text-left">
+                    <div class="custom-file">
+                      {{dataupload.datafile}}
+                        <label class="custom-file-label text-truncate" for="id_datafile" id = 'id_datafile_label'>
+                          Choose file
+                        </label>
+                    </div>
+                  </div>
+                  {{dataupload.datanotes}}
+                </div>
+                <div style = "display:none">
+                  {{dataupload.datatype}}
+                </div>
+              </div>
+            <br/>
+            <input style="display:none;" id = 'uploadbtm' class = "btn btn-light border" type="submit" value="Upload" name="upload_file"/>
+
+            </div>
+            </div>
+
+
+
+          <div class = "container" style = "width: 80%; left: 10%">
+            <div class = "btn-group" style = "width: 100%">
+              <button class = "btn btn-light border" onclick="supUpload()" style = "width: 20%" data-toggle="tooltip" data-placement="top" title="Upload a supply data file (csv) to this model">Upload Data</button>
+              <button class = "btn btn-light border" onclick="addNewSup()" style = "width: 20%" data-toggle="tooltip" data-placement="top" title="Manually define a supplier">Manual Entry</button>
+              <button class = "btn btn-light border" onclick="supLoadModel()" style = "width: 20%" data-toggle="tooltip" data-placement="top" title="Load supply data from another model">Load from Model</button>
+              <button class = "btn btn-light border" onclick="supClear()" style = "width: 20%" data-toggle="tooltip" data-placement="top" title="Clear all supply data assigned to this model">Clear Data</button>
+              <button class = "btn btn-light border" onclick="lookForProd()" style = "width: 20%" data-toggle="tooltip" data-placement="top" title="Look for a feedstock in the database">Look for a Feedstock</button>
+            </div>
+          </div>
+
+          <br/>
+
+          <div  class = "canvas_hold" id = "canvas_holder" style = "height: 400px; box-shadow: 5px 5px 5px #d3d3d3;">
+            <div class = "card" style = "position: absolute; top: 0px; right: 0px; z-index:1000" data-toggle="popover" data-placement="right" title="Tip" data-html="true" data-content="<p><strong>Zoom-in:</strong> Double Click on Map</p><p><strong>Zoom-to:</strong> Press Z </p> <p><strong>New Supply:</strong> Right Click on Map </p> <p><strong>Edit:</strong> Double Click on Marker </p> <p><strong>Delete:</strong> Right Click on Marker </p>" >
+                <ion-icon name="alert-circle-outline" class = "iconpiclarger" style = "cursor: pointer;" ></ion-icon>
+            </div>
+            <div id = "gfx_holder" style = "position: relative; width:100%; height: 400px; z-index: 999">
+            </div>
+          </div>
+          <br/>
+          <div class = "container" style = "width: 70%; left: 15%">
+            <div style="text-align: right">
+              <button class = "btn btn-light border" name = "save" onclick="supConfirm({{task.id}});">Next</button>
+            </div>
+          </div>
+
+          <div id = "overlaycontainer" style="display:none;z-index: 1002">
+            <div id = "overlay">
+              <div class="text-center border rounded" style="position: relative; top: 40%; background: #F7F7F7; width: 40%; left:30%;">
+                <h4>Saving Changes</h4>
+                <br/>
+                <div class="spinner-grow" style="width: 3rem; height: 3rem; color: #9A0001" role="status">
+                  <span class="sr-only">Running</span>
+                </div>
+                <br/>
+                <br/>
+                <p>Do not refresh...</p>
+              </div>
+            </div>
+          </div>
+
+          <div id = "overlaycontainer2" style="display:none;z-index: 1002">
+            <div id = "overlay">
+              <div class="text-center border rounded" style="position: relative; top: 40%; background: #F7F7F7; width: 40%; left:30%;">
+                <h4>Uploading...</h4>
+                <br/>
+                <div class="spinner-grow" style="width: 3rem; height: 3rem; color: #9A0001" role="status">
+                  <span class="sr-only">Running</span>
+                </div>
+                <br/>
+                <br/>
+                <p>Do not refresh...</p>
+              </div>
+            </div>
+          </div>
+
+
+      {% endif %}
+
+      {% if fail %}
+      <br/>
+      <h6> Form not Valid! </h6>
+      {% endif %}
+
+
+  </div>
+  </div>
+  </div>
+  <br/>
+  <br/>
+</section>
+{% endblock content %}
+
+{% block jscode %}
+
+<script type="text/javascript">
+function UpdateLabel(){
+  e = document.getElementsByClassName("custom-file-input")[0].files[0].name;
+  $('#id_datafile_label').html(e);
+}
+
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+
+function supLoadModel(){
+  content = '<label>Please choose the task to load data from:</lable><select class = "form-control" id = "modelid">'
+    {% for t in user.opttask_set.all%}
+      {% if '2' in t.finished_steps %}
+       {% if t.id == task.id%}
+          content += '<option value = "{{t.id}}" disabled> {{t.task_name}} </option>'
+       {% else %}
+          content += '<option value = "{{t.id}}"> {{t.task_name}} </option>'
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  content += '</select>'
+  alertify.confirm(content).set('title','Load Data From Model').set('closable', false).set('labels',{ok:'Yes', cancel:'Cancel'}).set('onok', function(){
+    $('#overlaycontainer2').css('display','block')
+    var el = document.getElementsByName("csrfmiddlewaretoken");
+    csrf_value = el[0].getAttribute("value");
+    jQuery.ajax({
+      method: "POST",
+      url: "/expert/ajax/suploadmodel",
+      data: {csrfmiddlewaretoken: csrf_value, loadid: $('#modelid').val(), taskid: {{task.id}}},
+      proccessData: false,
+      success: function (data) {
+        if (data) {
+          if (data.msg.length > 0 ) {
+            for (var i = 0; i < data.msg.length; i++){
+              alertify.notify(data.msg[i], 'error', 10, null);
+            }
+          } else {
+
+            for (var i = 0; i < markerls.length; i++){
+              markerls[i].removeFrom(mymap)
+            }
+            supdata = data.supdata
+            for (i = 1; i < supdata.length; i++) {
+              var lat = Number(supdata[i][1])
+              var lng = Number(supdata[i][2])
+
+              var value = findMarkerByLatLng(lat,lng)
+              var flag = value[0]
+              var index = value[1]
+              if (flag) {
+                if (supdata[i][0] != markerls[index].name){
+                  markerls[index].name = markerls[index].name + ' ' + supdata[i][0]
+                  markerls[index].unbindTooltip()
+                  var pop = markerls[index].bindTooltip("<b>"+markerls[index].name + "</b>")
+                }
+                markerls[index].data.push({name: supdata[i][3].slice(1), price: Number(supdata[i][4]), cap: Number(supdata[i][5])})
+              } else {
+                var name = supdata[i][0]
+                if (name.length == 0) {
+                  name = "Anon."
+                }
+                var data = [{name: supdata[i][3].slice(1), price: Number(supdata[i][4]), cap: Number(supdata[i][5])}]
+                var marker = newmarker(lat,lng,name,data)
+                markerls.push(marker)
+              }
+
+            }
+            for (i = 0; i < markerls.length; i++) {
+              markerls[i].addTo(mymap)
+            }
+            changeZoom();
+          }
+          $('#overlaycontainer2').css('display','none')
+        }
+      }
+    });
+  }).set('oncancel', null)
+}
+</script>
+{% endblock jscode %}

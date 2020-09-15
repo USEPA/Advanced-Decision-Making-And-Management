@@ -1,0 +1,16 @@
+tech,name,capmin,capmax,refprod,Kinv,Binv,Kop,Bop
+t58,Solid Liquid Separation (beef),0.0,1000000.0,p30,0.0,0.0,0.227,0.0
+t55,Granulation (beef solid),0.0,1000000.0,p34,0.0,1000000.0,4.25,0.0
+t69,"Solid Liquid Separation (cow, no fix cost)",0.0,10000000.0,p1,0.0,0.0,0.227,0.0
+t59,Solid Liquid Separation (heifer),0.0,1000000.0,p31,0.0,0.0,0.227,0.0
+t56,Granulation (cow solid),0.0,10000000.0,p6,0.0,1000000.0,4.25,0.0
+t57,Granulation (heifer solid),0.0,10000000.0,p36,0.0,1000000.0,4.25,0.0
+t60,P Release (raw cow manure),0.0,1e+20,p1,0.0,0.0,0.0,0.0
+t61,P Release (raw beef manrue),0.0,1e+20,p30,0.0,0.0,0.0,0.0
+t62,P Release (raw heifer manure),0.0,1e+20,p31,0.0,0.0,0.0,0.0
+t63,P Release (liquid beef manure),0.0,1e+20,p35,0.0,0.0,0.0,0.0
+t64,P Release (liquid cow manure),0.0,1e+20,p7,0.0,0.0,0.0,0.0
+t65,P Release (liquid heifer manure),0.0,1e+20,p37,0.0,0.0,0.0,0.0
+t66,P Release (solid beef manure),0.0,1e+20,p34,0.0,0.0,0.0,0.0
+t67,P Release (solid cow manure),0.0,1e+20,p6,0.0,0.0,0.0,0.0
+t68,P Release (solid heifer manure),0.0,1e+20,p36,0.0,0.0,0.0,0.0

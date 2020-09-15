@@ -1,0 +1,85 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+<section id="main">
+  {% csrf_token %}
+  <br/>
+
+  <div class="card" style = "min-width:950px">
+
+    <div class="card-header">
+        <div class="row align-items-center">
+          <div class = "col text-left">
+            <div class = "btn-group">
+              <a  class = "btn btn-light" href = '/expert/usermain/'>
+                <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+              </a>
+              <a  class = "btn btn-light" href = '/expert/usermain/task/'>
+                <ion-icon name="list" class = "iconpiclarger align-middle"></ion-icon> Model List
+              </a>
+            </div>
+          </div>
+
+          <div class = "col text-center">
+            <h4 class = "card-title align-vertical text-body" >Create New Model</h4>
+          </div>
+          <div class = "col text-right invisible">
+            <div class = "btn-group">
+              <a  class = "btn btn-light" href = '/'>
+                <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+              </a>
+              <a  class = "btn btn-light" href = '/expert/usermain/'>
+                <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+              </a>
+            </div>
+          </div>
+
+        </div>
+    </div>
+
+    <div class="card-body">
+    {% if fail %}
+    <p> Form not valid! </p>
+    {% endif %}
+
+      <div class = "container text-center" style = "width: 50%; left: 25%">
+        <form method = "GET">
+            <div class="input-group input-group mb-3" >
+              <div class="input-group-prepend">
+                <span class="input-group-text">Model Name</span>
+              </div>
+              {{  modelform.taskname  }}
+            </div>
+
+
+            <input type="submit" value="Create" class = "btn btn-light border btn-block" name="create_confirm"/>
+        </form>
+      </div>
+    </div>
+  </div>
+  <br/>
+</section>
+{% endblock content %}
+
+{% block jscode %}
+<script>
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
+</script>
+<script>
+  function hover(element) {
+  pic = element.getElementsByTagName('img')[0]
+  path = pic.src
+  newpath = path.slice(0, -4) + String(2) + '.png'
+  pic.setAttribute('src', newpath);
+}
+
+function unhover(element) {
+  pic = element.getElementsByTagName('img')[0]
+  path = pic.src
+  newpath = path.slice(0, -5) + '.png'
+  pic.setAttribute('src', newpath);
+}
+</script>
+{% endblock jscode %}

@@ -1,0 +1,149 @@
+{% extends "main.html" %}
+{% load static %}
+{% load tz %}
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block content %}
+<section id="main">
+  {% csrf_token %}
+  <br/>
+  <div class="card">
+
+    <div class="card-header">
+        <div class="row align-items-center">
+          <div class = "col text-left">
+            <a  class = "btn btn-light" href = '/expert/usermain/'>
+              <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+            </a>
+          </div>
+
+          <div class = "col text-center">
+            <h4 class = "card-title align-vertical text-body" >Technology Database</h4>
+          </div>
+          <div class = "col text-right invisible">
+            <a  class = "btn btn-light" href = '/'>
+              <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+            </a>
+          </div>
+
+        </div>
+    </div>
+
+    <div class="card-body">
+    <form method = "GET">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend" style = "flex: 0 0 3%;">
+          <span class="input-group-text">
+            <ion-icon name="search" class = "iconpiclarge"></ion-icon>
+          </span>
+        </div>
+      {{  searchform.keywords  }}
+      </div>
+
+      <div class="btn-group" style = "width: 38%">
+        <input type="submit" value="Search" class = "btn btn-light border" name = 'search_tech' style = "width: 33.3%">
+        <input type="submit" value="List All Tech" class = "btn btn-light border" name = 'list_tech' style = "width: 33.3%">
+        <button type = 'button' class = "btn btn-light border" style = "width:33.4%" onclick = "AddTechBase()">Add Technology</button>
+        {% if admin %}
+        <div class = "btn btn-light border align-middle" data-toggle="popover" data-placement="right" title="Notice" data-html="true" data-content="<p>If you need to edit or delete a <strong>public</strong> technology or do <strong>batch operations</strong>, please go to the admin system.</p>" >
+            <ion-icon name="alert-circle-outline" class = "iconpiclarge" style = "cursor: pointer;" ></ion-icon>
+        </div>
+        {% else %}
+        <div class = "btn btn-light border align-middle" data-toggle="popover" data-placement="right" title="Notice" data-html="true" data-content="<p>If you need to do <strong>batch operations</strong> or <strong>reinitialize</strong> your database, please send us a request.</p>" >
+            <ion-icon name="alert-circle-outline" class = "iconpiclarge" style = "cursor: pointer;" ></ion-icon>
+        </div>
+        {% endif %}
+      </div>
+    </form>
+    {% if admin %}
+    <br/>
+    {% endif %}
+    {% if techsearch %}
+      {% if error %}
+      <p>{{error}}</p>
+      {% else %}
+        {% if not techlist %}
+          <p>No technology found.</p>
+        {% else %}
+        <script type="text/javascript">
+          techlist = []
+          {% for item in techlist %}
+            data = {id: "{{item.id}}", name: "{{item.name}}", refprod: "{{item.refproduct}}", capmin: "{{item.capmin}}", capmax: "{{item.capmax}}", invfix: "{{item.invcost_fix}}", invpro:"{{item.invcost_pro}}", opfix: "{{item.opcost_fix}}",oppro: "{{item.opcost_pro}}", png: "{{item.pngsrc}}",  note: "{{item.notes}}", transformationset: []}
+
+            {% for trans in item.transformation_set.all %}
+              data.transformationset.push({prodname: "{{trans.product.name}}", yield: "{{trans.transforming_coefficient}}", prodid: "{{trans.product.id}}"})
+            {% endfor %}
+            techlist.push(data)
+          {% endfor %}
+        </script>
+
+        <br/>
+        <h4>Searching Results:</h4>
+          <table width = 100% class = "table text-center table-hover">
+            <thead>
+            <tr>
+              <th>Tech Name</th>
+              <th>Tech ID</th>
+              <th>Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for tech in techlist %}
+            <tr>
+              <td>{{tech.name}}</td>
+              <td>t{{tech.id}} </td>
+              <td>
+                    <ion-icon name="bar-chart" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Detalied information"style = "cursor: pointer" onclick = TechInfo({{tech.id}})></ion-icon>
+                    {% if not tech.public %}
+                    <ion-icon name="trash" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Delete this technology" style = "cursor: pointer" onclick = DeleteTech({{tech.id}})></ion-icon>
+                    <ion-icon name="create" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Edit this technology" style = "cursor: pointer" onclick = EditTech({{tech.id}})></ion-icon>
+                    {% endif %}
+              </td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+          {% endif %}
+      {% endif %}
+    {% endif %}
+
+    <br/>
+
+  </div>
+  </div>
+
+  <br/>
+  <br/>
+</section>
+{% endblock content %}
+{% block jscode %}
+<script id = "helper" admin = "{{admin}}" src="{% static 'jsfile/expertgraphedit/TechDataBase.js' %}"></script>
+<script>
+  prodlist = []
+  {% for item in prodlist %}
+    data = {id: "{{item.id}}", name: "{{item.name}}", transcost: "{{item.transcost}}", unit: "{{item.unit}}", note: "{{item.additionalinfo}}", public: "{{item.public}}", transformationset: []}
+    {% for trans in item.transformation_set.all %}
+      data.transformationset.push({techname: "{{trans.technology.name}}", yield: "{{trans.transforming_coefficient}}"})
+    {% endfor %}
+    prodlist.push(data)
+  {% endfor %}
+</script>
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="popover"]').popover();
+  let params = new URLSearchParams(location.search);
+  taskid = params.get('task')
+  if (taskid) {
+    AddTechBase(taskid);
+  }
+})
+$(".parent-toggler").hover(function(){
+    $( this ).animate({'color': '#9A0000'}, 180);
+}, function(){
+    $( this ).animate({'color': '#474747'}, 180);
+});
+</script>
+
+{% endblock jscode%}
