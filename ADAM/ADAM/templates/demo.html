@@ -1,0 +1,39 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="text-center" id='outline'>
+    <h4>ADAM tutorial</h4>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4">
+                <img src="{% static 'figure/tutorial/biogas-1.jpg'%}" width=80%>
+            </div>
+            <div class="col-lg-4">
+                <button class="btn btn-light border btn-block mt-auto" onclick="window.location = '/demo/eg1'">
+                    Biogas from Waste
+                </button>
+                <button class="btn btn-light border btn-block mb-auto" onclick="window.location = '/demo/eg2'">
+                    Custom Model
+                </button>
+            </div>
+            <div class="col-lg-4">
+                <img src="{% static 'figure/tutorial/nexus-1.jpg'%}" width=80%>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    function changecard(id1, id2) {
+        $("#" + id1).fadeTo(300, 0, function () {
+            $("#" + id1).css("display", "none");
+            $("#" + id2).fadeTo(300, 1);
+        });
+    }
+</script>
+
+{% endblock scripts %}

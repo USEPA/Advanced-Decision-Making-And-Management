@@ -36,9 +36,9 @@ urlpatterns = [
     path('support', views.support, name='support'),
     path('contact', views.contact, name='contact'),
     path('about', views.about, name='about'),
-    path('tryit', views.tryit, name='tryit'),
-    path('tryit/eg1', views.tryit_eg1, name='tryit_eg1'),
-    path('tryit/eg2', views.tryit_eg2, name='tryit_eg2'),
+    path('demo', views.demo, name='demo'),
+    path('demo/eg1', views.demo_eg1, name='demo_eg1'),
+    path('demo/eg2', views.demo_eg2, name='demo_eg2'),
     path('ajax/begintosolveeg2', views.beginsolveeg2, name='begintosolveeg2'),
     path('eg2_results/<id>', views.eg2_results, name='eg2_results'),
     # Module paths:
