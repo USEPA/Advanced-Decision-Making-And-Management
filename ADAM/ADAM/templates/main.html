@@ -182,8 +182,8 @@
     </div>
   </div>
 
-  <section id="main-content" class="main-content clearfix" role="main" tabindex="-1">
-    <div class="main-column clearfix">
+  <section id="main-content" class="main-content clearfix" role="main" tabindex="-1" style="max-width: 80em;">
+    <div class="main-column clearfix" >
       {% block content %}
       {% csrf_token %}
 
@@ -508,96 +508,99 @@
 
 
 
-                  <!--div class="custom-control custom-checkbox parent-toggler border-top" data-toggle="collapse" href="#collapseLAKE" role="button" aria-expanded="false" aria-controls="collapseLAKE" id = 'lakeparent'>
+                <!--div class="custom-control custom-checkbox parent-toggler border-top" data-toggle="collapse" href="#collapseLAKE" role="button" aria-expanded="false" aria-controls="collapseLAKE" id = 'lakeparent'>
 
-                                      <div class = "row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;" >
-                                          <div class = "col-2">
-                                              <img src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/google/241/speedboat_1f6a4.png' class="align-top" style="width:20px">
-                                          </div>
-                                          <div class = "col-7">
-                                              Lakes
-                                          </div>
-                                          <div class = "col-2">
-                                              <ion-icon name="add-outline" style="height: 23px;width:23px" id = 'lakeparenticon'></ion-icon>
-                                          </div>
-                                      </div>
+                          <div class = "row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;" >
+                              <div class = "col-2">
+                                  <img src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/google/241/speedboat_1f6a4.png' class="align-top" style="width:20px">
+                              </div>
+                              <div class = "col-7">
+                                  Lakes
+                              </div>
+                              <div class = "col-2">
+                                  <ion-icon name="add-outline" style="height: 23px;width:23px" id = 'lakeparenticon'></ion-icon>
+                              </div>
+                          </div>
 
-                                  </div-->
+                      </div-->
 
-                  <!--div class = "container" style = "padding-left:40px;">
-                                          <div class="collapse" id="collapseLAKE">
+                <!--div class = "container" style = "padding-left:40px;">
+                    <div class="collapse" id="collapseLAKE">
 
-                                              <div class="custom-control custom-checkbox">
-                                                  <input class="form-check-input" type="checkbox" value="" id="lake_erie" onchange="checkBound(this.id)">
-                                                  <label class="form-check-label">
-                                                      <p    data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Erie
-                                                      </p>
-                                                  </label>
-                                              </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="form-check-input" type="checkbox" value="" id="lake_erie" onchange="checkBound(this.id)">
+                            <label class="form-check-label">
+                                <p    data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Erie
+                                </p>
+                            </label>
+                        </div>
 
-                                              <div class="custom-control custom-checkbox">
-                                                  <input class="form-check-input" type="checkbox" value="" id="lake_ontario" onchange="checkBound(this.id)">
-                                                  <label class="form-check-label">
-                                                      <p    data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Ontario
-                                                      </p>
-                                                  </label>
-                                              </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="form-check-input" type="checkbox" value="" id="lake_ontario" onchange="checkBound(this.id)">
+                            <label class="form-check-label">
+                                <p    data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Ontario
+                                </p>
+                            </label>
+                        </div>
 
-                                              <div class="custom-control custom-checkbox">
-                                                  <input class="form-check-input" type="checkbox" value="" id="lake_superior" onchange="checkBound(this.id)">
-                                                  <label class="form-check-label">
-                                                      <p    data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Superior
-                                                      </p>
-                                                  </label>
-                                              </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="form-check-input" type="checkbox" value="" id="lake_superior" onchange="checkBound(this.id)">
+                            <label class="form-check-label">
+                                <p    data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Superior
+                                </p>
+                            </label>
+                        </div>
 
-                                              <div class="custom-control custom-checkbox">
-                                                  <input class="form-check-input" type="checkbox" value="" id="lake_huron" onchange="checkBound(this.id)">
-                                                  <label class="form-check-label">
-                                                      <p    data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Huron
-                                                      </p>
-                                                  </label>
-                                              </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="form-check-input" type="checkbox" value="" id="lake_huron" onchange="checkBound(this.id)">
+                            <label class="form-check-label">
+                                <p    data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Huron
+                                </p>
+                            </label>
+                        </div>
 
-                                              <div class="custom-control custom-checkbox">
-                                                  <input class="form-check-input" type="checkbox" value="" id="lake_michigan" onchange="checkBound(this.id)">
-                                                  <label class="form-check-label">
-                                                      <p    data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Michigan
-                                                      </p>
-                                                  </label>
-                                              </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="form-check-input" type="checkbox" value="" id="lake_michigan" onchange="checkBound(this.id)">
+                            <label class="form-check-label">
+                                <p    data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Michigan
+                                </p>
+                            </label>
+                        </div>
 
-                                              <div class="custom-control custom-checkbox">
-                                                  <input class="form-check-input" type="checkbox" value="" id="lake_mendota" onchange="checkBound(this.id)">
-                                                  <label class="form-check-label">
-                                                      <p    data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Mendota (Madison)
-                                                      </p>
-                                                  </label>
-                                              </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="form-check-input" type="checkbox" value="" id="lake_mendota" onchange="checkBound(this.id)">
+                            <label class="form-check-label">
+                                <p    data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake Mendota (Madison)
+                                </p>
+                            </label>
+                        </div>
 
-                                              <div class="custom-control custom-checkbox">
-                                                  <input class="form-check-input" type="checkbox" value="" id="lake_stclaire" onchange="checkBound(this.id)">
-                                                  <label class="form-check-label">
-                                                      <p    data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake St. Claire (Detroit)
-                                                      </p>
-                                                  </label>
-                                              </div>
-                                  </div>
-                              </div-->
+                        <div class="custom-control custom-checkbox">
+                            <input class="form-check-input" type="checkbox" value="" id="lake_stclaire" onchange="checkBound(this.id)">
+                            <label class="form-check-label">
+                                <p    data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Lake St. Claire (Detroit)
+                                </p>
+                            </label>
+                        </div>
+                      </div>
+                  </div-->
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
-      <br>
 
-      <br />
-      <div class="text-center" style="font-size: 0.6em;">Copyright &copy 2020 Board of Regents of the University of
-        Wisconsin System </div>
-
-
+        <!--googleon: all-->
+        <div class="panel-pane pane-node-content">
+          <div class="pane-content">
+            <div class="node node-page clearfix view-mode-full"></div>
+          </div>
+      </div>
+      <div id="block-epa-og-footer" class="block block-epa-og">
+      </div>
+      <!--googleoff: all-->
+      </div>
   </section>
 
   <div id="overlaycontainer" style="display: none">
@@ -607,7 +610,33 @@
   {% endblock content %}
 
   </div>
+  <footer class="main-footer clearfix" role="contentinfo">
+      <div class="main-footer__inner">
+          <div class="region-footer">
+              <div class="block block-pane block-pane-epa-global-footer">
+                  <h4>Software Disclaimer</h4>
+                  'useeio-foodwaste' is developed and maintained by U.S.
+                  Environmental Protection Agency, Office of Research & Development
+                  (ORD), Center for Environmental Solutions and Emergency Response
+                  (CESER), Land Remediation & Technology Division (LRTD), Environmental
+                  Decision Analytics Branch (EDAB)Cincinnati, OH 45268, under Mozilla
+                  Public License Version 2.0. See
+                  <a href="https://code.gov/#/policy-guide/docs/compliance/procurement" target="_blank">
+                      OMB Memorandum M-16-21 Section 4
+                  </a> &
+                  <a href="https://code.gov/#/policy-guide/docs/open-source/licensing" target="_blank">
+                      Releasing Open Source Code
+                  </a>.
+                  <div class="my-3">
+                      USEEIO-FoodWaste Tool v. {{APP_VERSION}}
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
 </body>
+
+
 <script>
   $(function () {
     $('[data-toggle="tooltip"]').tooltip({
@@ -631,6 +660,11 @@
 <script id="helper" helptext="{% static 'jsfile/leaflet.shapefile-gh-pages/' %}"
   src="{% static 'jsfile/leaflet.shapefile-gh-pages/leaflet.shpfile.js' %}"></script>
 <script id="helper2" helptext="{% static 'maindata/' %}" src="{% static 'jsfile/mainpage/main.js' %}"></script>
+
+<!-- NOTE: This is apparently a requirement for the EPA template, jquery 1.7.1 -->
+<script src="{% static 'EPA_files/jquery.js.download' %}"></script>
+<script src="{% static 'EPA_files/js.js.download' %}"></script>
+<!--[if lt IE 9]><script src="https://www.epa.gov/sites/all/themes/epa/js/ie.js"></script><![endif]-->
 
 <script>
   $(function () {
