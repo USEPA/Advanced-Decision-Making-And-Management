@@ -1,0 +1,411 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% csrf_token %}
+<div class="row text-center"  style="max-width: 80em;">
+    <div class="col-9">
+        <div id="gfx_holder1" class="border"
+            style="position: relative; width:100%; height: 520px;left:1%;box-shadow: 7px 7px 7px #d3d3d3">
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="card mb-3" id="datalayercard" style="height: 500px; top: 10px;border-width:2">
+            <div class="card-header">
+                <div class="spinner-grow align-middle float-left"
+                    style="color: #9A0001; width: 1.5rem; height: 1.5rem; visibility:hidden" role="status">
+                    <span class="sr-only">Running</span>
+                </div>
+                <strong style="color: #9A0001">Data Layers</strong>
+                <div class="spinner-grow align-middle float-right"
+                    style="color: #9A0001; width: 1.5rem; height: 1.5rem; visibility:hidden" role="status"
+                    id="spinner">
+                    <span class="sr-only">Running</span>
+                </div>
+            </div>
+
+            <div class="card-body text-left"
+                style="padding-left:0; padding-right:0; overflow-y: scroll; z-index:1 ">
+                <div style="height:425px; background-color:#fff; overflow-x: hidden;">
+                    <div class="container" style="width:100%;padding-left:0; padding-right:0; z-index:2">
+
+                        <div class="custom-control custom-checkbox parent-toggler" data-toggle="collapse"
+                            href="#collapseCAFO" role="button" aria-expanded="false"
+                            aria-controls="collapseCAFO" id='cafoparent' style:"z-index:1000">
+                            <div class="row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;">
+                                <div class="col-2">
+                                    <img src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/softbank/145/cow-face_1f42e.png'
+                                        class="align-top" style="width:23px">
+                                </div>
+                                <div class="col-7">
+                                    Large Dairy Farms
+                                </div>
+                                <div class="col-2">
+                                    <ion-icon name="add-outline" style="height: 23px;width:23px"
+                                        id='cafoparenticon'></ion-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container" style="padding-left:40px;;">
+                            <div class="collapse" id="collapseCAFO">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="cafos_all"
+                                        onchange="checkChangeAll('cafos')">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">All
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="cafos_wi"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">Wisconsin
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="cafos_mn"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">Minnesota
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="cafos_mi"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">Michigan
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="cafos_oh"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">Ohio
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="cafos_in"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">Indiana
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="cafos_pa"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">
+                                            Pennsylvania
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="custom-control custom-checkbox parent-toggler border-top"
+                            data-toggle="collapse" href="#collapseBEEF" role="button" aria-expanded="false"
+                            aria-controls="collapseBEEF" id='beefparent'>
+                            <div class="row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;">
+                                <div class="col-2">
+                                    <img src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/237/ox_1f402.png'
+                                        class="align-top" style="width:23px">
+                                </div>
+                                <div class="col-7">
+                                    Large Beef Farms
+                                </div>
+                                <div class="col-2">
+                                    <ion-icon name="add-outline" style="height: 23px;width:23px"
+                                        id='beefparenticon'></ion-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container" style="padding-left:40px;">
+                            <div class="collapse" id="collapseBEEF">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="beefs_all"
+                                        onchange="checkChangeAll('beefs')">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">All
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="beefs_wi"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">Wisconsin
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="beefs_mn"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">Minnesota
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="beefs_mi"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">Michigan
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="beefs_oh"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">Ohio
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="beefs_in"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">Indiana
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="beefs_pa"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">
+                                            Pennsylvania
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="custom-control custom-checkbox parent-toggler border-top"
+                            data-toggle="collapse" href="#collapseWWTP" role="button" aria-expanded="false"
+                            aria-controls="collapseWWTP" id='wwtpparent'>
+                            <div class="row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;">
+                                <div class="col-2">
+                                    <img src='https://image.flaticon.com/icons/svg/877/877656.svg'
+                                        class="align-top" style="width:23px">
+                                </div>
+                                <div class="col-7">
+                                    Wastewater Plants
+                                </div>
+                                <div class="col-2">
+                                    <ion-icon name="add-outline" style="height: 23px;width:23px"
+                                        id='wwtpparenticon'></ion-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container" style="padding-left:40px;">
+                            <div class="collapse" id="collapseWWTP">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="wwtps_all"
+                                        onchange="checkChangeAll('wwtps')">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">All
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="wwtps_wi"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">Wisconsin
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="wwtps_mn">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">Minnesota
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="custom-control custom-checkbox parent-toggler border-top"
+                            data-toggle="collapse" href="#collapseBG" role="button" aria-expanded="false"
+                            aria-controls="collapseWWTP" id='bgparent'>
+                            <div class="row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;">
+                                <div class="col-2">
+                                    <img src='https://image.flaticon.com/icons/svg/542/542512.svg'
+                                        class="align-top" style="width:23px">
+                                </div>
+                                <div class="col-7">
+                                    Biogas Facilities
+                                </div>
+                                <div class="col-2">
+                                    <ion-icon name="add-outline" style="height: 23px;width:23px"
+                                        id='bgparenticon'></ion-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container" style="padding-left:40px;">
+                            <div class="collapse" id="collapseBG">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="biogas_all"
+                                        onchange="checkChangeAll('biogas')">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">All
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="biogas_wi"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">Wisconsin
+                                        </p>
+                                    </label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox">
+                                    <input class="form-check-input" type="checkbox" value="" id="biogas_mn"
+                                        onchange="checkChange(this.id)">
+                                    <label class="form-check-label">
+                                        <p data-toggle="collapse" href="#collapseExample" role="button"
+                                            aria-expanded="false" aria-controls="collapseExample">Minnesota
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip({
+            html: true
+        });
+    });
+</script>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+<script src="{% static 'jsfile/Leaflet.PolylineDecorator-master/dist/leaflet.polylineDecorator.js' %}"></script>
+<link rel="stylesheet" href="{% static 'jsfile/leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.css' %}" />
+<script src="{% static 'jsfile/leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.js' %}"></script>
+<script src="{% static 'jsfile/leaflet.shapefile-gh-pages/catiline.js' %}"></script>
+<script id="helper" helptext="{% static 'jsfile/leaflet.shapefile-gh-pages/' %}"
+    src="{% static 'jsfile/leaflet.shapefile-gh-pages/leaflet.shpfile.js' %}"></script>
+<script id="helper2" helptext="{% static 'maindata/' %}" src="{% static 'jsfile/mainpage/main.js' %}"></script>
+
+<script>
+    $(function () {
+        initstep2();
+    });
+
+    /*$(".parent-toggler").hover(function(){
+    $( this ).animate({'color': '#9A0000'}, 180);
+    }, function(){
+    $( this ).animate({'color': '#474747'}, 180);
+    });*/
+
+    $(".parent-toggler").click(function () {
+        ele = $(this)
+        if (ele.css('font-weight') == 700) {
+            ele.css({ 'font-weight': 700 });
+            setTimeout(function () { ele.css({ 'font-weight': 700 }) }, 30)
+            setTimeout(function () { ele.css({ 'font-weight': 600 }) }, 60)
+            setTimeout(function () { ele.css({ 'font-weight': 500 }) }, 90)
+            setTimeout(function () { ele.css({ 'font-weight': 400 }) }, 120)
+
+            setTimeout(function () {
+                ele.css({ 'background-color': '#fff' })
+                ele.css({ 'color': '#474747' })
+            }, 120)
+            iconid = '#' + ele.attr('id') + 'icon'
+            $(iconid).attr('name', 'add-outline')
+            ele.css({ 'width': '100%' })
+            ele.css({ 'margin-left': '0' })
+        } else {
+
+            ele.css({ 'font-weight': 400 });
+            setTimeout(function () { ele.css({ 'font-weight': 400 }) }, 30)
+            setTimeout(function () { ele.css({ 'font-weight': 500 }) }, 60)
+            setTimeout(function () { ele.css({ 'font-weight': 600 }) }, 90)
+            setTimeout(function () { ele.css({ 'font-weight': 700 }) }, 120)
+
+            setTimeout(function () {
+                ele.css({ 'background-color': '#c5050c' })
+                ele.css({ 'color': 'white' })
+            }, 120)
+            iconid = '#' + ele.attr('id') + 'icon'
+            $(iconid).attr('name', 'remove-outline')
+            ele.css({ 'width': '105%' })
+            ele.css({ 'margin-left': '-2.5%' })
+
+            //ele.css({'position':'absolute'})
+
+        }
+    });
+
+</script>
+<script type="text/javascript">
+    var intFrameHeight = window.innerHeight;
+    var mapheight = 520 / 760 * intFrameHeight;
+    var cardheight = mapheight - 20;
+    $("#gfx_holder1").css('height', mapheight);
+    $("#datalayercard").css('height', cardheight)
+</script>
+{% endblock %}

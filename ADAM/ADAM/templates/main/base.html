@@ -47,8 +47,8 @@
     <script src="{% static 'jsfile/_uw-style.min.js' %}"></script>
 
     <script type="text/x-mathjax-config">
-MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-</script>
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
     <link rel="stylesheet" href="{% static 'cssfile/fonts/uw160/fonts.0.0.1.css' %}">
@@ -75,7 +75,7 @@ MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 <body class="node-type-(web-area|page|document|webform) (microsite|resource-directory) hasGoogleVoiceExt">
     <!-- Google Tag Manager -->
     <!--<noscript>&lt;iframe src="//www.googletagmanager.com/ns.html?id=GTM-L8ZB" height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;</noscript>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-L8ZB');</script>-->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-L8ZB');</script>-->
     <!-- End Google Tag Manager -->
     <div class="skip-links">
         <a href="https://www.epa.gov/sites/all/libraries/template2/standalone.html#main-content"
@@ -124,17 +124,17 @@ MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
                 {% else %}
 
                 {% url 'register' as register_url %}
-                <li {% if self.path == register_url %} class="expanded active-trail menu-item" {% else %} class="menu-item" {% endif %}
-                    role="presentation">
-                    <a href="{{register_url}}" {% if self.path == register_url %} class="active-trail menu-link active" {% else %}
-                        class="menu-link" {% endif %} role="menuitem">Register</a>
+                <li {% if self.path == register_url %} class="expanded active-trail menu-item" {% else %}
+                    class="menu-item" {% endif %} role="presentation">
+                    <a href="{{register_url}}" {% if self.path == register_url %} class="active-trail menu-link active"
+                        {% else %} class="menu-link" {% endif %} role="menuitem">Register</a>
                 </li>
 
                 {% url 'login' as login_url %}
-                <li {% if self.path == login_url %} class="expanded active-trail menu-item" {% else %} class="menu-item" {% endif %}
-                    role="presentation">
-                    <a href="{{login_url}}" {% if self.path == login_url %} class="active-trail menu-link active" {% else %}
-                        class="menu-link" {% endif %} role="menuitem">Log-In</a>
+                <li {% if self.path == login_url %} class="expanded active-trail menu-item" {% else %} class="menu-item"
+                    {% endif %} role="presentation">
+                    <a href="{{login_url}}" {% if self.path == login_url %} class="active-trail menu-link active"
+                        {% else %} class="menu-link" {% endif %} role="menuitem">Log-In</a>
                 </li>
                 {% endif %}
             </ul>
@@ -191,332 +191,14 @@ MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
         </div>
     </div>
 
-    <section id="main-content" class="main-content clearfix" role="main" tabindex="-1" style="max-width: 80em;">
+    <section id="main-content" class="main-content clearfix" role="main" tabindex="-1">
         <div class="main-column clearfix">
             {% block content %}
-            {% csrf_token %}
-
-            <div class="row text-center">
-                <div class="col-9">
-                    <div id="gfx_holder1" class="border"
-                        style="position: relative; width:100%; height: 520px;left:1%;box-shadow: 7px 7px 7px #d3d3d3">
-                    </div>
-                </div>
-
-                <div class="col-3">
-                    <div class="card mb-3" id="datalayercard" style="height: 500px; top: 10px;border-width:2">
-                        <div class="card-header">
-                            <div class="spinner-grow align-middle float-left"
-                                style="color: #9A0001; width: 1.5rem; height: 1.5rem; visibility:hidden" role="status">
-                                <span class="sr-only">Running</span>
-                            </div>
-                            <strong style="color: #9A0001">Data Layers</strong>
-                            <div class="spinner-grow align-middle float-right"
-                                style="color: #9A0001; width: 1.5rem; height: 1.5rem; visibility:hidden" role="status"
-                                id="spinner">
-                                <span class="sr-only">Running</span>
-                            </div>
-                        </div>
-
-                        <div class="card-body text-left"
-                            style="padding-left:0; padding-right:0; overflow-y: scroll; z-index:1 ">
-                            <div style="height:425px; background-color:#fff; overflow-x: hidden;">
-                                <div class="container" style="width:100%;padding-left:0; padding-right:0; z-index:2">
-
-                                    <div class="custom-control custom-checkbox parent-toggler" data-toggle="collapse"
-                                        href="#collapseCAFO" role="button" aria-expanded="false"
-                                        aria-controls="collapseCAFO" id='cafoparent' style:"z-index:1000">
-                                        <div class="row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;">
-                                            <div class="col-2">
-                                                <img src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/softbank/145/cow-face_1f42e.png'
-                                                    class="align-top" style="width:23px">
-                                            </div>
-                                            <div class="col-7">
-                                                Large Dairy Farms
-                                            </div>
-                                            <div class="col-2">
-                                                <ion-icon name="add-outline" style="height: 23px;width:23px"
-                                                    id='cafoparenticon'></ion-icon>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="container" style="padding-left:40px;;">
-                                        <div class="collapse" id="collapseCAFO">
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="cafos_all"
-                                                    onchange="checkChangeAll('cafos')">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">All
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="cafos_wi"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">Wisconsin
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="cafos_mn"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">Minnesota
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="cafos_mi"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">Michigan
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="cafos_oh"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">Ohio
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="cafos_in"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">Indiana
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="cafos_pa"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">
-                                                        Pennsylvania
-                                                    </p>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="custom-control custom-checkbox parent-toggler border-top"
-                                        data-toggle="collapse" href="#collapseBEEF" role="button" aria-expanded="false"
-                                        aria-controls="collapseBEEF" id='beefparent'>
-                                        <div class="row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;">
-                                            <div class="col-2">
-                                                <img src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/237/ox_1f402.png'
-                                                    class="align-top" style="width:23px">
-                                            </div>
-                                            <div class="col-7">
-                                                Large Beef Farms
-                                            </div>
-                                            <div class="col-2">
-                                                <ion-icon name="add-outline" style="height: 23px;width:23px"
-                                                    id='beefparenticon'></ion-icon>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="container" style="padding-left:40px;">
-                                        <div class="collapse" id="collapseBEEF">
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="beefs_all"
-                                                    onchange="checkChangeAll('beefs')">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">All
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="beefs_wi"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">Wisconsin
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="beefs_mn"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">Minnesota
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="beefs_mi"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">Michigan
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="beefs_oh"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">Ohio
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="beefs_in"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">Indiana
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="beefs_pa"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">
-                                                        Pennsylvania
-                                                    </p>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="custom-control custom-checkbox parent-toggler border-top"
-                                        data-toggle="collapse" href="#collapseWWTP" role="button" aria-expanded="false"
-                                        aria-controls="collapseWWTP" id='wwtpparent'>
-                                        <div class="row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;">
-                                            <div class="col-2">
-                                                <img src='https://image.flaticon.com/icons/svg/877/877656.svg'
-                                                    class="align-top" style="width:23px">
-                                            </div>
-                                            <div class="col-7">
-                                                Wastewater Plants
-                                            </div>
-                                            <div class="col-2">
-                                                <ion-icon name="add-outline" style="height: 23px;width:23px"
-                                                    id='wwtpparenticon'></ion-icon>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="container" style="padding-left:40px;">
-                                        <div class="collapse" id="collapseWWTP">
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="wwtps_all"
-                                                    onchange="checkChangeAll('wwtps')">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">All
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="wwtps_wi"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">Wisconsin
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="wwtps_mn">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">Minnesota
-                                                    </p>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="custom-control custom-checkbox parent-toggler border-top"
-                                        data-toggle="collapse" href="#collapseBG" role="button" aria-expanded="false"
-                                        aria-controls="collapseWWTP" id='bgparent'>
-                                        <div class="row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;">
-                                            <div class="col-2">
-                                                <img src='https://image.flaticon.com/icons/svg/542/542512.svg'
-                                                    class="align-top" style="width:23px">
-                                            </div>
-                                            <div class="col-7">
-                                                Biogas Facilities
-                                            </div>
-                                            <div class="col-2">
-                                                <ion-icon name="add-outline" style="height: 23px;width:23px"
-                                                    id='bgparenticon'></ion-icon>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="container" style="padding-left:40px;">
-                                        <div class="collapse" id="collapseBG">
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="biogas_all"
-                                                    onchange="checkChangeAll('biogas')">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">All
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="biogas_wi"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">Wisconsin
-                                                    </p>
-                                                </label>
-                                            </div>
-
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" value="" id="biogas_mn"
-                                                    onchange="checkChange(this.id)">
-                                                <label class="form-check-label">
-                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
-                                                        aria-expanded="false" aria-controls="collapseExample">Minnesota
-                                                    </p>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div id="overlaycontainer" style="display: none">
+                <div id="overlay">
                 </div>
             </div>
+            {% endblock content %}
 
             <!--googleon: all-->
             <div class="panel-pane pane-node-content">
@@ -524,18 +206,11 @@ MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
                     <div class="node node-page clearfix view-mode-full"></div>
                 </div>
             </div>
-            <div id="block-epa-og-footer" class="block block-epa-og">
-            </div>
+            <div id="block-epa-og-footer" class="block block-epa-og"></div>
             <!--googleoff: all-->
         </div>
     </section>
 
-    <div id="overlaycontainer" style="display: none">
-        <div id="overlay">
-        </div>
-    </div>
-    {% endblock content %}
-    </div>
     <div class="text-center mb-1">
         <a href="/"><img src="{% static 'figure/uw-crest.svg' %}"
                 alt="Link to University of Wisconsin-Madison home page" style="height: 40px;"></a>
@@ -543,6 +218,13 @@ MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
             U<span>niversity <span class="uw-of">of</span> </span>W<span>isconsin</span>–Madison
         </a>
     </div>
+
+    <!-- NOTE: This is apparently a requirement for the EPA template, jquery 1.7.1 -->
+    <script src="{% static 'EPA_files/jquery.js.download' %}"></script>
+    <script src="{% static 'EPA_files/js.js.download' %}"></script>
+    <!--[if lt IE 9]><script src="https://www.epa.gov/sites/all/themes/epa/js/ie.js"></script><![endif]-->
+    {% block scripts %}{% endblock %}
+
     <footer class="main-footer clearfix" role="contentinfo" style="font-size: small;">
         <div class="main-footer__inner">
             <div class="region-footer">
@@ -572,95 +254,4 @@ MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
         </div>
     </footer>
 </body>
-
-
-<script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip({
-            html: true
-        });
-    });
-</script>
-
-{% block jscode %}
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin="" />
-<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-    crossorigin=""></script>
-<script src="{% static 'jsfile/Leaflet.PolylineDecorator-master/dist/leaflet.polylineDecorator.js' %}"></script>
-<link rel="stylesheet" href="{% static 'jsfile/leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.css' %}" />
-<script src="{% static 'jsfile/leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.js' %}"></script>
-<script src="{% static 'jsfile/leaflet.shapefile-gh-pages/catiline.js' %}"></script>
-<script id="helper" helptext="{% static 'jsfile/leaflet.shapefile-gh-pages/' %}"
-    src="{% static 'jsfile/leaflet.shapefile-gh-pages/leaflet.shpfile.js' %}"></script>
-<script id="helper2" helptext="{% static 'maindata/' %}" src="{% static 'jsfile/mainpage/main.js' %}"></script>
-
-<!-- NOTE: This is apparently a requirement for the EPA template, jquery 1.7.1 -->
-<script src="{% static 'EPA_files/jquery.js.download' %}"></script>
-<script src="{% static 'EPA_files/js.js.download' %}"></script>
-<!--[if lt IE 9]><script src="https://www.epa.gov/sites/all/themes/epa/js/ie.js"></script><![endif]-->
-
-<script>
-    $(function () {
-        initstep2();
-    });
-
-    /*$(".parent-toggler").hover(function(){
-    $( this ).animate({'color': '#9A0000'}, 180);
-    }, function(){
-    $( this ).animate({'color': '#474747'}, 180);
-    });*/
-
-    $(".parent-toggler").click(function () {
-        ele = $(this)
-        if (ele.css('font-weight') == 700) {
-            ele.css({ 'font-weight': 700 });
-            setTimeout(function () { ele.css({ 'font-weight': 700 }) }, 30)
-            setTimeout(function () { ele.css({ 'font-weight': 600 }) }, 60)
-            setTimeout(function () { ele.css({ 'font-weight': 500 }) }, 90)
-            setTimeout(function () { ele.css({ 'font-weight': 400 }) }, 120)
-
-            setTimeout(function () {
-                ele.css({ 'background-color': '#fff' })
-                ele.css({ 'color': '#474747' })
-            }, 120)
-            iconid = '#' + ele.attr('id') + 'icon'
-            $(iconid).attr('name', 'add-outline')
-            ele.css({ 'width': '100%' })
-            ele.css({ 'margin-left': '0' })
-        } else {
-
-            ele.css({ 'font-weight': 400 });
-            setTimeout(function () { ele.css({ 'font-weight': 400 }) }, 30)
-            setTimeout(function () { ele.css({ 'font-weight': 500 }) }, 60)
-            setTimeout(function () { ele.css({ 'font-weight': 600 }) }, 90)
-            setTimeout(function () { ele.css({ 'font-weight': 700 }) }, 120)
-
-            setTimeout(function () {
-                ele.css({ 'background-color': '#c5050c' })
-                ele.css({ 'color': 'white' })
-            }, 120)
-            iconid = '#' + ele.attr('id') + 'icon'
-            $(iconid).attr('name', 'remove-outline')
-            ele.css({ 'width': '105%' })
-            ele.css({ 'margin-left': '-2.5%' })
-
-            //ele.css({'position':'absolute'})
-
-        }
-    });
-
-</script>
-<script type="text/javascript">
-    var intFrameHeight = window.innerHeight;
-    var mapheight = 520 / 760 * intFrameHeight;
-    var cardheight = mapheight - 20;
-    $("#gfx_holder1").css('height', mapheight);
-    $("#datalayercard").css('height', cardheight)
-</script>
-{% endblock jscode %}
-
 </html>
