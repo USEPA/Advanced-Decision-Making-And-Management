@@ -1,7 +1,7 @@
 # urls.py (accounts)
 # !/usr/bin/env python3
 # coding=utf-8
-# young.daniel@epa.gov
+# ruiz-mercado.gerardo@epa.gov
 # py-lint: disable=invalid-name
 # We disable the invalid name because urlpatterns is the Django default.
 # py-lint: disable=C0301

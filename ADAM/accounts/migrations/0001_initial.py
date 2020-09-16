@@ -5,7 +5,7 @@ This file is the initial migration file for the accounts project
 # 0001_initial.py (accounts)
 # !/usr/bin/env python
 # coding=utf-8
-# young.daniel@epa.gov
+# ruiz-mercado.gerardo@epa.gov
 # pylint: skip-file
 
 from __future__ import unicode_literals

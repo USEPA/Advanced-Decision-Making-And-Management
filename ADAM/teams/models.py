@@ -1,7 +1,7 @@
 # models.py (teams)
 # !/usr/bin/env python3
 # coding=utf-8
-# young.daniel@epa.gov
+# ruiz-mercado.gerardo@epa.gov
 
 """
 Models for teams of users.

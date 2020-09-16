@@ -1,7 +1,7 @@
 # admin.py (accounts)
 # !/usr/bin/env python3
 # coding=utf-8
-# young.daniel@epa.gov
+# ruiz-mercado.gerardo@epa.gov
 
 """
 Defines classes used to generate 'Accounts' Django Admin portion of website.
