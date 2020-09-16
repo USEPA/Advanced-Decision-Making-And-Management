@@ -11,7 +11,8 @@ Command-line utility for administrative tasks.
 # https://docs.djangoproject.com/en/2.1/ref/django-admin/
 """
 
-# Run localhost VS Code. Check 'venv' hit 'F5' select 'Django'
+# Run localhost VS Code. Check 'venv' hit 'F5' select 'Django.'
+# May need to enter path to manage.py
 
 import os
 import sys
