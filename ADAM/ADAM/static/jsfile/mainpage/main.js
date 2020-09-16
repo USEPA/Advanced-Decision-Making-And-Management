@@ -247,18 +247,18 @@ function checkBound(id) {
           var shpfile
           if (data.id.includes('lake')) {
               var shpfile = new L.Shapefile(document.getElementById("helper2").getAttribute("helptext") + data.path, {
-            			onEachFeature: function(feature, layer) {
-            				if (feature.properties) {
-            					layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-            						return k + ": " + feature.properties[k];
-            					}).join("<br />"), {
-            						maxHeight: 200
-            					});
+                        onEachFeature: function(feature, layer) {
+                            if (feature.properties) {
+                                layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                                    return k + ": " + feature.properties[k];
+                                }).join("<br />"), {
+                                    maxHeight: 200
+                                });
                       mymap.fitBounds(layer.getBounds())
-            				}
-            			},
+                            }
+                        },
                   color: '#9A0001'
-            		});
+                    });
                 shpfile.addTo(mymap);
           }
           datashown.push({id:data.id, shp:shpfile})

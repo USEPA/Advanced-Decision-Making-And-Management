@@ -455,7 +455,7 @@
         return this.getStep(this.toStepping(value));
     };
 
-    /*	Every input option is tested and parsed. This'll prevent
+    /*    Every input option is tested and parsed. This'll prevent
         endless validation in internal methods. These tests are
         structured with an item for every option available. An
         option can be marked as required by setting the 'r' flag.

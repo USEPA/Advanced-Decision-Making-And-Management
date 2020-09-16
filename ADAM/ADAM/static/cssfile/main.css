@@ -1,16 +1,22 @@
 @charset "utf-8";
 
+.full-width-child {
+  width: 80vw;
+  position: relative;
+  left: calc(-40vw + 50%);
+}
+
 #header {
-	border-style: none ;
-	width: 800px ;
-	height: auto ;
+    border-style: none ;
+    width: 800px ;
+    height: auto ;
 }
 #wrapper {
-	margin-top: 0px ;
-	margin-left: auto ;
-	margin-right: auto ;
-	background-color: #ffffff ;
-	width: 100% ;
+    margin-top: 0px ;
+    margin-left: auto ;
+    margin-right: auto ;
+    background-color: #ffffff ;
+    width: 100% ;
 }
 
 
@@ -63,7 +69,7 @@ a:hover {
   color: white;
   line-height: 2.2rem; }
   .uw-global-name-link:hover, .uw-global-name-link:visited, .uw-global-name-link:active {
-		color: white;
+        color: white;
     text-decoration: none; }
   .uw-global-name-link span {
     display: none; }
@@ -146,10 +152,10 @@ margin-right: .5rem; }
     font-size: 2rem; } }
 
 #main {
-	width: 94%;
-	float: left;
-	margin-left: 3%;
-	padding-right: 15px;
+    width: 94%;
+    float: left;
+    margin-left: 3%;
+    padding-right: 15px;
 }
 
 .text_box {
@@ -164,9 +170,9 @@ margin-right: .5rem; }
 .pic_box{
   float: center;
   display: inline-block;
-	margin-left: 20%;
-	margin-right: 20%;
-	background-color: #ffffff;
+    margin-left: 20%;
+    margin-right: 20%;
+    background-color: #ffffff;
 }
 .pic_cap{
   text-align: center;
@@ -175,7 +181,7 @@ margin-right: .5rem; }
 .right_pic{
   width:50%;
   float: center;
-	margin-left:25%;
+    margin-left:25%;
 }
 .div_allinline {
     text-align:center;
@@ -222,7 +228,7 @@ margin-right: .5rem; }
     margin: auto;
     letter-spacing: -0.07em;
     text-shadow: white 1px 1px 1px;
-  	font-family: "Arimo", arial, verdana, sans-serif;
+      font-family: "Arimo", arial, verdana, sans-serif;
 }
 .inputbox{
   width: 200px;
@@ -231,46 +237,46 @@ margin-right: .5rem; }
 }
 
 .logopic{
-	height: 60px ;
-	margin-left: 15px ;
+    height: 60px ;
+    margin-left: 15px ;
 }
 .iconpiclarge{
-	width:20px;
-	height: 20px;
+    width:20px;
+    height: 20px;
 }
 .iconpiclarger{
-	width:30px;
-	height: 30px;
+    width:30px;
+    height: 30px;
 }
 .iconpicsmall{
-	width:13px;
-	height: 13px;
+    width:13px;
+    height: 13px;
 }
 .div-square {
     border:3px double #e1e1e1;
     -webkit-border-radius:8px;
     -moz-border-radius:8px;
     border-radius:8px;
-		background-color: #e2e0e0;
-		box-shadow: 5px 5px 5px #f2efef;
-		width: 100%;
-		position: relative;
-		left: 50%;
-		transform: translateX(-50%);
+        background-color: #e2e0e0;
+        box-shadow: 5px 5px 5px #f2efef;
+        width: 100%;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
 }
 
 .module {
-	width: 80%;
+    width: 80%;
 }
 
 .div-square a{
-	opacity: 0.7;
-	text-decoration:none;
-	color: #474747;
+    opacity: 0.7;
+    text-decoration:none;
+    color: #474747;
 }
 
 .div-square a:hover {
-		opacity:1.0;
+        opacity:1.0;
     text-decoration:none;
 }
 
@@ -279,19 +285,19 @@ ion-icon {
 }
 
 .canvas_hold{
-		position: relative;
-		display: block;
-		height: 600px;
-		width: 70%;
-		margin-left: 15%;
-		background: #ffffff;
-		overflow: hidden;
+        position: relative;
+        display: block;
+        height: 600px;
+        width: 70%;
+        margin-left: 15%;
+        background: #ffffff;
+        overflow: hidden;
 }
 
 
 #gfx_holder {
-	height: 3000px;
-	width: 3000px;
+    height: 3000px;
+    width: 3000px;
 }
 
 .selectdiv {
@@ -357,7 +363,7 @@ display: none;
     width: 100%;
     height: 100%;
     background: rgba(255,255,255,0.5);
-		z-index:2147483647;
+        z-index:2147483647;
 }
 /*Change the default bootstrap input glow*/
 .form-control:focus {
@@ -395,7 +401,7 @@ display: none;
   background-color:#ffffff;
 }
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before{
-	border-color: #af8080;
+    border-color: #af8080;
   background-color:#ffffff;
 }
 
@@ -404,8 +410,8 @@ display: none;
 }
 
 .custom-checkbox .custom-control-input:focus~.custom-control-label::before{
-	border-color: #af8080;
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(175, 128, 128, 0.8);
+    border-color: #af8080;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(175, 128, 128, 0.8);
     }
 
 
@@ -416,17 +422,17 @@ display: none;
 }
 
 .btn:focus, .btn:active {
-	border-color: #af8080;
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(175, 128, 128, 0.8);
+    border-color: #af8080;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(175, 128, 128, 0.8);
 }
 
 .btn-primary:focus, .btn-primary:active {
-	border-color: #af8080;
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(175, 128, 128, 0.8);
+    border-color: #af8080;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(175, 128, 128, 0.8);
 }
 
 strong {
-	color: #494949;
+    color: #494949;
 }
 
 .custom-checkbox .custom-control-input:checked{
@@ -434,19 +440,19 @@ strong {
 }
 
 .egdiv {
-	width: 90%;
-	left: 5%;
+    width: 90%;
+    left: 5%;
 }
 
 .alarmbtn {
-	font-size: 1em;
+    font-size: 1em;
   font-weight: bold;
   text-transform: uppercase;
-	width: 50%;
+    width: 50%;
 }
 
 .alarmbtn:hover {
-	color: #700000;
+    color: #700000;
 }
 
 .input-group>.input-group-prepend {
@@ -457,7 +463,7 @@ strong {
 }
 
 .parent-toggler{
-	cursor: pointer;
+    cursor: pointer;
 }
 
 #uw-top-menus.uw-display-none {
