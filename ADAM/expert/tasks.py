@@ -11,7 +11,7 @@ from background_task import background
 from django.core.mail import send_mail
 from django.utils import timezone
 from .models import OptTask
-from django.contrib.auth.models import User
+from accounts.models import User
 import datetime
 import subprocess
 

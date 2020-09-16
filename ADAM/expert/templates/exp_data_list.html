@@ -1,4 +1,4 @@
-{% extends "main.html" %}
+{% extends "main/base.html" %}
 {% load static %}
 {% load tz %}
 {% block extrahead %}
@@ -35,7 +35,7 @@
     <div class="card-body">
 
       <p class="card-text">
-       Here you can manage your own supply, demand, technology site, and technology candidate data files. 
+       Here you can manage your own supply, demand, technology site, and technology candidate data files.
       </p>
 
       {% if user.datadocument_set.all %}

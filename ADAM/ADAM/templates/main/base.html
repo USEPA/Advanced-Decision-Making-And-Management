@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html class="not-oldie js" lang="en" dir="ltr">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="true">
+    <title>{% if title %}{{title}}{% else %}{{ APP_NAME }}{% endif %} - Online Supply Chain Optimization Tool</title>
+
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'EPA_files/logo50.png' %}" type="image/vnd.microsoft.icon">
+    <meta name="MobileOptimized" content="width">
+    <meta http-equiv="cleartype" content="on">
+    <meta http-equiv="ImageToolbar" content="false">
+    <meta name="viewport" content="width=device-width">
+    <meta name="version" content="20161218">
+    <!--googleon: all-->
+    <meta name="DC.description" content="">
+    <meta name="DC.title" content="">
+    <!--googleoff: snippet-->
+    <meta name="keywords" content="">
+    <link rel="shortlink" href="https://www.epa.gov/sites/all/libraries/template2/standalone.html">
+    <link rel="canonical" href="https://www.epa.gov/sites/all/libraries/template2/standalone.html">
+    <meta name="DC.creator" content="">
+    <meta name="DC.language" content="en">
+    <meta name="DC.Subject.epachannel" content="">
+    <meta name="DC.type" content="">
+    <meta name="DC.date.created" content="">
+    <meta name="DC.date.modified" content="">
+    <!--googleoff: all-->
+
+    <!-- ORIGINAL ADAM CSS and JS from before EPA template: -->
+    <link href="{% static 'jsfile/bootstrap-4.3.1-dist/css/bootstrap.css' %}" rel="stylesheet" />
+    <link href="{% static 'jsfile/nouislider.css' %}" rel="stylesheet" />
+    <link href="{% static 'cssfile/jquery/jquery-ui.css' %}" rel="stylesheet" />
+    <link href="{% static 'jsfile/alertifyjs/css/alertify.css' %}" rel="stylesheet" />
+    <link href="{% static 'jsfile/alertifyjs/css/themes/semantic.css' %}" rel="stylesheet" />
+
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    <script src="{% static 'jsfile/jquery/jquery-1.12.4.js' %}"></script>
+    <script src="{% static 'jsfile/jquery/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'jsfile/jquery/jquery-ui.js' %}"></script>
+    <script src="{% static 'jsfile/alertifyjs/alertify.min.js' %}"></script>
+    <script src="{% static 'jsfile/bootstrap-4.3.1-dist/js/popper.min.js' %}"></script>
+    <script src="{% static 'jsfile/bootstrap-4.3.1-dist/js/bootstrap.js' %}"></script>
+    <script>(function (H) { H.className = H.className.replace(/\bno-js\b/, '') })(document.documentElement)</script>
+    <script src="{% static 'jsfile/_uw-style.min.js' %}"></script>
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <link rel="stylesheet" href="{% static 'cssfile/fonts/uw160/fonts.0.0.1.css' %}">
+    <link href="{% static 'cssfile/main.css' %}" rel="stylesheet" type="text/css" />
+    {% block extrahead %}
+    {% endblock extrahead %}
+    <!-- End ORIGINAL ADAM CSS and JS -->
+
+    <!-- main CSS -->
+    <link rel="stylesheet" type="text/css" media="all"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{% static 'EPA_files/s.css' %}">
+
+    <!--[if lt IE 9]><link type="text/css" rel="stylesheet" href="https://www.epa.gov/sites/all/themes/epa/css/ie.css" media="all" /><![endif]-->
+    <link rel="alternate" type="application/atom+xml" title="EPA.gov All Press Releases"
+        href="https://www.epa.gov/newsreleases/search/rss">
+    <link rel="alternate" type="application/atom+xml" title="EPA.gov Headquarters Press Releases"
+        href="https://www.epa.gov/newsreleases/search/rss/field_press_office/headquarters">
+    <link rel="alternate" type="application/atom+xml" title="Greenversations, EPA&#39;s Blog"
+        href="https://blog.epa.gov/blog/feed/">
+    <!--[if lt IE 9]><script src="https://www.epa.gov/sites/all/themes/epa/js/html5.js"></script><![endif]-->
+</head>
+
+<body class="node-type-(web-area|page|document|webform) (microsite|resource-directory) hasGoogleVoiceExt">
+    <!-- Google Tag Manager -->
+    <!--<noscript>&lt;iframe src="//www.googletagmanager.com/ns.html?id=GTM-L8ZB" height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;</noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-L8ZB');</script>-->
+    <!-- End Google Tag Manager -->
+    <div class="skip-links">
+        <a href="https://www.epa.gov/sites/all/libraries/template2/standalone.html#main-content"
+            class="skip-link element-invisible element-focusable">Jump to main content</a>
+    </div>
+
+    <header class="masthead clearfix" role="banner">
+        <img class="site-logo" src="{% static 'EPA_files/logo.png' %}" alt="">
+        <hgroup class="site-name-and-slogan">
+            <h1 class="site-name"><a href="https://www.epa.gov/" title="Go US EPA Home Page" rel="home"><span>
+                        US EPA
+                    </span></a></h1>
+            <div class="site-slogan">United States Environmental Protection Agency</div>
+        </hgroup>
+        <div class="float-right">
+            <a href="https://www.usda.gov/"><img src="{% static 'figure/usda-symbol.svg' %}" style="height:40px" /></a>
+        </div>
+    </header>
+
+    <!-- Nav bar from EPA Template -->
+    <nav class="nav main-nav clearfix" role="navigation">
+        <div class="nav__inner">
+            <h2 class="element-invisible">Main menu</h2>
+
+            <ul class="menu" role="menu" id="navbar_left">
+                <li class="menu-item" role="presentation">
+                    <a href="/" class="menu-link" role="menuitem">Home</a>
+                </li>
+                <li class="menu-item" role="presentation">
+                    <a href="/about" class="menu-link" role="menuitem">About</a>
+                </li>
+                <li class="menu-item" role="presentation">
+                    <a href="/tryit" class="menu-link" role="menuitem">Tutorial</a>
+                </li>
+                <li class="menu-item" role="presentation">
+                    <a href="/contact" class="menu-link" role="menuitem">Contact</a>
+                </li>
+
+                <!-- navbar when user is logged in -->
+                {% if user.is_authenticated %}
+                <li class="menu-item" role="presentation">
+                    <a href="/expert/usermain" class="menu-link" role="menuitem">Dashboard</a>
+                </li>
+
+                <!-- Else user is not logged in -->
+                {% else %}
+
+                {% url 'register' as register_url %}
+                <li {% if self.path == register_url %} class="expanded active-trail menu-item" {% else %} class="menu-item" {% endif %}
+                    role="presentation">
+                    <a href="{{register_url}}" {% if self.path == register_url %} class="active-trail menu-link active" {% else %}
+                        class="menu-link" {% endif %} role="menuitem">Register</a>
+                </li>
+
+                {% url 'login' as login_url %}
+                <li {% if self.path == login_url %} class="expanded active-trail menu-item" {% else %} class="menu-item" {% endif %}
+                    role="presentation">
+                    <a href="{{login_url}}" {% if self.path == login_url %} class="active-trail menu-link active" {% else %}
+                        class="menu-link" {% endif %} role="menuitem">Log-In</a>
+                </li>
+                {% endif %}
+            </ul>
+
+            {% if user.is_authenticated %}
+            <ul class="menu float-right" role="menu" id="navbar_right">
+                <li class="dropdown menu-item" role="presentation">
+                    <a class="menu-link dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)"
+                        role="menuitem">
+                        Help/Suggestions
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'support:go_to_support' %}">Suggestions</a></li>
+                        <li><a href="{% url 'support:events' %}">Upcoming Events</a></li>
+                        <li><a href="{% url 'support:references' %}">Project References</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown menu-item" role="presentation">
+                    <a data-toggle="dropdown" href="javascript:void(0)" class="menu-link dropdown-toggle"
+                        role="menuitem">
+                        Welcome
+                        {% if user.first_name %}
+                        {{user.first_name}}
+                        {% else %}
+                        {{user.username}}
+                        {% endif %}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="menu-item">
+                            <a class="menu-link" href="{% url 'profile' %}">My profile</a>
+                        </li>
+                        {% if request.user.is_staff %}
+                        <li class="menu-item">
+                            <a class="menu-link" href="{% url 'admin:index' %}">Admin Portal</a>
+                        </li>
+                        {% endif %}
+                        <li role="separator" class="divider"></li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div id="mobile-nav" class="mobile-nav">
+        <div class="mobile-bar clearfix">
+            <a class="menu-button" href="#" onclick="toggleMenu()">Menu</a>
+        </div>
+        <div id="mobile-links" class="mobile-links element-hidden" style="height: 400px; margin-top: 0px;">
+        </div>
+    </div>
+
+    <section id="main-content" class="main-content clearfix" role="main" tabindex="-1" style="max-width: 80em;">
+        <div class="main-column clearfix">
+            {% block content %}
+            {% csrf_token %}
+
+            <div class="row text-center">
+                <div class="col-9">
+                    <div id="gfx_holder1" class="border"
+                        style="position: relative; width:100%; height: 520px;left:1%;box-shadow: 7px 7px 7px #d3d3d3">
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="card mb-3" id="datalayercard" style="height: 500px; top: 10px;border-width:2">
+                        <div class="card-header">
+                            <div class="spinner-grow align-middle float-left"
+                                style="color: #9A0001; width: 1.5rem; height: 1.5rem; visibility:hidden" role="status">
+                                <span class="sr-only">Running</span>
+                            </div>
+                            <strong style="color: #9A0001">Data Layers</strong>
+                            <div class="spinner-grow align-middle float-right"
+                                style="color: #9A0001; width: 1.5rem; height: 1.5rem; visibility:hidden" role="status"
+                                id="spinner">
+                                <span class="sr-only">Running</span>
+                            </div>
+                        </div>
+
+                        <div class="card-body text-left"
+                            style="padding-left:0; padding-right:0; overflow-y: scroll; z-index:1 ">
+                            <div style="height:425px; background-color:#fff; overflow-x: hidden;">
+                                <div class="container" style="width:100%;padding-left:0; padding-right:0; z-index:2">
+
+                                    <div class="custom-control custom-checkbox parent-toggler" data-toggle="collapse"
+                                        href="#collapseCAFO" role="button" aria-expanded="false"
+                                        aria-controls="collapseCAFO" id='cafoparent' style:"z-index:1000">
+                                        <div class="row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;">
+                                            <div class="col-2">
+                                                <img src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/softbank/145/cow-face_1f42e.png'
+                                                    class="align-top" style="width:23px">
+                                            </div>
+                                            <div class="col-7">
+                                                Large Dairy Farms
+                                            </div>
+                                            <div class="col-2">
+                                                <ion-icon name="add-outline" style="height: 23px;width:23px"
+                                                    id='cafoparenticon'></ion-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="container" style="padding-left:40px;;">
+                                        <div class="collapse" id="collapseCAFO">
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="cafos_all"
+                                                    onchange="checkChangeAll('cafos')">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">All
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="cafos_wi"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">Wisconsin
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="cafos_mn"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">Minnesota
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="cafos_mi"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">Michigan
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="cafos_oh"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">Ohio
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="cafos_in"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">Indiana
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="cafos_pa"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">
+                                                        Pennsylvania
+                                                    </p>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox parent-toggler border-top"
+                                        data-toggle="collapse" href="#collapseBEEF" role="button" aria-expanded="false"
+                                        aria-controls="collapseBEEF" id='beefparent'>
+                                        <div class="row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;">
+                                            <div class="col-2">
+                                                <img src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/237/ox_1f402.png'
+                                                    class="align-top" style="width:23px">
+                                            </div>
+                                            <div class="col-7">
+                                                Large Beef Farms
+                                            </div>
+                                            <div class="col-2">
+                                                <ion-icon name="add-outline" style="height: 23px;width:23px"
+                                                    id='beefparenticon'></ion-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="container" style="padding-left:40px;">
+                                        <div class="collapse" id="collapseBEEF">
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="beefs_all"
+                                                    onchange="checkChangeAll('beefs')">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">All
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="beefs_wi"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">Wisconsin
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="beefs_mn"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">Minnesota
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="beefs_mi"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">Michigan
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="beefs_oh"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">Ohio
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="beefs_in"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">Indiana
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="beefs_pa"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">
+                                                        Pennsylvania
+                                                    </p>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox parent-toggler border-top"
+                                        data-toggle="collapse" href="#collapseWWTP" role="button" aria-expanded="false"
+                                        aria-controls="collapseWWTP" id='wwtpparent'>
+                                        <div class="row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;">
+                                            <div class="col-2">
+                                                <img src='https://image.flaticon.com/icons/svg/877/877656.svg'
+                                                    class="align-top" style="width:23px">
+                                            </div>
+                                            <div class="col-7">
+                                                Wastewater Plants
+                                            </div>
+                                            <div class="col-2">
+                                                <ion-icon name="add-outline" style="height: 23px;width:23px"
+                                                    id='wwtpparenticon'></ion-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="container" style="padding-left:40px;">
+                                        <div class="collapse" id="collapseWWTP">
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="wwtps_all"
+                                                    onchange="checkChangeAll('wwtps')">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">All
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="wwtps_wi"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">Wisconsin
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="wwtps_mn">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">Minnesota
+                                                    </p>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox parent-toggler border-top"
+                                        data-toggle="collapse" href="#collapseBG" role="button" aria-expanded="false"
+                                        aria-controls="collapseWWTP" id='bgparent'>
+                                        <div class="row" style="margin-bottom:0px;padding-top:8px;padding-bottom:8px;">
+                                            <div class="col-2">
+                                                <img src='https://image.flaticon.com/icons/svg/542/542512.svg'
+                                                    class="align-top" style="width:23px">
+                                            </div>
+                                            <div class="col-7">
+                                                Biogas Facilities
+                                            </div>
+                                            <div class="col-2">
+                                                <ion-icon name="add-outline" style="height: 23px;width:23px"
+                                                    id='bgparenticon'></ion-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="container" style="padding-left:40px;">
+                                        <div class="collapse" id="collapseBG">
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="biogas_all"
+                                                    onchange="checkChangeAll('biogas')">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">All
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="biogas_wi"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">Wisconsin
+                                                    </p>
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" value="" id="biogas_mn"
+                                                    onchange="checkChange(this.id)">
+                                                <label class="form-check-label">
+                                                    <p data-toggle="collapse" href="#collapseExample" role="button"
+                                                        aria-expanded="false" aria-controls="collapseExample">Minnesota
+                                                    </p>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--googleon: all-->
+            <div class="panel-pane pane-node-content">
+                <div class="pane-content">
+                    <div class="node node-page clearfix view-mode-full"></div>
+                </div>
+            </div>
+            <div id="block-epa-og-footer" class="block block-epa-og">
+            </div>
+            <!--googleoff: all-->
+        </div>
+    </section>
+
+    <div id="overlaycontainer" style="display: none">
+        <div id="overlay">
+        </div>
+    </div>
+    {% endblock content %}
+    </div>
+    <div class="text-center mb-1">
+        <a href="/"><img src="{% static 'figure/uw-crest.svg' %}"
+                alt="Link to University of Wisconsin-Madison home page" style="height: 40px;"></a>
+        <a class="" href="http://www.wisc.edu" aria-label="University home page">
+            U<span>niversity <span class="uw-of">of</span> </span>W<span>isconsin</span>–Madison
+        </a>
+    </div>
+    <footer class="main-footer clearfix" role="contentinfo" style="font-size: small;">
+        <div class="main-footer__inner">
+            <div class="region-footer">
+                <div class="block block-pane block-pane-epa-global-footer">
+                    <h4>Software Disclaimer</h4>
+                    The United States Environmental Protection Agency (EPA) GitHub project code is provided on an "as
+                    is" basis
+                    and the user
+                    assumes responsibility for its use. EPA has relinquished control of the information and no longer
+                    has
+                    responsibility to
+                    protect the integrity , confidentiality, or availability of the information. Any reference to
+                    specific
+                    commercial
+                    products, processes, or services by service mark, trademark, manufacturer, or otherwise, does not
+                    constitute
+                    or imply
+                    their endorsement, recommendation or favoring by EPA. The EPA seal and logo shall not be used in any
+                    manner to
+                    imply
+                    endorsement of any commercial product or activity by EPA or the United States Government.
+                    <div class="my-3">
+                        ADAM Tool v. {{APP_VERSION}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip({
+            html: true
+        });
+    });
+</script>
+
+{% block jscode %}
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+<script src="{% static 'jsfile/Leaflet.PolylineDecorator-master/dist/leaflet.polylineDecorator.js' %}"></script>
+<link rel="stylesheet" href="{% static 'jsfile/leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.css' %}" />
+<script src="{% static 'jsfile/leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.js' %}"></script>
+<script src="{% static 'jsfile/leaflet.shapefile-gh-pages/catiline.js' %}"></script>
+<script id="helper" helptext="{% static 'jsfile/leaflet.shapefile-gh-pages/' %}"
+    src="{% static 'jsfile/leaflet.shapefile-gh-pages/leaflet.shpfile.js' %}"></script>
+<script id="helper2" helptext="{% static 'maindata/' %}" src="{% static 'jsfile/mainpage/main.js' %}"></script>
+
+<!-- NOTE: This is apparently a requirement for the EPA template, jquery 1.7.1 -->
+<script src="{% static 'EPA_files/jquery.js.download' %}"></script>
+<script src="{% static 'EPA_files/js.js.download' %}"></script>
+<!--[if lt IE 9]><script src="https://www.epa.gov/sites/all/themes/epa/js/ie.js"></script><![endif]-->
+
+<script>
+    $(function () {
+        initstep2();
+    });
+
+    /*$(".parent-toggler").hover(function(){
+    $( this ).animate({'color': '#9A0000'}, 180);
+    }, function(){
+    $( this ).animate({'color': '#474747'}, 180);
+    });*/
+
+    $(".parent-toggler").click(function () {
+        ele = $(this)
+        if (ele.css('font-weight') == 700) {
+            ele.css({ 'font-weight': 700 });
+            setTimeout(function () { ele.css({ 'font-weight': 700 }) }, 30)
+            setTimeout(function () { ele.css({ 'font-weight': 600 }) }, 60)
+            setTimeout(function () { ele.css({ 'font-weight': 500 }) }, 90)
+            setTimeout(function () { ele.css({ 'font-weight': 400 }) }, 120)
+
+            setTimeout(function () {
+                ele.css({ 'background-color': '#fff' })
+                ele.css({ 'color': '#474747' })
+            }, 120)
+            iconid = '#' + ele.attr('id') + 'icon'
+            $(iconid).attr('name', 'add-outline')
+            ele.css({ 'width': '100%' })
+            ele.css({ 'margin-left': '0' })
+        } else {
+
+            ele.css({ 'font-weight': 400 });
+            setTimeout(function () { ele.css({ 'font-weight': 400 }) }, 30)
+            setTimeout(function () { ele.css({ 'font-weight': 500 }) }, 60)
+            setTimeout(function () { ele.css({ 'font-weight': 600 }) }, 90)
+            setTimeout(function () { ele.css({ 'font-weight': 700 }) }, 120)
+
+            setTimeout(function () {
+                ele.css({ 'background-color': '#c5050c' })
+                ele.css({ 'color': 'white' })
+            }, 120)
+            iconid = '#' + ele.attr('id') + 'icon'
+            $(iconid).attr('name', 'remove-outline')
+            ele.css({ 'width': '105%' })
+            ele.css({ 'margin-left': '-2.5%' })
+
+            //ele.css({'position':'absolute'})
+
+        }
+    });
+
+</script>
+<script type="text/javascript">
+    var intFrameHeight = window.innerHeight;
+    var mapheight = 520 / 760 * intFrameHeight;
+    var cardheight = mapheight - 20;
+    $("#gfx_holder1").css('height', mapheight);
+    $("#datalayercard").css('height', cardheight)
+</script>
+{% endblock jscode %}
+
+</html>
