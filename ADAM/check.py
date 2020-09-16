@@ -3,7 +3,7 @@
 # coding=utf-8
 # ruiz-mercado.gerardo@epa.gov
 
-"""Add docstring."""
+"""Add docstring."""  # TODO: add docstring.
 
 
 from background_task import background
@@ -24,7 +24,7 @@ import zipfile
 
 # get the id of the task given the output file names
 def getid(filename):
-    """Add docstring."""
+    """Add docstring."""  # TODO: add docstring.
     ff_id = ''
     s = -5
     while filename[s] != '_':

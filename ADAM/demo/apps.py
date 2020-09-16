@@ -3,12 +3,12 @@
 # coding=utf-8
 # ruiz-mercado.gerardo@epa.gov
 
-"""Add docstring."""
+"""Add docstring."""  # TODO: add docstring.
 
 from django.apps import AppConfig
 
 
 class DemoConfig(AppConfig):
-    """Add docstring."""
+    """Add docstring."""  # TODO: add docstring.
 
     name = 'demo'

@@ -4,32 +4,32 @@
 # ruiz-mercado.gerardo@epa.gov
 
 
-"""Add docstring."""
+"""Add docstring."""  # TODO: add docstring.
 
 from django.contrib import admin
 from .models import *
 
 
 class ProductAdmin(admin.ModelAdmin):
-    """Add docstring."""
+    """Add docstring."""  # TODO: add docstring.
 
     readonly_fields = ('id',)
 
 
 class TechnologyAdmin(admin.ModelAdmin):
-    """Add docstring."""
+    """Add docstring."""  # TODO: add docstring.
 
     readonly_fields = ('id',)
 
 
 class CasestudyAdmin(admin.ModelAdmin):
-    """Add docstring."""
+    """Add docstring."""  # TODO: add docstring.
 
     readonly_fields = ('id',)
 
 
 class CaseGroupAdmin(admin.ModelAdmin):
-    """Add docstring."""
+    """Add docstring."""  # TODO: add docstring.
 
     readonly_fields = ('id',)
 

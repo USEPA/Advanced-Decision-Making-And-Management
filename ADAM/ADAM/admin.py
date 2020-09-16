@@ -3,4 +3,6 @@
 # coding=utf-8
 # ruiz-mercado.gerardo@epa.gov
 
-"""To be added."""
+"""Add docstring."""  # TODO: add docstring.
+
+# Add DJANGO ADMIN functions to code.
