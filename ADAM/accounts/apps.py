@@ -1,7 +1,7 @@
 # apps.py (accounts)
 # !/usr/bin/env python3
 # coding=utf-8
-# young.daniel@epa.gov
+# ruiz-mercado.gerardo@epa.gov
 
 """
 Application configuration objects store metadata for an application.

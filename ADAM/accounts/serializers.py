@@ -1,7 +1,7 @@
 # serializers.py (accounts)
 # !/usr/bin/env python3
 # coding=utf-8
-# young.daniel@epa.gov
+# ruiz-mercado.gerardo@epa.gov
 # py-lint: disable=R0903
 
 """
