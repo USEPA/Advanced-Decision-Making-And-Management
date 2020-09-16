@@ -13,26 +13,19 @@ from . import views
 
 app_name = 'expert'
 urlpatterns = [
-    path('registered/', views.exp_registered,
-         name='exp_registered'),
-    path('register/', views.exp_register,
-         name='exp_register'),
-    path('login/', views.exp_login,
-         name='exp_login'),
-    path('usermain/', views.exp_usermain,
-         name='exp_usermain'),
-    path('logout/', views.exp_logout,
-         name='exp_logout'),
-    path('usermain/advpanel', views.exp_advpanel,
-         name='exp_advpanel'),
+    path('usermain/', views.exp_usermain, name='exp_usermain'),
+    path('dashboard/', views.exp_usermain, name='dashboard'),
+    path('usermain/advpanel', views.exp_advpanel, name='exp_advpanel'),
+
     path('usermain/task/', views.exp_task_list,
          name='exp_task_list'),
     path('usermain/task/<int:task_id>', views.exp_task_detail_new,
          name='exp_task_detail_new'),
     path('usermain/task/<int:task_id>/results', views.exp_task_results,
          name='exp_task_results'),
-    path('usermain/profile', views.exp_user_profile,
-         name='exp_user_profile'),
+
+    path('usermain/profile', views.exp_user_profile, name='exp_user_profile'),
+
     path('usermain/visualization', views.exp_visualization_home,
          name='exp_visualization_home'),
     path('usermain/visualization/geo', views.exp_visualization_geo,
@@ -45,12 +38,13 @@ urlpatterns = [
     path('usermain/visualization/data/<int:task_id>',
          views.exp_visualization_modeldata,
          name='exp_visualization_modeldata'),
-    path('usermain/techbase', views.exp_techbase,
-         name='exp_techbase'),
-    path('usermain/prodbase', views.exp_prodbase,
-         name='exp_prodbase'),
+
+    path('usermain/techbase', views.exp_techbase, name='exp_techbase'),
+    path('usermain/prodbase', views.exp_prodbase, name='exp_prodbase'),
+
     path('usermain/techbase/<int:tech_id>', views.exp_techbase_graph,
          name='exp_techbase_graph'),
+
     path('usermain/task/<int:task_id>/1', views.exp_task_step1,
          name='exp_task_step1'),
     path('usermain/task/<int:task_id>/2', views.exp_task_step2new,
@@ -63,8 +57,10 @@ urlpatterns = [
          name='exp_task_task5new'),
     path('usermain/task/<int:task_id>/6', views.exp_task_step6new,
          name='exp_task_task6new'),
+
     path('demo/', views.exp_demomain,
          name='exp_demomain'),
+
     path('managecasestudy/', views.exp_managecasestudy,
          name='managecasestudy'),
     path('admincasestudy/', views.exp_addcasestudy,
@@ -73,6 +69,7 @@ urlpatterns = [
          name="exp_addcasestudy2"),
     path('casestudydetail/<int:case_id>', views.exp_casestudydetail,
          name="exp_casestudydetail"),
+
     path('ajax/deletetask', views.taskmanagedelete,
          name='taskmanagedelete'),
     path('ajax/userprofileedit', views.userprofileedit,

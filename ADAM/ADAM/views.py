@@ -23,6 +23,10 @@ import os
 import sys
 
 
+def dashboard(request):
+    """Forward request so /dashboard goes to /expert/dashboard. """
+    return HttpResponseRedirect('/expert/dashboard')
+
 # to generate a random string as a pseudo id for tasks
 def id_generator(size=20, chars=string.ascii_uppercase + string.digits):
     """Add docstring."""  # TODO: add docstring.
@@ -31,7 +35,7 @@ def id_generator(size=20, chars=string.ascii_uppercase + string.digits):
 
 def main(request):
     """Add docstring."""  # TODO: add docstring.
-    return render(request, 'main.html')
+    return render(request, 'main/base.html')
 
 
 def getdata(request):
@@ -67,9 +71,9 @@ def support(request):
     return render(request, 'support.html')
 
 
-def whatisthis(request):
+def about(request):
     """Add docstring."""  # TODO: add docstring.
-    return render(request, 'whatisthis.html')
+    return render(request, 'main/about.html')
 
 
 def tryit(request):
@@ -334,5 +338,5 @@ def contact(request):
         form = ContactForm()
         if 'submitted' in request.GET:
             submitted = True
-        return render(request, 'contact.html',
+        return render(request, 'main/contact.html',
                       {'form': form, 'submitted': submitted})

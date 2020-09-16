@@ -9,7 +9,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
-from django.contrib.auth.models import User
+from accounts.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse, FileResponse
@@ -34,104 +34,6 @@ import json
 import operator
 
 from .util import *
-
-
-# registered page - redirect to usermain
-def exp_registered(request):
-    """Main page - login/out, Register."""
-    return render(request, 'exp_registered.html')
-
-
-# register page
-def exp_register(request):
-    """Add docstring."""  # TODO: add docstring.
-    fail = 0
-    if (request.POST.get('user_register')):
-        uf = UserForm(request.POST)
-        if uf.is_valid():
-            new_user = User.objects.create_user(
-                username=uf.cleaned_data['username'],
-                password=uf.cleaned_data['password'])
-            new_user.first_name = uf.cleaned_data['first_name']
-            new_user.last_name = uf.cleaned_data['last_name']
-            new_user.email = uf.cleaned_data['email']
-            new_user.save()
-            new_info = UserInfo(user=new_user)
-            new_info.organization = uf.cleaned_data['organization']
-            new_info.save()
-            new_base = UserDatabase(user=new_user)
-            new_base.save()
-            for p in Product.objects.all():
-                if p.public:
-                    newitem = UserHasProd(userdatabase=new_base, product=p)
-                    newitem.save()
-            for t in Technology.objects.all():
-                if t.public:
-                    newitem = UserHasTech(userdatabase=new_base, technology=t)
-                    newitem.save()
-            new_base.save()
-            return redirect(reverse('expert:exp_registered'))
-        else:
-            fail = 1
-            context = {'userform': uf, 'fail': fail}
-            return render(request, 'exp_register.html', context)
-    else:
-        uf = UserForm()
-        context = {'userform': uf, 'fail': fail}
-        return render(request, 'exp_register.html', context)
-
-
-# login page
-def exp_login(request):
-    """Add docstring."""  # TODO: add docstring.
-    formfail = 0
-    authfail = 0
-    if (request.POST.get('user_login')):
-        uf = LoginForm(request.POST)
-        if uf.is_valid():
-            username = uf.cleaned_data['username']
-            password = uf.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            if user is None:
-                authfail = 1
-                context = {
-                    'loginform': uf, 'formfail': formfail,
-                    'authfail': authfail}
-                return render(request, 'exp_login.html', context)
-            else:
-                login(request, user)
-                base = user.userdatabase
-                for p in Product.objects.all():
-                    if p.public and p not in base.prods.all():
-                        newitem = UserHasProd(userdatabase=base, product=p)
-                        newitem.save()
-                for t in Technology.objects.all():
-                    if t.public and t not in base.techs.all():
-                        newitem = UserHasTech(userdatabase=base, technology=t)
-                        newitem.save()
-                base.save()
-                return redirect('expert:exp_usermain')
-        else:
-            formfail = 1
-            context = {
-                'loginform': uf, 'formfail': formfail, 'authfail': authfail}
-            return render(request, 'exp_login.html', context)
-    else:
-        uf = LoginForm()
-        context = {
-            'loginform': uf, 'formfail': formfail, 'authfail': authfail}
-        return render(request, 'exp_login.html', context)
-
-
-# logout page, will redirect to expertmain
-def exp_logout(request):
-    """Add docstring."""  # TODO: add docstring.
-    user = request.user
-    if user.is_authenticated:
-        logout(request)
-        return render(request, 'exp_logout.html')
-    else:
-        redirect('expert:expertmain')
 
 
 # usermain page

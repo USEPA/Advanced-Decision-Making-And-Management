@@ -40,9 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'background_task',
     'django_extensions',
+    # Add your apps here to enable them.
     'ADAM',
+    'accounts',
+    'constants',
+    'support',
+    'teams',
 ]
 
 MIDDLEWARE = [
@@ -126,6 +132,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'ADAM', 'static')
 
 DOWNLOADS_DIR = os.path.join(BASE_DIR, '..', 'docs')
+MANUAL_NAME = 'ADAM_User_Guide_V3_QA.docx'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'ADAM', 'media')
 MEDIA_URL = '/media/'

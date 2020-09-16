@@ -30,16 +30,21 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main, name='main'),
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('main/ajax/getdata', views.getdata, name='getdata'),
     path('main/ajax/getbounds', views.getbounds, name='getbounds'),
     path('support', views.support, name='support'),
     path('contact', views.contact, name='contact'),
-    path('whatisthis', views.whatisthis, name='whatisthis'),
+    path('about', views.about, name='about'),
     path('tryit', views.tryit, name='tryit'),
     path('tryit/eg1', views.tryit_eg1, name='tryit_eg1'),
     path('tryit/eg2', views.tryit_eg2, name='tryit_eg2'),
     path('ajax/begintosolveeg2', views.beginsolveeg2, name='begintosolveeg2'),
     path('eg2_results/<id>', views.eg2_results, name='eg2_results'),
+    # Module paths:
     # path('demo/', include('demo.urls')),
-    path('expert/', include('expert.urls'))
+    path('expert/', include('expert.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('teams/', include('teams.urls')),
+    path('support/', include('support.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
