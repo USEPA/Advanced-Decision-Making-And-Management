@@ -77,19 +77,19 @@ def about(request):
     return render(request, 'main/about.html')
 
 
-def tryit(request):
+def demo(request):
     """Add docstring."""  # TODO: add docstring.
-    return render(request, 'tryit.html')
+    return render(request, 'demo.html')
 
 
-def tryit_eg1(request):
+def demo_eg1(request):
     """Add docstring."""  # TODO: add docstring.
-    return render(request, 'tryit_eg1.html')
+    return render(request, 'demo_eg1.html')
 
 
-def tryit_eg2(request):
+def demo_eg2(request):
     """Add docstring."""  # TODO: add docstring.
-    return render(request, 'tryit_eg2.html')
+    return render(request, 'demo_eg2.html')
 
 
 def beginsolveeg2(request):

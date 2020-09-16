@@ -1,51 +1,37 @@
 {% extends "main/base.html" %}
 {% load static %}
 
-  {% block content %}
+{% block content %}
 
-  <section id="main">
-    <br/>
-
-    <div class="card text-center" style = "width:90%; left:5%; display: block">
-      <div class="card-header">
-        <h4>Contact Us</h4>
-
-      </div>
-      <div class="card-body">
-
-        {% if submitted %}
-            <p class="btn btn-light" style = "font-size: 1.2em; cursor: pointer" onclick = "window.location.href = '/'">
-                Your message was submitted successfully. Thank you.
-            </p>
-        {% else %}
-          <div class = "container" style = "width:70%; left:15%">
-            <form method="POST" style = "width:100%;">
-              {% for field in form %}
-              <div class="input-group input-group-sm mb-3" >
+<div class="text-center">
+    <h4>Contact Us</h4>
+    {% if submitted %}
+    <p class="btn btn-light" style="font-size: 1.2em; cursor: pointer" onclick="window.location.href = '/'">
+        Your message was submitted successfully. Thank you.
+    </p>
+    {% else %}
+    <div class="container" style="width:70%; left:15%">
+        <form method="POST" style="width:100%;">
+            {% for field in form %}
+            <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text">{{field.label}}</span>
+                    <span class="input-group-text">{{field.label}}</span>
                 </div>
                 {{field}}
-              </div>
-              {% endfor %}
+            </div>
+            {% endfor %}
             {% csrf_token %}
-            <input type="submit" value="Submit" class = "btn btn-light border">
-            </form>
-          </div>
-        {% endif %}
-
-        </div>
-      </div>
-
-    <br/>
-  </section>
-  {% endblock content %}
+            <input type="submit" value="Submit" class="btn btn-light">
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}
 
 {% block scripts %}
 <script>
-  $( function() {
-    $( "#tabs" ).tabs();
-  } );
-  </script>
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
 {% endblock scripts %}
-</html>
