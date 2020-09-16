@@ -100,7 +100,7 @@
   <br/>
 </section>
 {% endblock content %}
-{% block jscode %}
+{% block scripts %}
 <script>
 $(".parent-toggler").hover(function(){
       $( this ).animate({'color': '#9A0000'}, 180);
@@ -185,4 +185,4 @@ function newmodel(){
   }).set('oncancel', function(){alertify.confirm().destroy()})
 }
 </script>
-{% endblock jscode%}
+{% endblock scripts%}

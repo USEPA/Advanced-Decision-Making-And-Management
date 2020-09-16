@@ -232,11 +232,11 @@
 </section>
 {% endblock content %}
 
-{% block jscode %}
+{% block scripts %}
 <script type="text/javascript">
 function UpdateLabel(i){
       e = document.getElementsByClassName("custom-file-input")[i].files[0].name;
       $('.custom-file-label').eq(i).html(e);
   }
 </script>
-{% endblock jscode%}
+{% endblock scripts%}

@@ -591,7 +591,7 @@
   </div>
   {% endblock content %}
 
-{% block jscode %}
+{% block scripts %}
 <script>
   function changecard(id1,id2){
     $("#"+id1).fadeTo(300,0, function(){
@@ -638,5 +638,5 @@
 <script src="{% static 'jsfile/leaflet-routing-machine-3.2.12/dist/leaflet-routing-machine.js' %}"></script>
 <script src="{% static 'jsfile/tryitjsfile/eg2.js' %}"></script>
 
-{% endblock jscode %}
+{% endblock scripts %}
 </html>
