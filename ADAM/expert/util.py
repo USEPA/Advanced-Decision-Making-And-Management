@@ -91,7 +91,7 @@ def isfloat(value):
 def readSupFile(user, path):
     """
     Read a supply data file.
-    
+
     Specify user object and datadocfile.docpath, return msg and data.
     """
     # extract user accessible product
@@ -163,7 +163,7 @@ def readSupFile(user, path):
 def readTechFile(user, path, type, techids):
     """
     Read a technology data file.
-    
+
     Specify user object, datadocfile.docpath, data type  (Site or Candidate),
     and a string list of available technology ids, return msg and data.
     """
@@ -249,7 +249,7 @@ def readTechFile(user, path, type, techids):
 def readDemFile(user, path, prodids):
     """
     Read a demand data file.
-    
+
     Specify user object, datadocfile.docpath, and a string list of available
     product ids, return msg and data.
     """
@@ -319,7 +319,7 @@ def readDemFile(user, path, prodids):
 def WriteTransfiles(task, transfile=True):
     """
     Based on defined supply, demand, and technology data.
-    
+
     Generate 8 files needed for julia script and transportation matrix for each
     product, return node list, product list, and transportation matrices.
     """
@@ -661,7 +661,7 @@ def WriteTransfiles(task, transfile=True):
 def ReWriteTransData(task, prod_id, transdata):
     """
     Rewrite transportation matrix file.
-    
+
     Specify task, product id, and the new matrix.
     """
     user = task.user
@@ -687,7 +687,7 @@ def ReWriteTransData(task, prod_id, transdata):
 def ReadTaskData(task):
     """
     Read transportation matrix files.
-    
+
     Specify task and return transportation matrix, node list, and product list.
     """
     user = task.user
@@ -784,7 +784,7 @@ def readNodeFile(nodepath):
 def readFlowFile(nodedata, flowpath):
     """
     Read the flow file uploaded.
-    
+
     Specify the corresponding node file and tempdocument.docfile, return msg,
     lists of destinations, origins, and flow amounts
     """

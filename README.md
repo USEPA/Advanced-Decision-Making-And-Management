@@ -1,7 +1,8 @@
 # Advanced-Decision-Making-And-Management (ADAM)
 
 ![ADAM](https://www.epa.gov/sites/production/files/2013-06/epa_seal_verysmall_trim.gif)
-Version 1.0 to be hosted on USEPA website @ https://adam.epa.gov.
+
+Hosted on EPA RTP RHEL Server @ <https://adam.epa.gov>
 
 ***
 
