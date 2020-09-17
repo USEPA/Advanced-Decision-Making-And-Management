@@ -368,7 +368,7 @@ class APITeamDetailView(APIView):
                     return team, membership
             raise Http404
         except Team.DoesNotExist:
-            raise Http404
+            raise Http404  # TODO: Consider explicitly re-raising using the 'from' keyword.
 
     def get(self, request, team_id, *args, **kwargs):
         """Get details for the specified team."""
@@ -428,7 +428,7 @@ class APITeamMembershipListView(APIView):
                     return team_memberships
             raise Http404
         except Team.DoesNotExist:
-            raise Http404
+            raise Http404  # TODO: Consider explicitly re-raising using the 'from' keyword.
 
     def get(self, request, team_id, *args, **kwargs):
         """Get the membership information for the specified team."""
@@ -480,7 +480,7 @@ class APITeamMembershipDetailView(APIView):
                     return current_membership, membership.can_edit
             raise Http404
         except Team.DoesNotExist:
-            raise Http404
+            raise Http404  # TODO: Consider explicitly re-raising using the 'from' keyword.
 
     def get(self, request, team_id, membership_id, *args, **kwargs):
         """Get details for the specified team."""

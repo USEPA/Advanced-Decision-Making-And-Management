@@ -76,7 +76,7 @@ for root, dirs, files in os.walk(path):
                     # send email to notify user
                     message.send(fail_silently=False)
                     old_result = OptTaskResults.objects.filter(task=task)
-                    for i in range(len(old_result)):
+                    for i in range(len(old_result)):  # TODO: Consider using enumerate instead of iterating with range and len.
                         old_result[i].delete()
                     new_result = OptTaskResults(task=task)
                     summary = ''
@@ -131,7 +131,7 @@ for root, dirs, files in os.walk(path):
                     # send email to notify user
                     message.send(fail_silently=False)
                     old_result = OptTaskResults.objects.filter(task=task)
-                    for i in range(len(old_result)):
+                    for i in range(len(old_result)):  # TODO: Consider using enumerate instead of iterating with range and len.
                         old_result[i].delete()
                     new_result = OptTaskResults(task=task)
                     summary = ''
