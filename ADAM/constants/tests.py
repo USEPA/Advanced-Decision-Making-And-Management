@@ -48,35 +48,59 @@ class TestUtils(TestCase):
         self.assertNotEqual(split_email_list("t;e,s\tt@t|est.com"), ['t', 'e', 's', 't@test.com'])
 
     def test_is_epa_email_pass_one(self):
-        """Runs the test to check if an email address is in the right format to be an epa email address."""
+        """
+        Runs the test to check if an email address is in the right format to
+        be an epa email address.
+        """
         self.assertEqual(is_epa_email("test@epa.gov"), True)
 
     def test_is_epa_email_fail_one(self):
-        """Runs the test to check if an email address is in the right format to be an epa email address."""
+        """
+        Runs the test to check if an email address is in the right format to
+        be an epa email address.
+        """
         self.assertEqual(is_epa_email("test@test.com"), False)
 
     def test_is_epa_email_fail_two(self):
-        """Runs the test to check if an email address is in the right format to be an epa email address."""
+        """
+        Runs the test to check if an email address is in the right format to be
+        an epa email address.
+        """
         self.assertEqual(is_epa_email("test@test.gov"), False)
 
     def test_is_epa_email_fail_three(self):
-        """Runs the test to check if an email address is in the right format to be an epa email address."""
+        """
+        Runs the test to check if an email address is in the right format to
+        be an epa email address.
+        """
         self.assertEqual(is_epa_email("test@epa.com"), False)
 
     def test_is_epa_email_fail_seven(self):
-        """Runs the test to check if an email address is in the right format to be an epa email address."""
+        """
+        Runs the test to check if an email address is in the right format to
+        be an epa email address.
+        """
         self.assertEqual(is_epa_email("test@Aepa.gov"), False)
 
     def test_is_epa_email_fail_eight(self):
-        """Runs the test to check if an email address is in the right format to be an epa email address."""
+        """
+        Runs the test to check if an email address is in the right format to
+        be an epa email address.
+        """
         self.assertEqual(is_epa_email("test@repa.govR"), False)
 
     def test_is_epa_email_fail_nine(self):
-        """Runs the test to check if an email address is in the right format to be an epa email address."""
+        """
+        Runs the test to check if an email address is in the right format
+        to be an epa email address.
+        """
         self.assertEqual(is_epa_email("test@4epa.gov"), False)
 
     def test_non_epa_email_message_fail_one(self):
-        """Runs the test to check if an email address is not EPA that it sends the correct message."""
+        """
+        Runs the test to check if an email address is not EPA that it sends
+        the correct message.
+        """
         self.assertIn(
             """Email list may only contain @epa.gov addresses.""", non_epa_email_message("test@test.com"), msg=None)
 
@@ -88,11 +112,17 @@ class TestUtils(TestCase):
             EmailMultiAlternatives, msg=None)
 
     def test_xstr_one(self):
-        """Test the method that Checks for and replaces None objects with empty strings."""
+        """
+        Test the method that Checks for and replaces None objects with empty
+        strings.
+        """
         self.assertEqual(xstr(None), "")
 
     def test_xstr_two(self):
-        """Test the method that Checks for and replaces None objects with empty strings."""
+        """
+        Test the method that Checks for and replaces None objects with empty
+        strings.
+        """
         self.assertEqual(xstr("test"), "test")
 
     def test_is_float_one(self):

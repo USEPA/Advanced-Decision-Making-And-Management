@@ -377,7 +377,10 @@ class APITeamDetailView(APIView):
         return Response(serializer.data)
 
     def put(self, request, team_id, *args, **kwargs):
-        """Update an existing team. :param request: :param team_id: :param format: :return:."""
+        """
+        Update an existing team. :param request: :param team_id: :param format:
+        :return:.
+        """
         (team, membership) = self.get_object(team_id, request.user)
         if not membership.can_edit:
             return Response({"detail": "current user cannot edit this team"}, status=status.HTTP_400_BAD_REQUEST)
