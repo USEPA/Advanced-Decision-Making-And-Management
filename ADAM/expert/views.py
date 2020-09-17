@@ -547,7 +547,7 @@ def step5_rewritetransfiles(request):
         transdata = json.loads(transdata)
         error = []
         if transdata:
-            for i in range(len(transdata)):
+            for i in range(len(transdata)):  # TODO: Consider using enumerate instead of iterating with range and len.
                 print(transdata[i])
                 prodid = int(transdata[i]['prodid'])
                 ReWriteTransData(task, prodid, transdata[i]['data'])

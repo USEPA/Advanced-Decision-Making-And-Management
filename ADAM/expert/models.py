@@ -112,7 +112,7 @@ class CaseStudy(models.Model):
             os.rmdir(path)
         except Exception:
             print("Delete case " + str(self.id) + " and there is an error.")
-        super(CaseStudy, self).delete(*args, **kwargs)
+        super(CaseStudy, self).delete(*args, **kwargs)  # TODO: Consider using Python 3 style super() without arguments.
 
     def getprodlist(self):
         """Add docstring."""  # TODO: add docstring.
@@ -311,7 +311,7 @@ class OptTask(models.Model):
             os.rmdir(path)
         except Exception:
             print("Delete task " + str(self.id) + " and there is an error.")
-        super(OptTask, self).delete(*args, **kwargs)
+        super(OptTask, self).delete(*args, **kwargs)  # TODO: Consider using Python 3 style super() without arguments.
 
 
 def filepath(instance, filename):
@@ -364,7 +364,7 @@ class DataDocument(models.Model):
             os.remove(os.path.join(settings.MEDIA_ROOT, self.docfile.name))
         except Exception:
             pass
-        super(DataDocument, self).delete(*args, **kwargs)
+        super(DataDocument, self).delete(*args, **kwargs)  # TODO: Consider using Python 3 style super() without arguments.
 
 
 class TempDocument(models.Model):
@@ -389,7 +389,7 @@ class TempDocument(models.Model):
     def delete(self, *args, **kwargs):
         """Add docstring."""  # TODO: add docstring.
         os.remove(os.path.join(settings.MEDIA_ROOT, self.docfile.name))
-        super(TempDocument, self).delete(*args, **kwargs)
+        super(TempDocument, self).delete(*args, **kwargs)  # TODO: Consider using Python 3 style super() without arguments.
 
     def datatype(self):
         """Add docstring."""  # TODO: add docstring.

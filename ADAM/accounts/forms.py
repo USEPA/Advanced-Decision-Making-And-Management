@@ -162,7 +162,7 @@ class ProfileUpdateForm(forms.ModelForm):
 
     def __init__(self, *args, **kw):
         """The __init__ method represents a constructor in Python."""
-        super(ProfileUpdateForm, self).__init__(*args, **kw)
+        super(ProfileUpdateForm, self).__init__(*args, **kw)  # TODO: Consider using Python 3 style super() without arguments.
         profile = self.instance.userprofile
         self.fields['affiliation'].initial = profile.affiliation
         self.fields['sector'].initial = profile.sector

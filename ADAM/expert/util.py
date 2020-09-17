@@ -119,7 +119,7 @@ def readSupFile(user, path):
                        'Please refer to the template.')
         else:
             float_check = True
-            for i in range(len(latlist)):
+            for i in range(len(latlist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                 if isfloat(latlist[i]) and isfloat(lnglist[i]) and \
                         isfloat(caplist[i]) and isfloat(pricelist[i]):
                     pass
@@ -194,7 +194,7 @@ def readTechFile(user, path, type, techids):
                        'Please refer to the template.')
         else:
             float_check = True
-            for i in range(len(latlist)):
+            for i in range(len(latlist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                 if caplist:
                     if isfloat(latlist[i]) and isfloat(lnglist[i]) and \
                                 isfloat(caplist[i]):
@@ -274,7 +274,7 @@ def readDemFile(user, path, prodids):
                        'Please refer to the template.')
         else:
             float_check = True
-            for i in range(len(latlist)):
+            for i in range(len(latlist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                 if isfloat(latlist[i]) and isfloat(lnglist[i]) and \
                         isfloat(caplist[i]) and isfloat(pricelist[i]):
                     pass
@@ -475,7 +475,7 @@ def WriteTransfiles(task, transfile=True):
         canddata.append([cand, node, tech])
         tc += 1
 
-    for i in range(len(techidls)):
+    for i in range(len(techidls)):  # TODO: Consider using enumerate instead of iterating with range and len.
         Techobj = Technology.objects.get(id=techidls[i])
         prodset = Techobj.prods.all()
         for Prodobj in prodset:
@@ -486,9 +486,9 @@ def WriteTransfiles(task, transfile=True):
                 transcost = Prodobj.transcost
                 proddata.append([prod, name, transcost])
 
-    for i in range(len(techidls)):
+    for i in range(len(techidls)):  # TODO: Consider using enumerate instead of iterating with range and len.
         line = []
-        for j in range(len(prodidls)):
+        for j in range(len(prodidls)):  # TODO: Consider using enumerate instead of iterating with range and len.
             try:
                 line.append(
                     Transformation.objects.get(
@@ -528,42 +528,42 @@ def WriteTransfiles(task, transfile=True):
 
     with open(folder + 'node_data.csv', 'w') as csvfile:
         writer = csv.writer(csvfile, delimiter=',')
-        for row in range(len(nodedata)):
+        for row in range(len(nodedata)):  # TODO: Consider using enumerate instead of iterating with range and len.
             writer.writerow(nodedata[row])
 
     with open(folder + 'sup_data.csv', 'w') as csvfile:
         writer = csv.writer(csvfile, delimiter=',')
-        for row in range(len(supdata)):
+        for row in range(len(supdata)):  # TODO: Consider using enumerate instead of iterating with range and len.
             writer.writerow(supdata[row])
 
     with open(folder + 'dem_data.csv', 'w') as csvfile:
         writer = csv.writer(csvfile, delimiter=',')
-        for row in range(len(demdata)):
+        for row in range(len(demdata)):  # TODO: Consider using enumerate instead of iterating with range and len.
             writer.writerow(demdata[row])
 
     with open(folder + 'tech_data.csv', 'w') as csvfile:
         writer = csv.writer(csvfile, delimiter=',')
-        for row in range(len(techdata)):
+        for row in range(len(techdata)):  # TODO: Consider using enumerate instead of iterating with range and len.
             writer.writerow(techdata[row])
 
     with open(folder + 'prod_data.csv', 'w') as csvfile:
         writer = csv.writer(csvfile, delimiter=',')
-        for row in range(len(proddata)):
+        for row in range(len(proddata)):  # TODO: Consider using enumerate instead of iterating with range and len.
             writer.writerow(proddata[row])
 
     with open(folder + 'site_data.csv', 'w') as csvfile:
         writer = csv.writer(csvfile, delimiter=',')
-        for row in range(len(sitedata)):
+        for row in range(len(sitedata)):  # TODO: Consider using enumerate instead of iterating with range and len.
             writer.writerow(sitedata[row])
 
     with open(folder + 'cand_data.csv', 'w') as csvfile:
         writer = csv.writer(csvfile, delimiter=',')
-        for row in range(len(canddata)):
+        for row in range(len(canddata)):  # TODO: Consider using enumerate instead of iterating with range and len.
             writer.writerow(canddata[row])
 
     with open(folder + 'alpha_data.csv', 'w') as csvfile:
         writer = csv.writer(csvfile, delimiter=',')
-        for row in range(len(alphadata)):
+        for row in range(len(alphadata)):  # TODO: Consider using enumerate instead of iterating with range and len.
             writer.writerow(alphadata[row])
 
     if transfile:
@@ -579,23 +579,23 @@ def WriteTransfiles(task, transfile=True):
             os.makedirs(os.path.dirname(filename), exist_ok=True)
 
             # from supply to demand
-            for ss in range(len(supnodelist)):
+            for ss in range(len(supnodelist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                 if supprodlist[ss] == prod:
                     nodeI = nodelist.index(supnodelist[ss])
-                    for dd in range(len(demnodelist)):
+                    for dd in range(len(demnodelist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                         if demprodlist[dd] == prod:
                             nodeJ = nodelist.index(demnodelist[dd])
                             if nodeI != nodeJ:
                                 transdata[transid][nodeI][nodeJ] = 'Y'
             # from supply to tech site
-                    for tt in range(len(sitenodelist)):
+                    for tt in range(len(sitenodelist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                         techid = techlist.index(sitetechlist[tt])
                         if float(alphadata[techid][transid]) < 0:
                             nodeJ = nodelist.index(sitenodelist[tt])
                             if nodeI != nodeJ:
                                 transdata[transid][nodeI][nodeJ] = 'Y'
             # from supply to tech cand
-                    for tt in range(len(candnodelist)):
+                    for tt in range(len(candnodelist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                         techid = techlist.index(candtechlist[tt])
                         if float(alphadata[techid][transid]) < 0:
                             nodeJ = nodelist.index(candnodelist[tt])
@@ -603,50 +603,50 @@ def WriteTransfiles(task, transfile=True):
                                 transdata[transid][nodeI][nodeJ] = 'Y'
 
             # from tech site to tech site
-            for t1 in range(len(sitenodelist)):
+            for t1 in range(len(sitenodelist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                 t1id = techlist.index(sitetechlist[t1])
                 if float(alphadata[t1id][transid]) > 0:
                     nodeI = nodelist.index(sitenodelist[t1])
-                    for t2 in range(len(sitenodelist)):
+                    for t2 in range(len(sitenodelist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                         t2id = techlist.index(sitetechlist[t2])
                         if float(alphadata[t2id][transid]) < 0:
                             nodeJ = nodelist.index(sitenodelist[t2])
                             if nodeI != nodeJ:
                                 transdata[transid][nodeI][nodeJ] = 'Y'
             # from tech site to tech cand
-                    for t2 in range(len(candnodelist)):
+                    for t2 in range(len(candnodelist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                         t2id = techlist.index(candtechlist[t2])
                         if float(alphadata[t2id][transid]) < 0:
                             nodeJ = nodelist.index(candnodelist[t2])
                             if nodeI != nodeJ:
                                 transdata[transid][nodeI][nodeJ] = 'Y'
             # from tech site to demand
-                    for dd in range(len(demnodelist)):
+                    for dd in range(len(demnodelist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                         if demprodlist[dd] == prod:
                             nodeJ = nodelist.index(demnodelist[dd])
                             if nodeI != nodeJ:
                                 transdata[transid][nodeI][nodeJ] = 'Y'
 
             # from tech cand to tech site
-            for t1 in range(len(candnodelist)):
+            for t1 in range(len(candnodelist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                 t1id = techlist.index(candtechlist[t1])
                 if float(alphadata[t1id][transid]) > 0:
                     nodeI = nodelist.index(candnodelist[t1])
-                    for t2 in range(len(sitenodelist)):
+                    for t2 in range(len(sitenodelist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                         t2id = techlist.index(sitetechlist[t2])
                         if float(alphadata[t2id][transid]) < 0:
                             nodeJ = nodelist.index(sitenodelist[t2])
                             if nodeI != nodeJ:
                                 transdata[transid][nodeI][nodeJ] = 'Y'
             # from tech cand to tech cand
-                    for t2 in range(len(candnodelist)):
+                    for t2 in range(len(candnodelist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                         t2id = techlist.index(candtechlist[t2])
                         if float(alphadata[t2id][transid]) < 0:
                             nodeJ = nodelist.index(candnodelist[t2])
                             if nodeI != nodeJ:
                                 transdata[transid][nodeI][nodeJ] = 'Y'
             # from tech cand to demand
-                    for dd in range(len(demnodelist)):
+                    for dd in range(len(demnodelist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                         if demprodlist[dd] == prod:
                             nodeJ = nodelist.index(demnodelist[dd])
                             if nodeI != nodeJ:
@@ -670,7 +670,7 @@ def ReWriteTransData(task, prod_id, transdata):
     filename = folder + 'transmatrix_p' + str(prod_id) + '.csv'
     with open(filename) as csvfile:
         data = list(csv.reader(csvfile))
-    for i in range(0, len(data)):
+    for i in range(0, len(data)):  # TODO: Consider using enumerate instead of iterating with range and len.
         for j in range(0, len(data[0])):
             data[i][j] = 'N'
     for item in transdata:
@@ -680,7 +680,7 @@ def ReWriteTransData(task, prod_id, transdata):
         data[ii][jj] = 'Y'
     with open(filename, 'w') as csvfile:
         writer = csv.writer(csvfile, delimiter=',')
-        for row in range(len(data)):
+        for row in range(len(data)):  # TODO: Consider using enumerate instead of iterating with range and len.
             writer.writerow(data[row])
 
 
@@ -763,7 +763,7 @@ def readNodeFile(nodepath):
                        'Please refer to the template.')
         else:
             float_check = True
-            for i in range(len(latilist)):
+            for i in range(len(latilist)):  # TODO: Consider using enumerate instead of iterating with range and len.
                 lati_item = latilist[i]
                 long_item = longlist[i]
                 if lati_item == '' or isfloat(lati_item):
