@@ -3,7 +3,7 @@
 # coding=utf-8
 # ruiz-mercado.gerardo@epa.gov
 
-"""Add docstring."""  # TODO: add docstring.
+"""Views for home pages and tutorials"""
 
 # for the main page
 from django.http import HttpResponse, JsonResponse
@@ -30,17 +30,21 @@ def dashboard(request):
 
 # to generate a random string as a pseudo id for tasks
 def id_generator(size=20, chars=string.ascii_uppercase + string.digits):
-    """Add docstring."""  # TODO: add docstring.
+    """To generate a random id_string
+    :param size:
+    :param chars:
+    :return :
+    """
     return ''.join(random.choice(chars) for _ in range(size))
 
 
 def main(request):
-    """Add docstring."""  # TODO: add docstring.
+    """render the home page"""
     return render(request, 'index.html')
 
 
 def getdata(request):
-    """Add docstring."""  # TODO: add docstring.
+    """get the data that user selects"""
     if request.POST:
         data = request.POST
         id = data['id']
@@ -57,7 +61,7 @@ def getdata(request):
 
 
 def getbounds(request):
-    """Add docstring."""  # TODO: add docstring.
+    """get the gis shape file that user selects"""
     if request.POST:
         data = request.POST
         id = data['id']
@@ -68,32 +72,32 @@ def getbounds(request):
 
 
 def support(request):
-    """Add docstring."""  # TODO: add docstring.
+    """render the support page"""
     return render(request, 'support.html')
 
 
 def about(request):
-    """Add docstring."""  # TODO: add docstring.
+    """render the about page"""
     return render(request, 'main/about.html')
 
 
 def demo(request):
-    """Add docstring."""  # TODO: add docstring.
+    """render the tutorial page"""
     return render(request, 'demo.html')
 
 
 def demo_eg1(request):
-    """Add docstring."""  # TODO: add docstring.
+    """render the example 1 in tutorial"""
     return render(request, 'demo_eg1.html')
 
 
 def demo_eg2(request):
-    """Add docstring."""  # TODO: add docstring.
+    """render the example 2 in tutorial"""
     return render(request, 'demo_eg2.html')
 
 
 def beginsolveeg2(request):
-    """Add docstring."""  # TODO: add docstring.
+    """start to solve example using user specified data"""
     user = request.user
     if request.POST:
         data = request.POST
@@ -171,7 +175,7 @@ def beginsolveeg2(request):
 
         with open(alphafilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
-            for i in alphadata: 
+            for i in alphadata:
                 writer.writerow(i)
 
         cmd = [
@@ -189,7 +193,7 @@ def beginsolveeg2(request):
 
 
 def eg2_results(request, id):
-    """Add docstring."""  # TODO: add docstring.
+    """render the example 2 results"""
     error = 0
     id_string = id
 
@@ -313,7 +317,7 @@ def eg2_results(request, id):
 
 
 def contact(request):
-    """Add docstring."""  # TODO: add docstring.
+    """render the contact page"""
     submitted = False
     if request.method == 'POST':
         form = ContactForm(request.POST)

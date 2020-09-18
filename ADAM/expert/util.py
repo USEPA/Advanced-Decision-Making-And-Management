@@ -4,7 +4,9 @@
 # ruiz-mercado.gerardo@epa.gov
 
 
-"""Add docstring."""  # TODO: add docstring.
+"""This script contains several utility functions used in views.py
+- main IO between django and julia
+"""
 
 
 from django.shortcuts import render, redirect
@@ -32,9 +34,6 @@ import csv
 import zipfile
 import json
 import operator
-
-
-"""This script contains several utility functions used in views.py"""
 
 
 # to generate a random string as a pseudo id for tasks
@@ -710,7 +709,12 @@ def ReadTaskData(task):
 
 
 def ReadTransData(task, prodid):
-    """Add docstring."""  # TODO: add docstring.
+    """
+    Read a transportation data file.
+
+    Specify a model and a product
+    return transportation data
+    """
     user = task.user
     task_id = task.id
     folder = settings.MEDIA_ROOT + '/' + str(user.id) + '_' + \
@@ -721,7 +725,9 @@ def ReadTransData(task, prodid):
 
 
 def ReadCaseData(case):
-    """Add docstring."""  # TODO: add docstring.
+    """
+    Read a case study data.
+    """
     case_id = case.id
     folder = settings.MEDIA_ROOT + '/casestudies/' + str(case.id) + '_' + \
         case.name + '/'
@@ -864,7 +870,9 @@ def ReadTaskResult(task):
 
 
 def ReadTaskResultBasic(task):
-    """Add docstring."""  # TODO: add docstring.
+    """
+    read optimization results of a model
+    """
     user = task.user
     task_id = task.id
     folder = settings.MEDIA_ROOT + '/' + str(user.id) + '_' + \
@@ -921,7 +929,9 @@ def zipfiles(zipls, defaultfilename='download_datals_zip_'):
 
 
 def writeModelData(task, checkls):
-    """Add docstring."""  # TODO: add docstring.
+    """
+    write model data into julia readable form
+    """
     folder = settings.MEDIA_ROOT + '/public/'
     checkls = [int(i) for i in checkls]
     zipname = 'modeldata_' + str(task.id)
@@ -997,7 +1007,9 @@ def writeModelData(task, checkls):
 
 
 def readModelData(task, mode, checkls=[]):
-    """Add docstring."""  # TODO: add docstring.
+    """
+    read data of a model
+    """
     if mode == 'sup':
         supdata = [['#', 'Latitude', ',Longitude', 'Feed ID',
                     'Price', 'Capacity']]
