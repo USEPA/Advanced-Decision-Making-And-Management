@@ -103,7 +103,7 @@ class LoginForm(forms.Form):
         try:
             user = User.objects.get(username=username)
         except User.DoesNotExist:
-            raise forms.ValidationError(  # TODO: Consider explicitly re-raising using the 'from' keyword.
+            raise forms.ValidationError(
                 {'username': ["The username '%s' does not exist." % username]})
         else:
             pass
@@ -198,7 +198,7 @@ class TaskSelectionForm(forms.Form):
     def __init__(self, *args, **kwargs):
         """Add docstring."""  # TODO: add docstring.
         self.user = kwargs.pop('user', None)
-        super(TaskSelectionForm, self).__init__(*args, **kwargs)  # TODO: Consider using Python 3 style super() without arguments.
+        super().__init__(*args, **kwargs)
         task_list = []
         for task_item in self.user.opttask_set.all():
             # Only show completed tasks
@@ -218,7 +218,7 @@ class TaskSelectionForm2(forms.Form):
     def __init__(self, *args, **kwargs):
         """Add docstring."""  # TODO: add docstring.
         self.user = kwargs.pop('user', None)
-        super(TaskSelectionForm2, self).__init__(*args, **kwargs)  # TODO: Consider using Python 3 style super() without arguments.
+        super().__init__(*args, **kwargs)
         task_list = []
         for task_item in self.user.opttask_set.all():
             task_list.append((task_item.id, task_item.task_name))
@@ -236,7 +236,7 @@ class ProdSelectionForm(forms.Form):
     def __init__(self, *args, **kwargs):
         """Add docstring."""  # TODO: add docstring.
         self.task = kwargs.pop('task', None)
-        super(ProdSelectionForm, self).__init__(*args, **kwargs)  # TODO: Consider using Python 3 style super() without arguments.
+        super().__init__(*args, **kwargs)
         prod_list = []
         prodfile = self.task.prod_path
         temp_path = settings.MEDIA_ROOT + '/' + str(prodfile)
@@ -342,7 +342,7 @@ class YieldInputForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         """Add docstring."""  # TODO: add docstring.
-        super(YieldInputForm, self).__init__(*args, **kwargs)  # TODO: Consider using Python 3 style super() without arguments.
+        super().__init__(*args, **kwargs)
         self.fields['product'].widget.choices = list(
             Product.objects.all().values_list('id', 'name'))
 
@@ -379,7 +379,7 @@ class YieldOutputForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         """Add docstring."""  # TODO: add docstring.
-        super(YieldOutputForm, self).__init__(*args, **kwargs)  # TODO: Consider using Python 3 style super() without arguments.
+        super().__init__(*args, **kwargs)
         self.fields['product'].widget.choices = list(
             Product.objects.all().values_list('id', 'name'))
 
@@ -508,7 +508,7 @@ class Step2CsvFileSelection(forms.Form):
     def __init__(self, *args, **kwargs):
         """Add docstring."""  # TODO: add docstring.
         self.user = kwargs.pop('user', None)
-        super(Step2CsvFileSelection, self).__init__(*args, **kwargs)  # TODO: Consider using Python 3 style super() without arguments.
+        super().__init__(*args, **kwargs)
         tlist = [('0', 'Upload Technology Data')]
         plist = [('0', 'Upload Product Data')]
         alist = [('0', 'Upload Yield Data')]
@@ -533,7 +533,7 @@ class Step2TechGraphSelection(forms.Form):
     def __init__(self, *args, **kwargs):
         """Add docstring."""  # TODO: add docstring.
         self.user = kwargs.pop('user', None)
-        super(Step2TechGraphSelection, self).__init__(*args, **kwargs)  # TODO: Consider using Python 3 style super() without arguments.
+        super().__init__(*args, **kwargs)
         glist = [('0', 'New Graph')]
         for f in self.user.pgraph_set.all():
             glist.append((f.id, f.name))

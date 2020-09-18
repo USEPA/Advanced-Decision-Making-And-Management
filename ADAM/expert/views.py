@@ -547,10 +547,9 @@ def step5_rewritetransfiles(request):
         transdata = json.loads(transdata)
         error = []
         if transdata:
-            for i in range(len(transdata)):  # TODO: Consider using enumerate instead of iterating with range and len.
-                print(transdata[i])
-                prodid = int(transdata[i]['prodid'])
-                ReWriteTransData(task, prodid, transdata[i]['data'])
+            for i, item in enumerate(transdata):
+                prodid = int(item['prodid'])
+                ReWriteTransData(task, prodid, item['data'])
             if '5' not in task.finished_steps:
                 task.finished_steps += '5'
                 task.task_status = "Data Complete"

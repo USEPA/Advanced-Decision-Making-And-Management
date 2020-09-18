@@ -129,50 +129,50 @@ def beginsolveeg2(request):
         with open(nodefilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(['#node', 'lat', 'lng'])
-            for i in range(len(nodedata)):  # TODO: Consider using enumerate instead of iterating with range and len.
-                writer.writerow(nodedata[i])
+            for i in nodedata:
+                writer.writerow(i)
 
         with open(supfilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(['#sup', 'node', 'prod', 'price', 'cap'])
-            for i in range(len(supdata)):  # TODO: Consider using enumerate instead of iterating with range and len.
-                writer.writerow(supdata[i])
+            for i in supdata:
+                writer.writerow(i)
 
         with open(demfilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(['#dem', 'node', 'prod', 'price', 'cap'])
-            for i in range(len(demdata)):  # TODO: Consider using enumerate instead of iterating with range and len.
-                writer.writerow(demdata[i])
+            for i in demdata:
+                writer.writerow(i)
 
         with open(sitefilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(['#site', 'node', 'tech', 'cap'])
-            for i in range(len(sitedata)):  # TODO: Consider using enumerate instead of iterating with range and len.
-                writer.writerow(sitedata[i])
+            for i in sitedata:
+                writer.writerow(i)
 
         with open(candfilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(['#cand', 'node', 'tech'])
-            for i in range(len(canddata)):  # TODO: Consider using enumerate instead of iterating with range and len.
-                writer.writerow(canddata[i])
+            for i in canddata:
+                writer.writerow(i)
 
         with open(prodfilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(['#prod', 'name', 'transcost'])
-            for i in range(len(proddata)):  # TODO: Consider using enumerate instead of iterating with range and len.
-                writer.writerow(proddata[i])
+            for i in proddata:
+                writer.writerow(i)
 
         with open(techfilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
             writer.writerow(['#tech', 'name', 'capmin', 'capmax', 'refprod',
                              'Kinv', 'Binv', 'Kop', 'Bop'])
-            for i in range(len(techdata)):  # TODO: Consider using enumerate instead of iterating with range and len.
-                writer.writerow(techdata[i])
+            for i in techdata:
+                writer.writerow(i)
 
         with open(alphafilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
-            for i in range(len(alphadata)):  # TODO: Consider using enumerate instead of iterating with range and len.
-                writer.writerow(alphadata[i])
+            for i in alphadata: 
+                writer.writerow(i)
 
         cmd = [
             "/home/bitnami/julia-1.1.1/bin/julia", codepath, nodefilename,
