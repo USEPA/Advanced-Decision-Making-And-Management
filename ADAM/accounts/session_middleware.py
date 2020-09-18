@@ -30,14 +30,16 @@ class OnlyOneUserMiddleware:
         """Process any user login requests."""
         if request.user.is_authenticated():
             cur_session_key = request.user.get_profile().session_key
-            if cur_session_key and cur_session_key != request.session.session_key:
+            if cur_session_key \
+            and cur_session_key != request.session.session_key:
                 # Default handling... kick the old session...
                 try:
                     temp_s = Session.objects.get(session_key=cur_session_key)
                     temp_s.delete()
                 except ObjectDoesNotExist:
                     pass
-            if not cur_session_key or cur_session_key != request.session.session_key:
+            if not cur_session_key \
+            or cur_session_key != request.session.session_key:
                 temp_p = request.user.get_profile()
                 temp_p.session_key = request.session.session_key
                 temp_p.save()
