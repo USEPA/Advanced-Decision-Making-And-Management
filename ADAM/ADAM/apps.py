@@ -9,6 +9,6 @@ from django.apps import AppConfig
 
 
 class AdamConfig(AppConfig):
-    """Add docstring."""  # TODO: add docstring.
+    """Configuration""" 
 
     name = 'ADAM'

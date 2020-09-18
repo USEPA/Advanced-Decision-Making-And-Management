@@ -3,7 +3,11 @@
 # coding=utf-8
 # ruiz-mercado.gerardo@epa.gov
 
-"""Add docstring."""  # TODO: add docstring.
+"""This script will run periodically
+- to check if a model has finished
+- to notify users
+- to clean up old files
+"""
 
 
 from background_task import background
@@ -24,7 +28,7 @@ import zipfile
 
 # get the id of the task given the output file names
 def getid(filename):
-    """Add docstring."""  # TODO: add docstring.
+    """get id of a opt model by reading its opt output file name"""
     ff_id = ''
     s = -5
     while filename[s] != '_':
