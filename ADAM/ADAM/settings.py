@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 't9jbh==q9y5d)cf#i-i6e)8u%^cg963)nkhc6q@0(-pr^b&-4x'
+SECRET_KEY = '*******'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -89,9 +89,9 @@ WSGI_APPLICATION = 'ADAM.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'adamtest',
-        'USER': 'adam_manager',
-        'PASSWORD': 'chuxiao888',
+        'NAME': 'adam',
+        'USER': 'your-user-name',
+        'PASSWORD': 'your-pw',
         'HOST': 'localhost',
         'PORT': '5432',
     }
