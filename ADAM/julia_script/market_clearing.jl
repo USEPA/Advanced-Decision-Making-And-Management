@@ -9,12 +9,6 @@ using Dates
 using Printf
 using Ipopt
 
-IR = 0.1
-NY = 20
-R = 6335.439;
-M = 1e10
-
-Input = ARGS;
 #Input = [node, sup, dem, site, prod, tech, alpha, dis, id]
 
 IR = 0.1
@@ -41,7 +35,7 @@ userid = Input[12]=#
 
 #transfolder = "media/"*userid*"_"*username*"/task_"*id*"/";
 
-folder = "media/"
+folder = "ADAM/media/"
 userid = Input[2]
 username = Input[3]
 id = Input[4]
