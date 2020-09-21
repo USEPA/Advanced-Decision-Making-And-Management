@@ -49,6 +49,7 @@ from django.template.response import TemplateResponse
 from accounts.forms import SetPasswordForm, ProfileUpdateForm, \
     UsernameReminderRequestForm, PasswordResetRequestForm, ProfileCreationForm
 from accounts.models import State, Sector, Role, Country
+from expert.models import *
 
 
 class UsernameReminderRequestView(FormView):
@@ -448,6 +449,19 @@ class UserApprovalView(TemplateView):
             user = user_model._default_manager.get(pk=uid)
             user.is_active = True
             user.save()
+
+            #create a private database
+            new_base = UserDatabase(user = user)
+            new_base.save()
+            for p in Product.objects.all():
+                if p.public:
+                    newitem = UserHasProd(userdatabase = new_base, product = p)
+                    newitem.save()
+            for t in Technology.objects.all():
+                if t.public:
+                    newitem = UserHasTech(userdatabase = new_base, technology = t)
+                    newitem.save()
+            new_base.save()
 
             # Notify the user.
             user_email_context = {

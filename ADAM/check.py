@@ -18,6 +18,7 @@ from demo.models import *
 from background_task.models import Task
 from background_task.models import CompletedTask
 from django.conf import settings
+from django.contrib.auth.models import User
 import datetime
 import os
 import time
@@ -182,6 +183,19 @@ for root, dirs, files in os.walk(path):
             os.remove(ff)
         if ('modeldata_' in ff):
             os.remove(ff)
-    #    if '.csv' in ff and delta_time.total_seconds() > 30*24*3600:
-    #        # if a file exists more than 30 days then delete
-    #        os.remove(ff)
+
+for user in User.objects.all():
+    try:
+        db = UserDatabase.objects.get(user=user)
+    except:
+        new_base = UserDatabase(user = user)
+        new_base.save()
+        for p in Product.objects.all():
+            if p.public:
+                newitem = UserHasProd(userdatabase = new_base, product = p)
+                newitem.save()
+        for t in Technology.objects.all():
+            if t.public:
+                newitem = UserHasTech(userdatabase = new_base, technology = t)
+                newitem.save()
+        new_base.save()
