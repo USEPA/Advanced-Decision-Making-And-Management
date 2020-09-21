@@ -18,7 +18,7 @@ M = 1e10
 Input = ARGS;
 
 
-folder = "media/"
+folder = "ADAM/media/"
 userid = Input[1]
 username = Input[2]
 id = Input[3]
