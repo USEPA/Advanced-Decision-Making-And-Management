@@ -89,9 +89,9 @@ WSGI_APPLICATION = 'ADAM.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'adamtest',
-        'USER': 'adam_manager',
-        'PASSWORD': 'chuxiao888',
+        'NAME': 'adam',
+        'USER': 'your-username',
+        'PASSWORD': 'your-pw',
         'HOST': 'localhost',
         'PORT': '5432',
     }
