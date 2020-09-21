@@ -1,0 +1,2 @@
+tech,name,capmin,capmax,refprod,Kinv,Binv,Kop,Bop
+t1,"Anaerobic Digestion + Electricity Generation (S, cow)",0.0,100000.0,p1,55.15,570823.5,-0.192,32021.0

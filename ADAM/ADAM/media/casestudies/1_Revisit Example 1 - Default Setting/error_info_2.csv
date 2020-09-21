@@ -1,0 +1,3 @@
+Solving time,2020-9-21 12:57
+ERROR Reported,True
+ArgumentError: Cannot open 'media/3_yichenghu/task_2/node_data.csv': not a file
