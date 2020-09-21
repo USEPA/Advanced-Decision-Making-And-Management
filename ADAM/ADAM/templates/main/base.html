@@ -29,6 +29,11 @@
     <meta name="DC.date.modified" content="">
     <!--googleoff: all-->
 
+    <!-- NOTE: This is apparently a requirement for the EPA template, jquery 1.7.1 -->
+    <script src="{% static 'EPA_files/jquery.js.download' %}"></script>
+    <script src="{% static 'EPA_files/js.js.download' %}"></script>
+    <!--[if lt IE 9]><script src="https://www.epa.gov/sites/all/themes/epa/js/ie.js"></script><![endif]-->
+
     <!-- ORIGINAL ADAM CSS and JS from before EPA template: -->
     <link href="{% static 'jsfile/bootstrap-4.3.1-dist/css/bootstrap.css' %}" rel="stylesheet" />
     <link href="{% static 'jsfile/nouislider.css' %}" rel="stylesheet" />
@@ -219,10 +224,7 @@
         </a>
     </div>
 
-    <!-- NOTE: This is apparently a requirement for the EPA template, jquery 1.7.1 -->
-    <script src="{% static 'EPA_files/jquery.js.download' %}"></script>
-    <script src="{% static 'EPA_files/js.js.download' %}"></script>
-    <!--[if lt IE 9]><script src="https://www.epa.gov/sites/all/themes/epa/js/ie.js"></script><![endif]-->
+
     {% block scripts %}{% endblock %}
 
     <footer class="main-footer clearfix" role="contentinfo" style="font-size: small;">
