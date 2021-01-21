@@ -1,4 +1,4 @@
-# Advanced-Decision-Making-And-Management (ADAM)
+# Advanced Decision Making And Management (ADAM)
 
 ![ADAM](https://www.epa.gov/sites/production/files/2013-06/epa_seal_verysmall_trim.gif)
 
