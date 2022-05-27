@@ -1,2 +1,0 @@
-require('./BitmapText');
-require('./BitmapFontLoader');
