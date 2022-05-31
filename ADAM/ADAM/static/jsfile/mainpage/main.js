@@ -10,14 +10,16 @@ function initgeomap(divid, center = [37.0902, -95.7129], zoom = 4) {
 
 
   cowIcon = new L.Icon({
-    iconUrl: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/softbank/145/cow-face_1f42e.png',
+    // iconUrl: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/softbank/145/cow-face_1f42e.png',
+    iconUrl: '/static/icons/cow.png',
     iconSize: [18, 18],
     iconAnchor: [9, 9],
     popupAnchor: [5, 0]
   });
 
   beefIcon = new L.Icon({
-    iconUrl: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/237/ox_1f402.png',
+    // iconUrl: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/237/ox_1f402.png',
+    iconUrl: '/static/icons/ox.png',
     iconSize: [18, 18],
     iconAnchor: [9, 9],
     popupAnchor: [5, 0]
@@ -25,7 +27,8 @@ function initgeomap(divid, center = [37.0902, -95.7129], zoom = 4) {
 
   // TODO: This URL is dead
   wwtpIcon = new L.Icon({
-    iconUrl: 'https://image.flaticon.com/icons/svg/877/877656.svg',
+    // iconUrl: 'https://image.flaticon.com/icons/svg/877/877656.svg',
+    iconUrl: '/static/icons/wastewater.png',
     iconSize: [18, 18],
     iconAnchor: [9, 9],
     popupAnchor: [5, 0]
@@ -33,7 +36,8 @@ function initgeomap(divid, center = [37.0902, -95.7129], zoom = 4) {
 
   // TODO: This URL is dead
   biogasIcon = new L.Icon({
-    iconUrl: 'https://image.flaticon.com/icons/svg/542/542512.svg',
+    // iconUrl: 'https://image.flaticon.com/icons/svg/542/542512.svg',
+    iconUrl: '/static/icons/biogas.png',
     iconSize: [18, 18],
     iconAnchor: [9, 9],
     popupAnchor: [5, 0]
