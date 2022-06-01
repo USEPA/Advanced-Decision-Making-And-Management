@@ -26,10 +26,10 @@
 document.addEventListener("DOMContentLoaded",function () {
 
 
-    var app  = new example.Application();
+    var app =new example.Application();
     app.load(jsonDocument);
 
-    var msg = new draw2d.shape.note.PostIt({text:"You can change the port visibility with different policy implementations.\nYou can select some of them with the buttons above."});
+    var msg=new draw2d.shape.note.PostIt({text:"You can change the port visibility with different policy implementations.\nYou can select some of them with the buttons above."});
     app.view.add(msg, 20,10);
 
 });

@@ -21,10 +21,10 @@
 <script type="text/javascript">
 document.addEventListener("DOMContentLoaded",function () {
 
-	  var canvas = new draw2d.Canvas("gfx_holder");
+	  var canvas=new draw2d.Canvas("gfx_holder");
       canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
         createConnection: function(){
-            var connection = new draw2d.Connection({
+            var connection=new draw2d.Connection({
                 stroke:3,
                 outlineStroke:1,
                 outlineColor:"#303030",
@@ -37,14 +37,14 @@ document.addEventListener("DOMContentLoaded",function () {
     }));
 
 
-    var figure = new CollapsibleShape({x:150, y:150});
+    var figure=new CollapsibleShape({x:150, y:150});
 	  canvas.add( figure);
 
-      var figure = new CollapsibleShape({x:750, y:250});
+      var figure=new CollapsibleShape({x:750, y:250});
       canvas.add( figure);
 
 
-    var msg = new draw2d.shape.note.PostIt({text:"connect the shapes with connection by drag&drop a port.\nExpand and collapse the shape after this to see how the port locator is working"});
+    var msg=new draw2d.shape.note.PostIt({text:"connect the shapes with connection by drag&drop a port.\nExpand and collapse the shape after this to see how the port locator is working"});
     canvas.add(msg, 20,20);
 
 

@@ -107,14 +107,14 @@ document.addEventListener("DOMContentLoaded",function () {
 
 	  // create the canvas for the user interaction
 	  //
-	  var canvas = new draw2d.Canvas("gfx_holder");
+	  var canvas=new draw2d.Canvas("gfx_holder");
 
       // and install a customized ConnectionCreatePolicy into the canvas
       // Use a router wich adds a "bridge" on each connection crossing
       //
       canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
          createConnection: function(){
-            var c = new draw2d.Connection();
+            var c=new draw2d.Connection();
             c.setOutlineColor("#00A8F0");
             c.setOutlineStroke(1);
             c.setRadius(5);
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
       // unmarshal the JSON document into the canvas
 	  // (load)
-	  var reader = new draw2d.io.json.Reader();
+	  var reader=new draw2d.io.json.Reader();
 	  reader.unmarshal(canvas, jsonDocument);
 
 	  // display the JSON document in the preview DIV
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded",function () {
 });
 
 function displayJSON(canvas){
-    var writer = new draw2d.io.json.Writer();
+    var writer=new draw2d.io.json.Writer();
     writer.marshal(canvas,function(json){
         $("#json").text(JSON.stringify(json, null, 2));
     });

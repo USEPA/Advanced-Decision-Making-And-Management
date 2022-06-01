@@ -20,11 +20,11 @@
 document.addEventListener("DOMContentLoaded",function () {
 	  // create the canvas for the user interaction
 	  //
-	  var canvas = new draw2d.Canvas("gfx_holder");
+	  var canvas=new draw2d.Canvas("gfx_holder");
 
 	  // unmarshal the JSON document into the canvas
 	  // (load)
-	  var reader = new draw2d.io.json.Reader();
+	  var reader=new draw2d.io.json.Reader();
 	  reader.unmarshal(canvas, jsonDocument);
 });
 

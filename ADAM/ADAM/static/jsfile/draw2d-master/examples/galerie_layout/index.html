@@ -18,10 +18,10 @@ document.addEventListener("DOMContentLoaded",function () {
 
     // create the canvas for the user interaction
     //
-    var canvas = new draw2d.Canvas("gfx_holder");
+    var canvas=new draw2d.Canvas("gfx_holder");
 
     /*
-    var f = new draw2d.shape.layout.TableLayout();
+    var f=new draw2d.shape.layout.TableLayout();
     canvas.add(f);
     f.addRow("x");
     f.addRow("x", new draw2d.shape.basic.Label({text:"Test",bold:true, stroke:4, resizeable:true}), new draw2d.shape.basic.Label({text:"TEXT",bold:true, resizeable:true}),"x");
@@ -44,11 +44,11 @@ document.addEventListener("DOMContentLoaded",function () {
       f.removeRow(5);
 
 
-    var table = new draw2d.shape.layout.VerticalLayout();
+    var table=new draw2d.shape.layout.VerticalLayout();
     canvas.add(table,200,100);
     table.add(new draw2d.shape.basic.Label({text:"Header of the table",bold:true, stroke:4, resizeable:true}));
 
-    var grid = new draw2d.shape.layout.TableLayout({resizeable:true});
+    var grid=new draw2d.shape.layout.TableLayout({resizeable:true});
     grid.addRow(new draw2d.shape.basic.Label({text:"key1",resizeable:true}), new draw2d.shape.basic.Label({text:"value1",resizeable:true}));
     grid.addRow(new draw2d.shape.basic.Label({text:"key2",resizeable:true}), "value2");
     grid.addRow(new draw2d.shape.basic.Label({text:"key3",resizeable:true}), new draw2d.shape.basic.Label({text:"value3",resizeable:true}));
@@ -60,12 +60,12 @@ document.addEventListener("DOMContentLoaded",function () {
     table.add(grid);
 
     */
-    var label1 =  new draw2d.shape.basic.Label({text:"[0,1] with long long long long label", fontColor:"#00AF00"});
-    var label2 =  new draw2d.shape.basic.Label({text:"[1,1] padding:10", fontColor:"#00AF00"});
-    var label3 =  new draw2d.shape.basic.Label({text:"[2,1] align:right", fontColor:"#00AF00"});
-    var label4 =  new draw2d.shape.basic.Label({text:"[3,1] resize:true",resizeable:true, fontColor:"#00AF00"});
+    var label1= new draw2d.shape.basic.Label({text:"[0,1] with long long long long label", fontColor:"#00AF00"});
+    var label2= new draw2d.shape.basic.Label({text:"[1,1] padding:10", fontColor:"#00AF00"});
+    var label3= new draw2d.shape.basic.Label({text:"[2,1] align:right", fontColor:"#00AF00"});
+    var label4= new draw2d.shape.basic.Label({text:"[3,1] resize:true",resizeable:true, fontColor:"#00AF00"});
 
-    var container = new draw2d.shape.layout.TableLayout();
+    var container=new draw2d.shape.layout.TableLayout();
 
     container.addRow("[0,0]", label1 ,"[0,2] align:center");
     container.addRow("[1,0] valign:bottom", label2,"[1,2] long long long label");
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded",function () {
     canvas.add(container,400,100);
 
     /*
-    var table = new draw2d.shape.layout.FlexGridLayout({
+    var table=new draw2d.shape.layout.FlexGridLayout({
         rows:"20px, 5px,grow,60px, 5px",
         columns:"15px, 20px, grow,20px",
         x:100,

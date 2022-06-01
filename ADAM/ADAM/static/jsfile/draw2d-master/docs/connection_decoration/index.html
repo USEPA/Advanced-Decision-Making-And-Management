@@ -14,19 +14,19 @@
 
 <script type="text/javascript">
 
-var canvas = null;
+var canvas=null;
 
 document.addEventListener("DOMContentLoaded",function () {
 
 
 	     // Create the paint area. The id in the constructor must be
 	     // an existing DIV
-		 canvas = new draw2d.Canvas("gfx_holder");
+		 canvas=new draw2d.Canvas("gfx_holder");
 
 	     // create and add two nodes which contains Ports (In and OUT)
 	     //
-		 var start = new draw2d.shape.node.Start({x:50, y:250});
-		 var end   = new draw2d.shape.node.End({x:430, y:150});
+		 var start=new draw2d.shape.node.Start({x:50, y:250});
+		 var end  =new draw2d.shape.node.End({x:430, y:150});
 
 		 // ...add it to the canvas
 		 canvas.add( start);
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
 		 // Create a Connection and connect the Start and End node
 		 //
-		 var c = new draw2d.Connection({
+		 var c=new draw2d.Connection({
 		     sourceDecorator: new draw2d.decoration.connection.BarDecorator(),
 		     targetDecorator: new draw2d.decoration.connection.DiamondDecorator(),
 		     source: start.getOutputPort(0),
@@ -50,12 +50,12 @@ document.addEventListener("DOMContentLoaded",function () {
 		 // another connection router
 		 // create and add two nodes which contains Ports (In and OUT)
 	     //
-		 start = new draw2d.shape.node.Start({x:50, y:450});
-		 end   = new draw2d.shape.node.End({x:430, y:350});
+		 start=new draw2d.shape.node.Start({x:50, y:450});
+		 end  =new draw2d.shape.node.End({x:430, y:350});
 		 canvas.add( start);
 		 canvas.add( end);
 
-		 c = new draw2d.Connection({
+		 c=new draw2d.Connection({
 		     router:new draw2d.layout.connection.DirectRouter(),
              sourceDecorator: new draw2d.decoration.connection.BarDecorator(),
              targetDecorator: new draw2d.decoration.connection.DiamondDecorator(),
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded",function () {
 		 // THIS IS ONLY FOR THE ARROW AND THE POST-IT
 		 /////////////////////////////////////////////////////////////////////
 
-		 var msg = new draw2d.shape.note.PostIt({text:"Add to the standard connector some endpoint decorations."});
+		 var msg=new draw2d.shape.note.PostIt({text:"Add to the standard connector some endpoint decorations."});
 		 canvas.add(msg, 20,20);
 
 		 $("body").scrollTop(0)

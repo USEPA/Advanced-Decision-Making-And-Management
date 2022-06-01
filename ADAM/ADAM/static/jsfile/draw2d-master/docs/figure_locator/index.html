@@ -19,33 +19,33 @@ document.addEventListener("DOMContentLoaded",function () {
 
      // Create the paint area. The id in the constructor must be
      // an existing DIV
-	 var canvas = new draw2d.Canvas("gfx_holder");
+	 var canvas=new draw2d.Canvas("gfx_holder");
 
      // create a basic figure and add a Label/child via API call
      //
-	 var start = new draw2d.shape.node.Start();
+	 var start=new draw2d.shape.node.Start();
 	 start.add(new draw2d.shape.basic.Label({text:"Test Label"}), new draw2d.layout.locator.TopLocator());
 	 canvas.add( start, 80,150);
 
 	 // Create a custom shape with a build in feature for decoration/labels
 	 // Good example for inheritence of shapes
 	 //
-	 var end = new LabeledEnd();
+	 var end=new LabeledEnd();
 	 canvas.add( end, 350,250);
 
      // create a basic figure and add a Label/child via API call
      //
-	 var start2 = new draw2d.shape.node.Start();
+	 var start2=new draw2d.shape.node.Start();
 	 start2.add(new draw2d.shape.basic.Label({text:"Left Label"}), new draw2d.layout.locator.LeftLocator());
 	 canvas.add( start2, 80,250);
 
      // create a basic figure and add a Label/child via API call
      //
-	 var end2 = new draw2d.shape.node.End();
+	 var end2=new draw2d.shape.node.End();
 	 end2.add(new draw2d.shape.basic.Label({text:"Right Label"}), new draw2d.layout.locator.RightLocator());
 	 canvas.add( end2, 350,100);
 
-    var end3 = new draw2d.shape.node.End();
+    var end3=new draw2d.shape.node.End();
     end3.add(new draw2d.shape.basic.Label({text:"draggable Label", x:55, y:25}), new draw2d.layout.locator.DraggableLocator());
     canvas.add( end3, 350,180);
 
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded",function () {
     /////////////////////////////////////////////////////////////////////
 	 // THIS IS ONLY FOR THE ARROW AND THE POST-IT
 	 /////////////////////////////////////////////////////////////////////
-	 var msg = new draw2d.shape.note.PostIt({text:"Drag&Drop the blue box and notice the label.\nIt sticks always on the top or bottom of the shape."});
+	 var msg=new draw2d.shape.note.PostIt({text:"Drag&Drop the blue box and notice the label.\nIt sticks always on the top or bottom of the shape."});
 	 canvas.add(msg, 20,20);
 });
 

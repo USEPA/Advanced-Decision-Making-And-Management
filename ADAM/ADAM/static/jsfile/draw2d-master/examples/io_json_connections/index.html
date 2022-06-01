@@ -55,11 +55,11 @@ document.addEventListener("DOMContentLoaded",function () {
 
 	  // create the canvas for the user interaction
 	  //
-	  var canvas = new draw2d.Canvas("gfx_holder");
+	  var canvas=new draw2d.Canvas("gfx_holder");
 
 	  // unmarshal the JSON document into the canvas
 	  // (load)
-	  var reader = new draw2d.io.json.Reader();
+	  var reader=new draw2d.io.json.Reader();
 	  reader.unmarshal(canvas, jsonDocument);
 
 	  // display the JSON document in the preview DIV
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded",function () {
 });
 
 function displayJSON(canvas){
-    var writer = new draw2d.io.json.Writer();
+    var writer=new draw2d.io.json.Writer();
     writer.marshal(canvas, function(json){
         $("#json").text(JSON.stringify(json,null,2));
     });

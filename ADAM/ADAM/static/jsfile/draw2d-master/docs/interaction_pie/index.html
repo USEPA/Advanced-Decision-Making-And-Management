@@ -41,16 +41,16 @@ createConnection=function(sourcePort, targetPort){
 document.addEventListener("DOMContentLoaded",function () {
 
 
-     var canvas = new draw2d.Canvas("gfx_holder");
+     var canvas=new draw2d.Canvas("gfx_holder");
      canvas.installEditPolicy(new draw2d.policy.canvas.FadeoutDecorationPolicy());
      canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
         createConnection: createConnection
     }));
 
-    var pie = new MyPie({diameter:200});
-     var slider1 = new MySlider();
-     var slider2 = new MySlider();
-     var slider3 = new MySlider();
+    var pie=new MyPie({diameter:200});
+     var slider1=new MySlider();
+     var slider2=new MySlider();
+     var slider3=new MySlider();
 
      canvas.add(pie,420,160);
      canvas.add(slider1,100,150);
@@ -59,13 +59,13 @@ document.addEventListener("DOMContentLoaded",function () {
 
 	 // Create a Connection and connect he Start and End node
 	 //
-	 var c = createConnection(slider1.getPort("output0"),pie.getPort("input0"));
+	 var c=createConnection(slider1.getPort("output0"),pie.getPort("input0"));
 	 canvas.add(c);
 
-     c = createConnection(slider2.getPort("output0"),pie.getPort("input1"));
+     c=createConnection(slider2.getPort("output0"),pie.getPort("input1"));
 	 canvas.add(c);
 
-     c =  createConnection(slider3.getPort("output0"),pie.getPort("input2"));
+     c= createConnection(slider3.getPort("output0"),pie.getPort("input2"));
 	 canvas.add(c);
 
 
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded",function () {
      /////////////////////////////////////////////////////////////////////
 	 // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
 	 /////////////////////////////////////////////////////////////////////
-	 var msg = new draw2d.shape.note.PostIt({text:"Simple experiment with 3 slider,\nConnections and a Pie chart."});
+	 var msg=new draw2d.shape.note.PostIt({text:"Simple experiment with 3 slider,\nConnections and a Pie chart."});
 	 canvas.add(msg, 20,20);
 });
 

@@ -362,7 +362,7 @@
     });*/
 
     $(".parent-toggler").click(function () {
-        ele = $(this)
+        ele=$(this)
         if (ele.css('font-weight') == 700) {
             ele.css({ 'font-weight': 700 });
             setTimeout(function () { ele.css({ 'font-weight': 700 }) }, 30)
@@ -374,7 +374,7 @@
                 ele.css({ 'background-color': '#fff' })
                 ele.css({ 'color': '#474747' })
             }, 120)
-            iconid = '#' + ele.attr('id') + 'icon'
+            iconid='#' + ele.attr('id') + 'icon'
             $(iconid).attr('name', 'add-outline')
             ele.css({ 'width': '100%' })
             ele.css({ 'margin-left': '0' })
@@ -390,7 +390,7 @@
                 ele.css({ 'background-color': '#c5050c' })
                 ele.css({ 'color': 'white' })
             }, 120)
-            iconid = '#' + ele.attr('id') + 'icon'
+            iconid='#' + ele.attr('id') + 'icon'
             $(iconid).attr('name', 'remove-outline')
             ele.css({ 'width': '105%' })
             ele.css({ 'margin-left': '-2.5%' })
@@ -402,9 +402,9 @@
 
 </script>
 <script type="text/javascript">
-    var intFrameHeight = window.innerHeight;
-    var mapheight = 520 / 760 * intFrameHeight;
-    var cardheight = mapheight - 20;
+    var intFrameHeight=window.innerHeight;
+    var mapheight=520 / 760 * intFrameHeight;
+    var cardheight=mapheight - 20;
     $("#gfx_holder1").css('height', mapheight);
     $("#datalayercard").css('height', cardheight)
 </script>

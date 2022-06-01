@@ -32,22 +32,22 @@
     </div>
     <div class="card-footer text-muted">
         <button class="btn border-0 text-muted" style="background-color:rgba(0, 0, 0, 0);"
-            onclick="window.location = '/demo'">Tutorial Home</button>
+            onclick="window.location='/demo'">Tutorial Home</button>
         <button class="btn border-0 text-muted" style="background-color:rgba(0, 0, 0, 0);"
-            onclick="window.location = '/demo/eg1'">Biogas from Waste</button>
+            onclick="window.location='/demo/eg1'">Biogas from Waste</button>
         <button class="btn border-0 text-muted" style="background-color:rgba(0, 0, 0, 0);"
-            onclick="window.location = '/demo/eg2'">Custom Model</button>
+            onclick="window.location='/demo/eg2'">Custom Model</button>
     </div>
 </div>
 {% endblock content %}
 
 {% block scripts %}
 <script>
-    nodedatajs = []
-    supdatajs = []
-    demdatajs = []
-    sitedatajs = []
-    transresultjs = []
+    nodedatajs=[]
+    supdatajs=[]
+    demdatajs=[]
+    sitedatajs=[]
+    transresultjs=[]
 
     {% if nodedata %}
     {% for item in nodedata %}
@@ -75,7 +75,7 @@
 
     {% if transresult %}
     {% for dataset in transresult %}
-    var datasetjs = []
+    var datasetjs=[]
     {% for row in dataset %}
     datasetjs.push({{ row| safe}})
     {% endfor %}

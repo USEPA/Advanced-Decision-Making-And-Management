@@ -25,7 +25,7 @@
 
 document.addEventListener("DOMContentLoaded",function () {
 
-     var app  = new example.Application();
+     var app =new example.Application();
      app.view.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
         createConnection: function(){
             return new HoverConnection();

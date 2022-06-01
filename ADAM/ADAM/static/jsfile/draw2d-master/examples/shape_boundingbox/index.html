@@ -19,10 +19,10 @@
 document.addEventListener("DOMContentLoaded",function () {
 
 
-    var canvas = new draw2d.Canvas("gfx_holder");
+    var canvas=new draw2d.Canvas("gfx_holder");
     canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
         createConnection: function(){
-            var connection = new draw2d.Connection({
+            var connection=new draw2d.Connection({
                 stroke:3,
                 outlineStroke:1,
                 outlineColor:"#303030",
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded",function () {
      /////////////////////////////////////////////////////////////////////
      // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
      /////////////////////////////////////////////////////////////////////
-     var msg = new draw2d.shape.note.PostIt({text:"drag&drop the ports to see how the anchor point \ncalculation is working."});
+     var msg=new draw2d.shape.note.PostIt({text:"drag&drop the ports to see how the anchor point \ncalculation is working."});
      canvas.add(msg, 20,20);
 });
 </script>

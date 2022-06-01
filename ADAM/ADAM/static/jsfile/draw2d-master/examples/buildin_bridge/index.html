@@ -14,10 +14,10 @@
 
 <script type="text/javascript">
 
-var router = new draw2d.layout.connection.CircuitConnectionRouter();
+var router=new draw2d.layout.connection.CircuitConnectionRouter();
 router.abortRoutingOnFirstVertexNode=false;
 var createConnection=function(sourcePort, targetPort){
-    var c = new draw2d.Connection({
+    var c=new draw2d.Connection({
         outlineColor:"#ffffff",
         outlineStroke:1,
         color:"#000000",
@@ -35,7 +35,7 @@ var createConnection=function(sourcePort, targetPort){
 document.addEventListener("DOMContentLoaded",function () {
         // create the canvas for the user interaction
         //
-        var canvas = new draw2d.Canvas("gfx_holder");
+        var canvas=new draw2d.Canvas("gfx_holder");
         canvas.installEditPolicy(new draw2d.policy.canvas.ShowGridEditPolicy());
         canvas.installEditPolicy(new draw2d.policy.canvas.FadeoutDecorationPolicy());
 
@@ -66,15 +66,15 @@ document.addEventListener("DOMContentLoaded",function () {
         var voltage=new draw2d.shape.analog.VoltageSupplyHorizontal();
         canvas.add(voltage,230,110);
 
-        var voltage2 = new draw2d.shape.analog.VoltageSupplyVertical();
+        var voltage2=new draw2d.shape.analog.VoltageSupplyVertical();
         canvas.add(voltage2,20,350);
         canvas.add(new draw2d.shape.basic.Label({text:"draw2d.shape.analog.VoltageSupplyVertical"}),200,355);
 
-        var resistor = new draw2d.shape.analog.ResistorVertical();
+        var resistor=new draw2d.shape.analog.ResistorVertical();
         canvas.add(resistor,50,450);
         canvas.add(new draw2d.shape.basic.Label({text:"draw2d.shape.analog.ResistorVertical"}),200,455);
 
-        var fulcrum = new draw2d.shape.node.Fulcrum();
+        var fulcrum=new draw2d.shape.node.Fulcrum();
         canvas.add(fulcrum,280,270);
 
 	   	 // Create a Connection and connect the Start and End node

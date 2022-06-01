@@ -19,15 +19,15 @@
 document.addEventListener("DOMContentLoaded",function () {
 
 
-     var canvas = new draw2d.Canvas("gfx_holder");
+     var canvas=new draw2d.Canvas("gfx_holder");
 
-     var figure = new TimerFigure({x:100, y:100});
+     var figure=new TimerFigure({x:100, y:100});
      canvas.add( figure);
 
      /////////////////////////////////////////////////////////////////////
      // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
      /////////////////////////////////////////////////////////////////////
-     var msg = new draw2d.shape.note.PostIt({text:"A custom label with an internal timer/counter.\nDrag&Drop me around."});
+     var msg=new draw2d.shape.note.PostIt({text:"A custom label with an internal timer/counter.\nDrag&Drop me around."});
      canvas.add(msg, 20,20);
 });
 </script>

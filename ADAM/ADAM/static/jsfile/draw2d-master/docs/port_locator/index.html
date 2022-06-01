@@ -16,15 +16,15 @@
 
 document.addEventListener("DOMContentLoaded",function () {
 
-    var canvas = new draw2d.Canvas("gfx_holder");
+    var canvas=new draw2d.Canvas("gfx_holder");
 
 
     // Add input and output ports to any shape via generic API calls
     // and custom locators
     //
-    var d = new draw2d.shape.basic.Rectangle({width:50, height:100, x:100, y:100});
-    var inputLocator  = new draw2d.layout.locator.InputPortLocator();
-    var outputLocator = new draw2d.layout.locator.OutputPortLocator();
+    var d=new draw2d.shape.basic.Rectangle({width:50, height:100, x:100, y:100});
+    var inputLocator =new draw2d.layout.locator.InputPortLocator();
+    var outputLocator=new draw2d.layout.locator.OutputPortLocator();
 
     d.createPort("hybrid",inputLocator);
     d.createPort("hybrid",inputLocator);
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded",function () {
     // locators. The default locator arrange input on the left and ouput on the right
     // side of the shape
     //
-    var d2 = new draw2d.shape.basic.Diamond({width:50, height:60,x:100, y:300});
+    var d2=new draw2d.shape.basic.Diamond({width:50, height:60,x:100, y:300});
     canvas.add( d2);
     d2.createPort("input");
     d2.createPort("output");
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded",function () {
     // create my own implementation for the locators and use this for the port position
     // calculation
     //
-    var MyInputPortLocator = draw2d.layout.locator.PortLocator.extend({
+    var MyInputPortLocator=draw2d.layout.locator.PortLocator.extend({
         init:function( ){
           this._super();
         },
@@ -62,18 +62,18 @@ document.addEventListener("DOMContentLoaded",function () {
     });
 
 
-    var MyOutputPortLocator = draw2d.layout.locator.PortLocator.extend({
+    var MyOutputPortLocator=draw2d.layout.locator.PortLocator.extend({
         init:function( ){
           this._super();
         },
         relocate:function(index, figure){
-            var p = figure.getParent();
+            var p=figure.getParent();
 
             this.applyConsiderRotation(figure, p.getWidth()/2, p.getHeight());
         }
     });
 
-  var topBottom = new draw2d.shape.basic.Rectangle({width:50, height:100, x:100, y:500});
+  var topBottom=new draw2d.shape.basic.Rectangle({width:50, height:100, x:100, y:500});
   topBottom.createPort("hybrid",new MyInputPortLocator());
   topBottom.createPort("hybrid",new MyOutputPortLocator());
 
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
 
   // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
-  var msg = new draw2d.shape.note.PostIt({text:"Add input and output ports at any position of the \nshape via generic API calls.", x:20, y:20});
+  var msg=new draw2d.shape.note.PostIt({text:"Add input and output ports at any position of the \nshape via generic API calls.", x:20, y:20});
   canvas.add(msg);
 
 });

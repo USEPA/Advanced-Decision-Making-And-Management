@@ -19,7 +19,7 @@
 document.addEventListener("DOMContentLoaded",function () {
 
 
-     var canvas = new draw2d.Canvas("gfx_holder");
+     var canvas=new draw2d.Canvas("gfx_holder");
 
     canvas.add( new CustomFigure({x:100, y:100}));
     canvas.add( new CustomFigure({x:400, y:150}));
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded",function () {
      /////////////////////////////////////////////////////////////////////
      // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
      /////////////////////////////////////////////////////////////////////
-     var msg = new draw2d.shape.note.PostIt({text:"Connect the shapes by dragging the ports.\nThe ports are hidden if they are connected and visible if you disconnect again."});
+     var msg=new draw2d.shape.note.PostIt({text:"Connect the shapes by dragging the ports.\nThe ports are hidden if they are connected and visible if you disconnect again."});
      canvas.add(msg, 20,20);
 });
 </script>

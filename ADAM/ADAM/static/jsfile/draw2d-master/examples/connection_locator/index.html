@@ -18,8 +18,8 @@
 <script type="text/javascript">
 
 var createStandardConnection= function(locator){
-    var connection = new draw2d.Connection();
-    var label = new draw2d.shape.basic.Label({text:"I'm a Label", stroke:1, color:"#FF0000", fontColor:"#0d0d0d"});
+    var connection=new draw2d.Connection();
+    var label=new draw2d.shape.basic.Label({text:"I'm a Label", stroke:1, color:"#FF0000", fontColor:"#0d0d0d"});
 
 
     connection.add(label, locator);
@@ -36,9 +36,9 @@ var createConnection=function(sourcePort, targetPort, callback, dropTarget){
     // get the coordinate of the drop target element to place the context menu in a propper
     // way
     //
-    var pos = dropTarget.getAbsolutePosition();
+    var pos=dropTarget.getAbsolutePosition();
 
-    var context = $('<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">'+
+    var context=$('<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">'+
                     '<li><a data-locator="draw2d.layout.locator.ParallelMidpointLocator" tabindex="-1" href="#">Parallel Label</a></li>'+
                     '<li><a data-locator="draw2d.layout.locator.ManhattanMidpointLocator" tabindex="-1" href="#">Horizontal Label</a></li>'+
                     '</ul>');
@@ -50,8 +50,8 @@ var createConnection=function(sourcePort, targetPort, callback, dropTarget){
 
                 context.remove();
 
-                var locator = eval("new "+$(this).data("locator")+"()");
-                var connection = createStandardConnection(locator);
+                var locator=eval("new "+$(this).data("locator")+"()");
+                var connection=createStandardConnection(locator);
                 callback(connection);
            });
 };
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
      // Create the paint area. The id in the constructor must be
      // an existing DIV
-	 var canvas = new draw2d.Canvas("gfx_holder");
+	 var canvas=new draw2d.Canvas("gfx_holder");
 
      var start;
      var end;
@@ -71,14 +71,14 @@ document.addEventListener("DOMContentLoaded",function () {
      canvas.add( start= new draw2d.shape.node.Start(), 50,250);
      canvas.add( new draw2d.shape.node.Start(), 50,350);
      canvas.add( new draw2d.shape.node.Start(), 50,450);
-     canvas.add( end = new draw2d.shape.node.End(), 300,150);
+     canvas.add( end=new draw2d.shape.node.End(), 300,150);
      canvas.add( new draw2d.shape.node.End(), 300,250);
      canvas.add( new draw2d.shape.node.End(), 300,350);
      canvas.add( new draw2d.shape.node.End(), 300,450);
 
      // Create a Connection and connect the Start and End node
      //
-     var c = createStandardConnection(new draw2d.layout.locator.ParallelMidpointLocator());
+     var c=createStandardConnection(new draw2d.layout.locator.ParallelMidpointLocator());
      c.setSource(start.getOutputPort(0));
      c.setTarget(end.getInputPort(0));
      canvas.add(c);
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded",function () {
 	 // THIS IS ONLY FOR THE ARROW AND THE POST-IT
 	 /////////////////////////////////////////////////////////////////////
 
-	 var msg = new draw2d.shape.note.PostIt({text:"Drag&Drop the blue box and notice the label.\nIt sticks always in the middle of the connector.\nCreate new a connection to choose the kind of locator."});
+	 var msg=new draw2d.shape.note.PostIt({text:"Drag&Drop the blue box and notice the label.\nIt sticks always in the middle of the connector.\nCreate new a connection to choose the kind of locator."});
 	 canvas.add(msg, 20,20);
 /*
    canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({

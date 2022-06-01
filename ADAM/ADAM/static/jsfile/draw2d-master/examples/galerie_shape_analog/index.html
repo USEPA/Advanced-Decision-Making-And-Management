@@ -20,12 +20,12 @@ document.addEventListener("DOMContentLoaded",function () {
 
         // create the canvas for the user interaction
         //
-        var canvas = new draw2d.Canvas("gfx_holder");
+        var canvas=new draw2d.Canvas("gfx_holder");
 
         // install a Connection create policy which matches to a "circuit like"
         // connections
         //
-        var router = new draw2d.layout.connection.InteractiveManhattanConnectionRouter();
+        var router=new draw2d.layout.connection.InteractiveManhattanConnectionRouter();
         canvas.installEditPolicy( new draw2d.policy.connection.ComposedConnectionCreatePolicy(// Responsible for connection creation....
                 [
                     // create a connection via Drag&Drop of ports

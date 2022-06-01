@@ -19,7 +19,7 @@
 
 document.addEventListener("DOMContentLoaded",function () {
 
-    var canvas = new draw2d.Canvas("gfx_holder");
+    var canvas=new draw2d.Canvas("gfx_holder");
 
     var randomColor=function(weight){
         return colors[Math.floor(Math.random()*colors.length)][weight];
@@ -28,14 +28,14 @@ document.addEventListener("DOMContentLoaded",function () {
     // Override the standard ResizeHandle and add some fancy filter to the SVG element
     // We need the fraphael.js lib to apply the filter
     //
-    var filter = canvas.paper.createFilter();
+    var filter=canvas.paper.createFilter();
     filter.createShadow(1.7, 1.7, 2, 0.8, "#303030");
     filter.element.setAttribute("x", "-55%");
     filter.element.setAttribute("y", "-55%");
     filter.element.setAttribute("width",  "400%");
     filter.element.setAttribute("height", "400%");
 
-    draw2d.Configuration.factory = $.extend({}, draw2d.Configuration.factory,{
+    draw2d.Configuration.factory=$.extend({}, draw2d.Configuration.factory,{
 
         createResizeHandle: function(owner, type){
             var handle= new draw2d.ResizeHandle(
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded",function () {
             });
 
             handle.useGradient=false;
-            handle._origShow = handle.show;
+            handle._origShow=handle.show;
             // override the standard "show" method to apply the filter to the create raphael element
             //
             handle.show= function(canvas){
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded",function () {
   canvas.installEditPolicy(new draw2d.policy.canvas.FadeoutDecorationPolicy());
   canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
         createConnection: function(){
-            var conn = new draw2d.Connection({
+            var conn=new draw2d.Connection({
                 stroke:5,
                 color: randomColor("100"),
                 router:null
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded",function () {
   /////////////////////////////////////////////////////////////////////
   // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
   /////////////////////////////////////////////////////////////////////
-  var msg = new draw2d.shape.note.PostIt({text:"Select a shape to see CSS styled resize handles", x:20, y:20});
+  var msg=new draw2d.shape.note.PostIt({text:"Select a shape to see CSS styled resize handles", x:20, y:20});
   canvas.add(msg);
 
 });

@@ -20,7 +20,7 @@
 <script type="text/javascript">
 
 // just for debugging
-var canvas = null;
+var canvas=null;
 var oval =null;
 var circle =null;
 var rect =null;
@@ -31,13 +31,13 @@ document.addEventListener("DOMContentLoaded",function () {
 
     // create the canvas for the user interaction
     //
-    canvas = new draw2d.Canvas("gfx_holder");
+    canvas=new draw2d.Canvas("gfx_holder");
     canvas.installEditPolicy(new draw2d.policy.canvas.FadeoutDecorationPolicy());
     canvas.installEditPolicy(new draw2d.policy.canvas.ExtendedKeyboardPolicy());
 
     // install a custom connection create policy
     //
-    var router = new draw2d.layout.connection.InteractiveManhattanConnectionRouter();
+    var router=new draw2d.layout.connection.InteractiveManhattanConnectionRouter();
     canvas.installEditPolicy( new draw2d.policy.connection.ComposedConnectionCreatePolicy(
        [
             // create a connection via Drag&Drop of ports
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
     // unmarshal the JSON document into the canvas
     // (load)
-    var reader = new draw2d.io.json.Reader();
+    var reader=new draw2d.io.json.Reader();
     reader.unmarshal(canvas, jsonDocument);
 
 });

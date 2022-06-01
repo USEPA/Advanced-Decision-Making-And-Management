@@ -16,13 +16,13 @@
 
 <script type="text/javascript">
 
-var canvas1 = null;
-var canvas2 = null;
+var canvas1=null;
+var canvas2=null;
 document.addEventListener("DOMContentLoaded",function () {
 
     // create the canvas for the user interaction
     //
-    canvas1 = new draw2d.Canvas("gfx_holder1");
+    canvas1=new draw2d.Canvas("gfx_holder1");
     canvas1.installEditPolicy(new CopyInterceptorPolicy());
 
     canvas1.paper.canvas.style.position="relative";
@@ -36,12 +36,12 @@ document.addEventListener("DOMContentLoaded",function () {
     /////////////////////////////////////////////////////////////////////
     // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
     /////////////////////////////////////////////////////////////////////
-    var msg = new draw2d.shape.note.PostIt({text: "Press SHIFT key before drag&drop to copy a figure.\nYou can drop them on the second canvas as well."});
+    var msg=new draw2d.shape.note.PostIt({text: "Press SHIFT key before drag&drop to copy a figure.\nYou can drop them on the second canvas as well."});
     canvas1.add(msg, 20,20);
 
     // create the canvas for the user interaction
     //
-    canvas2 = new draw2d.Canvas("gfx_holder2");
+    canvas2=new draw2d.Canvas("gfx_holder2");
     canvas2.installEditPolicy(new CopyInterceptorPolicy());
 
     canvas2.paper.canvas.style.position="relative";

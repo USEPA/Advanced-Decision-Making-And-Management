@@ -46,14 +46,14 @@ var createConnection=function(sourcePort, targetPort){
 
 };
 
-var canvas = null;
+var canvas=null;
 document.addEventListener("DOMContentLoaded",function () {
 
        // Everything is loaded - core and application. Now can create the
        // application
        //
 
-	    canvas = new draw2d.Canvas("gfx_holder");
+	    canvas=new draw2d.Canvas("gfx_holder");
 
       // Install a special policy into the canvas to use my own implementation of connection
       // if we drag&drop a port
@@ -70,8 +70,8 @@ document.addEventListener("DOMContentLoaded",function () {
 	  // Create two standard nodes for "start" and "end" and link
 	  // this figures with a standard Connector
 	  //
-	  var start  = new draw2d.shape.node.Start({x:130,y:130,width:60,height:60});
-	  var end    = new draw2d.shape.node.End({x:450,y:250});
+	  var start =new draw2d.shape.node.Start({x:130,y:130,width:60,height:60});
+	  var end   =new draw2d.shape.node.End({x:450,y:250});
 
 	  canvas.add(start);
 	  canvas.add(end);
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded",function () {
 	 /////////////////////////////////////////////////////////////////////
 	 // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
 	 /////////////////////////////////////////////////////////////////////
-	 var msg = new draw2d.shape.note.PostIt({text:"Drag&Drop the orange box onto the connector.\nThe orange box will be injected into the Connection.\n \nSmart - right?"});
+	 var msg=new draw2d.shape.note.PostIt({text:"Drag&Drop the orange box onto the connector.\nThe orange box will be injected into the Connection.\n \nSmart - right?"});
 	 canvas.add(msg, 20,20);
 });
 

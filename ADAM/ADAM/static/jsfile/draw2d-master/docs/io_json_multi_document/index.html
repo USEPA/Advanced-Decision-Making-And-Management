@@ -26,16 +26,16 @@ document.addEventListener("DOMContentLoaded",function () {
 
 	  // create the canvas for the user interaction
 	  //
-	  var canvas = new draw2d.Canvas("gfx_holder");
+	  var canvas=new draw2d.Canvas("gfx_holder");
 
 	  // create a defualt JSON reader
-	  var reader = new draw2d.io.json.Reader();
+	  var reader=new draw2d.io.json.Reader();
 
 	  // load the first document into the canvas...
 	  reader.unmarshal(canvas, jsonDocument_01);
 
 	  // ...load the second document into the canvas without to clear it before.
-      var s = reader.unmarshal(canvas, jsonDocument_02);
+      var s=reader.unmarshal(canvas, jsonDocument_02);
 	  canvas.addSelection(s);
 
       reader.unmarshal(canvas, jsonDocument_03);
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded",function () {
 });
 
 function displayJSON(canvas){
-    var writer = new draw2d.io.json.Writer();
+    var writer=new draw2d.io.json.Writer();
     writer.marshal(canvas,function(json){
         $("#json").text(JSON.stringify(json, null, 2));
     });

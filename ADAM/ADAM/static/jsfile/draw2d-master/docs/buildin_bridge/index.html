@@ -15,8 +15,8 @@
 <script type="text/javascript">
 
 var router = new draw2d.layout.connection.CircuitConnectionRouter();
-router.abortRoutingOnFirstVertexNode=false;
-var createConnection=function(sourcePort, targetPort){
+router.abortRoutingOnFirstVertexNode = false;
+var createConnection = function(sourcePort, targetPort){
     var c = new draw2d.Connection({
         outlineColor:"#ffffff",
         outlineStroke:1,
@@ -57,13 +57,13 @@ document.addEventListener("DOMContentLoaded",function () {
             ])
         );
 
-        var amp =new draw2d.shape.analog.OpAmp();
+        var amp  = new draw2d.shape.analog.OpAmp();
         canvas.add(amp,90,50);
 
-        var bridge=new draw2d.shape.analog.ResistorBridge()
+        var bridge = new draw2d.shape.analog.ResistorBridge()
         canvas.add(bridge,90,150);
 
-        var voltage=new draw2d.shape.analog.VoltageSupplyHorizontal();
+        var voltage = new draw2d.shape.analog.VoltageSupplyHorizontal();
         canvas.add(voltage,230,110);
 
         var voltage2 = new draw2d.shape.analog.VoltageSupplyVertical();

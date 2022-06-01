@@ -16,13 +16,13 @@
 
 <script type="text/javascript">
 
-	var canvas = null;
+	var canvas=null;
 
 	document.addEventListener("DOMContentLoaded",function() {
 
 		// create the canvas for the user interaction
 		//
-		canvas = new draw2d.Canvas("gfx_holder");
+		canvas=new draw2d.Canvas("gfx_holder");
 		// Override the default connection type. This is used during drag&drop operations of ports.
 		canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
 			createConnection: function() {
@@ -39,7 +39,7 @@
 
 		// unmarshal the JSON document into the canvas
 		// (load)
-		var reader = new draw2d.io.json.Reader();
+		var reader=new draw2d.io.json.Reader();
 		reader.unmarshal(canvas, jsonDocument);
 
     // tweak the loaded ports and set a anchor implementation for this
@@ -65,7 +65,7 @@
 	});
 
 	function displayJSON(canvas) {
-		var writer = new draw2d.io.json.Writer();
+		var writer=new draw2d.io.json.Writer();
 		writer.marshal(canvas,function(json){
    		   $("#json").text(JSON.stringify(json, null, 2));
 		});

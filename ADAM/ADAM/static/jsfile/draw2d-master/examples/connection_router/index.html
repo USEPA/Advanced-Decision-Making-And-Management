@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
 
 
-    app  = new example.Application();
+    app =new example.Application();
     app.load(jsonDocument);
 
     if(showJSON===true){
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
 
 function displayJSON(canvas){
-    var writer = new draw2d.io.json.Writer();
+    var writer=new draw2d.io.json.Writer();
     writer.marshal(canvas, function(json){
         $("#json").html("<pre>"+JSON.stringify(json,null,2)+"<pre>");
     });

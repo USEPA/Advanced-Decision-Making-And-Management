@@ -21,13 +21,13 @@
 
 <script type="text/javascript">
 
-var canvas = null;
+var canvas=null;
 document.addEventListener("DOMContentLoaded",function () {
 
 
     // create the canvas for the user interaction
     //
-    canvas = new draw2d.Canvas("canvas");
+    canvas=new draw2d.Canvas("canvas");
 
     // this example is different than the other ones. In this example the div is the scroll
     // area and not the body itself
@@ -47,13 +47,13 @@ document.addEventListener("DOMContentLoaded",function () {
 
     // Create the top toolbar with bootstrap.js element/buttons
     //
-    var toolbarDiv = $("#toolbar");
+    var toolbarDiv=$("#toolbar");
     var buttonGroup=$('<div class="btn-group" ></div>');
     toolbarDiv.append(buttonGroup);
 
     // Inject the GROUP Button and the callbacks
     //
-    var groupButton  = $('<button title="Group figures" class=\"btn btn-default\" ><img src="./icons/group.png"></button>');
+    var groupButton =$('<button title="Group figures" class=\"btn btn-default\" ><img src="./icons/group.png"></button>');
     buttonGroup.append(groupButton);
     groupButton.on("click",$.proxy(function(){
         canvas.getCommandStack().execute(new draw2d.command.CommandGroup(canvas, canvas.getSelection()));
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
     // Inject the UNGROUP Button and the callbacks
     //
-    var ungroupButton  = $('<button title="Ungroup figures" class=\"btn btn-default\" ><img src="./icons/ungroup.png"></button>');
+    var ungroupButton =$('<button title="Ungroup figures" class=\"btn btn-default\" ><img src="./icons/ungroup.png"></button>');
     buttonGroup.append(ungroupButton);
     ungroupButton.on("click",$.proxy(function(){
         canvas.getCommandStack().execute(new draw2d.command.CommandUngroup(canvas, canvas.getSelection()));
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
     // load an JSON document into the canvas
     //
-    var reader = new draw2d.io.json.Reader();
+    var reader=new draw2d.io.json.Reader();
     reader.unmarshal(canvas, jsonDocument);
 
 

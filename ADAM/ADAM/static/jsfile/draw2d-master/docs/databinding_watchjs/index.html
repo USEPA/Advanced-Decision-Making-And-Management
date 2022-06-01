@@ -26,11 +26,11 @@
 var app;
 document.addEventListener("DOMContentLoaded",function () {
 
-      app  = new example.Application();
+      app =new example.Application();
 
       // unmarshal the JSON document into the canvas
       // (load)
-      var reader = new draw2d.io.json.Reader();
+      var reader=new draw2d.io.json.Reader();
       reader.unmarshal(app.view, jsonDocument);
 
 });

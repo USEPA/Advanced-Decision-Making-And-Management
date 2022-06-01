@@ -17,7 +17,7 @@
 document.addEventListener("DOMContentLoaded",function () {
     // create the canvas for the user interaction
     //
-    var canvas = new draw2d.Canvas("gfx_holder");
+    var canvas=new draw2d.Canvas("gfx_holder");
 
     var circle =new draw2d.shape.basic.Circle({diameter:30});
     // standard selectionFeedback. It is not neccessary to install it manually
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
 
     // annotations / documentation
-    var msg = new draw2d.shape.note.PostIt({text:"Install different kind of selection feedback policies.\nSelect the circles to see the effect"});
+    var msg=new draw2d.shape.note.PostIt({text:"Install different kind of selection feedback policies.\nSelect the circles to see the effect"});
     canvas.add(msg, 20,20);
     canvas.add(new draw2d.shape.basic.Label({text:"circle.installEditPolicy(new draw2d.policy.figure.RectangleSelectionFeedbackPolicy());"}),200,100);
     canvas.add(new draw2d.shape.basic.Label({text:"circle.installEditPolicy(new draw2d.policy.figure.AntSelectionFeedbackPolicy());"}),200,150);

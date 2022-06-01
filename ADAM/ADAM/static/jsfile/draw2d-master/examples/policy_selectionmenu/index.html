@@ -17,18 +17,18 @@
 
 <script type="text/javascript">
 
-var textFigure = null;
-var canvas = null;
+var textFigure=null;
+var canvas=null;
 document.addEventListener("DOMContentLoaded",function () {
 
     // create the canvas for the user interaction
     //
-    canvas = new draw2d.Canvas("gfx_holder");
+    canvas=new draw2d.Canvas("gfx_holder");
 
     // create and add two nodes which contains Ports (In and OUT)
     //
-     let start = new CustomFigure();
-     let end   = new CustomFigure();
+     let start=new CustomFigure();
+     let end  =new CustomFigure();
 
      // ...add it to the canvas
      canvas.add( start, 50,250);
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded",function () {
      /////////////////////////////////////////////////////////////////////
      // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
      /////////////////////////////////////////////////////////////////////
-     var msg = new draw2d.shape.note.PostIt({text:"Show a figure flyout menu if an element is selected.\nSelect an shape and press the 'delete' icon."});
+     var msg=new draw2d.shape.note.PostIt({text:"Show a figure flyout menu if an element is selected.\nSelect an shape and press the 'delete' icon."});
      canvas.add(msg, 20,20);
 });
 

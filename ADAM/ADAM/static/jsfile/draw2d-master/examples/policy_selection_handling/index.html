@@ -26,10 +26,10 @@
 document.addEventListener("DOMContentLoaded",function () {
 
 
-    var app  = new example.Application();
+    var app =new example.Application();
     app.load(jsonDocument);
 
-    var msg = new draw2d.shape.note.PostIt({text:"You can install different selection policy into the canvas.Multi selection, single selection, \npanning or just a readOnly policy to avoid model modifications"});
+    var msg=new draw2d.shape.note.PostIt({text:"You can install different selection policy into the canvas.Multi selection, single selection, \npanning or just a readOnly policy to avoid model modifications"});
     app.view.add(msg, 20,10);
 });
 

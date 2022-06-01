@@ -16,18 +16,18 @@
 <script type="text/javascript">
 
 
-	var canvas = null;
+	var canvas=null;
 
 	document.addEventListener("DOMContentLoaded",function() {
 
 
 		// create the canvas for the user interaction
 		//
-		canvas = new draw2d.Canvas("gfx_holder");
+		canvas=new draw2d.Canvas("gfx_holder");
 		canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
 			createConnection: function(){
 				// return my special kind of connection
-				var conn = new draw2d.Connection({
+				var conn=new draw2d.Connection({
 					router:new draw2d.layout.connection.VertexRouter()
 				});
 				conn.installEditPolicy(new draw2d.policy.line.VertexSelectionFeedbackPolicy());
@@ -37,27 +37,27 @@
 
 		// unmarshal the JSON document into the canvas
 		// (load)
-		var reader = new draw2d.io.json.Reader();
+		var reader=new draw2d.io.json.Reader();
 		reader.unmarshal(canvas, jsonDocument);
 
 
 		// get the bounding box of the document and translate the complete document
 		// into the center of the canvas. Scroll to the top left corner after them
 	    //
-	    var xCoords = [];
-	    var yCoords = [];
+	    var xCoords=[];
+	    var yCoords=[];
 	    canvas.getFigures().each(function(i,f){
-	        var b = f.getBoundingBox();
+	        var b=f.getBoundingBox();
 	        xCoords.push(b.x, b.x+b.w);
 	        yCoords.push(b.y, b.y+b.h);
 	    });
-	    var minX   = Math.min.apply(Math, xCoords);
-	    var minY   = Math.min.apply(Math, yCoords);
-	    var width  = Math.max.apply(Math, xCoords)-minX;
-	    var height = Math.max.apply(Math, yCoords)-minY;
+	    var minX  =Math.min.apply(Math, xCoords);
+	    var minY  =Math.min.apply(Math, yCoords);
+	    var width =Math.max.apply(Math, xCoords)-minX;
+	    var height=Math.max.apply(Math, yCoords)-minY;
 
-        var dx = (canvas.getWidth()/2)-(minX+width/2);
-        var dy = (canvas.getHeight()/2)-(minY+height/2);
+        var dx=(canvas.getWidth()/2)-(minX+width/2);
+        var dy=(canvas.getHeight()/2)-(minY+height/2);
         canvas.getFigures().each(function(i,f){
             f.translate(dx,dy);
         });

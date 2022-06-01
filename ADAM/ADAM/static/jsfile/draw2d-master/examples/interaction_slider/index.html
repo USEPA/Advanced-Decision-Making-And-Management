@@ -49,17 +49,17 @@ var jsonDocument =
 
 document.addEventListener("DOMContentLoaded",function () {
 
-     var canvas = new draw2d.Canvas("gfx_holder");
+     var canvas=new draw2d.Canvas("gfx_holder");
 
      // unmarshal the JSON document into the canvas
      // (load)
-     var reader = new draw2d.io.json.Reader();
+     var reader=new draw2d.io.json.Reader();
      reader.unmarshal(canvas, jsonDocument);
 
 	 /////////////////////////////////////////////////////////////////////
 	 // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
 	 /////////////////////////////////////////////////////////////////////
-	 var msg = new draw2d.shape.note.PostIt({text:"Drag the slider thumb to change the\nvalue and propagate these to the Sparkline"});
+	 var msg=new draw2d.shape.note.PostIt({text:"Drag the slider thumb to change the\nvalue and propagate these to the Sparkline"});
 	 canvas.add(msg, 20,20);
 });
 

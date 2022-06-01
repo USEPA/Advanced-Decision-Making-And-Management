@@ -18,13 +18,13 @@
 <script type="text/javascript">
 
 
-	var canvas = null;
+	var canvas=null;
 
 	document.addEventListener("DOMContentLoaded",function() {
 
 		// create the canvas for the user interaction
 		//
-		canvas = new draw2d.Canvas("gfx_holder");
+		canvas=new draw2d.Canvas("gfx_holder");
 
 		// remove the default keyboard handler
 		//
@@ -40,7 +40,7 @@
 		canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
 			createConnection: function(){
 				// return my special kind of connection
-				var conn = new draw2d.Connection({
+				var conn=new draw2d.Connection({
 					router:new draw2d.layout.connection.VertexRouter()
 				});
 				conn.installEditPolicy(new draw2d.policy.line.VertexSelectionFeedbackPolicy());
@@ -52,11 +52,11 @@
 
 		// unmarshal the JSON document into the canvas
 		// (load)
-		var reader = new draw2d.io.json.Reader();
+		var reader=new draw2d.io.json.Reader();
 		reader.unmarshal(canvas, jsonDocument);
 
 
-		var msg = new draw2d.shape.note.PostIt({text:"Select an object and press the 'DEL' key. \nA confirm dialog apears triggerd by a canvas keyboard policy"});
+		var msg=new draw2d.shape.note.PostIt({text:"Select an object and press the 'DEL' key. \nA confirm dialog apears triggerd by a canvas keyboard policy"});
 		canvas.add(msg, 20,20);
 	});
 

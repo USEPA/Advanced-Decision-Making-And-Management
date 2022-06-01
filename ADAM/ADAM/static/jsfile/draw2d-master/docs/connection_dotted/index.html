@@ -14,13 +14,13 @@
 
 <script type="text/javascript">
 
-var endNode = null;
+var endNode=null;
 document.addEventListener("DOMContentLoaded",function () {
 
 
      // create the paint area. The id in the constructor must be
      // an existing DIV
-	 var canvas = new draw2d.Canvas("gfx_holder");
+	 var canvas=new draw2d.Canvas("gfx_holder");
 
      canvas.installEditPolicy(new draw2d.policy.canvas.FadeoutDecorationPolicy());
 
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded",function () {
      canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
         createConnection: function() {
             // return my special kind of connection
-            var con =  new draw2d.Connection({
+            var con= new draw2d.Connection({
                 "dasharray":"- ",
                 "stroke":3
             });
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded",function () {
      }));
 
      // create and add two Node which contains Ports (In and OUT)
-	 var start  = new draw2d.shape.node.Start({x:50, y:250});
+	 var start =new draw2d.shape.node.Start({x:50, y:250});
 	 var endNode= new draw2d.shape.node.End({x:230, y:150});
 
 	 canvas.add( start);
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded",function () {
 	 // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
 	 /////////////////////////////////////////////////////////////////////
 
-	 var msg = new draw2d.shape.note.PostIt({text:"connect two ports to se a dotted line as connection."});
+	 var msg=new draw2d.shape.note.PostIt({text:"connect two ports to se a dotted line as connection."});
 	 canvas.add(msg, 20,20);
 
 	 $("body").scrollTop(0)

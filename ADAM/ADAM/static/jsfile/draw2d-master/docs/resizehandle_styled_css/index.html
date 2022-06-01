@@ -17,7 +17,7 @@
 document.addEventListener("DOMContentLoaded",function () {
 
 
-  var canvas = new draw2d.Canvas("gfx_holder");
+  var canvas=new draw2d.Canvas("gfx_holder");
 
   canvas.add( new draw2d.shape.basic.Oval(),100,100);
   canvas.add( new draw2d.shape.basic.Rectangle(),120,150);
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded",function () {
   /////////////////////////////////////////////////////////////////////
   // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
   /////////////////////////////////////////////////////////////////////
-  var msg = new draw2d.shape.note.PostIt({text:"Select a shape to see CSS styled resize handles", x:20, y:20});
+  var msg=new draw2d.shape.note.PostIt({text:"Select a shape to see CSS styled resize handles", x:20, y:20});
   canvas.add(msg);
 
 });

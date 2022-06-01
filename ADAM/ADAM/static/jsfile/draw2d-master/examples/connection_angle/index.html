@@ -15,9 +15,9 @@
 <script type="text/javascript">
 
 var createConnection=function(){
-    var connection = new draw2d.Connection();
-    var locator = new draw2d.layout.locator.ParallelMidpointLocator();
-    var label = new draw2d.shape.basic.Label({text:"I'm a Label"});
+    var connection=new draw2d.Connection();
+    var locator=new draw2d.layout.locator.ParallelMidpointLocator();
+    var label=new draw2d.shape.basic.Label({text:"I'm a Label"});
     label.setColor(null);
     label.setFontColor("#0d0d0d");
 
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
 	     // Create the paint area. The id in the constructor must be
 	     // an existing DIV
-		 var canvas = new draw2d.Canvas("gfx_holder");
+		 var canvas=new draw2d.Canvas("gfx_holder");
         // Override the default connection type. This is used during drag&drop operations of ports.
         canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
             createConnection: createConnection
@@ -45,8 +45,8 @@ document.addEventListener("DOMContentLoaded",function () {
 
          // create and add two nodes which contains Ports (In and OUT)
 	     //
-		 var start = new draw2d.shape.node.Start({x:50, y:250});
-		 var end   = new draw2d.shape.node.End({x:430, y:150});
+		 var start=new draw2d.shape.node.Start({x:50, y:250});
+		 var end  =new draw2d.shape.node.End({x:430, y:150});
 
 		 // ...add it to the canvas
 		 canvas.add( start);
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
 		 // Create a Connection and connect the Start and End node
 		 //
-		 var c = createConnection();
+		 var c=createConnection();
          c.setSource(start.getOutputPort(0));
          c.setTarget(end.getInputPort(0));
 
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded",function () {
 		 /////////////////////////////////////////////////////////////////////
 		 // this is the text in the upper left corner
 		 /////////////////////////////////////////////////////////////////////
-		 var msg = new draw2d.shape.note.PostIt({text:"Move the start or destination figure to update the label.\nThe label is always readable and isn't upside down in any cases."});
+		 var msg=new draw2d.shape.note.PostIt({text:"Move the start or destination figure to update the label.\nThe label is always readable and isn't upside down in any cases."});
 		 canvas.add(msg, 20,20);
 });
 

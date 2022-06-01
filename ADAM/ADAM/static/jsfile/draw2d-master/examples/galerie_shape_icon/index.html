@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
      // create the canvas for the user interaction
      //
-     var canvas = new draw2d.Canvas("gfx_holder");
+     var canvas=new draw2d.Canvas("gfx_holder");
 
      // add all icons to the canvas
      //
@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded",function () {
    	 // THIS IS ONLY FOR THE POST-IT
    	 /////////////////////////////////////////////////////////////////////
 
-   	 var msg = new draw2d.shape.note.PostIt({text:"Icons copied from raphaeljs.com"});
+   	 var msg=new draw2d.shape.note.PostIt({text:"Icons copied from raphaeljs.com"});
    	 canvas.add(msg, 20,20);
 
    	 $("body").scrollTop(0)

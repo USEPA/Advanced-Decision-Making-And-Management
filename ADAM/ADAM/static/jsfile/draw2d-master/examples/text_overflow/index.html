@@ -15,16 +15,16 @@
 
 <script type="text/javascript">
 
-var textFigure = null;
+var textFigure=null;
 document.addEventListener("DOMContentLoaded",function () {
 
 
     // create the canvas for the user interaction
     //
-    var canvas = new draw2d.Canvas("gfx_holder");
+    var canvas=new draw2d.Canvas("gfx_holder");
 
 
-    textFigure = new draw2d.shape.basic.Text({
+    textFigure=new draw2d.shape.basic.Text({
           text:"The quick brown fox jumps over the lazy dog",
           fontFamily:"Curier New",
           fontSize:20,
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded",function () {
     /////////////////////////////////////////////////////////////////////
     // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
     /////////////////////////////////////////////////////////////////////
-    var msg = new draw2d.shape.note.PostIt({text:"A resizeable text box. \nThe box wraps the text if the width changes."});
+    var msg=new draw2d.shape.note.PostIt({text:"A resizeable text box. \nThe box wraps the text if the width changes."});
     canvas.add(msg, 20,20);
 
 });

@@ -16,21 +16,21 @@
 document.addEventListener("DOMContentLoaded",function () {
 
 
-    var testData = [];
+    var testData=[];
     for(var i=0;i<100;i++) {
         testData.push(Math.floor(Math.random() * 100));
     }
 
-    var canvas = new draw2d.Canvas("gfx_holder");
+    var canvas=new draw2d.Canvas("gfx_holder");
 
-    var sparkline = new draw2d.shape.diagram.Sparkline({x:100, y:100, data: testData});
+    var sparkline=new draw2d.shape.diagram.Sparkline({x:100, y:100, data: testData});
 
     canvas.add( sparkline);
 
   /////////////////////////////////////////////////////////////////////
   // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
   /////////////////////////////////////////////////////////////////////
-  var msg = new draw2d.shape.note.PostIt({text:"A simple SparkLineChart with some random data"});
+  var msg=new draw2d.shape.note.PostIt({text:"A simple SparkLineChart with some random data"});
   canvas.add(msg, 20,20);
 });
 

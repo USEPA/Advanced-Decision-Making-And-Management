@@ -31,18 +31,18 @@
 var app;
 document.addEventListener("DOMContentLoaded",function () {
 
-      app  = new example.Application();
+      app =new example.Application();
 
       // unmarshal the JSON document into the canvas
       // (load)
-      var reader = new draw2d.io.json.Reader();
+      var reader=new draw2d.io.json.Reader();
       reader.unmarshal(app.canvas, jsonDocument);
 
 
     /////////////////////////////////////////////////////////////////////
     // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
     /////////////////////////////////////////////////////////////////////
-    var msg = new draw2d.shape.note.PostIt({text:"Use the contextmenu to add additional sliders to the figure.\nAll of them can be stored and restored via JSON.\n \n \n - Changing the slider changes the opacity of the connected figure.\n - Press the 'SHIFT' during drag&drop to copy a shape.\n - DoubleClick on the title of the shape to change it."});
+    var msg=new draw2d.shape.note.PostIt({text:"Use the contextmenu to add additional sliders to the figure.\nAll of them can be stored and restored via JSON.\n \n \n - Changing the slider changes the opacity of the connected figure.\n - Press the 'SHIFT' during drag&drop to copy a shape.\n - DoubleClick on the title of the shape to change it."});
     app.canvas.add(msg, 20,20);
 
 });

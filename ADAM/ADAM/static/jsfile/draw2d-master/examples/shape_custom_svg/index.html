@@ -19,14 +19,14 @@
 document.addEventListener("DOMContentLoaded",function () {
 
 
-     var canvas = new draw2d.Canvas("gfx_holder");
+     var canvas=new draw2d.Canvas("gfx_holder");
 
      canvas.add( new CustomFigure({x:100, y:100}));
 
      /////////////////////////////////////////////////////////////////////
      // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
      /////////////////////////////////////////////////////////////////////
-     var msg = new draw2d.shape.note.PostIt({text:"Just a simple SVG figure with some text. You can toggle the SVG by\nclicking on the figure.", x:20, y:20});
+     var msg=new draw2d.shape.note.PostIt({text:"Just a simple SVG figure with some text. You can toggle the SVG by\nclicking on the figure.", x:20, y:20});
      canvas.add(msg);
 });
 </script>

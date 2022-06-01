@@ -15,17 +15,17 @@
 
 <script type="text/javascript">
 
-	var canvas = null;
+	var canvas=null;
 
 	document.addEventListener("DOMContentLoaded",function() {
 
 		// create the canvas for the user interaction
 		//
-		canvas = new draw2d.Canvas("gfx_holder");
+		canvas=new draw2d.Canvas("gfx_holder");
 		canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
 			createConnection: function(sourcePort, targetPort){
 				// return my special kind of connection
-				var conn = new draw2d.Connection({
+				var conn=new draw2d.Connection({
 					router:new draw2d.layout.connection.VertexRouter()
 				});
 
@@ -36,7 +36,7 @@
 
 		// unmarshal the JSON document into the canvas
 		// (load)
-		var reader = new draw2d.io.json.Reader();
+		var reader=new draw2d.io.json.Reader();
 		reader.unmarshal(canvas, jsonDocument);
 
 		// display the JSON document in the preview DIV
@@ -54,7 +54,7 @@
 	});
 
 	function displayJSON(canvas) {
-		var writer = new draw2d.io.json.Writer();
+		var writer=new draw2d.io.json.Writer();
 		writer.marshal(canvas,function(json){
    		   $("#json").text(JSON.stringify(json, null, 2));
 		});

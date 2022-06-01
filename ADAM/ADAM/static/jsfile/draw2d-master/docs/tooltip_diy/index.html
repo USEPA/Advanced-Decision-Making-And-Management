@@ -19,7 +19,7 @@
 
 document.addEventListener("DOMContentLoaded",function () {
 
-     var canvas = new draw2d.Canvas("gfx_holder");
+     var canvas=new draw2d.Canvas("gfx_holder");
 
 
      canvas.add(new TooltipFigure({x:100,y:300}));
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded",function () {
     /////////////////////////////////////////////////////////////////////
     // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
     /////////////////////////////////////////////////////////////////////
-    var msg = new draw2d.shape.note.PostIt({text:"The shapes below show a tooltip on mouse over.\nThis is a good example how to implement your own tooltips."});
+    var msg=new draw2d.shape.note.PostIt({text:"The shapes below show a tooltip on mouse over.\nThis is a good example how to implement your own tooltips."});
     canvas.add(msg, 20,20);
 
 });

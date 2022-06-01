@@ -14,18 +14,18 @@
 
     <div class="card-header">
         <div class="row align-items-center">
-          <div class = "col text-left">
-            <a  class = "btn btn-light" href = '/expert/usermain/'>
-              <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+          <div class="col text-left">
+            <a  class="btn btn-light" href='/expert/usermain/'>
+              <ion-icon name="arrow-back-circle-outline" class="iconpiclarger align-middle"></ion-icon> Dashboard
             </a>
           </div>
 
-          <div class = "col text-center">
-            <h4 class = "card-title align-vertical text-body" >Model List</h4>
+          <div class="col text-center">
+            <h4 class="card-title align-vertical text-body" >Model List</h4>
           </div>
-          <div class = "col text-right invisible">
-            <a  class = "btn btn-light" href = '/'>
-              <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+          <div class="col text-right invisible">
+            <a  class="btn btn-light" href='/'>
+              <ion-icon name="exit" class="iconpiclarger align-middle"></ion-icon> Dashborad
             </a>
           </div>
 
@@ -34,17 +34,17 @@
 
     <div class="card-body">
 
-      <div class = "container" style = "width: 40%; left: 30%">
-        <div class = "btn-group" style = "width: 100%">
-          <button class = "btn btn-light border" style = "width: 50%" onclick="newmodel()" data-toggle="tooltip" data-placement="top" title="Build a new blank model">New Model</button>
-          <button class = "btn btn-light border" style = "width: 50%" onclick="copymodel()" data-toggle="tooltip" data-placement="top" title="Copy a current model and save as a new model">Copy Model</button>
+      <div class="container" style="width: 40%; left: 30%">
+        <div class="btn-group" style="width: 100%">
+          <button class="btn btn-light border mx-2" style="width: 50%" onclick="newmodel()" data-toggle="tooltip" data-placement="top" title="Build a new blank model">New Model</button>
+          <button class="btn btn-light border mx-2" style="width: 50%" onclick="copymodel()" data-toggle="tooltip" data-placement="top" title="Copy a current model and save as a new model">Copy Model</button>
         </div>
       </div>
       <br/>
 
     {% if user.opttask_set.all %}
-    <div class = "row">
-      <table width = 100% class = "table text-center table-hover">
+    <div class="row">
+      <table width=100% class="table text-center table-hover">
         <thead>
         <tr>
           <th>Model Name</th>
@@ -58,7 +58,7 @@
         {% for task in user.opttask_set.all%}
          <tr>
            <td>
-             <a href = '/expert/usermain/task/{{task.id}}' class = "parent-toggler" style = "text-decoration: none; color:#474747 ">{{task.task_name}}
+             <a href='/expert/usermain/task/{{task.id}}' class="parent-toggler" style="text-decoration: none; color:#474747 ">{{task.task_name}}
              </a>
           </td>
            <td>{{task.date_create}} </td>
@@ -76,9 +76,9 @@
            <td>{{task.task_status}} </td>
            <td>
              <div >
-               <ion-icon name="trash" class = "iconpiclarge delete_confirm" id = "{{task.id}}" data-toggle="tooltip" data-placement="right" title="Delete this model">
+               <ion-icon name="trash" class="iconpiclarge delete_confirm" id="{{task.id}}" data-toggle="tooltip" data-placement="right" title="Delete this model">
                </ion-icon>
-               <ion-icon name="reader" class = "iconpiclarge renote_dialog" data-toggle="tooltip" data-placement="right" title="{{task.notes}}" onclick = ''>
+               <ion-icon name="reader" class="iconpiclarge renote_dialog" data-toggle="tooltip" data-placement="right" title="{{task.notes}}" onclick=''>
                </ion-icon>
              </div>
            </td>
@@ -110,11 +110,11 @@ $(".parent-toggler").hover(function(){
 
 $(function() {
   $('.delete_confirm').click(function(event) {
-    var task_id = this.id;
+    var task_id=this.id;
     alertify.confirm('Confirm', 'Are you sure to delete this task?',
     function() {
-      var el = document.getElementsByName("csrfmiddlewaretoken");
-      csrf_value = el[0].getAttribute("value");
+      var el=document.getElementsByName("csrfmiddlewaretoken");
+      csrf_value=el[0].getAttribute("value");
       jQuery.ajax({
         method: "POST",
         url: "/expert/ajax/deletetask",
@@ -131,25 +131,25 @@ $(function() {
 });
 
 function copymodel(){
-  content = '<div class="form-group"><label for="modelname">Model name:</label><input type="email" class="form-control" id="modelname"></div>'
-  content += '<div class="form-group"><label for="modelid">Choose the model to copy:</lable><select class = "form-control" id = "modelid">'
+  content='<div class="form-group"><label for="modelname">Model name:</label><input type="email" class="form-control" id="modelname"></div>'
+  content += '<div class="form-group"><label for="modelid">Choose the model to copy:</lable><select class="form-control" id="modelid">'
   content += '<optgroup label="Your Models">'
     {% for t in tasklist %}
       {% if '1' in t.finished_steps %}
-        content += '<option value = "{{t.id}}"> {{t.task_name}} </option>'
+        content += '<option value="{{t.id}}"> {{t.task_name}} </option>'
       {% endif %}
     {% endfor %}
     content += '</optgroup><optgroup label="Case Studies">'
     {% for case in caselist %}
       {% for s in case.childrencase.all %}
-      content += '<option value = "c{{s.id}}"> {{case.name}} (Scenario: {{s.name}}) </option>'
+      content += '<option value="c{{s.id}}"> {{case.name}} (Scenario: {{s.name}}) </option>'
       {% endfor %}
     {% endfor %}
 
   content += '</optgroup></select></div><div class="form-group"><label for="modelnotes">Model descriptions</label><textarea maxlength="1000" class="form-control" id="modelnotes" rows="5"></textarea></div>'
   alertify.confirm(content).set('title','Copy Model').set('closable', false).set('labels',{ok:'Yes', cancel:'Cancel'}).set('onok', function(){
-    var el = document.getElementsByName("csrfmiddlewaretoken");
-    csrf_value = el[0].getAttribute("value");
+    var el=document.getElementsByName("csrfmiddlewaretoken");
+    csrf_value=el[0].getAttribute("value");
     jQuery.ajax({
       method: "POST",
       url: "/expert/ajax/copymodel",
@@ -165,12 +165,12 @@ function copymodel(){
 }
 
 function newmodel(){
-  content = '<div class="form-group"><label for="modelname">Model name:</label><input type="email" class="form-control" id="modelname"></div>'
+  content='<div class="form-group"><label for="modelname">Model name:</label><input type="email" class="form-control" id="modelname"></div>'
 
   content += '<div class="form-group"><label for="modelnotes">Model descriptions</label><textarea  maxlength="1000" class="form-control" id="modelnotes" rows="5"></textarea></div>'
   alertify.confirm(content).set('title','New Model').set('closable', false).set('labels',{ok:'Yes', cancel:'Cancel'}).set('onok', function(){
-    var el = document.getElementsByName("csrfmiddlewaretoken");
-    csrf_value = el[0].getAttribute("value");
+    var el=document.getElementsByName("csrfmiddlewaretoken");
+    csrf_value=el[0].getAttribute("value");
     jQuery.ajax({
       method: "POST",
       url: "/expert/ajax/newmodel",

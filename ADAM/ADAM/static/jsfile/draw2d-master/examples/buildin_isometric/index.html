@@ -20,16 +20,16 @@ document.addEventListener("DOMContentLoaded",function () {
 
   // create the canvas for the user interaction
   //
-  var canvas = new draw2d.Canvas("canvas");
+  var canvas=new draw2d.Canvas("canvas");
 
-    // 10   = Grid size
-    // true = consider zoom and resize the grid
+    // 10  =Grid size
+    // true=consider zoom and resize the grid
   canvas.installEditPolicy(new draw2d.policy.canvas.SnapToDimetricGridEditPolicy());
 
     /////////////////////////////////////////////////////////////////////
     // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
     /////////////////////////////////////////////////////////////////////
-    var msg = new draw2d.shape.dimetric.Rectangle({x:100,y:10, bgColor:"#f0f000", alpha:0.7, width:100, height:90});
+    var msg=new draw2d.shape.dimetric.Rectangle({x:100,y:10, bgColor:"#f0f000", alpha:0.7, width:100, height:90});
     canvas.add(msg, 20,20);
     canvas.addSelection(msg)
 });

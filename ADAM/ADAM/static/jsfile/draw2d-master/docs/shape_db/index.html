@@ -46,10 +46,10 @@
 document.addEventListener("DOMContentLoaded",function () {
 
     var routerToUse =new draw2d.layout.connection.InteractiveManhattanConnectionRouter();
-    var app  = new example.Application();
+    var app =new example.Application();
     app.view.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
         createConnection: function(){
-            var connection = new draw2d.Connection({
+            var connection=new draw2d.Connection({
                 stroke:3,
                 outlineStroke:1,
                 outlineColor:"#303030",
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
     // unmarshal the JSON document into the canvas
     // (load)
-    var reader = new draw2d.io.json.Reader();
+    var reader=new draw2d.io.json.Reader();
     reader.unmarshal(app.view, jsonDocument);
 
 });

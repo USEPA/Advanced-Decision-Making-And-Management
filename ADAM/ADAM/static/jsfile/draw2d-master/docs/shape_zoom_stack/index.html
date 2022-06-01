@@ -22,14 +22,14 @@ document.addEventListener("DOMContentLoaded",function () {
 
     // create the canvas for the user interaction
     //
-    var canvas = new draw2d.Canvas("gfx_holder");
+    var canvas=new draw2d.Canvas("gfx_holder");
 
 
     canvas.add(new ZoomFigure({ width:50, height:50}),400,100);
 
 
     // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
-    var msg = new draw2d.shape.note.PostIt({text:"Use the Shift key + mouse wheel to zoom in/out. \nThe StackFigure shows/hides different layers in relation to the zoom level"});
+    var msg=new draw2d.shape.note.PostIt({text:"Use the Shift key + mouse wheel to zoom in/out. \nThe StackFigure shows/hides different layers in relation to the zoom level"});
     canvas.add(msg, 20,20);
 
 });

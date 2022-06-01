@@ -27,10 +27,10 @@ document.addEventListener("DOMContentLoaded",function () {
     // Everything is loaded - core and application. Now can create the
     // application
     //
-   	var app  = new example.Application();
+   	var app =new example.Application();
 
-    // 10   = Grid size
-    // true = consider zoom and resize the grid
+    // 10  =Grid size
+    // true=consider zoom and resize the grid
     app.view.installEditPolicy(new draw2d.policy.canvas.ShowGridEditPolicy());
 
     app.view.installEditPolicy(new draw2d.policy.canvas.SnapToGeometryEditPolicy());
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded",function () {
     /////////////////////////////////////////////////////////////////////
     // JUST ADD SOME DOCU ELEMENTS ON THE SCREEN
     /////////////////////////////////////////////////////////////////////
-    var msg = new draw2d.shape.note.PostIt({text: "A canvas has per default a mouse wheel zoom support.\nPress 'SHIFT' and the mouse wheel to zoom in/out."});
+    var msg=new draw2d.shape.note.PostIt({text: "A canvas has per default a mouse wheel zoom support.\nPress 'SHIFT' and the mouse wheel to zoom in/out."});
     app.view.add(msg, 20,20);
 
 });

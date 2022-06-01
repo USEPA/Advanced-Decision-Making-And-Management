@@ -79,13 +79,13 @@ document.addEventListener("DOMContentLoaded",function () {
     // Everything is loaded - core and application. Now can create the
     // application
     //
-   	var app  = new example.Application();
+   	var app =new example.Application();
 
     // and install a customized ConnectionCreatePolicy into the canvas
     //
     app.view.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
         createConnection: function(sourcePort, targetPort){
-            var c = new draw2d.Connection();
+            var c=new draw2d.Connection();
             c.setOutlineColor("#00A8F0");
             c.setOutlineStroke(1);
             c.setRadius(5);
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
     // unmarshal the JSON document into the canvas
     // (load)
-    var reader = new draw2d.io.json.Reader();
+    var reader=new draw2d.io.json.Reader();
     reader.unmarshal(app.view, jsonDocument);
 });
 

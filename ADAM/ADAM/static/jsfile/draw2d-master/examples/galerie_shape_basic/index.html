@@ -14,20 +14,20 @@
 
 <script type="text/javascript">
 
-var textFigure = null;
-var canvas = null;
+var textFigure=null;
+var canvas=null;
 var label=null;
-var line = null;
-var circle = null;
+var line=null;
+var circle=null;
 document.addEventListener("DOMContentLoaded",function () {
 
     // create the canvas for the user interaction
     //
-    canvas = new draw2d.Canvas("gfx_holder");
+    canvas=new draw2d.Canvas("gfx_holder");
     canvas.installEditPolicy(new draw2d.policy.canvas.FadeoutDecorationPolicy());
 
-    label = new draw2d.shape.basic.Label({text:"draw2d.shape.basic.Oval", x:200, y:55});
-    var oval  = new draw2d.shape.basic.Oval({width:80,height:30, x:50, y:50});
+    label=new draw2d.shape.basic.Label({text:"draw2d.shape.basic.Oval", x:200, y:55});
+    var oval =new draw2d.shape.basic.Oval({width:80,height:30, x:50, y:50});
     canvas.add(oval);
     canvas.add(label);
 
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded",function () {
     canvas.add(new draw2d.shape.basic.Image({path:"icon.png", width:120, height:90, x:50, y:600}));
     canvas.add(new draw2d.shape.basic.Label({text:"draw2d.shape.basic.Image", x:200, y:605}));
 
-    line = new draw2d.shape.basic.Line({startX:340,startY:160, endX:620, endY:90});
+    line=new draw2d.shape.basic.Line({startX:340,startY:160, endX:620, endY:90});
     canvas.add(line);
 
     canvas.add(new draw2d.shape.basic.Polygon({x:50, y:800, width:100, height:100}));
@@ -54,11 +54,11 @@ document.addEventListener("DOMContentLoaded",function () {
     canvas.add(new draw2d.shape.basic.Polygon({radius:15, x:50, y:1000, width:100, height:100, dasharray:"-"}));
     canvas.add(new draw2d.shape.basic.Label({text:"draw2d.shape.basic.Polygon (radius=15)", x:200, y:1005}));
 
-    textFigure = new draw2d.shape.basic.Text({text:"The quick brown fox jumps over the lazy dog", x:50, y:1200});
+    textFigure=new draw2d.shape.basic.Text({text:"The quick brown fox jumps over the lazy dog", x:50, y:1200});
     canvas.add(textFigure);
     canvas.add(new draw2d.shape.basic.Label({text:"draw2d.shape.basic.Text", x:200, y:1205}));
 
-    var textFigure2 = new draw2d.shape.basic.Text({text:"The quick brown fox $ jumps over the lazy dog", bold:false, fontFamily:"Verdana", fontSize:10, bgColor:"#fafafa", width:200, height:10, x:450, y:1200});
+    var textFigure2=new draw2d.shape.basic.Text({text:"The quick brown fox $ jumps over the lazy dog", bold:false, fontFamily:"Verdana", fontSize:10, bgColor:"#fafafa", width:200, height:10, x:450, y:1200});
     canvas.add(textFigure2);
     canvas.add(new draw2d.shape.basic.Label({text:"draw2d.shape.basic.Text", x:700, y:1205}));
 
@@ -84,11 +84,11 @@ document.addEventListener("DOMContentLoaded",function () {
         ]
     }];
     // create a default JSON reader
-    var reader = new draw2d.io.json.Reader();
+    var reader=new draw2d.io.json.Reader();
     reader.unmarshal(canvas, lineJson);
 
 
-    var line = new draw2d.shape.basic.PolyLine();
+    var line=new draw2d.shape.basic.PolyLine();
     line.setVertices([{x:10,y:10},{x:80,y:70},{x:100,y:110}]);
     canvas.add(line);
 
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded",function () {
 
 
     /* just for debug purpose
-    var policy = new draw2d.policy.canvas.SingleSelectionPolicy();
+    var policy=new draw2d.policy.canvas.SingleSelectionPolicy();
     policy.onClick= function(figure, position){
         if(figure!=null)
             figure.toFront();
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded",function () {
     canvas.on("mousemove",function(emitter, event){
         var projection =line.pointProjection(event.x,event.y);
         if (projection !== null) {
-            var pos = line.lerp(projection.percentage);
+            var pos=line.lerp(projection.percentage);
             label.setPosition(pos);
             label.setText(projection.percentage);
         }
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded",function () {
 });
 
 function displayJSON(canvas){
-    var writer = new draw2d.io.json.Writer();
+    var writer=new draw2d.io.json.Writer();
     writer.marshal(canvas,function(json){
         $("#json").text(JSON.stringify(json, null, 2));
     });

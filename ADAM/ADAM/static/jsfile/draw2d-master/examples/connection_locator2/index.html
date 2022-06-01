@@ -23,16 +23,16 @@
 
 document.addEventListener("DOMContentLoaded",function () {
 
-       var draw2DCanvas = new draw2d.Canvas("gfx_holder");
+       var draw2DCanvas=new draw2d.Canvas("gfx_holder");
        draw2DCanvas.setScrollArea($(window));
 
 
        //Creating Rectangle 1
-       var rect1    = new draw2d.shape.basic.Rectangle({x:50, y:50, width:120,  height:50, bgColor:'#3366FF' });
-       var textFig1 = new draw2d.shape.basic.Label({text:'Step-1', stroke:0});
+       var rect1   =new draw2d.shape.basic.Rectangle({x:50, y:50, width:120,  height:50, bgColor:'#3366FF' });
+       var textFig1=new draw2d.shape.basic.Label({text:'Step-1', stroke:0});
 
-       var rect2    = new draw2d.shape.basic.Rectangle({x:350, y:350, width:120,  height:50, bgColor:'#3366FF' });
-       var textFig2 = new draw2d.shape.basic.Label({text:'Step-2', stroke:0});
+       var rect2   =new draw2d.shape.basic.Rectangle({x:350, y:350, width:120,  height:50, bgColor:'#3366FF' });
+       var textFig2=new draw2d.shape.basic.Label({text:'Step-2', stroke:0});
 
 
        rect1.createPort("hybrid", new draw2d.layout.locator.BottomLocator(rect1));
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded",function () {
        draw2DCanvas.add(rect2);
 
        //Creating LabelConnection
-       var c = new LabelConnection({
+       var c=new LabelConnection({
            text: "Label Connection",
            fontSize:16,
            bgColor:"#eeeeee",
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded",function () {
    });
 
    function insertChildShape(shapeObj) {
-       var imgGear = new draw2d.shape.icon.Gear({width:20, height:20});
+       var imgGear=new draw2d.shape.icon.Gear({width:20, height:20});
        shapeObj.add(imgGear, new draw2d.layout.locator.TopLocator(shapeObj));
 
        //seting Click event on Child Shape

@@ -60,20 +60,20 @@ var jsonDocument =
       }
     ];
 
-var canvas = null;
+var canvas=null;
 document.addEventListener("DOMContentLoaded",function () {
 
 
   // create the canvas for the user interaction
   //
-  canvas = new draw2d.Canvas("gfx_holder");
+  canvas=new draw2d.Canvas("gfx_holder");
 
   // unmarshal the JSON document into the canvas
   // (load)
-  var reader = new draw2d.io.json.Reader();
+  var reader=new draw2d.io.json.Reader();
   reader.unmarshal(canvas, jsonDocument);
 
-  var msg = new draw2d.shape.note.PostIt({text:"Export the canvas area that actually has objects in it to\na PNG and display them in the upper right corner"});
+  var msg=new draw2d.shape.note.PostIt({text:"Export the canvas area that actually has objects in it to\na PNG and display them in the upper right corner"});
   canvas.add(msg, 20,20);
 
     // hack. I didn know why but the very first call must be asyn to render the image
@@ -94,19 +94,19 @@ document.addEventListener("DOMContentLoaded",function () {
 function updatePreview(canvas){
     // convert the canvas into a PNG image source string
     //
-    var xCoords = [];
-    var yCoords = [];
+    var xCoords=[];
+    var yCoords=[];
     canvas.getFigures().each(function(i,f){
-        var b = f.getBoundingBox();
+        var b=f.getBoundingBox();
         xCoords.push(b.x, b.x+b.w);
         yCoords.push(b.y, b.y+b.h);
     });
-    var minX   = Math.min.apply(Math, xCoords);
-    var minY   = Math.min.apply(Math, yCoords);
-    var width  = Math.max.apply(Math, xCoords)-minX;
-    var height = Math.max.apply(Math, yCoords)-minY;
+    var minX  =Math.min.apply(Math, xCoords);
+    var minY  =Math.min.apply(Math, yCoords);
+    var width =Math.max.apply(Math, xCoords)-minX;
+    var height=Math.max.apply(Math, yCoords)-minY;
 
-    var writer = new draw2d.io.png.Writer();
+    var writer=new draw2d.io.png.Writer();
     writer.marshal(canvas,function(png){
        $("#preview").attr("src",png);
     }, new draw2d.geo.Rectangle(minX,minY,width,height));
