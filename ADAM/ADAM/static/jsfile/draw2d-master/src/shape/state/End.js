@@ -1,22 +1,24 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.state.End
+ * @class
  *
  * The end node for a state diagram
  *
- * See the example:
  *
- *     @example preview small frame
- *     let end   = new draw2d.shape.state.End();
+ * @example
+ *    let end   = new draw2d.shape.state.End();
 
- *     // ...add it to the canvas
- *     canvas.add( end, 230,80);
+ *    // ...add it to the canvas
+ *    canvas.add( end, 230,80);
  *
  * @extends draw2d.shape.basic.Circle
  */
-import draw2d from '../../packages'
-
-draw2d.shape.state.End = draw2d.shape.basic.Circle.extend({
-
+draw2d.shape.state.End = draw2d.shape.basic.Circle.extend(
+  /** @lends draw2d.shape.state.End.prototype */
+  {
+  
   NAME: "draw2d.shape.state.End",
 
   DEFAULT_COLOR: new draw2d.util.Color("#4D90FE"),

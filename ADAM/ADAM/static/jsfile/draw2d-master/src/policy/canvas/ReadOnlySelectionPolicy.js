@@ -1,18 +1,20 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.canvas.ReadOnlySelectionPolicy
+ * @class
  *
  *
  * @author Andreas Herz
  * @extends draw2d.policy.canvas.SelectionPolicy
  */
-import draw2d from '../../packages'
-
-draw2d.policy.canvas.ReadOnlySelectionPolicy = draw2d.policy.canvas.SelectionPolicy.extend({
-
+draw2d.policy.canvas.ReadOnlySelectionPolicy = draw2d.policy.canvas.SelectionPolicy.extend(
+  /** @lends draw2d.policy.canvas.ReadOnlySelectionPolicy.prototype */
+  {
+  
   NAME: "draw2d.policy.canvas.ReadOnlySelectionPolicy",
 
   /**
-   * @constructor
    * Creates a new Router object
    */
   init: function (attr, setter, getter) {
@@ -20,7 +22,7 @@ draw2d.policy.canvas.ReadOnlySelectionPolicy = draw2d.policy.canvas.SelectionPol
   },
 
   /**
-   * @method
+   * 
    * Called by the host if the policy has been installed.
    *
    * @param {draw2d.Canvas/draw2d.Canvas} canvas
@@ -33,7 +35,7 @@ draw2d.policy.canvas.ReadOnlySelectionPolicy = draw2d.policy.canvas.SelectionPol
   },
 
   /**
-   * @method
+   * 
    * Called by the host if the policy has been uninstalled.
    *
    * @param {draw2d.Canvas} canvas
@@ -47,7 +49,7 @@ draw2d.policy.canvas.ReadOnlySelectionPolicy = draw2d.policy.canvas.SelectionPol
   },
 
   /**
-   * @method
+   * 
    *
    * @param {draw2d.Canvas} canvas
    * @param {Number} dx The x diff between start of dragging and this event
@@ -59,7 +61,7 @@ draw2d.policy.canvas.ReadOnlySelectionPolicy = draw2d.policy.canvas.SelectionPol
    * @template
    */
   onMouseDrag: function (canvas, dx, dy, dx2, dy2, shiftKey, ctrlKey) {
-    var area = canvas.getScrollArea()
+    let area = canvas.getScrollArea()
     area.scrollTop(area.scrollTop() - dy2)
     area.scrollLeft(area.scrollLeft() - dx2)
   }

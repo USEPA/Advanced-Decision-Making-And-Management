@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.util.spline.CubicSpline
+ * @class
  *
  * A cubic spline object.
  *
@@ -8,14 +11,14 @@
  *
  * @extends draw2d.util.spline.Spline
  */
-import draw2d from '../../packages';
-
 draw2d.util.spline.CubicSpline = draw2d.util.spline.Spline.extend(
-{
-    NAME : "draw2d.util.spline.CubicSpline",
+
+    /** @lends draw2d.util.spline.CubicSpline.prototype */
+    {
+    
+    NAME: "draw2d.util.spline.CubicSpline",
 
     /**
-     * @constructor
      */
     init: function()
     {

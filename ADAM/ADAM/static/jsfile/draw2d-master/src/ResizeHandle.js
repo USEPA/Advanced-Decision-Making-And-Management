@@ -1,33 +1,35 @@
+import draw2d from 'packages'
+import extend from './util/extend'
+
+
 /**
- * @class draw2d.ResizeHandle
+ * @class
  * The Resizehandles for Figures.
 
  * <pre>
  * Possible Type:
  *
  *   1             2               3
- *     O-----------O-------------O
- *     |                         |
- *     |                         |
+ *    O-----------O-------------O
+ *    |                         |
+ *    |                         |
  *   8 O           + 9           O 4
- *     |                         |
- *     |                         |
- *     O-----------O-------------O
+ *    |                         |
+ *    |                         |
+ *    O-----------O-------------O
  *   7             6               5
  * </pre>
  *
  * @author Andreas Herz
  * @extends draw2d.shape.basic.Rectangle
  */
+draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend(
+  /** @lends draw2d.ResizeHandle.prototype */
+  {
 
-import draw2d from 'packages'
-import extend from './util/extend'
-
-draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
   NAME: "draw2d.ResizeHandle",
 
   /**
-   * @constructor
    * Creates a new figure element which are not assigned to any canvas.
    *
    * @param {draw2d.Figure} the owner if the resize handle
@@ -90,10 +92,10 @@ draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
 
 
   /**
-   * @method
+   *
    * The edge of the rectangle for the snapTo mechanism.
    *
-   * @return
+   * @return {draw2d.SnapToHelper} enum of the direction (NORTH, NORTH_WEST, EAST,...)
    */
   getSnapToDirection: function () {
     switch (this.type) {
@@ -134,7 +136,7 @@ draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
 
 
   /**
-   * @method
+   *
    * Returns the current used SVG as string
    *
    * @returns {String}
@@ -152,7 +154,7 @@ draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
 
 
   /**
-   * @method
+   *
    * Returns the current used SVG as string
    *
    * @returns {String}
@@ -169,7 +171,7 @@ draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
   },
 
   /**
-   * @method
+   *
    * calculate and set the cursor of the reize handle
    * @private
    */
@@ -216,12 +218,12 @@ draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
   },
 
   /**
-   * @method
+   *
    * Adjust the draggable flag of the resize handle and update the cursor of the shape in relation
    * to the type of resize handle. north, south,west,..
    *
    * @param flag
-   * @returns
+   * @returns {this}
    */
   setDraggable: function (flag) {
     this._super(flag)
@@ -231,7 +233,7 @@ draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
   },
 
   /**
-   * @method
+   *
    * Will be called if the drag and drop action beginns. You can return [false] if you
    * want avoid that the figure can be move.
    *
@@ -240,7 +242,7 @@ draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
    * @param {Boolean} shiftKey true if the shift key has been pressed during this event
    * @param {Boolean} ctrlKey true if the ctrl key has been pressed during the event
    *
-   * @return {Boolean} true whenever the drag drop operation is allowed.
+   * @returns {Boolean} true whenever the drag drop operation is allowed.
    **/
   onDragStart: function (x, y, shiftKey, ctrlKey) {
     // This happens if the selected figure has set the "nonResizeable" flag
@@ -261,7 +263,7 @@ draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
 
 
   /**
-   * @method
+   *
    * Called by the framework if the figure is moved by user interaction.
    *
    * @param {Number} dx the move x offset
@@ -347,7 +349,7 @@ draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
   },
 
   /**
-   * @method
+   *
    * Will be called after a drag and drop action.<br>
    *
    * @param {Number} x the x-coordinate of the mouse event
@@ -409,7 +411,7 @@ draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
   },
 
   /**
-   * @method
+   *
    * Set the new dimension of the the ResizeHandle. If you didn't pass any width/height the best default for the
    * platform will be used.
    *
@@ -470,7 +472,7 @@ draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
   },
 
   /**
-   * @method
+   *
    * Show the ResizeHandle and add it to the canvas.<br>
    * Additional bring it in to the front of other figures if we didn't use
    * an overlayCanvas.
@@ -500,7 +502,7 @@ draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
   },
 
   /**
-   * @method
+   *
    * Hide the resize handle and remove it from the canvas.
    *
    **/
@@ -531,7 +533,7 @@ draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
   },
 
   /**
-   * @method
+   *
    * Set the new background color of the figure. It is possible to hands over
    * <code>null</code> to set the background transparent.
    *
@@ -572,18 +574,18 @@ draw2d.ResizeHandle = draw2d.shape.basic.Rectangle.extend({
   },
 
   /**
-   * @method
+   *
    * return true if the element can be used in combination with the
    * SnapToHelper feature.
    *
-   * @return {Boolean}
+   * @returns {Boolean}
    **/
   supportsSnapToHelper: function () {
     return true
   },
 
   /**
-   * @method
+   *
    * Override this method and redirect them to the cavas. A ResizeHandle didn't support
    * Keyboard interaction at the moment.
    *

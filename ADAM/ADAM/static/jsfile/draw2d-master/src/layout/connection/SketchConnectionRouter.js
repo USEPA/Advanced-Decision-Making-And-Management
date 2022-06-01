@@ -1,52 +1,53 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.connection.SketchConnectionRouter
+ * @class
  *
  * Provide a router which routes the connection in a hand drawn manner.
  *
- *     @example preview small frame
+ * @example
  *
- *     let createConnection=function(){
- *        let con = new draw2d.Connection();
- *        con.setRouter(new draw2d.layout.connection.SketchConnectionRouter());
- *        return con;
- *     };
+ *    let createConnection=function(){
+ *       let con = new draw2d.Connection();
+ *       con.setRouter(new draw2d.layout.connection.SketchConnectionRouter());
+ *       return con;
+ *    };
  *
- *     // install a custom connection create policy
- *     //
- *     canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
- *            createConnection: createConnection
- *     }));
+ *    // install a custom connection create policy
+ *    //
+ *    canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
+ *           createConnection: createConnection
+ *    }));
  *
- *     // create and add two nodes which contains Ports (In and OUT)
- *     //
- *     let f1 = new draw2d.shape.analog.OpAmp({x:10, y:10});
- *     let f2 = new draw2d.shape.analog.ResistorVertical({angle:90, height:20, x:300, y:150});
+ *    // create and add two nodes which contains Ports (In and OUT)
+ *    //
+ *    let f1 = new draw2d.shape.analog.OpAmp({x:10, y:10});
+ *    let f2 = new draw2d.shape.analog.ResistorVertical({angle:90, height:20, x:300, y:150});
  *
- *     // ...add it to the canvas
- *     //
- *     canvas.add( f1);
- *     canvas.add( f2);
+ *    // ...add it to the canvas
+ *    //
+ *    canvas.add( f1);
+ *    canvas.add( f2);
  *
- *     // first Connection
- *     //
- *     let c = createConnection();
- *     c.setSource(f1.getOutputPort(0));
- *     c.setTarget(f2.getHybridPort(0));
- *     canvas.add(c);
+ *    // first Connection
+ *    //
+ *    let c = createConnection();
+ *    c.setSource(f1.getOutputPort(0));
+ *    c.setTarget(f2.getHybridPort(0));
+ *    canvas.add(c);
  *
  * @inheritable
  * @author Andreas Herz
  * @since 2.7.2
  * @extends  draw2d.layout.connection.MazeConnectionRouter
  */
-import draw2d from '../../packages'
-
-draw2d.layout.connection.SketchConnectionRouter = draw2d.layout.connection.MazeConnectionRouter.extend({
+draw2d.layout.connection.SketchConnectionRouter = draw2d.layout.connection.MazeConnectionRouter.extend(
+  /** @lends draw2d.layout.connection.SketchConnectionRouter.prototype */
+  {
   NAME: "draw2d.layout.connection.SketchConnectionRouter",
 
-
   /**
-   * @constructor
    * Creates a new Router object.
    *
    */
@@ -60,7 +61,7 @@ draw2d.layout.connection.SketchConnectionRouter = draw2d.layout.connection.MazeC
   },
 
   /**
-   * @method
+   *
    * Callback method if the router has been assigned to a connection.
    *
    * @param {draw2d.Connection} connection The assigned connection
@@ -70,5 +71,4 @@ draw2d.layout.connection.SketchConnectionRouter = draw2d.layout.connection.MazeC
     connection.installEditPolicy(new draw2d.policy.line.LineSelectionFeedbackPolicy())
 
   }
-
 })

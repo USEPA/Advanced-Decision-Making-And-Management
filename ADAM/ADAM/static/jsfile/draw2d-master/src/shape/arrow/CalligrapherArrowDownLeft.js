@@ -1,27 +1,29 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.arrow.CalligrapherArrowDownLeft
+ * @class
  * Hand drawn arrow which points down left
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
- *     let figure =  new draw2d.shape.arrow.CalligrapherArrowDownLeft({x:10,y:10, color:"#3d3d3d"});
+ *    let figure =  new draw2d.shape.arrow.CalligrapherArrowDownLeft({x:10,y:10, color:"#3d3d3d"});
  *
- *     canvas.add(figure);
+ *    canvas.add(figure);
  *
  *
  * @extends draw2d.SVGFigure
  */
-import draw2d from '../../packages'
-
-draw2d.shape.arrow.CalligrapherArrowDownLeft = draw2d.SVGFigure.extend({
+draw2d.shape.arrow.CalligrapherArrowDownLeft = draw2d.SVGFigure.extend(
+  /** @lends draw2d.shape.arrow.CalligrapherArrowDownLeft.prototype */
+  {
 
   NAME: "draw2d.shape.arrow.CalligrapherArrowDownLeft",
 
   /**
-   * @constructor
    * Create a new instance
+   *
    * @param {Object} [attr] the configuration of the shape
    */
   init: function (attr, setter, getter) {
@@ -38,7 +40,7 @@ draw2d.shape.arrow.CalligrapherArrowDownLeft = draw2d.SVGFigure.extend({
   },
 
   /**
-   * @method
+   *
    * propagate all attributes like color, stroke,... to the shape element
    **/
   repaint: function (attributes) {

@@ -1,39 +1,40 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.state.Connection
+ * @class
  *
  * Connection designed for a state diagram with arrow decoration at the
  * target of the connection and a label
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
- *     // create and add two nodes which contains Ports (In and OUT)
- *     //
- *     let start = new draw2d.shape.state.Start();
- *     let end   = new draw2d.shape.state.End();
+ *    // create and add two nodes which contains Ports (In and OUT)
+ *    //
+ *    let start = new draw2d.shape.state.Start();
+ *    let end   = new draw2d.shape.state.End();
 
- *     // ...add it to the canvas
- *     canvas.add( start, 50,50);
- *     canvas.add( end, 230,180);
+ *    // ...add it to the canvas
+ *    canvas.add( start, 50,50);
+ *    canvas.add( end, 230,180);
  *
- *     // Create a Connection and connect the Start and End node
- *     //
- *     let c = new draw2d.shape.state.Connection({
- *     	 source : start.getOutputPort(0),
- *       target : end.getInputPort(0)
- *     });
+ *    // Create a Connection and connect the Start and End node
+ *    //
+ *    let c = new draw2d.shape.state.Connection({
+ *    	 source : start.getOutputPort(0),
+ *      target : end.getInputPort(0)
+ *    });
  *
- *     // and finally add the connection to the canvas
- *     canvas.add(c);
+ *    // and finally add the connection to the canvas
+ *    canvas.add(c);
  *
  *
  * @extends draw2d.Connection
  */
-import draw2d from '../../packages'
-
-draw2d.shape.state.Connection = draw2d.Connection.extend({
-
+draw2d.shape.state.Connection = draw2d.Connection.extend(
+  /** @lends draw2d.shape.state.Connection.prototype */
+  {
   NAME: "draw2d.shape.state.Connection",
 
   DEFAULT_COLOR: new draw2d.util.Color("#4D90FE"),
@@ -52,7 +53,7 @@ draw2d.shape.state.Connection = draw2d.Connection.extend({
 
   },
   /**
-   * @method
+   * 
    * Set the text to show if the state shape
    *
    * @param {String} text
@@ -69,7 +70,7 @@ draw2d.shape.state.Connection = draw2d.Connection.extend({
 
 
   /**
-   * @method
+   * 
    * Return the label of the shape
    *
    */

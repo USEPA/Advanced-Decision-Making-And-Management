@@ -1,44 +1,45 @@
-/**
- * @class draw2d.shape.basic.Line
- * The base class for all visible elements inside a canvas.
- *
- * See the example:
- *
- *     @example preview small frame
- *
- *     // Create the line and modify the start/end after inserting them into
- *     // the canvas
- *     let line1 =  new draw2d.shape.basic.Line({startX:30, startY:30, endX:100, endY:80});
- *
- *     canvas.add(line1);
- *
- *     // Create the line with a given start/end coordinate in the constructor
- *     //
- *     let line2 = new draw2d.shape.basic.Line({
- *           startX:20,
- *           startY:80,
- *           endX:200,
- *           endY:150,
- *           stroke:3,
- *           color:"#1d1dff"
- *      });
- *     canvas.add(line2);
- *
- * @inheritable
- * @author Andreas Herz
- * @extends draw2d.Figure
- */
 import draw2d from '../../packages'
 import jsonUtil from '../../util/JSONUtil'
 import extend from '../../util/extend'
 
-draw2d.shape.basic.Line = draw2d.Figure.extend({
+
+/**
+ * @class
+ * The base class for all visible elements inside a canvas.
+ *
+ *
+ * @example
+ *
+ *    // Create the line and modify the start/end after inserting them into
+ *    // the canvas
+ *    let line1 =  new draw2d.shape.basic.Line({startX:30, startY:30, endX:100, endY:80});
+ *
+ *    canvas.add(line1);
+ *
+ *    // Create the line with a given start/end coordinate in the constructor
+ *    //
+ *    let line2 = new draw2d.shape.basic.Line({
+ *          startX:20,
+ *          startY:80,
+ *          endX:200,
+ *          endY:150,
+ *          stroke:3,
+ *          color:"#1d1dff"
+ *     });
+ *    canvas.add(line2);
+ *
+ * @author Andreas Herz
+ * @extends draw2d.Figure
+ */
+draw2d.shape.basic.Line = draw2d.Figure.extend(
+  /** @lends draw2d.shape.basic.Line.prototype */
+  {
+
   NAME: "draw2d.shape.basic.Line",
 
   DEFAULT_COLOR: new draw2d.util.Color(0, 0, 0),
 
   /**
-   * @constructor
    * Creates a new figure element which are not assigned to any canvas witht he given start and
    * end coordinate.
    *
@@ -71,31 +72,32 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
         selectable: true
       }, attr),
       extend({}, {
-        /** @attr {Number} start the  coordinates of the start point */
+        // @attr {Number} start the  coordinates of the start point */
         start: this.setStartPosition,
-        /** @attr {Number} startX the x coordinate of the start point */
+        // @attr {Number} startX the x coordinate of the start point */
         startX: this.setStartX,
-        /** @attr {Number} startY the y coordinate of the start point */
+        // @attr {Number} startY the y coordinate of the start point */
         startY: this.setStartY,
-        /** @attr {Number} end the coordinates of the end point */
+        // @attr {Number} end the coordinates of the end point */
         end: this.setEndPosition,
-        /** @attr {Number} endX the x coordinate of the end */
+        // @attr {Number} endX the x coordinate of the end */
         endX: this.setEndX,
-        /** @attr {Number} endY the y coordinate of the end */
+        // @attr {Number} endY the y coordinate of the end */
         endY: this.setEndY,
-        /** @attr {Number} vertices the x coordinate of the start point */
+        // @attr {Number} vertices the x coordinate of the start point */
         vertices: this.setVertices,
-        /** @attr {String | draw2d.util.Color} outlineColor the outline color of the line */
+        // @attr {String | draw2d.util.Color} outlineColor the outline color of the line */
         outlineColor: this.setOutlineColor,
-        /** @attr {Number} outlineStroke the line width of the outline */
+        // @attr {Number} outlineStroke the line width of the outline */
         outlineStroke: this.setOutlineStroke,
-        /** @attr {String|draw2d.util.Color} color the color of the line */
+        // @attr {String|draw2d.util.Color} color the color of the line */
         color: this.setColor,
-        /** @attr {Number} stroke the line width of the color */
+        // @attr {Number} stroke the line width of the color */
         stroke: this.setStroke,
-        /** @attr {String} dasharray the line pattern see {@link draw2d.shape.basic.Line#setDashArray} for more information*/
+        corona: this.setCorona,
+        // @attr {String} dasharray the line pattern see {@link draw2d.shape.basic.Line#setDashArray} for more information*/
         dasharray: this.setDashArray,
-        /** @attr {Boolean} glow the glow flag for the shape. The representation of the "glow" depends on the shape */
+        // @attr {Boolean} glow the glow flag for the shape. The representation of the "glow" depends on the shape */
         glow: this.setGlow
       }, setter),
 
@@ -105,6 +107,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
         outlineColor: this.getOutlineColor,
         outlineStroke: this.getOutlineStroke,
         stroke: this.getStroke,
+        corona: this.getCorona,
         color: this.getColor,
         dasharray: this.getDashArray,
         vertices: this.getVertices
@@ -118,13 +121,13 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Set the outline color of the line.
    *
-   *      // Alternatively you can use the attr method:
-   *      figure.attr({
-   *        outlineColor: color
-   *      });
+   *     // Alternatively you can use the attr method:
+   *     figure.attr({
+   *       outlineColor: color
+   *     });
    *
    * @param {draw2d.util.Color/String} color The new color of the line.
    * @since 4.2.1
@@ -138,7 +141,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * The outline color of the text
    *
    * @returns {draw2d.util.Color}
@@ -149,13 +152,13 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Set the outline stroke of the line to use.
    *
-   *      // Alternatively you can use the attr method:
-   *      figure.attr({
-   *        outlineStroke: w
-   *      });
+   *     // Alternatively you can use the attr method:
+   *     figure.attr({
+   *       outlineStroke: w
+   *     });
    *
    * @param {Number} w The new outline width of the line
    * @since 4.2.1
@@ -169,7 +172,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * The used outline line width.
    *
    * @returns {Number}
@@ -180,7 +183,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Called if the drag and drop action begins. You can return [false] if you
    * want avoid that the figure can be move.
    *
@@ -189,7 +192,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
    * @param {Boolean} shiftKey true if the shift key has been pressed during this event
    * @param {Boolean} ctrlKey true if the ctrl key has been pressed during the event
    *
-   * @return {Boolean} true if the figure accepts dragging
+   * @returns {Boolean} true if the figure accepts dragging
    **/
   onDragStart: function (x, y, shiftKey, ctrlKey, isFaked) {
     let result = this._super(x, y, shiftKey, ctrlKey)
@@ -201,7 +204,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Don't call them manually. This will be done by the framework.<br>
    * Will be called if the object are moved via drag and drop.
    * Sub classes can override this method to implement additional stuff. Don't forget to call
@@ -272,13 +275,13 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Called when a user clicks on the element.
    *
-   *      // Alternatively you can register for this event with
-   *      figure.on("click", function(emitterFigure){
-   *          alert("clicked");
-   *      });
+   *     // Alternatively you can register for this event with
+   *     figure.on("click", function(emitterFigure){
+   *         alert("clicked");
+   *     });
    *
    * @template
    * @since 4.0.0
@@ -287,13 +290,13 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Set the line style for this object.
    *
-   *      // Alternatively you can use the attr method:
-   *      figure.attr({
-   *        dasharray: dashPattern
-   *      });
+   *     // Alternatively you can use the attr method:
+   *     figure.attr({
+   *       dasharray: dashPattern
+   *     });
    *
    * @param {String} dashPattern Can be one of this ["", "-", ".", "-.", "-..", ". ", "- ", "--", "- .", "--.", "--.."]
    */
@@ -307,11 +310,11 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Get the line style for this object.
    *
-   *      // Alternatively you can use the attr method:
-   *      figure.attr("dasharray");
+   *     // Alternatively you can use the attr method:
+   *     figure.attr("dasharray");
    *
    * @since 5.1.0
    */
@@ -320,21 +323,9 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
 
+
   /**
-   * @method
-   * Set the width for the click hit test of this line.
    *
-   * @param {Number} width the width of the line hit test.
-   **/
-  setCoronaWidth: function (width) {
-    this.corona = width
-
-    return this
-  },
-
-
-  /**
-   * @method
    * Called by the framework. Don't call them manually.
    *
    * @private
@@ -404,7 +395,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Moves the element to the background. Additional
    * the internal model changed as well.
    *
@@ -422,13 +413,13 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * Highlight the element or remove the highlighting
    *
-   *      // Alternatively you can use the attr method:
-   *      figure.attr({
-   *        glow: flag
-   *      });
+   *     // Alternatively you can use the attr method:
+   *     figure.attr({
+   *       glow: flag
+   *     });
    *
    * @param {Boolean} flag indicates glow/noGlow
    * @template
@@ -470,10 +461,10 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
    * Set the line width. This enforce a repaint of the line.
    * This method fires a <i>document dirty</i> event.
    *
-   *      // Alternatively you can use the attr method:
-   *      figure.attr({
-   *        stroke: w
-   *      });
+   *     // Alternatively you can use the attr method:
+   *     figure.attr({
+   *       stroke: w
+   *     });
    *
    * @param {Number} w The new line width of the figure.
    **/
@@ -488,7 +479,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * The used line width.
    *
    * @returns {Number}
@@ -498,15 +489,42 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
 
+
+    /**
+     *  click area for the line hit test.
+     *
+     *     // Alternatively you can use the attr method:
+     *     figure.attr({
+     *       corona: w
+     *     });
+     *
+     * @param {Number} w The new click hit offset
+     **/
+    setCorona: function (w) {
+      this.corona = parseFloat(w)
+      return this
+    },
+
+
+    /**
+     *
+     * The used corona hitTest area.
+     *
+     * @returns {Number}
+     **/
+    getCorona: function () {
+      return this.corona
+    },
+
   /**
-   * @method
+   *
    * Set the color of the line.
    * This method fires a <i>document dirty</i> event.
    *
-   *      // Alternatively you can use the attr method:
-   *      figure.attr({
-   *        color: color
-   *      });
+   *     // Alternatively you can use the attr method:
+   *     figure.attr({
+   *       color: color
+   *     });
    *
    * @param {draw2d.util.Color|String} color The new color of the line.
    **/
@@ -519,17 +537,17 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Return the current paint color.
    *
-   * @return {draw2d.util.Color} The paint color of the line.
+   * @returns {draw2d.util.Color} The paint color of the line.
    **/
   getColor: function () {
     return this.lineColor
   },
 
   /**
-   * @method
+   *
    * Translate the line with the given x/y offset.
    *
    * @param {Number} dx The new x translate offset
@@ -560,7 +578,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * return the bounding box of the line or polygon
    *
    * TODO: precalculate or cache this values
@@ -581,15 +599,15 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * Set the start point of the line.
    * This method fires a <i>document dirty</i> event.
    *
-   *      // Alternatively you can use the attr method:
-   *      figure.attr({
-   *        startX: x,
-   *        startY: y
-   *      });
+   *     // Alternatively you can use the attr method:
+   *     figure.attr({
+   *       startX: x,
+   *       startY: y
+   *     });
    *
    * @param {Number|draw2d.geo.Point} x the x coordinate of the start point
    * @param {Number} [y] the y coordinate of the start point
@@ -639,16 +657,16 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
    * Set the end point of the line.
    * This method fires a <i>document dirty</i> event.
    *
-   *      // Alternatively you can use the attr method:
-   *      figure.attr({
-   *        endX: 3,
-   *        endY: 10
-   *      });
+   *     // Alternatively you can use the attr method:
+   *     figure.attr({
+   *       endX: 3,
+   *       endY: 10
+   *     });
    *
-   *      // or
-   *      figure.attr({
-   *        end: {x:3, y:10}
-   *      });
+   *     // or
+   *     figure.attr({
+   *       end: {x:3, y:10}
+   *     });
    * @param {Number|draw2d.geo.Point} x the x coordinate or a draw2d.geo.Point of the end point
    * @param {Number} [y] the y coordinate of the end point
    **/
@@ -679,29 +697,29 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Return the x coordinate of the start.
-   * @return {Number}
+   * @returns {Number}
    **/
   getStartX: function () {
     return this.start.x
   },
 
   /**
-   * @method
+   *
    * Return the y coordinate of the start.
    *
-   * @return {Number}
+   * @returns {Number}
    **/
   getStartY: function () {
     return this.start.y
   },
 
   /**
-   * @method
+   *
    * Return the start point.
    *
-   * @return {draw2d.geo.Point}
+   * @returns {draw2d.geo.Point}
    **/
   getStartPosition: function () {
     return this.start.clone()
@@ -713,44 +731,47 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * Return the x coordinate of the end point
    *
-   * @return {Number}
+   * @returns {Number}
    **/
   getEndX: function () {
     return this.end.x
   },
 
   /**
-   * @method
+   *
    * Return the y coordinate of the end point.
    *
-   * @return {Number}
+   * @returns {Number}
    **/
   getEndY: function () {
     return this.end.y
   },
 
   /**
-   * @method
+   *
    * Return the end point.
    *
-   * @return {draw2d.geo.Point}
+   * @returns {draw2d.geo.Point}
    **/
   getEndPosition: function () {
     return this.end.clone()
   },
-  /** @deprecated **/
+  /**
+   * @deprecated use `getEndPosition`
+   * @returns {draw2d.geo.Point}
+   **/
   getEndPoint: function () {
     return this.getEndPosition()
   },
 
   /**
-   * @method
+   *
    * The x-offset related to the parent figure or canvas.
    *
-   * @return {Number} the x-offset to the parent figure
+   * @returns {Number} the x-offset to the parent figure
    **/
   getX: function () {
     return this.getBoundingBox().x
@@ -758,10 +779,10 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * The x-offset related to the parent figure or canvas.
    *
-   * @return {Number} the x-offset to the parent figure
+   * @returns {Number} the x-offset to the parent figure
    **/
   getY: function () {
     return this.getBoundingBox().y
@@ -769,7 +790,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * Return the Vertex with the given index.
    *
    * @param {Number} index the index of the vertex to return
@@ -780,7 +801,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * Update the vertex at the give position with the new coordinate
    *
    * @param {Number} index the index of the vertex to update
@@ -827,17 +848,17 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Returns the vertices of the connection
    *
-   * @return {draw2d.util.ArrayList} an draw2d.util.ArrayList of type draw2d.Point
+   * @returns {draw2d.util.ArrayList} an draw2d.util.ArrayList of type draw2d.Point
    **/
   getVertices: function () {
     return this.vertices
   },
 
   /**
-   * @method
+   *
    * Update the vertices of the object. The given array is copied and assigned.
    *
    * @param {draw2d.util.ArrayList|Array} vertices the new vertices of the polyline.
@@ -899,7 +920,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Return the segments of the line with {start:s, end: e} JSON array list
    *
    * @returns {draw2d.util.ArrayList}
@@ -912,34 +933,34 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Returns the length of the line.
    *
-   * @return {Number}
+   * @returns {Number}
    **/
   getLength: function () {
     return Math.sqrt((this.start.x - this.end.x) * (this.start.x - this.end.x) + (this.start.y - this.end.y) * (this.start.y - this.end.y))
   },
 
   /**
-   * @method
+   *
    * Returns the angle of the line in degree.
    *
    * <pre>
-   *                                 270°
-   *                               |
-   *                               |
-   *                               |
-   *                               |
+   *                                270°
+   *                              |
+   *                              |
+   *                              |
+   *                              |
    * 180° -------------------------+------------------------> +X
-   *                               |                        0°
-   *                               |
-   *                               |
-   *                               |
-   *                               V +Y
-   *                              90°
+   *                              |                        0°
+   *                              |
+   *                              |
+   *                              |
+   *                              V +Y
+   *                             90°
    * </pre>
-   * @return {Number}
+   * @returns {Number}
    **/
   getAngle: function () {
     let length = this.getLength()
@@ -962,12 +983,12 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Returns the Command to perform the specified Request or null if the shape want cancel the
    * operation or it can't operate the command.
    *
    * @param {draw2d.command.CommandType} request describes the Command being requested
-   * @return {draw2d.command.Command} null or a Command
+   * @returns {draw2d.command.Command} null or a Command
    * @private
    **/
   createCommand: function (request) {
@@ -1002,26 +1023,26 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Checks if the hands over coordinate close to the line. The 'corona' is considered
    * for this test. This means the point isn't direct on the line. Is it only close to the
    * line!
    *
    * @param {Number} px the x coordinate of the test point
    * @param {Number} py the y coordinate of the test point
-   * @return {Boolean}
+   * @returns {Boolean}
    **/
   hitTest: function (px, py) {
     return draw2d.shape.basic.Line.hit(this.corona + this.stroke, this.start.x, this.start.y, this.end.x, this.end.y, px, py)
   },
 
   /**
-   * @method
+   *
    * Returns the projection of the point on the line.
    *
    * @param {Number} px the x coordinate of the test point
    * @param {Number} py the y coordinate of the test point
-   * @return {draw2d.geo.Point}
+   * @returns {draw2d.geo.Point}
    **/
   pointProjection: function (px, py) {
     let pt = new draw2d.geo.Point(px, py)
@@ -1032,7 +1053,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * Returns the point onto the line which has the 'percentage' position onto the line.
    *
    * @param {Number} percentage value between [0..1]
@@ -1047,7 +1068,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * Return all intersection points between the given Line.
    *
    * @param {draw2d.shape.basic.Line} other
@@ -1077,7 +1098,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * Return an objects with all important attributes for XML or JSON serialization
    *
    * @returns {Object}
@@ -1114,11 +1135,11 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Read all attributes from the serialized properties and transfer them into the shape.
    *
    * @param {Object} memento
-   * @returns
+   * @returns {this}
    */
   setPersistentAttributes: function (memento) {
     this._super(memento)
@@ -1155,6 +1176,7 @@ draw2d.shape.basic.Line = draw2d.Figure.extend({
       this.setVertices(memento.vertex)
     }
 
+    return this
   }
 })
 
@@ -1199,7 +1221,7 @@ draw2d.shape.basic.Line.intersection = function (a1, a2, b1, b2) {
  * Static util function to determine is a point(px,py) on the line(x1,y1,x2,y2)
  * A simple hit test.
  *
- * @return {Boolean}
+ * @returns {Boolean}
  * @static
  * @private
  * @param {Number} coronaWidth the accepted corona for the hit test

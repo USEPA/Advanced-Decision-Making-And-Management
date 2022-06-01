@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.figure.VertexSelectionFeedbackPolicy
+ * @class
  *
  * Called by the framework if the user edit the position of a figure with a drag drop operation.
  * Sub class like SelectionEditPolicy or RegionEditPolicy cam adjust th e position of the figure or the selections handles.
@@ -7,14 +10,13 @@
  * @author  Andreas Herz
  * @extends draw2d.policy.figure.SelectionFeedbackPolicy
  */
-import draw2d from '../../packages'
-
-draw2d.policy.figure.VertexSelectionFeedbackPolicy = draw2d.policy.figure.SelectionFeedbackPolicy.extend({
+draw2d.policy.figure.VertexSelectionFeedbackPolicy = draw2d.policy.figure.SelectionFeedbackPolicy.extend(
+  /** @lends draw2d.policy.figure.VertexSelectionFeedbackPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.figure.VertexSelectionFeedbackPolicy",
 
   /**
-   * @constructor
    * Creates a new Router object
    */
   init: function (attr, setter, getter) {
@@ -23,7 +25,7 @@ draw2d.policy.figure.VertexSelectionFeedbackPolicy = draw2d.policy.figure.Select
 
 
   /**
-   * @method
+   *
    *
    * @param {draw2d.Canvas} canvas The host canvas
    * @param {draw2d.Connection} connection the selected figure
@@ -51,7 +53,7 @@ draw2d.policy.figure.VertexSelectionFeedbackPolicy = draw2d.policy.figure.Select
   },
 
   /**
-   * @method
+   *
    * Callback method if the figure has been moved.
    *
    * @param {draw2d.Canvas} canvas The host canvas

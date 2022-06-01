@@ -1,5 +1,8 @@
+import draw2d from '../packages'
+
+
 /**
- * @class draw2d.command.CommandAattr
+ * @class
  *
  *Command to change attributes of a shape with undo/redo support
  *
@@ -8,13 +11,13 @@
  *
  * @extends draw2d.command.Command
  */
-import draw2d from '../packages'
+draw2d.command.CommandAttr = draw2d.command.Command.extend(
+  /** @lends draw2d.command.CommandAttr.prototype */
+  {
 
-draw2d.command.CommandAttr = draw2d.command.Command.extend({
   NAME: "draw2d.command.CommandAttr",
 
   /**
-   * @constructor
    * Create a new Command objects which provides undo/redo for attributes.
    *
    * @param {draw2d.Figure} figure the figure to handle
@@ -35,13 +38,13 @@ draw2d.command.CommandAttr = draw2d.command.Command.extend({
 
 
   /**
-   * @method
+   * 
    * Returns [true] if the command can be execute and the execution of the
    * command modify the model. A CommandMove with [startX,startX] == [endX,endY] should
    * return false. <br>
    * the execution of the Command doesn't modify the model.
    *
-   * @return {Boolean}
+   * @returns {Boolean}
    **/
   canExecute: function () {
     // return false if we doesn't modify the model => NOP Command
@@ -49,7 +52,7 @@ draw2d.command.CommandAttr = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   * 
    * Execute the command the first time
    *
    **/
@@ -58,7 +61,7 @@ draw2d.command.CommandAttr = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   * 
    *
    * Undo the move command
    *
@@ -68,7 +71,7 @@ draw2d.command.CommandAttr = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   * 
    *
    * Redo the move command after the user has undo this command
    *

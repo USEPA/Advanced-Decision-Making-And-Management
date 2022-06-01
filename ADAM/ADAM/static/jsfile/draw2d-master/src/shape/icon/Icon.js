@@ -1,29 +1,36 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.icon.Icon
+ * @class
  * @inheritable
  * @author Andreas Herz
  * @extends draw2d.SetFigure
  */
-import draw2d from '../../packages'
+draw2d.shape.icon.Icon = draw2d.SetFigure.extend(
+  /** @lends draw2d.shape.icon.Icon.prototype */
+  {
 
-draw2d.shape.icon.Icon = draw2d.SetFigure.extend({
   NAME: "draw2d.shape.icon.Icon",
 
   /**
    *
-   * @constructor
    * Creates a new figure element which are not assigned to any canvas.
    *
    * @param {Object} attr the configuration of the shape
    */
   init: function (attr, setter, getter) {
-    this._super(extend({width: 50, height: 50}, attr), setter, getter)
-    this.setBackgroundColor("#333333")
+    this._super(extend({
+      width: 50,
+      height: 50,
+      color:"#333333",
+      bgColor:null
+    }, attr), setter, getter)
     this.keepAspectRatio = false
   },
 
   /**
-   * @method
+   * 
    * propagate all attributes like color, stroke,... to the shape element
    **/
   repaint: function (attributes) {
@@ -33,11 +40,8 @@ draw2d.shape.icon.Icon = draw2d.SetFigure.extend({
 
     attributes = attributes || {}
 
-    // redirect the bgColor to the inner set and not to the outer container
-    //
-    attributes.fill = "none"
     if (this.svgNodes !== null) {
-      this.svgNodes.attr({fill: this.bgColor.rgba(), stroke: "none"})
+      this.svgNodes.attr({fill: this.color.rgba(), stroke: "none"})
     }
 
     this._super(attributes)
@@ -45,7 +49,6 @@ draw2d.shape.icon.Icon = draw2d.SetFigure.extend({
 
   applyTransformation: function () {
     let trans = []
-
 
     if (this.rotationAngle !== 0) {
       trans.push("R" + this.rotationAngle)

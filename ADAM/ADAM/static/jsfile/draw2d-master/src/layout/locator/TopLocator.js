@@ -1,48 +1,49 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.locator.TopLocator
+ * @class
  *
  * A TopLocator  is used to place figures at the top/center of a parent shape.
  *
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
+ *    // create a basic figure and add a Label/child via API call
+ *    //
+ *    let circle = new draw2d.shape.basic.Circle({
+ *        x:100,
+ *        y:70,
+ *        diameter:80,
+ *        stroke: 3,
+ *        color:"#A63343",
+ *        bgColor:"#E65159"
+ *    });
  *
- *     // create a basic figure and add a Label/child via API call
- *     //
- *     let circle = new draw2d.shape.basic.Circle({
- *         x:100,
- *         y:70,
- *         diameter:80,
- *         stroke: 3,
- *         color:"#A63343",
- *         bgColor:"#E65159"
- *     });
- *
- *     circle.add(new draw2d.shape.basic.Label({text:"Top Label"}), new draw2d.layout.locator.TopLocator());
- *     canvas.add( circle);
+ *    circle.add(new draw2d.shape.basic.Label({text:"Top Label"}), new draw2d.layout.locator.TopLocator());
+ *    canvas.add( circle);
  *
  * @author Andreas Herz
  * @extend draw2d.layout.locator.Locator
  */
-import draw2d from '../../packages'
+draw2d.layout.locator.TopLocator = draw2d.layout.locator.Locator.extend(
+  /** @lends draw2d.layout.locator.TopLocator.prototype */
+  {
 
-draw2d.layout.locator.TopLocator = draw2d.layout.locator.Locator.extend({
   NAME: "draw2d.layout.locator.TopLocator",
 
   /**
-   * @constructor
    * Constructs a ManhattanMidpointLocator with associated Connection c.
    *
    */
-  init: function () {
-    this._super()
+  init: function (attr, setter, getter) {
+    this._super(attr, setter, getter)
   },
 
 
   /**
-   * @method
+   * 
    * Relocates the given Figure.
    *
    * @param {Number} index child index of the target

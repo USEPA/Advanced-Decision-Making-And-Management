@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.locator.PortLocator
+ * @class
  *
  * The port locator calculates the position of an port. All ports MUST have a locator
  * if you add them as child to a node.
@@ -7,18 +10,18 @@
  * @author Andreas Herz
  * @extend draw2d.layout.locator.Locator
  */
-import draw2d from '../../packages'
+draw2d.layout.locator.PortLocator = draw2d.layout.locator.Locator.extend(
+  /** @lends draw2d.layout.locator.PortLocator.prototype */
+  {
 
-draw2d.layout.locator.PortLocator = draw2d.layout.locator.Locator.extend({
   NAME: "draw2d.layout.locator.PortLocator",
 
   /**
-   * @constructor
    * Default constructor for a Locator which can layout a port in context of a
    *
    */
-  init: function () {
-    this._super()
+  init: function (attr, setter, getter) {
+    this._super(attr, setter, getter)
   },
 
   applyConsiderRotation: function (port, x, y) {

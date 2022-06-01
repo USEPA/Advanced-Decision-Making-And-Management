@@ -1,19 +1,20 @@
+import draw2d from 'packages'
+
+
 /**
- * @class draw2d.OutputPort
+ * @class
  * A OutputPort is the start anchor for a {@link draw2d.Connection}.
  *
  * @author Andreas Herz
  * @extends draw2d.Port
  */
+draw2d.OutputPort = draw2d.Port.extend(
+  /** @lends draw2d.OutputPort.prototype */
+    {
 
-import draw2d from 'packages';
-
-draw2d.OutputPort = draw2d.Port.extend({
-
-    NAME : "draw2d.OutputPort",
+    NAME: "draw2d.OutputPort",
 
     /**
-     * @constructor
      * Create a new OutputPort element
      *
      * @param {Object} [attr] the configuration of the shape

@@ -1,28 +1,31 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.figure.RectangleSelectionFeedbackPolicy
+ * @class
  *
  * A SelectionFeedbackPolicy with resize handles (rectangles) on each side and corner of the shape
  *
- * See the example:
  *
- *     @example preview small frame
- *       circle =new draw2d.shape.basic.Circle({diameter:50});
- *       circle.installEditPolicy(new draw2d.policy.RectangleSelectionFeedbackPolicy());
- *       canvas.add(circle,90,50);
+ * @example
  *
- *       canvas.add(new draw2d.shape.basic.Label({text:"Click on the circle to see the selection feedback"}),20,10);
+ *      circle =new draw2d.shape.basic.Circle({diameter:50});
+ *      circle.installEditPolicy(new draw2d.policy.RectangleSelectionFeedbackPolicy());
+ *      canvas.add(circle,90,50);
+ *
+ *      canvas.add(new draw2d.shape.basic.Label({text:"Click on the circle to see the selection feedback"}),20,10);
  *
  * @author Andreas Herz
  * @extends draw2d.policy.figure.SelectionFeedbackPolicy
  */
-import draw2d from '../../packages'
-
-draw2d.policy.figure.RectangleSelectionFeedbackPolicy = draw2d.policy.figure.SelectionFeedbackPolicy.extend({
+draw2d.policy.figure.RectangleSelectionFeedbackPolicy = draw2d.policy.figure.SelectionFeedbackPolicy.extend(
+  /** @lends draw2d.policy.figure.RectangleSelectionFeedbackPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.figure.RectangleSelectionFeedbackPolicy",
   /**
-   * @constructor
    * Creates a selection feedback for a shape.
+   *
    */
   init: function (attr, setter, getter) {
     this._super(attr, setter, getter)
@@ -114,7 +117,7 @@ draw2d.policy.figure.RectangleSelectionFeedbackPolicy = draw2d.policy.figure.Sel
 
 
   /**
-   * @method
+   * 
    * Callback if the figure has been moved. In this case we must update the position of the
    * resize handles and the "ant" box.
    *

@@ -1,34 +1,38 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.state.State
+ * @class
  *
  * a state shape for a state diagram
  *
- *     @example preview small frame
- *     // create and add two nodes which contains Ports (In and OUT)
- *     //
- *     let start = new draw2d.shape.state.Start();
- *     let state   = new draw2d.shape.state.State();
+ * @example
+ *
+ *    // create and add two nodes which contains Ports (In and OUT)
+ *    //
+ *    let start = new draw2d.shape.state.Start();
+ *    let state   = new draw2d.shape.state.State();
 
- *     // ...add it to the canvas
- *     canvas.add( start, 50,50);
- *     canvas.add( state, 230,180);
+ *    // ...add it to the canvas
+ *    canvas.add( start, 50,50);
+ *    canvas.add( state, 230,180);
  *
- *     // Create a Connection and connect the Start and End node
- *     //
- *     let c = new draw2d.shape.state.Connection({
- *     		source : start.getOutputPort(0),
- *          target : state.getInputPort(0)
- *     });
+ *    // Create a Connection and connect the Start and End node
+ *    //
+ *    let c = new draw2d.shape.state.Connection({
+ *    		source : start.getOutputPort(0),
+ *         target : state.getInputPort(0)
+ *    });
  *
  *
- *     // and finally add the connection to the canvas
- *     canvas.add(c);
+ *    // and finally add the connection to the canvas
+ *    canvas.add(c);
  *
  * @extends draw2d.shape.layout.VerticalLayout
  */
-import draw2d from '../../packages'
-
-draw2d.shape.state.State = draw2d.shape.layout.VerticalLayout.extend({
+draw2d.shape.state.State = draw2d.shape.layout.VerticalLayout.extend(
+  /** @lends draw2d.shape.state.State.prototype */
+  {
 
   NAME: "draw2d.shape.state.State",
 
@@ -76,7 +80,7 @@ draw2d.shape.state.State = draw2d.shape.layout.VerticalLayout.extend({
   },
 
   /**
-   * @method
+   *
    * Set the text to show if the state shape
    *
    * @param {String} text
@@ -90,7 +94,7 @@ draw2d.shape.state.State = draw2d.shape.layout.VerticalLayout.extend({
 
 
   /**
-   * @method
+   *
    * Return the label of the shape
    *
    */
@@ -100,7 +104,7 @@ draw2d.shape.state.State = draw2d.shape.layout.VerticalLayout.extend({
 
 
   /**
-   * @method
+   *
    * helper method to create some labels
    *
    * @param {String} txt the label to display

@@ -1,45 +1,47 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.locator.RightLocator
+ * @class
  *
  * A RightLocator is used to place figures to the right of a parent shape.
  *
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
  *
- *     // create a basic figure and add a Label/child via API call
- *     //
- *     var end = new draw2d.shape.node.End();
- *     end.add(new draw2d.shape.basic.Label({text:"Right Label"}), new draw2d.layout.locator.RightLocator({
- *          margin: 10 // distance to the parent shape
- *     }));
- *     canvas.add( end, 50,50);
+ *    // create a basic figure and add a Label/child via API call
+ *    //
+ *    var end = new draw2d.shape.node.End();
+ *    end.add(new draw2d.shape.basic.Label({text:"Right Label"}), new draw2d.layout.locator.RightLocator({
+ *         margin: 10 // distance to the parent shape
+ *    }));
+ *    canvas.add( end, 50,50);
  *
  *
  * @author Andreas Herz
  * @extend draw2d.layout.locator.Locator
  */
-import draw2d from '../../packages'
-
-draw2d.layout.locator.RightLocator = draw2d.layout.locator.Locator.extend({
+draw2d.layout.locator.RightLocator = draw2d.layout.locator.Locator.extend(
+  /** @lends draw2d.layout.locator.RightLocator.prototype */
+  {
+  
   NAME: "draw2d.layout.locator.RightLocator",
 
   /**
-   * @constructor
    * Constructs a locator with associated parent.
    *
    */
-  init: function (attr) {
-    this._super()
+  init: function (attr, setter, getter) {
+    this._super(attr, setter, getter)
 
     this.margin = (attr && ("margin" in attr)) ? attr.margin : 5
   },
 
 
   /**
-   * @method
+   * 
    * Relocates the given Figure.
    *
    * @param {Number} index child index of the target

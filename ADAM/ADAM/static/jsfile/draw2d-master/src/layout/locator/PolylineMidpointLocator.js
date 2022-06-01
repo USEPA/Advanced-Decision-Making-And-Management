@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.locator.PolylineMidpointLocator
+ * @class
  *
  * A PolylineMidpointLocator is used to place figures at the midpoint of a routed
  * connection. <br>
@@ -9,23 +12,23 @@
  * @author Andreas Herz
  * @extend draw2d.layout.locator.ManhattanMidpointLocator
  */
-import draw2d from '../../packages'
+draw2d.layout.locator.PolylineMidpointLocator = draw2d.layout.locator.ManhattanMidpointLocator.extend(
+  /** @lends draw2d.layout.locator.PolylineMidpointLocator.prototype */
+  {
 
-draw2d.layout.locator.PolylineMidpointLocator = draw2d.layout.locator.ManhattanMidpointLocator.extend({
   NAME: "draw2d.layout.locator.PolylineMidpointLocator",
 
   /**
-   * @constructor
    * Constructs a ManhattanMidpointLocator with associated Connection c.
    *
    */
-  init: function () {
-    this._super()
+  init: function (attr, setter, getter) {
+    this._super(attr, setter, getter)
   },
 
 
   /**
-   * @method
+   *
    * Relocates the given Figure.
    *
    * @param {Number} index child index of the target

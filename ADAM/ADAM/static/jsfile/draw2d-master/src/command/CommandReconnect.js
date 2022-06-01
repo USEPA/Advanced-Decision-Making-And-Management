@@ -1,5 +1,8 @@
+import draw2d from '../packages'
+
+
 /**
- * @class draw2d.command.CommandReconnect
+ * @class
  *
  * Reconnects two ports. This command is used during the DragDrop operation of a draw2d.Connection.
  *
@@ -8,14 +11,14 @@
  *
  * @extends draw2d.command.Command
  */
-import draw2d from '../packages'
+draw2d.command.CommandReconnect = draw2d.command.Command.extend(
+  /** @lends draw2d.command.CommandReconnect.prototype */
+  {
 
-draw2d.command.CommandReconnect = draw2d.command.Command.extend({
   NAME: "draw2d.command.CommandReconnect",
 
 
   /**
-   * @constructor
    * Create a new Command objects which can be execute via the CommandStack.
    *
    * @param {draw2d.Connection} conn the related Connection which is currently in the drag&drop operation
@@ -28,13 +31,13 @@ draw2d.command.CommandReconnect = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   *
    * Returns [true] if the command can be execute and the execution of the
    * command modify the model. A CommandMove with [startX,startX] == [endX,endY] should
    * return false. <br>
    * the execution of the Command doesn't modify the model.
    *
-   * @return {Boolean}
+   * @returns {Boolean}
    **/
   canExecute: function () {
     // return false if we doesn't modify the model => NOP Command
@@ -42,7 +45,7 @@ draw2d.command.CommandReconnect = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   *
    * The new ports to use during the execute of this command.
    *
    * @param {draw2d.Port} source
@@ -74,7 +77,7 @@ draw2d.command.CommandReconnect = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   *
    * Execute the command the first time
    *
    **/
@@ -83,7 +86,7 @@ draw2d.command.CommandReconnect = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   *
    * Execute the command the first time
    *
    **/
@@ -98,7 +101,7 @@ draw2d.command.CommandReconnect = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   *
    * Undo the command
    *
    **/
@@ -112,7 +115,7 @@ draw2d.command.CommandReconnect = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   *
    * Redo the command after the user has undo this command
    *
    **/

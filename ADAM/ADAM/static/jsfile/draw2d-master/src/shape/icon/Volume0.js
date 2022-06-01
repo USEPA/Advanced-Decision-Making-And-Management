@@ -1,28 +1,30 @@
-/**
- * @class draw2d.shape.icon.Volume0
+import draw2d from '../../packages'
 
- * See the example:
+
+/**
+ * @class
+
  *
- *     @example preview small frame
+ * @example
  *
- *     let icon =  new draw2d.shape.icon.Volume0();
+ *    let icon =  new draw2d.shape.icon.Volume0();
  *
- *     canvas.add(icon,50,10);
+ *    canvas.add(icon,50,10);
  *
  * @inheritable
  * @author Andreas Herz
  * @extends draw2d.shape.icon.Icon
  */
-import draw2d from '../../packages'
+draw2d.shape.icon.Volume0 = draw2d.shape.icon.Icon.extend(
+  /** @lends draw2d.shape.icon.Volume0.prototype */
+  {
 
-draw2d.shape.icon.Volume0 = draw2d.shape.icon.Icon.extend({
   NAME: "draw2d.shape.icon.Volume0",
 
   /**
    *
-   * @constructor
    * Creates a new icon element which are not assigned to any canvas.
-   *
+   * 
    * @param {Object} attr the configuration of the shape
    */
   init: function (attr, setter, getter) {
@@ -31,7 +33,7 @@ draw2d.shape.icon.Volume0 = draw2d.shape.icon.Icon.extend({
 
   /**
    * @private
-   * @returns
+   * @returns {Object} the raphaelJS path object
    */
   createSet: function () {
     return this.canvas.paper.path("M4.998,12.127v7.896h4.495l6.729,5.526l0.004-18.948l-6.73,5.526H4.998z")

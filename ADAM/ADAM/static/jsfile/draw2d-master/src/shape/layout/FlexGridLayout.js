@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+import extend from '../../util/extend'
+
 /**
- * @class draw2d.shape.layout.FlexGridLayout
+ * @class
  *
  * FlexGridLayout is a powerful, flexible and precise layout manager that aligns components vertically and
  * horizontally in a dynamic rectangular grid of cells, with each component occupying in one or more cell.
@@ -38,59 +41,57 @@
  *
  * Example Implementation of a shape:
  *
- *     @example preview small frame
- *     let PredefinedProcess = draw2d.shape.layout.FlexGridLayout.extend({
+ * @example
+ *    let PredefinedProcess = draw2d.shape.layout.FlexGridLayout.extend({
  *
  *
- *          //     10px       grow         10px
- *          //
- *          //    -----+------------------+-----
- *          //    |    |  [LABEL]         |    |
- *          //    |    |                  |    |
- *          //    |    |                  |    |    grow
- *          //    |    |                  |    |
- *          //    |    |                  |    |
- *          //    -----+------------------+-----
- *          //
- *          // @param attr
- *          //
- *         init: function(attr, setter, getter)
- *         {
- *            this._super(extend({
- *                 columns:"10px, grow, 10px",
- *                 rows:   "grow",
- *                 bgColor:"#FFFFFF",
- *                 stroke:2
- *             },attr),
- *            setter,
- *             getter);
+ *         //     10px       grow         10px
+ *         //
+ *         //    -----+------------------+-----
+ *         //    |    |  [LABEL]         |    |
+ *         //    |    |                  |    |
+ *         //    |    |                  |    |    grow
+ *         //    |    |                  |    |
+ *         //    |    |                  |    |
+ *         //    -----+------------------+-----
+ *         //
+ *         // @param attr
+ *         //
+ *        init: function(attr, setter, getter)
+ *        {
+ *           this._super(extend({
+ *                columns:"10px, grow, 10px",
+ *                rows:   "grow",
+ *                bgColor:"#FFFFFF",
+ *                stroke:2
+ *            },attr),
+ *           setter,
+ *            getter);
  *
  *
- *             this.label = new draw2d.shape.basic.Label({text:"Process Name", resizeable:true, stroke:2});
- *             this.label.installEditor(new draw2d.ui.LabelInplaceEditor());
- *             this.add(this.label, {row:0, col:1});
+ *            this.label = new draw2d.shape.basic.Label({text:"Process Name", resizeable:true, stroke:2});
+ *            this.label.installEditor(new draw2d.ui.LabelInplaceEditor());
+ *            this.add(this.label, {row:0, col:1});
  *
- *             this.setDimension(120,80);
- *         }
- *     });
- *     let shape = new PredefinedProcess();
- *     canvas.add(shape,10,10);
+ *            this.setDimension(120,80);
+ *        }
+ *    });
+ *    let shape = new PredefinedProcess();
+ *    canvas.add(shape,10,10);
  *
  *
  * @author Andreas Herz
  * @extends draw2d.shape.layout.Layout
  * @since 2.5.1
  */
-import draw2d from '../../packages'
-import extend from '../../util/extend'
-
-draw2d.shape.layout.FlexGridLayout = draw2d.shape.layout.Layout.extend({
-
+draw2d.shape.layout.FlexGridLayout = draw2d.shape.layout.Layout.extend(
+  /** @lends draw2d.shape.layout.FlexGridLayout.prototype */
+  {
+  
   NAME: "draw2d.shape.layout.FlexGridLayout",
 
 
   /**
-   * @constructor
    * Create a new instance
    *
    * @param {Object} [attr] the configuration of the shape

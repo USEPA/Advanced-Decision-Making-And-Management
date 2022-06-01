@@ -1,18 +1,20 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.line.LineSelectionFeedbackPolicy
+ * @class
  *
  *
  * @author Andreas Herz
  * @extends draw2d.policy.figure.SelectionFeedbackPolicy
  */
-import draw2d from '../../packages'
-
-draw2d.policy.line.LineSelectionFeedbackPolicy = draw2d.policy.figure.SelectionFeedbackPolicy.extend({
+draw2d.policy.line.LineSelectionFeedbackPolicy = draw2d.policy.figure.SelectionFeedbackPolicy.extend(
+  /** @lends draw2d.policy.line.LineSelectionFeedbackPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.line.LineSelectionFeedbackPolicy",
 
   /**
-   * @constructor
    * Creates a new selection feedback policy for a line or connection
    */
   init: function (attr, setter, getter) {
@@ -21,7 +23,7 @@ draw2d.policy.line.LineSelectionFeedbackPolicy = draw2d.policy.figure.SelectionF
 
 
   /**
-   * @method
+   * 
    * Called by the framework of the Policy should show a resize handle for the given shape
    *
    * @param {draw2d.Canvas} canvas The host canvas
@@ -42,7 +44,7 @@ draw2d.policy.line.LineSelectionFeedbackPolicy = draw2d.policy.figure.SelectionF
   },
 
   /**
-   * @method
+   * 
    * Callback method if the figure has been moved.
    *
    * @template

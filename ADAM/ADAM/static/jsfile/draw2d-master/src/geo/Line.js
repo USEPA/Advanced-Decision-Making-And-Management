@@ -1,8 +1,11 @@
+import draw2d from '../packages'
+
+
 /**
  * Static util function to determine the minimal distance of point(px,py) on the line(x1,y1,x2,y2)
  *
  *
- * @return {Number}
+ * @returns {Number}
  * @static
  * @private
  * @param {Number} X1 x coordinate of the start point of the line
@@ -12,9 +15,6 @@
  * @param {Number} px x coordinate of the point to test
  * @param {Number} py y coordinate of the point to test
  **/
-import draw2d from '../packages'
-
-
 draw2d.geo.Line = {
 
   /**
@@ -25,7 +25,7 @@ draw2d.geo.Line = {
    * ..=> given point is in between
    * 1 => given point is at the end
    *
-   * @return {Number}
+   * @returns {Number}
    */
   inverseLerp: function (X1, Y1, X2, Y2, px, py) {
     let nenner = Math.abs(X2 - X1)
@@ -43,12 +43,12 @@ draw2d.geo.Line = {
 
 
   /**
-   * @method
+   *
    * Returns the projection of the point onto the line.
    *
    * @param {Number} px the x coordinate of the test point
    * @param {Number} py the y coordinate of the test point
-   * @return {draw2d.geo.Point}
+   * @returns {draw2d.geo.Point}
    **/
   pointProjection: function (X1, Y1, X2, Y2, px, py) {
     let r = new draw2d.geo.Point(0, 0)

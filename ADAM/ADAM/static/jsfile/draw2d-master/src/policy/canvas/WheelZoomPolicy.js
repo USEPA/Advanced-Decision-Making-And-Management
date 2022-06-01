@@ -1,15 +1,18 @@
+import draw2d from '../../packages'
+import {Tweenable} from "shifty"
+
+
 /**
- * @class draw2d.policy.canvas.WheelZoomPolicy
+ * @class
  * Zoom support for a canvas. Use the mouse wheel and the shift key to zoom in/out.
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
- *     canvas.installEditPolicy(new draw2d.policy.canvas.WheelZoomPolicy());
- *     let shape =  new draw2d.shape.basic.Text({text:"Use the mouse wheel + SHIFT to zoom"});
+ *    canvas.installEditPolicy(new draw2d.policy.canvas.WheelZoomPolicy());
+ *    let shape =  new draw2d.shape.basic.Text({text:"Use the mouse wheel + SHIFT to zoom"});
  *
- *     canvas.add(shape,40,10);
+ *    canvas.add(shape,40,10);
  *
  *
  *
@@ -17,15 +20,13 @@
  * @extends draw2d.policy.canvas.CanvasPolicy
  * @since 5.8.0
  */
-import draw2d from '../../packages'
-import {Tweenable} from "shifty"
-
-draw2d.policy.canvas.WheelZoomPolicy = draw2d.policy.canvas.ZoomPolicy.extend({
+draw2d.policy.canvas.WheelZoomPolicy = draw2d.policy.canvas.ZoomPolicy.extend(
+  /** @lends draw2d.policy.canvas.WheelZoomPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.canvas.WheelZoomPolicy",
 
   /**
-   * @constructor
    */
   init: function () {
     this._super()
@@ -56,7 +57,7 @@ draw2d.policy.canvas.WheelZoomPolicy = draw2d.policy.canvas.ZoomPolicy.extend({
 
 
   /**
-   * @method
+   *
    * called if the user uses the mouse wheel.
    *
    *
@@ -67,7 +68,7 @@ draw2d.policy.canvas.WheelZoomPolicy = draw2d.policy.canvas.ZoomPolicy.extend({
    * @param ctrlKey
    * @since 5.8.0
    * @template
-   * @return {Boolean} return <b>false</b> to preven tthe default event operation (e.g. scrolling)
+   * @returns {Boolean} return <b>false</b> to preven tthe default event operation (e.g. scrolling)
    */
   onMouseWheel: function (wheelDelta, x, y, shiftKey, ctrlKey) {
     // mouse wheel is only supported if the user presses the shift key.
@@ -97,7 +98,7 @@ draw2d.policy.canvas.WheelZoomPolicy = draw2d.policy.canvas.ZoomPolicy.extend({
   },
 
   /**
-   * @method
+   *
    * Set the new zoom level of the canvas.
    *
    * @param zoomFactor
@@ -111,7 +112,7 @@ draw2d.policy.canvas.WheelZoomPolicy = draw2d.policy.canvas.ZoomPolicy.extend({
     let scrollTop = this.canvas.getScrollTop()
     let scrollLeft = this.canvas.getScrollLeft()
     let scrollWidth = this.canvas.getScrollArea().width()
-    let scrollHeight = this.canvas.getScrollArea().width()
+    let scrollHeight = this.canvas.getScrollArea().height()
     let centerY = scrollTop + (scrollHeight / 2) * this.canvas.zoomFactor
     let centerX = scrollLeft + (scrollWidth / 2) * this.canvas.zoomFactor
 
@@ -137,7 +138,7 @@ draw2d.policy.canvas.WheelZoomPolicy = draw2d.policy.canvas.ZoomPolicy.extend({
   },
 
   /**
-   * @method
+   *
    *
    * @param {Number} zoom
    * @param {draw2d.geo.Point} center

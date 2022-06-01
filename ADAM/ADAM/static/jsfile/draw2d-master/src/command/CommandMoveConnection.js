@@ -1,5 +1,8 @@
+import draw2d from '../packages'
+
+
 /**
- * @class draw2d.command.CommandMoveConnection
+ * @class
  *
  * Command for the movement of figures.
  *
@@ -8,13 +11,13 @@
  *
  * @extends draw2d.command.Command
  */
-import draw2d from '../packages'
-
-draw2d.command.CommandMoveConnection = draw2d.command.Command.extend({
+draw2d.command.CommandMoveConnection = draw2d.command.Command.extend(
+  /** @lends draw2d.command.CommandMoveConnection.prototype */
+  {
+  
   NAME: "draw2d.command.CommandMoveConnection",
 
   /**
-   * @constructor
    * Create a new Command objects which can be execute via the CommandStack.
    *
    * @param {draw2d.Connection} figure the connection to move
@@ -27,7 +30,7 @@ draw2d.command.CommandMoveConnection = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   * 
    * set the offset of the line translation
    *
    * @param {Number} dx

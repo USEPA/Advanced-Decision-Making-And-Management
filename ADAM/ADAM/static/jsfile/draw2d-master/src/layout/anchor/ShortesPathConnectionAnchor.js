@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.anchor.ShortesPathConnectionAnchor
+ * @class
  *
  * The ChopboxAnchor's location is found by calculating the intersection of a
  * line drawn from the center point of its owner's box (the parent of the
@@ -12,15 +15,14 @@
  * @author Andreas Herz
  * @extends draw2d.layout.anchor.ConnectionAnchor
  */
-import draw2d from '../../packages'
 
-
-draw2d.layout.anchor.ShortesPathConnectionAnchor = draw2d.layout.anchor.ConnectionAnchor.extend({
+draw2d.layout.anchor.ShortesPathConnectionAnchor = draw2d.layout.anchor.ConnectionAnchor.extend(
+  /** @lends draw2d.layout.anchor.ShortesPathConnectionAnchor.prototype */
+  {
 
   NAME: "draw2d.layout.anchor.ShortesPathConnectionAnchor",
 
   /**
-   * @constructor
    *
    * @param {draw2d.Figure} [owner] the figure to use for the anchor calculation
    */
@@ -29,7 +31,7 @@ draw2d.layout.anchor.ShortesPathConnectionAnchor = draw2d.layout.anchor.Connecti
   },
 
   /**
-   * @method
+   * 
    *
    * Returns the location where the Connection should be anchored in
    * absolute coordinates. The anchor may use the given reference
@@ -38,7 +40,7 @@ draw2d.layout.anchor.ShortesPathConnectionAnchor = draw2d.layout.anchor.Connecti
    * @param {draw2d.geo.Point} ref The reference Point in absolute coordinates
    * @param {draw2d.Connection} inquiringConnection the connection who ask for the location.
    *
-   * @return {draw2d.geo.Point} The anchor's location
+   * @returns {draw2d.geo.Point} The anchor's location
    */
   getLocation: function (ref, inquiringConnection) {
     let r = this.getOwner().getParent().getBoundingBox()
@@ -88,14 +90,14 @@ draw2d.layout.anchor.ShortesPathConnectionAnchor = draw2d.layout.anchor.Connecti
    * override this method to adjust the box. Maybe you return the box
    * of the port parent (the parent figure)
    *
-   * @return {draw2d.geo.Rectangle} The bounds of this Anchor's owner
+   * @returns {draw2d.geo.Rectangle} The bounds of this Anchor's owner
    */
   getBox: function () {
     return this.getOwner().getParent().getBoundingBox()
   },
 
   /**
-   * @method
+   * 
    *
    * Returns the bounds of this Anchor's owner. Subclasses can
    * override this method to adjust the box. Maybe you return the box
@@ -103,7 +105,7 @@ draw2d.layout.anchor.ShortesPathConnectionAnchor = draw2d.layout.anchor.Connecti
    *
    * @param {draw2d.Connection} inquiringConnection the connection who ask for the location.
    *
-   * @return {draw2d.geo.Point} The bounds of this Anchor's owner
+   * @returns {draw2d.geo.Point} The bounds of this Anchor's owner
    */
   getReferencePoint: function (inquiringConnection) {
     return this.getBox().getCenter()

@@ -1,44 +1,43 @@
-/**
- * @class draw2d.shape.diagram.Pie
- *
- * Small data pie chart.
- *
- * See the example:
- *
- *     @example preview small frame
- *
- *     let pie = new draw2d.shape.diagram.Pie({
- *        diameter:80,
- *        data:[30,60,122,4],
- *        x:100,
- *        y:60
- *     });
- *
- *     canvas.add( pie);
- *
- * @extends draw2d.shape.diagram.Diagram
- */
 import draw2d from '../../packages'
 import extend from '../../util/extend'
 
-draw2d.shape.diagram.Pie = draw2d.shape.diagram.Diagram.extend({
+/**
+ * @class
+ *
+ * Small data pie chart.
+ *
+ *
+ * @example
+ *
+ *    let pie = new draw2d.shape.diagram.Pie({
+ *       diameter:80,
+ *       data:[30,60,122,4],
+ *       x:100,
+ *       y:60
+ *    });
+ *
+ *    canvas.add( pie);
+ *
+ * @param {Object} [attr] the configuration of the shape
+ * @extends draw2d.shape.diagram.Diagram
+ */
+draw2d.shape.diagram.Pie = draw2d.shape.diagram.Diagram.extend(
+  /** @lends draw2d.shape.diagram.Pie */
+  {
 
+  NAME: "draw2d.shape.diagram.Pie",
   COLORS: ['#00A8F0', '#b9dd69', '#f3546a', '#4DA74D', '#9440ED'],
   TWO_PI: Math.PI * 2,
 
-  /**
-   *
-   * @param {Object} [attr] the configuration of the shape
-   */
   init: function (attr, setter, getter) {
 
 
     this._super(
       extend({stroke: 0}, attr),
       extend({
-        /** @attr {Number} diameter the diameter of the pie chart */
+        // @attr {Number} diameter the diameter of the pie chart */
         diameter: this.setDiameter,
-        /** @attr {Number} radius the radius of the pie chart */
+        // @attr {Number} radius the radius of the pie chart */
         radius: this.setRadius
       }, setter),
       extend({
@@ -48,7 +47,7 @@ draw2d.shape.diagram.Pie = draw2d.shape.diagram.Diagram.extend({
   },
 
   /**
-   * @method
+   *
    * Set the diameter of the circle. The center of the circle will be retained.
    *
    * @param {Number} d The new diameter of the circle.
@@ -64,7 +63,7 @@ draw2d.shape.diagram.Pie = draw2d.shape.diagram.Diagram.extend({
   },
 
   /**
-   * @method
+   *
    * Get the diameter of the circle.
    *
    * @since 4.0.0
@@ -75,7 +74,7 @@ draw2d.shape.diagram.Pie = draw2d.shape.diagram.Diagram.extend({
 
 
   /**
-   * @method
+   *
    * Set the radius of the circle. The center of the circle will be retained.
    *
    * @param {Number} r The new radius of the circle.
@@ -90,7 +89,7 @@ draw2d.shape.diagram.Pie = draw2d.shape.diagram.Diagram.extend({
 
 
   /**
-   * @method
+   *
    * Get the center of the circle
    *
    */
@@ -100,7 +99,7 @@ draw2d.shape.diagram.Pie = draw2d.shape.diagram.Diagram.extend({
   },
 
   /**
-   * @method
+   *
    * Set the center of the circle.
    *
    * @param {Number|draw2d.geo.Point} x the new x coordinate of the center or a draw2d.geo.Point object with the center

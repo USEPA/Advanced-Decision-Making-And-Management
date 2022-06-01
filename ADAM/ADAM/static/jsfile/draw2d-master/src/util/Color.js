@@ -1,34 +1,32 @@
+import draw2d from '../packages'
+
 /**
  * @class
  * Util class to handle colors in the draw2d enviroment.
  *
- *      // Create a new Color with RGB values
- *      var color = new draw2d.util.Color(127,0,0);
+ * @example
+ *     // Create a new Color with RGB values
+ *     var color = new draw2d.util.Color(127,0,0);
  *
- *      // of from a hex string
- *      var color2 = new draw2d.util.Color("#f00000");
+ *     // of from a hex string
+ *     var color2 = new draw2d.util.Color("#f00000");
  *
- *      // Create a little bit darker color
- *      var darkerColor = color.darker(0.2); // 20% darker
+ *     // Create a little bit darker color
+ *     var darkerColor = color.darker(0.2); // 20% darker
  *
- *      // create a optimal text color if 'color' the background color
- *      // (best in meaning of contrast and readability)
- *      var fontColor = color.getIdealTextColor();
+ *     // create a optimal text color if 'color' the background color
+ *     // (best in meaning of contrast and readability)
+ *     var fontColor = color.getIdealTextColor();
  *
+ * @param {Number|String|draw2d.util.Color|Array} red
+ * @param {Number} green
+ * @param {Number} blue
+ * @param {Number} [alpha]
  */
-import draw2d from '../packages';
+draw2d.util.Color = Class.extend(
+  /** @lends draw2d.util.Color */
+  {
 
-draw2d.util.Color = Class.extend({
-
-    /**
-     * @constructor
-     * Create a new Color object
-     *
-     * @param {Number|String|draw2d.util.Color|Array} red
-     * @param {Number} green
-     * @param {Number} blue
-     * @param {Number} [alpha]
-     */
     init: function(red, green, blue, alpha) {
 
       this.hashString = null;
@@ -95,21 +93,24 @@ draw2d.util.Color = Class.extend({
 
 
     /**
-     * @method
+     * 
      * Convert the color object into a HTML CSS representation
-     * @return {String} the color in rgb(##,##,##) representation
+     * @returns {String} the color in rgb(##,##,##) representation
      **/
     getHTMLStyle: function()
     {
+      if(typeof this.red ==="undefined")
+        return "rgba(0,0,0,0)";
+
       return "rgba("+this.red+","+this.green+","+this.blue+","+this.alpha+")"
     },
 
 
     /**
-     * @method
+     * 
      * The red part of the color.
      *
-     * @return {Number} the [red] part of the color.
+     * @returns {Number} the [red] part of the color.
      **/
     getRed: function()
     {
@@ -118,10 +119,10 @@ draw2d.util.Color = Class.extend({
 
 
     /**
-     * @method
+     * 
      * The green part of the color.
      *
-     * @return {Number} the [green] part of the color.
+     * @returns {Number} the [green] part of the color.
      **/
     getGreen: function()
     {
@@ -130,10 +131,10 @@ draw2d.util.Color = Class.extend({
 
 
     /**
-     * @method
+     * 
      * The blue part of the color
      *
-     * @return {Number} the [blue] part of the color.
+     * @returns {Number} the [blue] part of the color.
      **/
     getBlue: function()
     {
@@ -142,10 +143,10 @@ draw2d.util.Color = Class.extend({
 
 
     /**
-     * @method
+     * 
      * The alpha part of the color
      *
-     * @return {Number} the [alpha] part of the color.
+     * @returns {Number} the [alpha] part of the color.
      **/
     getAlpha: function()
     {
@@ -153,10 +154,10 @@ draw2d.util.Color = Class.extend({
     },
 
     /**
-     * @method
+     * 
      * Returns the ideal Text Color. Useful for font color selection by a given background color.
      *
-     * @return {draw2d.util.Color} The <i>ideal</i> inverse color.
+     * @returns {draw2d.util.Color} The <i>ideal</i> inverse color.
      **/
     getIdealTextColor: function()
     {
@@ -233,9 +234,9 @@ draw2d.util.Color = Class.extend({
 
 
     /**
-     * @method
+     * 
      * Convert the color object into a HTML CSS representation
-     * @return {String} the color in rgb(##,##,##) representation
+     * @returns {String} the color in rgb(##,##,##) representation
      **/
     rgba: function()
     {
@@ -244,9 +245,9 @@ draw2d.util.Color = Class.extend({
 
 
     /**
-     * @method
+     * 
      * Convert the color object into a HTML CSS representation
-     * @return {String} the color in #RRGGBB representation
+     * @returns {String} the color in #RRGGBB representation
      **/
     hash: function()
     {
@@ -266,7 +267,7 @@ draw2d.util.Color = Class.extend({
     },
 
     /**
-     * @method
+     * 
      * Returns a darker color of the given one. The original color is unchanged.
      *
      * @param {Number} fraction  Darkness fraction between [0..1].
@@ -294,11 +295,11 @@ draw2d.util.Color = Class.extend({
 
 
     /**
-     * @method
+     * 
      * Make a color lighter. The original color is unchanged.
      *
      * @param {Number} fraction  lighter fraction between [0..1].
-     * @return {draw2d.util.Color} Lighter color.
+     * @returns {draw2d.util.Color} Lighter color.
      */
     lighter: function( fraction)
     {
@@ -321,7 +322,7 @@ draw2d.util.Color = Class.extend({
     },
 
     /**
-     * @method
+     * 
      * Return a new color wich is faded to the given color.
      * @param {draw2d.util.Color} color
      * @param {Number} pc the fade percentage in [0..1]
@@ -340,11 +341,11 @@ draw2d.util.Color = Class.extend({
     },
 
 	/**
-	 * @method
+	 * 
 	 * Compares two color objects
 	 *
 	 * @param {draw2d.util.Color} o
-	 * @return {Boolean}
+	 * @returns {Boolean}
 	 **/
 	equals: function( o)
 	{

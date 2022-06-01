@@ -1,28 +1,30 @@
-/**
- * @class draw2d.shape.icon.DockLeft
+import draw2d from '../../packages'
 
- * See the example:
+
+/**
+ * @class
+
  *
- *     @example preview small frame
+ * @example
  *
- *     let icon =  new draw2d.shape.icon.DockLeft();
+ *    let icon =  new draw2d.shape.icon.DockLeft();
  *
- *     canvas.add(icon,50,10);
+ *    canvas.add(icon,50,10);
  *
  * @inheritable
  * @author Andreas Herz
  * @extends draw2d.shape.icon.Icon
  */
-import draw2d from '../../packages'
+draw2d.shape.icon.DockLeft = draw2d.shape.icon.Icon.extend(
+  /** @lends draw2d.shape.icon.DockLeft.prototype */
+  {
 
-draw2d.shape.icon.DockLeft = draw2d.shape.icon.Icon.extend({
   NAME: "draw2d.shape.icon.DockLeft",
 
   /**
    *
-   * @constructor
    * Creates a new icon element which are not assigned to any canvas.
-   *
+   * 
    * @param {Object} attr the configuration of the shape
    */
   init: function (attr, setter, getter) {
@@ -31,7 +33,7 @@ draw2d.shape.icon.DockLeft = draw2d.shape.icon.Icon.extend({
 
   /**
    * @private
-   * @returns
+   * @returns {Object} the raphaelJS path object
    */
   createSet: function () {
     return this.canvas.paper.path("M3.084,7.333v16.334h24.832V7.333H3.084z M11.667,10.332h13.251v10.336H11.667V10.332z")

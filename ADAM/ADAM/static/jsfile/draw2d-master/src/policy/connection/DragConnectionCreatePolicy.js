@@ -1,6 +1,6 @@
 
 /**
- * @class draw2d.policy.connection.DragConnectionCreatePolicy
+ * @class
  *
  * The DragConnectionCreatePolicy is the default configuration for connection creation.
  * You must drag a port and drop them onto another port to create connection.
@@ -15,36 +15,36 @@
  * <br>
  *
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
- *     // Override the default connection creation.
- *     //
- *     canvas.installEditPolicy( new draw2d.policy.connection.DragConnectionCreatePolicy());
+ *    // Override the default connection creation.
+ *    //
+ *    canvas.installEditPolicy( new draw2d.policy.connection.DragConnectionCreatePolicy());
  *
- *     // create and add two Node which contains Ports (In and OUT)
- *     //
- *     var start = new draw2d.shape.node.Start({x:50, y:50});
- *     var endNode   = new draw2d.shape.node.End({x:200, y:70});
+ *    // create and add two Node which contains Ports (In and OUT)
+ *    //
+ *    var start = new draw2d.shape.node.Start({x:50, y:50});
+ *    var endNode   = new draw2d.shape.node.End({x:200, y:70});
  *
- *     // add the two nodes to the canvas
- *     //
- *     canvas.add( start);
- *     canvas.add( endNode);
+ *    // add the two nodes to the canvas
+ *    //
+ *    canvas.add( start);
+ *    canvas.add( endNode);
  *
  * @author Andreas Herz
  *
  * @extends draw2d.policy.connection.ConnectionCreatePolicy
  */
-import draw2d from '../../packages';
+import draw2d from '../../packages'
 
-draw2d.policy.connection.DragConnectionCreatePolicy = draw2d.policy.connection.ConnectionCreatePolicy.extend({
-
-    NAME : "draw2d.policy.connection.DragConnectionCreatePolicy",
+draw2d.policy.connection.DragConnectionCreatePolicy = draw2d.policy.connection.ConnectionCreatePolicy.extend(
+    /** @lends draw2d.policy.connection.DragConnectionCreatePolicy.prototype */
+    {
+    
+    NAME: "draw2d.policy.connection.DragConnectionCreatePolicy",
     
     /**
-     * @constructor
      *
      * Creates a new connection create policy instance
      */
@@ -58,7 +58,7 @@ draw2d.policy.connection.DragConnectionCreatePolicy = draw2d.policy.connection.C
     },
 
     /**
-     * @method
+     * 
      *
      * @param {draw2d.Canvas} canvas
      * @param {Number} x the x-coordinate of the mouse down event
@@ -109,7 +109,7 @@ draw2d.policy.connection.DragConnectionCreatePolicy = draw2d.policy.connection.C
     },
 
     /**
-     * @method
+     * 
      *
      * @param {draw2d.Canvas} canvas
      * @param {Number} dx The x diff between start of dragging and this event
@@ -191,7 +191,7 @@ draw2d.policy.connection.DragConnectionCreatePolicy = draw2d.policy.connection.C
 
 
     /**
-     * @method
+     * 
      *
      * @param {draw2d.Figure} figure the shape below the mouse or null
      * @param {Number} x the x-coordinate of the mouse down event

@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.connection.CircuitConnectionRouter
+ * @class
  *
  * Provides a {@link draw2d.Connection} with an orthogonal route between the Connection's source
  * and target anchors.
@@ -10,47 +13,47 @@
  *
  * <br>
  *
- *     @example preview small frame
+ * @example
  *
- *     let createConnection=function(){
- *        let con = new draw2d.Connection();
- *        con.setRouter(new draw2d.layout.connection.CircuitConnectionRouter());
- *        return con;
- *     };
+ *    let createConnection=function(){
+ *       let con = new draw2d.Connection();
+ *       con.setRouter(new draw2d.layout.connection.CircuitConnectionRouter());
+ *       return con;
+ *    };
  *
- *     // install a custom connection create policy
- *     //
- *     canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
- *            createConnection: createConnection
- *     }));
+ *    // install a custom connection create policy
+ *    //
+ *    canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
+ *           createConnection: createConnection
+ *    }));
  *
- *     // create and add two nodes which contains Ports (In and OUT)
- *     //
- *     let f1 = new draw2d.shape.analog.OpAmp({x:10, y:10});
- *     let f2 = new draw2d.shape.analog.ResistorVertical({angle:90, height:20, x:300, y:150});
- *     let f3 = new draw2d.shape.analog.ResistorVertical({x:250, y:70});
- *     let f4 = new draw2d.shape.analog.ResistorVertical({x:10, y:90});
+ *    // create and add two nodes which contains Ports (In and OUT)
+ *    //
+ *    let f1 = new draw2d.shape.analog.OpAmp({x:10, y:10});
+ *    let f2 = new draw2d.shape.analog.ResistorVertical({angle:90, height:20, x:300, y:150});
+ *    let f3 = new draw2d.shape.analog.ResistorVertical({x:250, y:70});
+ *    let f4 = new draw2d.shape.analog.ResistorVertical({x:10, y:90});
  *
- *     // ...add it to the canvas
- *     //
- *     canvas.add( f1);
- *     canvas.add( f2);
- *     canvas.add( f3);
- *     canvas.add( f4);
+ *    // ...add it to the canvas
+ *    //
+ *    canvas.add( f1);
+ *    canvas.add( f2);
+ *    canvas.add( f3);
+ *    canvas.add( f4);
  *
- *     // first Connection
- *     //
- *     let c = createConnection();
- *     c.setSource(f1.getOutputPort(0));
- *     c.setTarget(f2.getHybridPort(0));
- *     canvas.add(c);
+ *    // first Connection
+ *    //
+ *    let c = createConnection();
+ *    c.setSource(f1.getOutputPort(0));
+ *    c.setTarget(f2.getHybridPort(0));
+ *    canvas.add(c);
  *
- *     // second Connection between the other resistors
- *     //
- *     c = createConnection();
- *     c.setSource(f3.getHybridPort(1));
- *     c.setTarget(f4.getHybridPort(0));
- *     canvas.add(c);
+ *    // second Connection between the other resistors
+ *    //
+ *    c = createConnection();
+ *    c.setSource(f3.getHybridPort(1));
+ *    c.setTarget(f4.getHybridPort(0));
+ *    canvas.add(c);
  *
  *
  * @inheritable
@@ -58,20 +61,19 @@
  *
  * @extends  draw2d.layout.connection.ManhattanConnectionRouter
  */
-import draw2d from '../../packages'
 
+draw2d.layout.connection.CircuitConnectionRouter = draw2d.layout.connection.ManhattanConnectionRouter.extend(
+  /** @lends draw2d.layout.connection.CircuitConnectionRouter.prototype */
+  {
 
-draw2d.layout.connection.CircuitConnectionRouter = draw2d.layout.connection.ManhattanConnectionRouter.extend({
   NAME: "draw2d.layout.connection.CircuitConnectionRouter",
 
   /**
-   * @constructor
    * Creates a new Router object.
    *
    */
   init: function () {
     this._super()
-
     this.setBridgeRadius(4)
     this.setVertexRadius(2)
 
@@ -81,7 +83,7 @@ draw2d.layout.connection.CircuitConnectionRouter = draw2d.layout.connection.Manh
 
 
   /**
-   * @method
+   * 
    * Callback method if the router has been assigned to a connection.
    *
    * @param {draw2d.Connection} connection The assigned connection
@@ -93,7 +95,7 @@ draw2d.layout.connection.CircuitConnectionRouter = draw2d.layout.connection.Manh
   },
 
   /**
-   * @method
+   * 
    * Callback method if the router has been removed from the connection. In the case of the CircuitRouter
    * all vertex nodes will be removed from the canvas.
    *
@@ -109,7 +111,7 @@ draw2d.layout.connection.CircuitConnectionRouter = draw2d.layout.connection.Manh
   },
 
   /**
-   * @method
+   * 
    * Set the radius of the vertex circle.
    *
    * @param {Number} radius
@@ -127,7 +129,7 @@ draw2d.layout.connection.CircuitConnectionRouter = draw2d.layout.connection.Manh
   },
 
   /**
-   * @method
+   * 
    * Set the radius or span of the bridge. A bridge will be drawn if two connections are crossing and didn't have any
    * common port.
    *
@@ -222,7 +224,7 @@ draw2d.layout.connection.CircuitConnectionRouter = draw2d.layout.connection.Manh
                   path = ["M", (interP.x | 0) + 0.5, " ", (interP.y | 0) + 0.5]
                   if (lastVertexNode !== null) {
                     lastVertexNode.remove()
-                    conn.vertexNodes.exclude(lastVerteNode)
+                    conn.vertexNodes.exclude(lastVertexNode)
                   }
                 }
                 lastVertexNode = vertexNode

@@ -1,44 +1,46 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.locator.CenterLocator
+ * @class
  *
  * A CenterLocator is used to place figures in the center of a parent shape.
  *
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
  *
- *     // create a basic figure and add a Label/child via API call
- *     //
- *     let circle = new draw2d.shape.basic.Circle({diameter:120});
- *     circle.setStroke(3);
- *     circle.setColor("#A63343");
- *     circle.setBackgroundColor("#E65159");
- *     circle.add(new draw2d.shape.basic.Label({text:"Center Label"}), new draw2d.layout.locator.CenterLocator());
- *     canvas.add( circle, 100,50);
+ *    // create a basic figure and add a Label/child via API call
+ *    //
+ *    let circle = new draw2d.shape.basic.Circle({diameter:120});
+ *    circle.setStroke(3);
+ *    circle.setColor("#A63343");
+ *    circle.setBackgroundColor("#E65159");
+ *    circle.add(new draw2d.shape.basic.Label({text:"Center Label"}), new draw2d.layout.locator.CenterLocator());
+ *    canvas.add( circle, 100,50);
  *
  *
  * @author Andreas Herz
  * @extend draw2d.layout.locator.Locator
  */
-import draw2d from '../../packages'
+draw2d.layout.locator.CenterLocator = draw2d.layout.locator.Locator.extend(
+  /** @lends draw2d.layout.locator.CenterLocator.prototype */
+  {
 
-draw2d.layout.locator.CenterLocator = draw2d.layout.locator.Locator.extend({
   NAME: "draw2d.layout.locator.CenterLocator",
 
   /**
-   * @constructor
    * Constructs a locator with associated parent.
    *
    */
-  init: function () {
-    this._super()
+  init: function (attr, setter, getter) {
+    this._super(attr, setter, getter)
   },
 
 
   /**
-   * @method
+   * 
    * Relocates the given Figure.
    *
    * @param {Number} index child index of the target

@@ -1,5 +1,8 @@
+import draw2d from 'packages'
+
+
 /**
- * @class draw2d.HeadlessCanvas
+ * @class
  *
  * Required for Node.js draw2d model read/write operations.
  *
@@ -7,14 +10,15 @@
  * @author Andreas Herz
  */
 
-import draw2d from 'packages';
-
 draw2d.HeadlessCanvas = Class.extend(
-{
-    NAME : "draw2d.HeadlessCanvas",
+  /** @lends draw2d.HeadlessCanvas.prototype */
+
+    /** @lends draw2d.HeadlessCanvas.prototype */
+    {
+
+    NAME: "draw2d.HeadlessCanvas",
 
     /**
-     * @constructor
      * Create a new canvas with the given HTML DOM references.
      *
      * @param {String} canvasId the id of the DOM element to use a parent container
@@ -35,7 +39,7 @@ draw2d.HeadlessCanvas = Class.extend(
     },
 
     /**
-     * @method
+     * 
      * Reset the canvas and delete all model elements.<br>
      * You can now reload another model to the canvas with a {@link draw2d.io.Reader}
      *
@@ -56,11 +60,10 @@ draw2d.HeadlessCanvas = Class.extend(
 
     calculateConnectionIntersection:function()
     {
-
     },
 
     /**
-     * @method
+     * 
      * Callback for any kind of image export tools to trigger the canvas to hide all unwanted
      * decorations. The method is called e.g. from the draw2d.io.png.Writer
      *
@@ -72,7 +75,7 @@ draw2d.HeadlessCanvas = Class.extend(
     },
 
     /**
-     * @method
+     * 
      * callback method for any image export writer to reactivate the decoration
      * of the canvas. e.g. grids, rulers,...
      *
@@ -86,23 +89,23 @@ draw2d.HeadlessCanvas = Class.extend(
 
 
     /**
-     * @method
+     * 
      * Add a figure at the given x/y coordinate. This method fires an event.
      *
      * Example:
      *
-     *      canvas.on("figure:add", function(emitter, event){
-     *         alert("figure added:");
-     *      });
+     *     canvas.on("figure:add", function(emitter, event){
+     *        alert("figure added:");
+     *     });
      *
-     *      // or more general if you want catch all figure related events
-     *      //
-     *      canvas.on("figure", function(emitter, event){
-     *         // use event.figure.getCanvas()===null to determine if the
-     *         // figure part of the canvas
+     *     // or more general if you want catch all figure related events
+     *     //
+     *     canvas.on("figure", function(emitter, event){
+     *        // use event.figure.getCanvas()===null to determine if the
+     *        // figure part of the canvas
      *
-     *         alert("figure added or removed:");
-     *      });
+     *        alert("figure added or removed:");
+     *     });
      *
      * @param {draw2d.Figure} figure The figure to add.
      * @param {Number/draw2d.geo.Point} [x] The new x coordinate of the figure or the x/y coordinate if it is an draw2d.geo.Point
@@ -127,11 +130,11 @@ draw2d.HeadlessCanvas = Class.extend(
     },
 
     /**
-     * @method
+     * 
      * Returns all lines/connections in this workflow/canvas.<br>
      *
      * @protected
-     * @return {draw2d.util.ArrayList}
+     * @returns {draw2d.util.ArrayList}
      **/
     getLines: function()
     {
@@ -139,11 +142,11 @@ draw2d.HeadlessCanvas = Class.extend(
     },
 
     /**
-     * @method
+     * 
      * Returns the internal figures.<br>
      *
      * @protected
-     * @return {draw2d.util.ArrayList}
+     * @returns {draw2d.util.ArrayList}
      **/
     getFigures: function()
     {
@@ -151,12 +154,12 @@ draw2d.HeadlessCanvas = Class.extend(
     },
 
     /**
-     * @method
+     * 
      * Returns the line or connection with the given id.
      *
      * @param {String} id The id of the line.
      *
-     * @return {draw2d.shape.basic.Line}
+     * @returns {draw2d.shape.basic.Line}
      **/
     getLine: function( id)
     {
@@ -172,11 +175,11 @@ draw2d.HeadlessCanvas = Class.extend(
     },
 
     /**
-     * @method
+     * 
      * Returns the figure with the given id.
      *
      * @param {String} id The id of the figure.
-     * @return {draw2d.Figure}
+     * @returns {draw2d.Figure}
      **/
     getFigure: function( id)
     {
@@ -191,7 +194,7 @@ draw2d.HeadlessCanvas = Class.extend(
     },
 
     /**
-     * @method
+     * 
      * Register a port to the canvas. This is required for other ports to find a valid drop target.
      *
      * @param {draw2d.Port} port The new port which has been added to the Canvas.
@@ -208,7 +211,7 @@ draw2d.HeadlessCanvas = Class.extend(
     },
 
     /**
-     * @method
+     * 
      * Return all ports in the canvas
      *
      */
@@ -218,10 +221,10 @@ draw2d.HeadlessCanvas = Class.extend(
     },
 
     /**
-     * @method
+     * 
      * Returns the command stack for the Canvas. Required for undo/redo support.
      *
-     * @return {draw2d.command.CommandStack}
+     * @returns {draw2d.command.CommandStack}
      **/
     getCommandStack: function()
     {
@@ -231,7 +234,7 @@ draw2d.HeadlessCanvas = Class.extend(
 
     // NEW EVENT HANDLING SINCE VERSION 5.0.0
     /**
-     * @method
+     * 
      * Execute all handlers and behaviors attached to the canvas for the given event type.
      *
      *
@@ -260,7 +263,7 @@ draw2d.HeadlessCanvas = Class.extend(
     },
 
     /**
-     * @method
+     * 
      * Attach an event handler function for one or more events to the canvas.
      * To remove events bound with .on(), see {@link #off}.
      *
@@ -272,18 +275,18 @@ draw2d.HeadlessCanvas = Class.extend(
      *
      * Example:
      *
-     *      canvas.on("clear", function(emitter, event){
-     *         alert("canvas.clear() called.");
-     *      });
+     *     canvas.on("clear", function(emitter, event){
+     *        alert("canvas.clear() called.");
+     *     });
      *
-     *      canvas.on("select", function(emitter,event){
-     *          if(event.figure!==null){
-     *              alert("figure selected");
-     *          }
-     *          else{
-     *              alert("selection cleared");
-     *          }
-     *      });
+     *     canvas.on("select", function(emitter,event){
+     *         if(event.figure!==null){
+     *             alert("figure selected");
+     *         }
+     *         else{
+     *             alert("selection cleared");
+     *         }
+     *     });
      *
      * @param {String}   event One or more space-separated event types
      * @param {Function} callback A function to execute when the event is triggered.
@@ -305,7 +308,7 @@ draw2d.HeadlessCanvas = Class.extend(
     },
 
     /**
-     * @method
+     * 
      * The .off() method removes event handlers that were attached with {@link #on}.<br>
      * Calling .off() with no arguments removes all handlers attached to the canvas.<br>
      * <br>

@@ -1,29 +1,31 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.basic.Diamond
+ * @class
  * A Diamond Figure.
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
- *     let d1 =  new draw2d.shape.basic.Diamond({x:10,y:10});
- *     let d2 =  new draw2d.shape.basic.Diamond({x:100,y:10, bgColor:"#f0f000", alpha:0.7, width:100, height:60});
+ *    let d1 =  new draw2d.shape.basic.Diamond({x:10,y:10});
+ *    let d2 =  new draw2d.shape.basic.Diamond({x:100,y:10, bgColor:"#f0f000", alpha:0.7, width:100, height:60});
  *
- *     canvas.add(d1);
- *     canvas.add(d2);
+ *    canvas.add(d1);
+ *    canvas.add(d2);
  *
- *     canvas.setCurrentSelection(d2);
+ *    canvas.setCurrentSelection(d2);
  *
  * @author Andreas Herz
  * @extends draw2d.VectorFigure
  */
-import draw2d from '../../packages'
-
-draw2d.shape.basic.Diamond = draw2d.shape.basic.Polygon.extend({
+draw2d.shape.basic.Diamond = draw2d.shape.basic.Polygon.extend(
+  /** @lends draw2d.shape.basic.Diamond.prototype */
+  {
+  
   NAME: "draw2d.shape.basic.Diamond",
 
   /**
-   * @constructor
    * Creates a new figure element which are not assigned to any canvas.
    *
    * @param {Object} [attr] the configuration of the shape

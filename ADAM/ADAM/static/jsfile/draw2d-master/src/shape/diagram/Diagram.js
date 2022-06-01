@@ -1,22 +1,19 @@
-/**
- * @class draw2d.shape.diagram.Diagram
- *
- * Base class for all diagrams.
- *
- * @extends draw2d.SetFigure
- */
-
 import draw2d from '../../packages'
 import extend from '../../util/extend'
 import jsonUtil from '../../util/JSONUtil'
 
-draw2d.shape.diagram.Diagram = draw2d.SetFigure.extend({
+/**
+ * @class
+ *
+ * Base class for all diagrams.
+ *
+ * @param {Object} [attr] the configuration of the shape
+ * @extends draw2d.SetFigure
+ */
+draw2d.shape.diagram.Diagram = draw2d.SetFigure.extend(
+  /** @lends draw2d.shape.diagram.Diagram */
+  {
 
-  /**
-   * @constructor
-   *
-   * @param {Object} [attr] the configuration of the shape
-   */
   init: function (attr, setter, getter) {
     this.data = []
     this.cache = {}
@@ -24,7 +21,7 @@ draw2d.shape.diagram.Diagram = draw2d.SetFigure.extend({
     this._super(
       extend({data: [], bgColor: "#8dabf2", stroke: 1, color: "#f0f0f0", radius: 2, resizeable: true}, attr),
       extend({}, {
-        /** @attr {Array} data the data to display in the diagram */
+        // @attr {Array} data the data to display in the diagram */
         data: this.setData
       }, setter),
       extend({}, {
@@ -34,7 +31,7 @@ draw2d.shape.diagram.Diagram = draw2d.SetFigure.extend({
   },
 
   /**
-   * @method
+   * 
    * Set the data for the chart/diagram element
    *
    * @param {Array} data
@@ -56,7 +53,7 @@ draw2d.shape.diagram.Diagram = draw2d.SetFigure.extend({
   },
 
   /**
-   * @method
+   * 
    * Return the data of the diagram
    *
    * @since 5.0.0
@@ -67,7 +64,7 @@ draw2d.shape.diagram.Diagram = draw2d.SetFigure.extend({
 
 
   /**
-   * @method
+   * 
    * Set the dimension of the diagram and reset the cached calculation
    *
    * @since 5.0.0
@@ -81,20 +78,20 @@ draw2d.shape.diagram.Diagram = draw2d.SetFigure.extend({
 
 
   /**
-   * @method
+   * 
    * Return the calculate width of the set. This calculates the bounding box of all elements.
    *
-   * @return {Number} the calculated width of the label
+   * @returns {Number} the calculated width of the label
    **/
   getWidth: function () {
     return this.width
   },
 
   /**
-   * @method
+   * 
    * Return the calculated height of the set. This calculates the bounding box of all elements.
    *
-   * @return {Number} the calculated height of the label
+   * @returns {Number} the calculated height of the label
    */
   getHeight: function () {
     return this.height

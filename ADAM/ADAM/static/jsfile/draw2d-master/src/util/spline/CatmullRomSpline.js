@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.util.spline.CatmullRomSpline
+ * @class
  *
  * A catmull-rom spline object.
  *
@@ -8,14 +11,14 @@
  *
  * @extends draw2d.util.spline.CubicSpline
  */
-import draw2d from '../../packages';
-
 draw2d.util.spline.CatmullRomSpline = draw2d.util.spline.CubicSpline.extend(
-{
-    NAME : "draw2d.util.spline.CatmullRomSpline",
+
+    /** @lends draw2d.util.spline.CatmullRomSpline.prototype */
+    {
+    
+    NAME: "draw2d.util.spline.CatmullRomSpline",
 
     /**
-     * @constructor
      */
     init: function()
     {

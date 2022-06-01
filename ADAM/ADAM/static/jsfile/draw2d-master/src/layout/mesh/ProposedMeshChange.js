@@ -1,16 +1,18 @@
 
 /**
- * @class draw2d.layout.mesh.ProposedMeshChange
+ * @class
  * Change proposal for grid/mesh layout changes.
  *
  * @author Andreas Herz
  */
-import draw2d from '../../packages';
+import draw2d from '../../packages'
 
-draw2d.layout.mesh.ProposedMeshChange = Class.extend({
+draw2d.layout.mesh.ProposedMeshChange = Class.extend(
+  /** @lends draw2d.layout.mesh.ProposedMeshChange.prototype */
+
+  {
 
 	/**
-	 * @constructor
 	 * Creates change object.
 	 */
     init: function(figure, x, y)
@@ -21,10 +23,10 @@ draw2d.layout.mesh.ProposedMeshChange = Class.extend({
     },
 
     /**
-     * @method
+     *
      * Return the related figure.
      *
-     * @return {draw2d.Figure} the figure to the related change proposal
+     * @returns {draw2d.Figure} the figure to the related change proposal
      */
     getFigure: function( )
     {
@@ -32,10 +34,10 @@ draw2d.layout.mesh.ProposedMeshChange = Class.extend({
     },
 
     /**
-     * @method
+     *
      * The proposed x-coordinate.
      *
-     * @return {Number}
+     * @returns {Number}
      */
     getX: function()
     {
@@ -43,10 +45,10 @@ draw2d.layout.mesh.ProposedMeshChange = Class.extend({
     },
 
     /**
-     * @method
+     *
      * The proposed y-coordinate
      *
-     * @return {Number}
+     * @returns {Number}
      */
     getY: function()
     {

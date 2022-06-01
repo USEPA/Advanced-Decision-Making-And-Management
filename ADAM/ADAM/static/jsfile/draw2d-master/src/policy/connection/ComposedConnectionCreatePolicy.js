@@ -1,6 +1,6 @@
 
 /**
- * @class draw2d.policy.connection.ComposedConnectionCreatePolicy
+ * @class
  * A composed connection create policy. Use this to install more than one
  * ConnectionCreatePolicy into the canvas. Normally it is not allowed to install
  * more than one policy from the same type.
@@ -10,14 +10,15 @@
  *
  * @extends draw2d.policy.connection.ConnectionCreatePolicy
  */
-import draw2d from '../../packages';
+import draw2d from '../../packages'
 
-draw2d.policy.connection.ComposedConnectionCreatePolicy = draw2d.policy.connection.ConnectionCreatePolicy.extend({
-
-    NAME : "draw2d.policy.connection.ComposedConnectionCreatePolicy",
+draw2d.policy.connection.ComposedConnectionCreatePolicy = draw2d.policy.connection.ConnectionCreatePolicy.extend(
+    /** @lends draw2d.policy.connection.ComposedConnectionCreatePolicy.prototype */
+    {
+    
+    NAME: "draw2d.policy.connection.ComposedConnectionCreatePolicy",
 
     /**
-     * @constructor
      *
      * Creates a new connection create policy instance
      *
@@ -90,7 +91,7 @@ draw2d.policy.connection.ComposedConnectionCreatePolicy = draw2d.policy.connecti
     },
 
     /**
-     * @method
+     * 
      * Called if the policy is installed into the canvas.
      *
      * @param {draw2d.Canvas} canvas
@@ -104,7 +105,7 @@ draw2d.policy.connection.ComposedConnectionCreatePolicy = draw2d.policy.connecti
     },
 
     /**
-     * @method
+     * 
      * Called if the policy is deinstalled from the canvas
      *
      * @param {draw2d.Canvas} canvas

@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.canvas.GhostMoveSelectionPolicy
+ * @class
  *
  * A drag&Drop feedback handler for the canvas. The policy didn't move the
  * shapes in real time rather it shows a ghost rectangle as feedback. <br>
@@ -7,31 +10,29 @@
  * The shapes are updated after the drag&drop operation.
  *
  *
- * See the example:
  *
- *       @example preview small frame
+ * @example
  *
- *       // install the policy to the canvas
- *       canvas.installEditPolicy(new draw2d.policy.canvas.GhostMoveSelectionPolicy());
+ *      // install the policy to the canvas
+ *      canvas.installEditPolicy(new draw2d.policy.canvas.GhostMoveSelectionPolicy());
  *
- *       // add some demo figure to the canvas
- *       canvas.add(new draw2d.shape.basic.Circle({diameter: 50, x: 10,  y: 30}));
- *       canvas.add(new draw2d.shape.basic.Circle({diameter: 30, x: 90,  y: 50}));
- *       canvas.add(new draw2d.shape.basic.Circle({diameter: 60, x: 110, y: 30}));
+ *      // add some demo figure to the canvas
+ *      canvas.add(new draw2d.shape.basic.Circle({diameter: 50, x: 10,  y: 30}));
+ *      canvas.add(new draw2d.shape.basic.Circle({diameter: 30, x: 90,  y: 50}));
+ *      canvas.add(new draw2d.shape.basic.Circle({diameter: 60, x: 110, y: 30}));
  *
- *       canvas.add(new draw2d.shape.basic.Label({text:"move the circle to see the drag&drop feedback"}),5,5);
+ *      canvas.add(new draw2d.shape.basic.Label({text:"move the circle to see the drag&drop feedback"}),5,5);
  *
  * @author Andreas Herz
  * @extends draw2d.policy.canvas.SingleSelectionPolicy
  */
-import draw2d from '../../packages'
-
-draw2d.policy.canvas.GhostMoveSelectionPolicy = draw2d.policy.canvas.SingleSelectionPolicy.extend({
+draw2d.policy.canvas.GhostMoveSelectionPolicy = draw2d.policy.canvas.SingleSelectionPolicy.extend(
+  /** @lends draw2d.policy.canvas.GhostMoveSelectionPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.canvas.GhostMoveSelectionPolicy",
 
   /**
-   * @constructor
    */
   init: function () {
     this.clone = null

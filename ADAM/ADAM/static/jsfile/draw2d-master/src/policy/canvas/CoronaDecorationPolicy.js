@@ -1,36 +1,37 @@
+import draw2d from '../../packages'
+import extend from '../../util/extend'
+
+
 /**
- * @class draw2d.policy.canvas.CoronaDecorationPolicy
+ * @class
  * This decorations hides draw2d.Ports which are to far from the current cursor position.
  * This makes the canvas more clean if you have a lot of nodes on it.<br>
  * You didn't see a bunch of ports.
  *
- * See the example:
  *
- *       @example preview small frame
+ * @example
  *
- *       // install the policy to the canvas
+ *      // install the policy to the canvas
  *
- *       // add some demo figure to the canvas
- *       canvas.add(new draw2d.shape.node.Start({x: 10,  y: 30}));
- *       canvas.add(new draw2d.shape.node.End({x: 90,  y: 90}));
- *       canvas.add(new draw2d.shape.node.Between({ x: 310, y: 30}));
+ *      // add some demo figure to the canvas
+ *      canvas.add(new draw2d.shape.node.Start({x: 10,  y: 30}));
+ *      canvas.add(new draw2d.shape.node.End({x: 90,  y: 90}));
+ *      canvas.add(new draw2d.shape.node.Between({ x: 310, y: 30}));
  *
- *       canvas.add(new draw2d.shape.basic.Label({text:"move the mouse and you see that ports are hidden if the mouse far from it"}),5,5);
+ *      canvas.add(new draw2d.shape.basic.Label({text:"move the mouse and you see that ports are hidden if the mouse far from it"}),5,5);
  *
- *       canvas.installEditPolicy(new draw2d.policy.canvas.CoronaDecorationPolicy());
+ *      canvas.installEditPolicy(new draw2d.policy.canvas.CoronaDecorationPolicy());
  *
  * @author Andreas Herz
  * @extends draw2d.policy.canvas.DecorationPolicy
  */
-import draw2d from '../../packages'
-import extend from '../../util/extend'
-
-draw2d.policy.canvas.CoronaDecorationPolicy = draw2d.policy.canvas.DecorationPolicy.extend({
+draw2d.policy.canvas.CoronaDecorationPolicy = draw2d.policy.canvas.DecorationPolicy.extend(
+  /** @lends draw2d.policy.canvas.CoronaDecorationPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.canvas.CoronaDecorationPolicy",
 
   /**
-   * @constructor
    *
    */
   init: function (attr, setter, getter) {
@@ -80,7 +81,7 @@ draw2d.policy.canvas.CoronaDecorationPolicy = draw2d.policy.canvas.DecorationPol
   onInstall: function (canvas) {
     this._super(canvas)
     canvas.getFigures().each((i, figure) => {
-      figure.getPorts().each((i, p) => p.setVisible(false))
+      figure.getPorts().each((i, p) => p.setAlpha(0.0))
     })
   },
 
@@ -96,7 +97,6 @@ draw2d.policy.canvas.CoronaDecorationPolicy = draw2d.policy.canvas.DecorationPol
           p.setAlpha(p.__origAlpha)
           delete p.__origAlpha
         }
-        p.setVisible(true)
       })
     })
   },
@@ -126,7 +126,7 @@ draw2d.policy.canvas.CoronaDecorationPolicy = draw2d.policy.canvas.DecorationPol
 
 
   /**
-   * @method
+   * 
    * Update all ports with the new calculated opacity in relation to the distance to the current
    * mouse position
    *
@@ -144,18 +144,13 @@ draw2d.policy.canvas.CoronaDecorationPolicy = draw2d.policy.canvas.DecorationPol
               p.__origAlpha = figure.getAlpha()
             }
             let dist = figure.getBoundingBox().getDistance(new draw2d.geo.Point(x, y))
-            let alpha = 1 - ((100 / (this.diameterToBeVisible - this.diameterToBeFullVisible)) * dist) / 100.0
+            let alpha = Math.max(0, (1 - (((100 / (this.diameterToBeVisible - this.diameterToBeFullVisible)) * dist) / 100.0)))
             p.setAlpha(alpha)
-            p.setVisible(true)
           })
         }
         else {
           figure.getPorts().each((i, p) => {
-            if (p.__origAlpha) {
-              p.setAlpha(p.__origAlpha)
-              delete p.__origAlpha
-            }
-            p.setVisible(false)
+              p.setAlpha(0.0)
           })
         }
       }

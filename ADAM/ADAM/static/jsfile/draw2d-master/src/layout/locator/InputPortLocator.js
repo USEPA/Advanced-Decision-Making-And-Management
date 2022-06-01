@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.locator.InputPortLocator
+ * @class
  *
  * Repositions a Figure attached to a Connection when the
  * Connection is moved. Provides for alignment at the start
@@ -8,23 +11,23 @@
  * @author Andreas Herz
  * @extend draw2d.layout.locator.PortLocator
  */
-import draw2d from '../../packages'
+draw2d.layout.locator.InputPortLocator = draw2d.layout.locator.PortLocator.extend(
+  /** @lends draw2d.layout.locator.InputPortLocator.prototype */
+  {
 
-draw2d.layout.locator.InputPortLocator = draw2d.layout.locator.PortLocator.extend({
   NAME: "draw2d.layout.locator.InputPortLocator",
 
   /**
-   * @constructor
    * Default constructor for a Locator which can layout a port in context of a
    * {@link draw2d.shape.node.Node}
    *
    */
-  init: function () {
-    this._super()
+  init: function (attr, setter, getter) {
+    this._super(attr, setter, getter)
   },
 
   /**
-   * @method
+   *
    * Controls the location of an {@link draw2d.Figure}
    *
    * @param {Number} index port index of the figure

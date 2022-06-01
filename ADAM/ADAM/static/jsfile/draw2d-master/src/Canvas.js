@@ -1,33 +1,20 @@
+import draw2d from 'packages'
+
+
 /**
- * @class draw2d.Canvas
- * Interactive paint area of the draw2d library.
- * <br>
- * <strong>Usage</strong>
+ * @class
+ * A scrolling Canvas that contains Figures. Call `add(draw2d.Figure)` to add shapes to the Viewport.
  *
  *
- *      $(window).load(function () {
- *
- *          let canvas = new draw2d.Canvas("gfx_holder");
- *
- *          let figure1 = new draw2d.shape.basic.Oval();
- *          let figure2 = new draw2d.shape.basic.Rectangle();
- *          canvas.add(figure1,100,100);
- *          canvas.add(figure2,120,150);
- *      });
- *
- *
- * @inheritable
  * @author Andreas Herz
  */
-import '../dist/draw2d.js'
-//import draw2d from 'packages'
-
 draw2d.Canvas = Class.extend(
+  /** @lends draw2d.Canvas.prototype */
   {
+
     NAME: "draw2d.Canvas",
 
     /**
-     * @constructor
      * Create a new canvas with the given HTML DOM references.
      *
      * @param {String} canvasId the id of the DOM element to use a parent container
@@ -41,10 +28,12 @@ draw2d.Canvas = Class.extend(
       this.html = $("#" + canvasId)
       this.html.css({"cursor": "default"})
       if (!isNaN(parseFloat(width)) && !isNaN(parseFloat(height))) {
-        this.initialWidth = width
-        this.initialHeight = height
-      }
-      else {
+        this.initialWidth = parseInt(width)
+        this.initialHeight = parseInt(height)
+        this.html
+          .height(this.initialHeight)
+          .width(this.initialWidth)
+      } else {
         this.initialWidth = this.getWidth()
         this.initialHeight = this.getHeight()
       }
@@ -68,10 +57,13 @@ draw2d.Canvas = Class.extend(
         out: function (event, ui) {
           _this.onDragLeave(ui.draggable)
         },
-        drop: function (event, ui) {
-          event = _this._getEvent(event)
-          let pos = _this.fromDocumentToCanvasCoordinate(event.clientX, event.clientY)
-          _this.onDrop(ui.draggable, pos.getX(), pos.getY(), event.shiftKey, event.ctrlKey)
+        drop: function drop(event, ui) {
+          event = _this._getEvent(event);
+          let helperPos = $(ui.helper).position()
+          let pos = _this.fromDocumentToCanvasCoordinate(event.clientX, event.clientY);
+          _this.onDrop(ui.draggable,
+            pos.getX()- (event.clientX-helperPos.left)+5,
+            pos.getY()- (event.clientY-helperPos.top)+5, event.shiftKey, event.ctrlKey);
         }
       })
 
@@ -100,13 +92,10 @@ draw2d.Canvas = Class.extend(
       //
       if (!isNaN(parseFloat(height))) {
         this.paper = Raphael(canvasId, width, height)
-      }
-      else {
+      } else {
         this.paper = Raphael(canvasId, this.getWidth(), this.getHeight())
       }
       this.paper.canvas.style.position = "absolute"
-      //this.paper.canvas.style.top = 0
-      //this.paper.canvas.style.left = 0
 
       // Status handling
       //
@@ -219,8 +208,7 @@ draw2d.Canvas = Class.extend(
               _this.fireEvent("mouseenter", {figure: hover})
             }
             _this.currentHoverFigure = hover
-          }
-          catch (exc) {
+          } catch (exc) {
             // just write it to the console
             console.log(exc)
           }
@@ -235,8 +223,7 @@ draw2d.Canvas = Class.extend(
             ctrlKey: event.ctrlKey,
             hoverFigure: _this.currentHoverFigure
           })
-        }
-        else {
+        } else {
           let diffXAbs = (event.clientX - _this.mouseDownX) * _this.zoomFactor
           let diffYAbs = (event.clientY - _this.mouseDownY) * _this.zoomFactor
           _this.editPolicy.each(function (i, policy) {
@@ -254,7 +241,7 @@ draw2d.Canvas = Class.extend(
         }
       })
 
-      this.html.bind("mousedown touchstart", function (event) {
+      this.html.bind("mousedown", function (event) {
         try {
           let pos = null
           switch (event.which) {
@@ -272,8 +259,7 @@ draw2d.Canvas = Class.extend(
                 _this.editPolicy.each(function (i, policy) {
                   policy.onMouseDown(_this, pos.x, pos.y, event.shiftKey, event.ctrlKey)
                 })
-              }
-              catch (exc) {
+              } catch (exc) {
                 console.log(exc)
               }
               break
@@ -285,15 +271,13 @@ draw2d.Canvas = Class.extend(
               pos = _this.fromDocumentToCanvasCoordinate(event.clientX, event.clientY)
               _this.onRightMouseDown(pos.x, pos.y, event.shiftKey, event.ctrlKey)
               return false
-              break
             case 2:
               //Middle mouse button pressed
               break
             default:
             //You have a strange mouse
           }
-        }
-        catch (exc) {
+        } catch (exc) {
           console.log(exc)
         }
       })
@@ -331,10 +315,9 @@ draw2d.Canvas = Class.extend(
         let pos = _this.fromDocumentToCanvasCoordinate(event.originalEvent.clientX, event.originalEvent.clientY)
 
         let delta = 0
-        if (e.type == 'mousewheel') {
+        if (e.type === 'mousewheel') {
           delta = (e.originalEvent.wheelDelta * -1)
-        }
-        else if (e.type == 'DOMMouseScroll') {
+        } else if (e.type === 'DOMMouseScroll') {
           delta = 40 * e.originalEvent.detail
         }
 
@@ -380,9 +363,9 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * Call this method if you didn't need the canvas anymore. The method unregister all even handlers
-     * and free all resources. The canvas is unusable after this call
+     * and frees all resources. The canvas is unusable after this call
      *
      * @since. 4.7.4
      */
@@ -402,11 +385,12 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * Reset the canvas and delete all model elements.<br>
      * You can now reload another model to the canvas with a {@link draw2d.io.Reader}
      *
      * @since 1.1.0
+     * @returns {this}
      */
     clear: function () {
       // notice all listener that the canvas will be cleared
@@ -439,28 +423,22 @@ draw2d.Canvas = Class.extend(
       this.linesToRepaintAfterDragDrop = new draw2d.util.ArrayList()
       this.lineIntersections = new draw2d.util.ArrayList()
 
-      // Inform all listener that the selection has been cleanup. Normally this will be done
-      // by the edit policies of the canvas..but exceptional this is done in the clear method as well -
-      // Design flaw.
-      this.fireEvent("select", {figure: null})
-
       return this
     },
 
     /**
-     * @method
+     *
      * Callback for any kind of image export tools to trigger the canvas to hide all unwanted
      * decorations. The method is called e.g. from the draw2d.io.png.Writer
      *
      * @since 4.0.0
-     * @template
+     * @@interface
      */
     hideDecoration: function () {
-
     },
 
     /**
-     * @method
+     *
      * callback method for any image export writer to reactivate the decoration
      * of the canvas. e.g. grids, rulers,...
      *
@@ -472,7 +450,7 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * Calculate all connection intersection of the canvas.
      * Required for "bridging" or "crossing decoration"
      *
@@ -484,7 +462,7 @@ draw2d.Canvas = Class.extend(
       let lines = this.getLines().clone()
       while (lines.getSize() > 0) {
         let l1 = lines.removeElementAt(0)
-        lines.each( (ii, l2) =>{
+        lines.each((ii, l2) => {
           let partInter = l1.intersection(l2)
           if (partInter.getSize() > 0) {
             this.lineIntersections.add({line: l1, other: l2, intersection: partInter})
@@ -498,7 +476,7 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      *
      * Install a new selection and edit policy into the canvas
      *
@@ -511,12 +489,12 @@ draw2d.Canvas = Class.extend(
       //
       if (policy instanceof draw2d.policy.canvas.SelectionPolicy) {
         // reset old selection before install new selection strategy
-        this.getSelection().getAll().each( (i, figure)=> {
+        this.getSelection().getAll().each((i, figure) => {
           figure.unselect()
         })
 
         // remove existing selection policy
-        this.editPolicy.grep( (p) =>{
+        this.editPolicy.grep((p) => {
           let stay = !(p instanceof draw2d.policy.canvas.SelectionPolicy)
           if (stay === false) {
             p.onUninstall(this)
@@ -528,7 +506,7 @@ draw2d.Canvas = Class.extend(
       //
       else if (policy instanceof draw2d.policy.canvas.ZoomPolicy) {
         // remove existing zoom policy
-        this.editPolicy.grep( (p) =>{
+        this.editPolicy.grep((p) => {
           let stay = !(p instanceof draw2d.policy.canvas.ZoomPolicy)
           if (stay === false) {
             p.onUninstall(this)
@@ -537,18 +515,21 @@ draw2d.Canvas = Class.extend(
         })
         // replace the short cut handle for faster access
         this.zoomPolicy = policy
-      }
-      else if (policy instanceof draw2d.policy.connection.ConnectionCreatePolicy) {
-        this.editPolicy.grep( (p) =>{
+      } else if (policy instanceof draw2d.policy.connection.ConnectionCreatePolicy) {
+        this.editPolicy.grep((p) => {
           let stay = !(p instanceof draw2d.policy.connection.ConnectionCreatePolicy)
           if (stay === false) {
             p.onUninstall(this)
           }
           return stay
         })
-      }
-      else if (policy instanceof draw2d.policy.canvas.DropInterceptorPolicy) {
+      } else if (policy instanceof draw2d.policy.canvas.DropInterceptorPolicy) {
         // think about if I allow to install only one drop policy
+      }
+
+      // remove doublicate edit policies
+      if(policy.NAME) {
+        this.uninstallEditPolicy(policy.NAME)
       }
 
       policy.onInstall(this)
@@ -558,7 +539,7 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      *
      * UnInstall the selection and edit policy from the canvas.
      *
@@ -578,8 +559,7 @@ draw2d.Canvas = Class.extend(
         if (removed instanceof draw2d.policy.canvas.ZoomPolicy) {
           this.zoomPolicy = null
         }
-      }
-      else {
+      } else {
         // ..or all of the same class if the policy isn't installed before
         // With this kind of behaviour it is possible to deinstall all policies with
         // the same class at once
@@ -608,15 +588,15 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * Set the new zoom factor for the canvas. The value must be between [0.01..10]
      *
-     *      // you can register an eventhandler if the zoom factor did change
-     *      canvas.on("zoom", function(emitterFigure, zoomData){
-     *          alert("canvas zoomed to:"+zoomData.factor);
-     *      });
+     *     // you can register an eventhandler if the zoom factor did change
+     *     canvas.on("zoom", function(emitterFigure, zoomData){
+     *         alert("canvas zoomed to:"+zoomData.value);
+     *     });
      *
-     * @param {Number} zoomFactor new zoom factor.
+     * @param {Number} zoomFactor new zoom factor. range [0.001..10]. 1.0 is no zoom.
      * @param {Boolean} [animated] set it to true for smooth zoom in/out
      */
     setZoom: function (zoomFactor, animated) {
@@ -628,7 +608,7 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * Return the current zoom factor of the canvas.
      *
      * @returns {Number}
@@ -638,7 +618,7 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * Return the dimension of the drawing area
      *
      * @since 4.4.0
@@ -649,7 +629,7 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * Tells the canvas to resize. If you do not specific any parameters
      * the canvas will attempt to determine the height and width by the enclosing bounding box
      * of all elements and set the dimension accordingly. If you would like to set the dimension
@@ -657,6 +637,7 @@ draw2d.Canvas = Class.extend(
      *
      * @since 4.4.0
      * @param {draw2d.geo.Rectangle} [dim] the dimension to set or null for autodetect
+     * @param {Number} [height] the height of the canvas if the first argument is a number and not a Rectangle
      */
     setDimension: function (dim, height) {
       if (typeof dim === "undefined") {
@@ -668,16 +649,13 @@ draw2d.Canvas = Class.extend(
         })
         this.initialHeight = Math.max(...heights.asArray())
         this.initialWidth = Math.max(...widths.asArray())
-      }
-      else if (dim instanceof draw2d.geo.Rectangle) {
+      } else if (dim instanceof draw2d.geo.Rectangle) {
         this.initialWidth = dim.w
         this.initialHeight = dim.h
-      }
-      else if (typeof dim.width === "number" && typeof dim.height === "number") {
+      } else if (typeof dim.width === "number" && typeof dim.height === "number") {
         this.initialWidth = dim.width
         this.initialHeight = dim.height
-      }
-      else if (typeof dim === "number" && typeof height === "number") {
+      } else if (typeof dim === "number" && typeof height === "number") {
         this.initialWidth = dim
         this.initialHeight = height
       }
@@ -690,7 +668,7 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      * Transforms a document coordinate to canvas coordinate.
      *
      * @param {Number} x the x coordinate relative to the window
@@ -698,15 +676,14 @@ draw2d.Canvas = Class.extend(
      *
      * @returns {draw2d.geo.Point} The coordinate in relation to the canvas [0,0] position
      */
-     // modified to capture the window offset
     fromDocumentToCanvasCoordinate: function (x, y) {
       return new draw2d.geo.Point(
-        (x + window.pageXOffset - this.getAbsoluteX() + this.getScrollLeft()) * this.zoomFactor,
-        (y + window.pageYOffset - this.getAbsoluteY() + this.getScrollTop()) * this.zoomFactor)
+        (x - this.getAbsoluteX() + this.getScrollLeft()) * this.zoomFactor,
+        (y - this.getAbsoluteY() + this.getScrollTop()) * this.zoomFactor)
     },
 
     /**
-     * @method
+     *
      * Transforms a canvas coordinate to document coordinate.
      *
      * @param {Number} x the x coordinate in the canvas
@@ -716,12 +693,12 @@ draw2d.Canvas = Class.extend(
      */
     fromCanvasToDocumentCoordinate: function (x, y) {
       return new draw2d.geo.Point(
-        ((x * (1 / this.zoomFactor)) + this.getAbsoluteX() - this.getScrollLeft() - window.pageXOffset),
-        ((y * (1 / this.zoomFactor)) + this.getAbsoluteY() - this.getScrollTop() - window.pageYOffset))
+        ((x * (1 / this.zoomFactor)) + this.getAbsoluteX() - this.getScrollLeft()),
+        ((y * (1 / this.zoomFactor)) + this.getAbsoluteY() - this.getScrollTop()))
     },
 
     /**
-     * @method
+     *
      * The DOM host of the canvas
      *
      * @returns {HTMLElement}
@@ -732,11 +709,11 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      * Return a common event object independed if we run on an iPad or desktop.
      *
      * @param event
-     * @return
+     * @returns {DOMEventObject}
      * @private
      */
     _getEvent: function (event) {
@@ -753,12 +730,13 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      *
      * Set the area which are scrolling the canvas. This can be a jquery selector or
      * a jQuery node.
      *
      * @param {String/HTMLElement} elementSelector
+     * @returns {this}
      **/
     setScrollArea: function (elementSelector) {
       this.scrollArea = $(elementSelector)
@@ -767,38 +745,38 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      *
      * return the scrolling area of the canvas. This is jQuery object
      *
-     * @return {JQuery}
+     * @returns {JQueryElement}
      **/
     getScrollArea: function () {
       return this.scrollArea
     },
 
     /**
-     * @method
+     *
      * The left scroll position.
      *
-     * @return {Number} the left scroll offset of the canvas
+     * @returns {Number} the left scroll offset of the canvas
      **/
     getScrollLeft: function () {
       return this.getScrollArea().scrollLeft()
     },
 
     /**
-     * @method
+     *
      * The top scroll position
      *
-     * @return {Number} the top scroll offset of the cnavas.
+     * @returns {Number} the top scroll offset of the cnavas.
      **/
     getScrollTop: function () {
       return this.getScrollArea().scrollTop()
     },
 
     /**
-     * @method
+     *
      * Set left scroll position.
      *
      * @param {Number} left the left scroll offset of the canvas
@@ -810,7 +788,7 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * set top scroll position
      *
      * @param {Number} top the top scroll offset of the canvas.
@@ -822,7 +800,7 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * set the new scroll position of the canvas
      *
      * @param {Number} top the top scroll offset of the canvas.
@@ -830,27 +808,26 @@ draw2d.Canvas = Class.extend(
      * @since 5.8.0
      **/
     scrollTo: function (top, left) {
-      this.getScrollArea().scrollTop(top)
-      this.getScrollArea().scrollLeft(left)
+      this.getScrollArea().scrollTop(top).scrollLeft(left)
 
       return this
     },
 
     /**
-     * @method
+     *
      * The absolute document x offset.
      *
-     * @return {Number}
+     * @returns {Number}
      **/
     getAbsoluteX: function () {
       return this.html.offset().left
     },
 
     /**
-     * @method
+     *
      * The absolute document y offset.
      *
-     * @return {Number}
+     * @returns {Number}
      **/
     getAbsoluteY: function () {
       return this.html.offset().top
@@ -858,10 +835,10 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      * Return the width of the canvas
      *
-     * @return {Number}
+     * @returns {Number}
      **/
     getWidth: function () {
       return this.html.width()
@@ -869,10 +846,10 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      * Return the height of the canvas.
      *
-     * @return {Number}
+     * @returns {Number}
      **/
     getHeight: function () {
       return this.html.height()
@@ -880,23 +857,23 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      * Add a figure at the given x/y coordinate. This method fires an event.
      *
      * Example:
      *
-     *      canvas.on("figure:add", function(emitter, event){
-     *         alert("figure added:");
-     *      });
+     *     canvas.on("figure:add", function(emitter, event){
+     *        alert("figure added:");
+     *     });
      *
-     *      // or more general if you want catch all figure related events
-     *      //
-     *      canvas.on("figure", function(emitter, event){
-     *         // use event.figure.getCanvas()===null to determine if the
-     *         // figure part of the canvas
+     *     // or more general if you want catch all figure related events
+     *     //
+     *     canvas.on("figure", function(emitter, event){
+     *        // use event.figure.getCanvas()===null to determine if the
+     *        // figure part of the canvas
      *
-     *         alert("figure added or removed:");
-     *      });
+     *        alert("figure added or removed:");
+     *     });
      *
      * @param {draw2d.Figure} figure The figure to add.
      * @param {Number/draw2d.geo.Point} [x] The new x coordinate of the figure or the x/y coordinate if it is an draw2d.geo.Point
@@ -910,13 +887,11 @@ draw2d.Canvas = Class.extend(
       if (figure instanceof draw2d.shape.basic.Line) {
         this.lines.add(figure)
         this.linesToRepaintAfterDragDrop = this.lines
-      }
-      else {
+      } else {
         this.figures.add(figure)
         if (typeof y !== "undefined") {
           figure.setPosition(x, y)
-        }
-        else if (typeof x !== "undefined") {
+        } else if (typeof x !== "undefined") {
           figure.setPosition(x)
         }
       }
@@ -925,7 +900,7 @@ draw2d.Canvas = Class.extend(
       // to avoid drag&drop outside of this canvas
       figure.installEditPolicy(this.regionDragDropConstraint)
 
-      // important inital call
+      // important initial call
       figure.getShapeElement()
 
       // init a repaint of the figure. This enforce that all properties
@@ -941,7 +916,7 @@ draw2d.Canvas = Class.extend(
       figure.fireEvent("added", {figure: figure, canvas: this})
 
       // ...now we can fire the initial move event
-      figure.fireEvent("move", {figure: figure, dx: 0, dy: 0})
+      figure.fireEvent("move", {figure: figure, x: figure.getX(), y: figure.getY(), dx: 0, dy: 0})
 
       // this is only required if the used router requires the crossing information
       // of the connections
@@ -959,24 +934,24 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      * Remove a figure or connection from the Canvas. This method fires an event
      * which can be catched.
      *
      * Example:
      *
-     *      canvas.on("figure:remove", function(emitter, event){
-     *         alert("figure removed:");
-     *      });
+     *     canvas.on("figure:remove", function(emitter, event){
+     *        alert("figure removed:");
+     *     });
      *
-     *      // or more general if you want catch all figure related events
-     *      //
-     *      canvas.on("figure", function(emitter, event){
-     *         // use event.figure.getCanvas()===null to determine if the
-     *         // figure part of the canvas
+     *     // or more general if you want catch all figure related events
+     *     //
+     *     canvas.on("figure", function(emitter, event){
+     *        // use event.figure.getCanvas()===null to determine if the
+     *        // figure part of the canvas
      *
-     *         alert("figure added or removed:");
-     *      });
+     *        alert("figure added or removed:");
+     *     });
      *
      *
      * @param {draw2d.Figure} figure The figure to remove
@@ -990,19 +965,17 @@ draw2d.Canvas = Class.extend(
 
       // remove the figure from a selection handler as well and cleanup the
       // selection feedback
-      let _this = this
       if (this.getSelection().contains(figure)) {
-        this.editPolicy.each(function (i, policy) {
+        this.editPolicy.each((i, policy) => {
           if (typeof policy.unselect === "function") {
-            policy.unselect(_this, figure)
+            policy.unselect(this, figure)
           }
         })
       }
 
       if (figure instanceof draw2d.shape.basic.Line) {
         this.lines.remove(figure)
-      }
-      else {
+      } else {
         this.figures.remove(figure)
       }
 
@@ -1020,32 +993,32 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * Returns all lines/connections in this workflow/canvas.<br>
      *
-     * @return {draw2d.util.ArrayList}
+     * @returns {draw2d.util.ArrayList}
      **/
     getLines: function () {
       return this.lines
     },
 
     /**
-     * @method
+     *
      * Returns the internal figures.<br>
      *
-     * @return {draw2d.util.ArrayList}
+     * @returns {draw2d.util.ArrayList}
      **/
     getFigures: function () {
       return this.figures
     },
 
     /**
-     * @method
+     *
      * Returns the line or connection with the given id.
      *
      * @param {String} id The id of the line.
      *
-     * @return {draw2d.shape.basic.Line}
+     * @returns {draw2d.shape.basic.Line}
      **/
     getLine: function (id) {
       let count = this.lines.getSize()
@@ -1059,15 +1032,15 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * Returns the figure with the given id.
      *
      * @param {String} id The id of the figure.
-     * @return {draw2d.Figure}
+     * @returns {draw2d.Figure}
      **/
     getFigure: function (id) {
       let figure = null
-      this.figures.each(function (i, e) {
+      this.figures.each((i, e) => {
         if (e.id === id) {
           figure = e
           return false
@@ -1077,19 +1050,19 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * Return all intersections draw2d.geo.Point between the given line and all other
      * lines in the canvas.
      *
      * @param {draw2d.shape.basic.Line} line the line for the intersection test
-     * @return {draw2d.util.ArrayList}
+     * @returns {draw2d.util.ArrayList}
      */
     getIntersection: function (line) {
       let result = new draw2d.util.ArrayList()
 
-      this.lineIntersections.each(function (i, entry) {
+      this.lineIntersections.each((i, entry) => {
         if (entry.line === line) {
-          entry.intersection.each(function (i, p) {
+          entry.intersection.each((j, p) => {
             result.add({x: p.x, y: p.y, justTouching: p.justTouching, other: entry.other})
           })
         }
@@ -1100,27 +1073,28 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      *  Adjust the coordinate with the installed SnapToHelper.
      *
      * @param  {draw2d.Figure} figure The related figure
      * @param  {draw2d.geo.Point} pos The position to adjust
      *
-     * @return {draw2d.geo.Point} the adjusted position
+     * @returns {draw2d.geo.Point} the adjusted position
      * @private
      **/
     snapToHelper: function (figure, pos) {
-      // disable snapToPos if we have sleect more than one element
+      // disable snapToPos if we have select more than one element
       // which are currently in Drag&Drop operation
       //
       if (this.getSelection().getSize() > 1) {
         return pos
       }
 
-      let _this = this
       let orig = pos.clone()
-      this.editPolicy.each(function (i, policy) {
-        pos = policy.snap(_this, figure, pos, orig)
+      this.editPolicy.each((i, policy) => {
+        if (policy instanceof draw2d.policy.canvas.SnapToEditPolicy) {
+          pos = policy.snap(this, figure, pos, orig)
+        }
       })
 
       return pos
@@ -1128,7 +1102,7 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      * Register a port to the canvas. This is required for other ports to find a valid drop target.
      *
      * @param {draw2d.Port} port The new port which has been added to the Canvas.
@@ -1144,12 +1118,13 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * Remove a port from the internal cnavas registration. Now other ports can't find the
      * port anymore as drop target. The port itself is still visible.
      *
      * @param {draw2d.Port} port The port to unregister as potential drop target
      * @private
+     * @returns {this}
      **/
     unregisterPort: function (port) {
       this.commonPorts.remove(port)
@@ -1158,57 +1133,60 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * Return all ports in the canvas
      *
+     * @returns {draw2d.util.ArrayList} all ports from all figures
      */
     getAllPorts: function () {
       return this.commonPorts
     },
 
     /**
-     * @method
+     *
      * Returns the command stack for the Canvas. Required for undo/redo support.
      *
-     * @return {draw2d.command.CommandStack}
+     * @returns {draw2d.command.CommandStack}
      **/
     getCommandStack: function () {
       return this.commandStack
     },
 
     /**
-     * @method
+     *
      * Returns the current selected figure in the Canvas.
      *
-     * @return {draw2d.Figure}
+     * @returns {draw2d.Figure}
      **/
     getPrimarySelection: function () {
       return this.selection.getPrimary()
     },
 
     /**
-     * @method
+     *
      * Returns the current selection.
      *
-     * @return {draw2d.Selection}
+     * @returns {draw2d.Selection}
      **/
     getSelection: function () {
       return this.selection
     },
 
     /**
-     * @method
+     *
      * Set the current selected figure or figures in the canvas.<br>
      * <br>
      * You can hand over a draw2d.util.ArrayList since version 4.8.0 for multiple selection.
      *
      * @param {draw2d.Figure| draw2d.util.ArrayList} object The figure or list of figures to select.
+     * @returns {this}
      **/
     setCurrentSelection: function (object) {
       // deselect the current selected figures
       //
-      this.selection.each( (i, e) =>{
-        this.editPolicy.each( (i, policy) =>{
+      // clone the array (getAll) before iterate and modify the initial array
+      this.selection.getAll().each((i, e) => {
+        this.editPolicy.each((i, policy) => {
           if (typeof policy.unselect === "function") {
             policy.unselect(this, e)
           }
@@ -1220,38 +1198,36 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * Add the current figure to the selection. If a single selection policy is installed in the
      * canvas the selection before is reseted and the figure is the one and only selection.
      *
-     * @param {draw2d.Figure| draw2d.util.ArrayList} object The figure(s) to add to the selection
+     * @param {draw2d.Figure | draw2d.util.ArrayList} object The figure(s) to add to the selection
      * @since 4.6.0
+     * @returns {this}
      **/
     addSelection: function (object) {
-      let _this = this
 
-      let add = function (i, figure) {
-        _this.editPolicy.each(function (i, policy) {
+      let add = (i, figure) =>{
+        this.editPolicy.each( (i, policy) =>{
           if (typeof policy.select === "function") {
-            policy.select(_this, figure)
+            policy.select(this, figure)
           }
         })
       }
 
-      if (object instanceof draw2d.util.ArrayList) {
+      if (object instanceof draw2d.util.ArrayList || object instanceof draw2d.Selection) {
         object.each(add)
-      }
-      else {
+      } else {
         add(0, object)
       }
 
       return this
-
     },
 
 
     /**
-     * @method
+     *
      * Returns the best figure at the location [x,y]. It is a simple hit test. Keep in mind that only visible objects
      * are returned.
      *
@@ -1289,8 +1265,7 @@ draw2d.Canvas = Class.extend(
             if (testFigure instanceof considering) {
               return true
             }
-          }
-          else if ((considering === testFigure) || (considering.contains(testFigure))) {
+          } else if ((considering === testFigure) || (considering.contains(testFigure))) {
             return true
           }
         }
@@ -1360,27 +1335,15 @@ draw2d.Canvas = Class.extend(
         //
         if (result === null && figure.isVisible() && figure.hitTest(x, y) && !isInBlacklist(figure) && isInWhitelist(figure)) {
           result = figure
-        }
-
-        if (result !== null) {
-          //added check for best line to allow connections in composites to be selected
-          //
-          //if (result instanceof draw2d.shape.composite.Composite)
-          {
-            let resultLine = this.getBestLine(x, y, result)
-            // conflict between line and normal shape -> calculate the DOM index and return the higher (on Top)
-            // element
-            if (resultLine !== null) {
-              let lineIndex = $(resultLine.shape.node).index()
-              let resultIndex = $(result.shape.node).index()
-              if (resultIndex < lineIndex) {
-                return resultLine
-              }
-            }
-          }
-          return result
+          break
         }
       }
+
+      let figureResult = result
+      let childResult = null
+      let lineResult = this.getBestLine(x, y, blacklist, whitelist)
+      result = null
+
 
       // Check the children of the lines as well
       // Not selectable/draggable. But should receive onClick/onDoubleClick events
@@ -1393,15 +1356,25 @@ draw2d.Canvas = Class.extend(
         checkRecursive(line.children)
 
         if (result !== null) {
-          return result
+          childResult = result
+          break
         }
       }
 
-      // A line is the last option in the priority queue for a "Best" figure
-      //
-      result = this.getBestLine(x, y, blacklist, whitelist)
-      if (result !== null) {
-        return result
+      let figureIndex = figureResult !== null ? $(figureResult.shape.node).index() : -1
+      let childIndex = childResult !== null ? $(childResult.shape.node).index() : -1
+      let lineIndex = lineResult !== null ? $(lineResult.shape.node).index() : -1
+      let array = [
+        {i: figureIndex, f: figureResult},
+        {i: childIndex, f: childResult},
+        {i: lineIndex, f: lineResult}
+      ]
+      array = array.filter((e) => e.i !== -1);
+      array = array.sort((a, b) => b.i - a.i)
+
+
+      if (array.length > 0) {
+        result = array[0].f
       }
 
       return result
@@ -1409,7 +1382,7 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      * Return the line which match the hands over coordinate
      *
      * @param {Number} x the x-coordinate for the hit test
@@ -1417,14 +1390,13 @@ draw2d.Canvas = Class.extend(
      * @param {draw2d.shape.basic.Line} [lineToIgnore] a possible line which should be ignored for the hit test
      *
      * @private
-     * @return {draw2d.shape.basic.Line}
+     * @returns {draw2d.shape.basic.Line}
      **/
     getBestLine: function (x, y, lineToIgnore) {
       if (!Array.isArray(lineToIgnore)) {
         if (lineToIgnore instanceof draw2d.Figure) {
           lineToIgnore = [lineToIgnore]
-        }
-        else {
+        } else {
           lineToIgnore = []
         }
       }
@@ -1441,19 +1413,19 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      * Called by the framework during drag&drop operations.<br>
      * Droppable can be setup with:
      * <pre>
-     *     $(".draw2d_droppable").draggable({
-     *          appendTo:"#container",
-     *          stack:"#container",
-     *          zIndex: 27000,
-     *          helper:"clone",
-     *          start: function(e, ui){$(ui.helper).addClass("shadow");}
-     *     });
+     *    $(".draw2d_droppable").draggable({
+     *         appendTo:"#container",
+     *         stack:"#container",
+     *         zIndex: 27000,
+     *         helper:"clone",
+     *         start: function(e, ui){$(ui.helper).addClass("shadow");}
+     *    });
      * </pre>
-     * Graphiti use the jQuery draggable/droppable lib. Please inspect
+     * Draw2D use the jQuery draggable/droppable lib. Please inspect
      * http://jqueryui.com/demos/droppable/ for further information.
      *
      * @param {HTMLElement} draggedDomNode The DOM element which is currently dragging
@@ -1465,10 +1437,10 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      * Called if the DragDrop object is moving around.<br>
      * <br>
-     * Graphiti use the jQuery draggable/droppable lib. Please inspect
+     * Draw2D use the jQuery draggable/droppable lib. Please inspect
      * http://jqueryui.com/demos/droppable/ for further information.
      *
      * @param {HTMLElement} draggedDomNode The dragged DOM element.
@@ -1482,7 +1454,7 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      * Called if the DragDrop object leaving the current hover figure.<br>
      * <br>
      * Graphiti use the jQuery draggable/droppable lib. Please inspect
@@ -1497,7 +1469,7 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      * Called if the user drop the droppedDomNode onto the canvas.<br>
      * <br>
      * Draw2D use the jQuery draggable/droppable lib. Please inspect
@@ -1516,7 +1488,7 @@ draw2d.Canvas = Class.extend(
 
 
     /**
-     * @method
+     *
      * Callback method for the double click event. The x/y coordinates are relative to the top left
      * corner of the canvas.
      *
@@ -1573,7 +1545,7 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * The user has triggered a right click. Redirect them to a responsible figure.
      *
      * @param {Number} x The x-coordinate of the click
@@ -1634,13 +1606,13 @@ draw2d.Canvas = Class.extend(
 
     // NEW EVENT HANDLING SINCE VERSION 5.0.0
     /**
-     * @method
+     *
      * Execute all handlers and behaviors attached to the canvas for the given event type.
      *
      *
      * @param {String} event the event to trigger
      * @param {Object} [args] optional parameters for the triggered event callback
-     *
+     * @private
      * @since 5.0.0
      */
     fireEvent: function (event, args) {
@@ -1652,8 +1624,7 @@ draw2d.Canvas = Class.extend(
       for (let i = 0; i < subscribers.length; i++) {
         try {
           subscribers[i](this, args)
-        }
-        catch (exc) {
+        } catch (exc) {
           console.log(exc)
           console.log(subscribers[i])
           debugger
@@ -1662,7 +1633,7 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
+     *
      * Attach an event handler function for one or more events to the canvas.
      * To remove events bound with .on(), see {@link #off}.
      *
@@ -1674,19 +1645,18 @@ draw2d.Canvas = Class.extend(
      *
      * Example:
      *
-     *      canvas.on("clear", function(emitter, event){
-     *         alert("canvas.clear() called.");
-     *      });
+     *     canvas.on("clear", function(emitter, event){
+     *        alert("canvas.clear() called.");
+     *     });
      *
-     *      canvas.on("select", function(emitter,event){
-     *          if(event.figure!==null){
-     *              alert("figure selected");
-     *          }
-     *          else{
-     *              alert("selection cleared");
-     *          }
-     *      });
+     *     canvas.on("select", function(emitter,event){
+     *        alert("figure selected");
+     *     });
      *
+     *     canvas.on("unselect", function(emitter,event){
+     *        alert("figure unselected");
+     *     });
+     * 
      * @param {String}   event One or more space-separated event types
      * @param {Function} callback A function to execute when the event is triggered.
      * @param {draw2d.Canvas} callback.emitter the emitter of the event
@@ -1706,8 +1676,8 @@ draw2d.Canvas = Class.extend(
     },
 
     /**
-     * @method
-     * The .off() method removes event handlers that were attached with {@link #on}.<br>
+     *
+     * The `off()` method removes event handlers that were attached with {@link #on}.<br>
      * Calling .off() with no arguments removes all handlers attached to the canvas.<br>
      * <br>
      * If a simple event name such as "reset" is provided, all events of that type are removed from the canvas.
@@ -1719,11 +1689,9 @@ draw2d.Canvas = Class.extend(
     off: function (eventOrFunction) {
       if (typeof eventOrFunction === "undefined") {
         this.eventSubscriptions = {}
-      }
-      else if (typeof eventOrFunction === 'string') {
+      } else if (typeof eventOrFunction === 'string') {
         this.eventSubscriptions[eventOrFunction] = []
-      }
-      else {
+      } else {
         for (let event in this.eventSubscriptions) {
           this.eventSubscriptions[event] = this.eventSubscriptions[event].filter(function (callback) {
             return callback !== eventOrFunction

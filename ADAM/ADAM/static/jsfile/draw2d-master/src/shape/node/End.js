@@ -1,27 +1,28 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.node.End
+ * @class
  * A simple Node which has a InputPort. Mainly used for demo and examples.
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
- *     let figure =  new draw2d.shape.node.End({color: "#3d3d3d"});
+ *    let figure =  new draw2d.shape.node.End({color: "#3d3d3d"});
  *
- *     canvas.add(figure,50,10);
+ *    canvas.add(figure,50,10);
  *
  * @extends draw2d.shape.basic.Rectangle
  */
-import draw2d from '../../packages'
-
-draw2d.shape.node.End = draw2d.shape.basic.Rectangle.extend({
-
+draw2d.shape.node.End = draw2d.shape.basic.Rectangle.extend(
+  /** @lends draw2d.shape.node.End.prototype */
+  {
+  
   NAME: "draw2d.shape.node.End",
 
   DEFAULT_COLOR: new draw2d.util.Color("#4D90FE"),
 
   /**
-   * @constructor
    *
    * @param {Object} [attr] the configuration of the shape
    */

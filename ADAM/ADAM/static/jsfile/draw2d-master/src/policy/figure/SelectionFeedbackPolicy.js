@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.figure.SelectionFeedbackPolicy
+ * @class
  *
  * A {@link  draw2d.policy.SelectionFeedbackPolicy} that is sensitive to the canvas selection. Subclasses will typically
  * decorate the {@link draw2d.Figure figure} with things like selection handles and/or focus feedback.
@@ -9,14 +12,13 @@
  * @author Andreas Herz
  * @extends draw2d.policy.figure.DragDropEditPolicy
  */
-import draw2d from '../../packages'
-
-draw2d.policy.figure.SelectionFeedbackPolicy = draw2d.policy.figure.SelectionPolicy.extend({
+draw2d.policy.figure.SelectionFeedbackPolicy = draw2d.policy.figure.SelectionPolicy.extend(
+  /** @lends draw2d.policy.figure.SelectionFeedbackPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.figure.SelectionFeedbackPolicy",
 
   /**
-   * @constructor
    *
    */
   init: function (attr, setter, getter) {
@@ -25,7 +27,7 @@ draw2d.policy.figure.SelectionFeedbackPolicy = draw2d.policy.figure.SelectionPol
 
 
   /**
-   * @method
+   * 
    *
    * @param {draw2d.Figure} figure the unselected figure
    */
@@ -37,7 +39,7 @@ draw2d.policy.figure.SelectionFeedbackPolicy = draw2d.policy.figure.SelectionPol
   },
 
   /**
-   * @method
+   * 
    * Called by the host if the policy has been installed.
    *
    * @param {draw2d.Figure} figure
@@ -55,7 +57,7 @@ draw2d.policy.figure.SelectionFeedbackPolicy = draw2d.policy.figure.SelectionPol
 
 
   /**
-   * @method
+   * 
    * Called by the host if the policy has been uninstalled.
    *
    * @param {draw2d.Figure} figure

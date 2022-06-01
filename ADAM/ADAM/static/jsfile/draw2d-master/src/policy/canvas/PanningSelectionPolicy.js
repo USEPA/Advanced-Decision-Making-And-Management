@@ -1,18 +1,20 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.canvas.PanningSelectionPolicy
+ * @class
  *
  *
  * @author Andreas Herz
  * @extends draw2d.policy.canvas.SingleSelectionPolicy
  */
-import draw2d from '../../packages'
-
-draw2d.policy.canvas.PanningSelectionPolicy = draw2d.policy.canvas.SingleSelectionPolicy.extend({
+draw2d.policy.canvas.PanningSelectionPolicy = draw2d.policy.canvas.SingleSelectionPolicy.extend(
+  /** @lends draw2d.policy.canvas.PanningSelectionPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.canvas.PanningSelectionPolicy",
 
   /**
-   * @constructor
    * Creates a new Router object
    */
   init: function () {
@@ -21,7 +23,7 @@ draw2d.policy.canvas.PanningSelectionPolicy = draw2d.policy.canvas.SingleSelecti
 
 
   /**
-   * @method
+   * 
    *
    * @param {draw2d.Canvas} canvas
    * @param {Number} dx The x diff between start of dragging and this event

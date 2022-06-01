@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.figure.FigureEditPolicy
+ * @class
  *
  * Called by the framework if the user edit the position of a figure with a drag drop operation.
  * Sub class like SelectionEditPolicy or RegionEditPolicy can adjust the position of the figure
@@ -9,22 +12,22 @@
  * @extends draw2d.policy.EditPolicy
  * @since 4.4.0
  */
-import draw2d from '../../packages'
-
-draw2d.policy.figure.FigureEditPolicy = draw2d.policy.EditPolicy.extend({
-
+draw2d.policy.figure.FigureEditPolicy = draw2d.policy.EditPolicy.extend(
+  /** @lends draw2d.policy.figure.FigureEditPolicy.prototype */
+  {
+  
   NAME: "draw2d.policy.figure.FigureEditPolicy",
 
   /**
-   * @constructor
    * Creates a new Router object
+   *
    */
   init: function (attr, setter, getter) {
     this._super(attr, setter, getter)
   },
 
   /**
-   * @method
+   * 
    * Called if the user press the right mouse on the figure.<br>
    * You can either override the "onContextMenu" method of the figure or install an editor policy and override this method.
    * Booth is valid and possible.

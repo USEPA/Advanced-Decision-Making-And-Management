@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.connection.MuteableManhattanConnectionRouter
+ * @class
  *
  * JUST FOR RESEARCH AT THE MOMENT!!!!!!
  *
@@ -8,10 +11,11 @@
  *
  * @extends  draw2d.layout.connection.ManhattanConnectionRouter
  */
-import draw2d from '../../packages'
 
+draw2d.layout.connection.MuteableManhattanConnectionRouter = draw2d.layout.connection.ManhattanConnectionRouter.extend(
+  /** @lends draw2d.layout.connection.MuteableManhattanConnectionRouter.prototype */
+  {
 
-draw2d.layout.connection.MuteableManhattanConnectionRouter = draw2d.layout.connection.ManhattanConnectionRouter.extend({
   NAME: "draw2d.layout.connection.MuteableManhattanConnectionRouter",
 
   UP: new draw2d.geo.Ray(0, -1),
@@ -20,7 +24,6 @@ draw2d.layout.connection.MuteableManhattanConnectionRouter = draw2d.layout.conne
   RIGHT: new draw2d.geo.Ray(1, 0),
 
   /**
-   * @constructor
    * Creates a new Router object.
    *
    */
@@ -170,7 +173,7 @@ draw2d.layout.connection.MuteableManhattanConnectionRouter = draw2d.layout.conne
   },
 
   /**
-   * @method
+   *
    *
    * @param {draw2d.Connection} connection
    * @param {Number} r
@@ -298,7 +301,7 @@ draw2d.layout.connection.MuteableManhattanConnectionRouter = draw2d.layout.conne
    *
    * @param r the rectangle
    * @param p the point
-   * @return the direction from <i>r</i> to <i>p</i>
+   * @returns the direction from <i>r</i> to <i>p</i>
    */
   getDirection: function (r, p) {
     let i = Math.abs(r.y - p.y)
@@ -331,7 +334,7 @@ draw2d.layout.connection.MuteableManhattanConnectionRouter = draw2d.layout.conne
     if (horizontal)
       pos.push(start.x)
     else
-      pos.oush(start.y)
+      pos.push(start.y)
     let i
     for (i = 0; i < positions.getSize(); i++) {
       pos.push(positions.get(i))
