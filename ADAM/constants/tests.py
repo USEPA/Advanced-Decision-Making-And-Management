@@ -3,7 +3,6 @@
 # coding=utf-8
 # ruiz-mercado.gerardo@epa.gov
 # py-lint: disable=C0301
-
 """
 This file houses test cases for the constants module.
 
@@ -34,18 +33,22 @@ class TestUtils(TestCase):
     def setUp(self):
         """Prepare various objects for this class of tests."""
         self.test_str = 'Test'
-        self.client.login(username='dyoung11', password='***REMOVED***')
-        self.user = User.objects.get(id=1)
+        self.user = User.objects.create_user(username='testuser',
+                                             password='12345')
+        self.client.login(username='testuser', password='12345')
         self.file = SimpleUploadedFile('test.txt', b'This is a test file.')
-        self.excel_file = SimpleUploadedFile('test.xlsx', b'This is a test file.')
+        self.excel_file = SimpleUploadedFile('test.xlsx',
+                                             b'This is a test file.')
 
     def test_split_email_list_pass_one(self):
         """Runs the char split on an email that will be equal."""
-        self.assertEqual(split_email_list("t;e,s\tt@t|est.com"), ['t', 'e', 's', 't@t', 'est.com'])
+        self.assertEqual(split_email_list("t;e,s\tt@t|est.com"),
+                         ['t', 'e', 's', 't@t', 'est.com'])
 
     def test_split_email_list_fail_one(self):
         """Runs the char split on an email that will not be equal."""
-        self.assertNotEqual(split_email_list("t;e,s\tt@t|est.com"), ['t', 'e', 's', 't@test.com'])
+        self.assertNotEqual(split_email_list("t;e,s\tt@t|est.com"),
+                            ['t', 'e', 's', 't@test.com'])
 
     def test_is_epa_email_pass_one(self):
         """
@@ -101,15 +104,19 @@ class TestUtils(TestCase):
         Runs the test to check if an email address is not EPA that it sends
         the correct message.
         """
-        self.assertIn(
-            """Email list may only contain @epa.gov addresses.""", non_epa_email_message("test@test.com"), msg=None)
+        self.assertIn("""Email list may only contain @epa.gov addresses.""",
+                      non_epa_email_message("test@test.com"),
+                      msg=None)
 
     def test_create_qt_email_message(self):
         """Returns EmailMultiAlternatives object."""
         to_emails = ["testTo@test.com"]
-        self.assertIsInstance(
-            create_qt_email_message("email Subject", "text content", "testFrom@test.com", to_emails, None, None),
-            EmailMultiAlternatives, msg=None)
+        self.assertIsInstance(create_qt_email_message("email Subject",
+                                                      "text content",
+                                                      "testFrom@test.com",
+                                                      to_emails, None, None),
+                              EmailMultiAlternatives,
+                              msg=None)
 
     def test_xstr_one(self):
         """
