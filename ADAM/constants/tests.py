@@ -36,7 +36,6 @@ class TestUtils(TestCase):
         self.user = User.objects.create_user(username='testuser',
                                              password='12345')
         self.client.login(username='testuser', password='12345')
-        self.user = User.objects.get(id=1)
         self.file = SimpleUploadedFile('test.txt', b'This is a test file.')
         self.excel_file = SimpleUploadedFile('test.xlsx',
                                              b'This is a test file.')
