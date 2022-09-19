@@ -155,6 +155,8 @@ EMAIL_HOST_PASSWORD = 'email-password'
 
 LOGIN_URL = '/expert/login/'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 APP_NAME = 'ADAM'
 
 # Versioning will match Semantic Versioning 2.0.0:
