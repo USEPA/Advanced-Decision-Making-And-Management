@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.port.PortFeedbackPolicy
+ * @class
  *
  * Base class for all port feedback policies. Used for grow, highlight or
  * other decorations during drag&drop and connecting of ports.
@@ -7,22 +10,20 @@
  * @author Andreas Herz
  * @extends draw2d.policy.figure.DragDropEditPolicy
  */
-import draw2d from '../../packages'
-
-draw2d.policy.port.PortFeedbackPolicy = draw2d.policy.figure.DragDropEditPolicy.extend({
-
+draw2d.policy.port.PortFeedbackPolicy = draw2d.policy.figure.DragDropEditPolicy.extend(
+  /** @lends draw2d.policy.port.PortFeedbackPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.port.PortFeedbackPolicy",
 
   /**
-   * @constructor
    */
   init: function (attr, setter, getter) {
     this._super(attr, setter, getter)
   },
 
   /**
-   * @method
+   *
    * Called if the dragged port hove another port
    *
    * @param {draw2d.Canvas} canvas
@@ -33,7 +34,7 @@ draw2d.policy.port.PortFeedbackPolicy = draw2d.policy.figure.DragDropEditPolicy.
   },
 
   /**
-   * @method
+   *
    * Fired if the dragged figures leaves the hover figure
    *
    * @param {draw2d.Canvas} canvas

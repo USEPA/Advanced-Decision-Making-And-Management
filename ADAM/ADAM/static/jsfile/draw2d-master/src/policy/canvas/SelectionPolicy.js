@@ -1,18 +1,20 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.canvas.SelectionPolicy
+ * @class
  *
  *
  * @author Andreas Herz
  * @extends draw2d.policy.canvas.CanvasPolicy
  */
-import draw2d from '../../packages'
-
-draw2d.policy.canvas.SelectionPolicy = draw2d.policy.canvas.CanvasPolicy.extend({
+draw2d.policy.canvas.SelectionPolicy = draw2d.policy.canvas.CanvasPolicy.extend(
+  /** @lends draw2d.policy.canvas.SelectionPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.canvas.SelectionPolicy",
 
   /**
-   * @constructor
    * Creates a new selection policy
    */
   init: function (attr, setter, getter) {
@@ -20,7 +22,7 @@ draw2d.policy.canvas.SelectionPolicy = draw2d.policy.canvas.CanvasPolicy.extend(
   },
 
   /**
-   * @method
+   *
    * Selects the given figure within the canvas. The policy must unselect already selected
    * figures or show any decorations.
    *
@@ -32,7 +34,7 @@ draw2d.policy.canvas.SelectionPolicy = draw2d.policy.canvas.CanvasPolicy.extend(
   },
 
   /**
-   * @method
+   *
    * Unselect the given figure in the canvas and remove all resize handles
    *
    * @param {draw2d.Canvas} canvas

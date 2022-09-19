@@ -14,24 +14,24 @@
 
   <div class="card-header">
       <div class="row align-items-center">
-        <div class = "col text-left">
-          <a  class = "btn btn-light" href = '/expert/usermain/'>
-            <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+        <div class="col text-left">
+          <a  class="btn btn-light" href='/expert/usermain/'>
+            <ion-icon name="arrow-back-circle-outline" class="iconpiclarger align-middle"></ion-icon> Dashboard
           </a>
-          <a  class = "btn btn-light" href = '/expert/usermain/visualization'>
-            <ion-icon name="map-outline" class = "iconpiclarger align-middle"></ion-icon> Visualization Home
+          <a  class="btn btn-light" href='/expert/usermain/visualization'>
+            <ion-icon name="map-outline" class="iconpiclarger align-middle"></ion-icon> Visualization Home
           </a>
         </div>
 
-        <div class = "col text-center">
-          <h4 class = "card-title align-vertical text-body" >Visualization Tool</h4>
+        <div class="col text-center">
+          <h4 class="card-title align-vertical text-body" >Visualization Tool</h4>
         </div>
-        <div class = "col text-right invisible">
-          <a  class = "btn btn-light" href = '/'>
-            <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+        <div class="col text-right invisible">
+          <a  class="btn btn-light" href='/'>
+            <ion-icon name="exit" class="iconpiclarger align-middle"></ion-icon> Dashboard
           </a>
-          <a  class = "btn btn-light" href = '/expert/usermain/visualization'>
-            <ion-icon name="map-outline" class = "iconpiclarger align-middle"></ion-icon> Visualization Home
+          <a  class="btn btn-light" href='/expert/usermain/visualization'>
+            <ion-icon name="map-outline" class="iconpiclarger align-middle"></ion-icon> Visualization Home
           </a>
         </div>
 
@@ -48,18 +48,18 @@
     {% endif %}
 
     <div style="text-align: center">
-      <button class = "btn btn-light border" name = "add_flow" onclick="uploadflow()">Upload Data File</button>
+      <button class="btn btn-light border" name="add_flow" onclick="uploadflow()">Upload Data File</button>
     </div>
     <br/>
 
     <div style="display:none;">
-    <div style="text-align: center" class = "flow_upload">
+    <div style="text-align: center" class="flow_upload">
       <br/>
-      <form method = "POST" enctype="multipart/form-data">
+      <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
             <h6>{{dataupload.nodefile.label}}</h6>
-            <table width = 100% class = "table text-center">
+            <table width=100% class="table text-center">
               <thead>
               <tr>
                 <th>#</th>
@@ -84,8 +84,8 @@
             <div class="input-group input-group-sm mb-3 text-left">
               <div class="custom-file">
                 {{dataupload.nodefile}}
-                  <label class="custom-file-label text-truncate" for="id_flowfile" id = 'id_flowfile_label'>
-                    <small class = 'upload_file_name'>Choose file</small>
+                  <label class="custom-file-label text-truncate" for="id_flowfile" id='id_flowfile_label'>
+                    <small class='upload_file_name'>Choose file</small>
                   </label>
               </div>
             </div>
@@ -93,7 +93,7 @@
             <br/>
 
             <h6 >{{dataupload.flowfile.label}}</h6>
-            <table width = 100% class = "table text-center">
+            <table width=100% class="table text-center">
               <thead>
               <tr>
                 <th>From/To</th>
@@ -127,8 +127,8 @@
             <div class="input-group input-group-sm mb-3 text-left">
               <div class="custom-file">
                 {{dataupload.flowfile}}
-                  <label class="custom-file-label text-truncate" for="id_flowfile" id = 'id_flowfile_label'>
-                    <small class = 'upload_file_name'>Choose file</small>
+                  <label class="custom-file-label text-truncate" for="id_flowfile" id='id_flowfile_label'>
+                    <small class='upload_file_name'>Choose file</small>
                   </label>
               </div>
             </div>
@@ -139,14 +139,14 @@
               {{dataupload.selectmode}}
       <br/>
       <br/>
-      <input style="display:none;" id = 'uploadbtm' class = "btn default" type="submit" value="Upload" name="upload_file_geo"/>
+      <input style="display:none;" id='uploadbtm' class="btn default" type="submit" value="Upload" name="upload_file_geo"/>
       </form>
       </div>
       </div>
 
     <script>
       function uploadflow(){
-        var flowuploadHTML = $('.flow_upload').html();
+        var flowuploadHTML=$('.flow_upload').html();
         $('.flow_upload').html("");
         alertify.confirm(flowuploadHTML).set('onok', function(closeEvent) {
           $('#uploadbtm').click()
@@ -166,14 +166,14 @@
     <script type="text/javascript">
         $(window).on('load',function () {
           initgeomap()
-          nodels = []
+          nodels=[]
 
           {% if nodedata %}
-            nodedata = {{nodedata|safe}}
-            for (var i = 1; i < nodedata.length; i++){
-              value = newmarker(Number(nodedata[i][1]), Number(nodedata[i][2]), nodedata[i][0])
-              var marker = value[0]
-              var id = value[1]
+            nodedata={{nodedata|safe}}
+            for (var i=1; i < nodedata.length; i++){
+              value=newmarker(Number(nodedata[i][1]), Number(nodedata[i][2]), nodedata[i][0])
+              var marker=value[0]
+              var id=value[1]
               marker.addTo(mymap)
               nodels.push({marker: marker, nodename: nodedata[i][0], nodeid: id, lat: marker.getLatLng().lat, lon: marker.getLatLng().lng})
             }
@@ -181,32 +181,32 @@
 
 
           {% if origins and destinations and flows %}
-            origins = {{origins|safe}}
-            destinations = {{destinations|safe}}
-            flows = {{flows|safe}}
-            mode = {{type}}
+            origins={{origins|safe}}
+            destinations={{destinations|safe}}
+            flows={{flows|safe}}
+            mode={{type}}
             if (mode == 1){
-            for (var i = 0; i < origins.length; i++){
-              var value = newpath([[origins[i].lat, origins[i].lng],[destinations[i].lat, destinations[i].lng]], flows[i])
-              var path = value[0]
+            for (var i=0; i < origins.length; i++){
+              var value=newpath([[origins[i].lat, origins[i].lng],[destinations[i].lat, destinations[i].lng]], flows[i])
+              var path=value[0]
               path.addTo(mymap)
-              var arrowHead = L.polylineDecorator(path, {
+              var arrowHead=L.polylineDecorator(path, {
                   patterns: [
                     {offset: '60%', repeat: 0, symbol: L.Symbol.arrowHead({pixelSize: 4, polygon: false, pathOptions: {stroke: true}})}]
                   }).addTo(mymap);
                 }
               }
             if (mode == 2){
-            for (var i = 0; i < origins.length; i++){
-                var path = newroute([[origins[i].lat, origins[i].lng],[destinations[i].lat, destinations[i].lng]], flows[i])
+            for (var i=0; i < origins.length; i++){
+                var path=newroute([[origins[i].lat, origins[i].lng],[destinations[i].lat, destinations[i].lng]], flows[i])
                 }
               }
             if (mode == 3){
-            for (var i = 0; i < origins.length; i++){
-              var value = newhybrid([[origins[i].lat, origins[i].lng],[destinations[i].lat, destinations[i].lng]], flows[i])
-              var path = value[0]
+            for (var i=0; i < origins.length; i++){
+              var value=newhybrid([[origins[i].lat, origins[i].lng],[destinations[i].lat, destinations[i].lng]], flows[i])
+              var path=value[0]
               path.addTo(mymap)
-              var arrowHead = L.polylineDecorator(path, {
+              var arrowHead=L.polylineDecorator(path, {
                   patterns: [
                     {offset: '60%', repeat: 0, symbol: L.Symbol.arrowHead({pixelSize: 4, polygon: false, pathOptions: {stroke: true}})}]
                   }).addTo(mymap);
@@ -219,8 +219,8 @@
 
       });
     </script>
-    <div  class = "canvas_hold" id = "canvas_holder" style = " height: 470px; box-shadow: 5px 5px 5px #d3d3d3;">
-      <div id = "gfx_holder" style = "position: relative; width:100%; height: 470px">
+    <div  class="canvas_hold" id="canvas_holder" style=" height: 470px; box-shadow: 5px 5px 5px #d3d3d3;">
+      <div id="gfx_holder" style="position: relative; width:100%; height: 470px">
       </div>
     </div>
       <br/>
@@ -235,7 +235,7 @@
 {% block scripts %}
 <script type="text/javascript">
 function UpdateLabel(i){
-      e = document.getElementsByClassName("custom-file-input")[i].files[0].name;
+      e=document.getElementsByClassName("custom-file-input")[i].files[0].name;
       $('.custom-file-label').eq(i).html(e);
   }
 </script>

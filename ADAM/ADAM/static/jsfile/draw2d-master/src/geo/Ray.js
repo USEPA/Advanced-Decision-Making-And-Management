@@ -1,25 +1,23 @@
+import draw2d from '../packages'
 
 
 /**
- * @class draw2d.geo.Ray
- * A ray is a line starting in [0,0,] with some additional
- * helper functions required for some router.
+ * @class
+ * Represents a vector within 2-dimensional Euclidean space.
  * 
  * @inheritable
  * @extends draw2d.geo.Point
  * @author Andreas Herz
  */
-import draw2d from '../packages';
-
-
-draw2d.geo.Ray = draw2d.geo.Point.extend({
-
-    NAME : "draw2d.geo.Ray",
+draw2d.geo.Ray = draw2d.geo.Point.extend(
+    /** @lends draw2d.geo.Ray.prototype */
+    {
+    
+    NAME: "draw2d.geo.Ray",
     
     /**
-     * @constructor 
-     * Creates a ray object. 
-     * 
+     * Creates a ray object.
+     *
      * @param {Number} x
      * @param {Number} y
      */

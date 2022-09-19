@@ -15,37 +15,37 @@
 
     <div class="card-header">
         <div class="row align-items-center">
-          <div class = "col text-left">
-            <div class = "btn-group">
-            <a  class = "btn btn-light btn-sm" href = '/expert/usermain/'>
-              <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+          <div class="col text-left">
+            <div class="btn-group">
+            <a  class="btn btn-light btn-sm" href='/expert/usermain/'>
+              <ion-icon name="arrow-back-circle-outline" class="iconpiclarger align-middle"></ion-icon> Dashborad
             </a>
-            <a  class = "btn btn-light btn-sm" href = '/expert/demo'>
-              <ion-icon name="book" class = "iconpiclarger align-middle"></ion-icon> Case Studies
+            <a  class="btn btn-light btn-sm" href='/expert/demo'>
+              <ion-icon name="book" class="iconpiclarger align-middle"></ion-icon> Case Studies
             </a>
             {% if user.is_staff %}
-            <a  class = "btn btn-light btn-sm" href = '/expert/managecasestudy/'>
-              <ion-icon name="file-tray-stacked" class = "iconpiclarger align-middle"></ion-icon> Manage Cases
+            <a  class="btn btn-light btn-sm" href='/expert/managecasestudy/'>
+              <ion-icon name="file-tray-stacked" class="iconpiclarger align-middle"></ion-icon> Manage Cases
             </a>
             {% endif %}
             </div>
           </div>
 
-          <div class = "col text-center">
-            <h4 class = "card-title align-vertical text-body" >Add Scenario</h4>
+          <div class="col text-center">
+            <h4 class="card-title align-vertical text-body" >Add Scenario</h4>
           </div>
 
-          <div class = "col text-right invisible">
-            <a  class = "btn btn-light btn-sm" href = '/'>
-              <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+          <div class="col text-right invisible">
+            <a  class="btn btn-light btn-sm" href='/'>
+              <ion-icon name="exit" class="iconpiclarger align-middle"></ion-icon> Dashborad
             </a>
 
-            <a  class = "btn btn-light btn-sm" href = '/demo'>
-              <ion-icon name="library" class = "iconpiclarger align-middle"></ion-icon> Case Studies
+            <a  class="btn btn-light btn-sm" href='/demo'>
+              <ion-icon name="library" class="iconpiclarger align-middle"></ion-icon> Case Studies
             </a>
             {% if user.is_staff %}
-            <a  class = "btn btn-light btn-sm" href = '/expert/managecasestudy/'>
-              <ion-icon name="file-tray-stacked" class = "iconpiclarger align-middle"></ion-icon> Manage Cases
+            <a  class="btn btn-light btn-sm" href='/expert/managecasestudy/'>
+              <ion-icon name="file-tray-stacked" class="iconpiclarger align-middle"></ion-icon> Manage Cases
             </a>
             {% endif %}
 
@@ -57,13 +57,13 @@
     <div class="card-body">
       <br/>
 
-        <div class = "container text-center" style = "width:40%; left:30%">
+        <div class="container text-center" style="width:40%; left:30%">
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">Scenario Name</span>
             </div>
-            <input type="text" class="form-control" placeholder="Case Name"  aria-describedby="basic-addon1" id = "casename">
+            <input type="text" class="form-control" placeholder="Case Name"  aria-describedby="basic-addon1" id="casename">
           </div>
 
           <div class="input-group mb-3">
@@ -72,20 +72,20 @@
             </div>
             <select class="custom-select" id="selectmodel">
               {% for model in tasklist %}
-              <option value = "{{model.id}}">{{model.user.username}} - {{model.task_name}} </option>
+              <option value="{{model.id}}">{{model.user.username}} - {{model.task_name}} </option>
               {% endfor %}
             </select>
           </div>
 
-          <button class = "btn btn-light border" onclick="addcase()">Confirm</button>
+          <button class="btn btn-light border" onclick="addcase()">Confirm</button>
         </div>
 
     </div>
 
-    <div id = "overlaycontainer" style="display:none;z-index: 1002">
-      <div id = "overlay">
+    <div id="overlaycontainer" style="display:none;z-index: 1002">
+      <div id="overlay">
         <div class="text-center border rounded" style="position: relative; top: 40%; background: #F7F7F7; width: 40%; left:30%;">
-          <h4 id = "spinnertext">Generating...</h4>
+          <h4 id="spinnertext">Generating...</h4>
           <br/>
           <div class="spinner-grow" style="width: 3rem; height: 3rem; color: #9A0001" role="status">
             <span class="sr-only">Running</span>

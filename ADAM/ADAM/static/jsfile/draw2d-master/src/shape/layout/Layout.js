@@ -1,5 +1,9 @@
+import draw2d from '../../packages'
+import extend from '../../util/extend'
+
+
 /**
- * @class draw2d.shape.layout.Layout
+ * @class
  *
  * A base class for positioning child figures and determining the ideal size for
  * a figure with children.
@@ -8,15 +12,13 @@
  * @author Andreas Herz
  * @extends draw2d.shape.basic.Rectangle
  */
-import draw2d from '../../packages'
-import extend from '../../util/extend'
-
-draw2d.shape.layout.Layout = draw2d.shape.basic.Rectangle.extend({
+draw2d.shape.layout.Layout = draw2d.shape.basic.Rectangle.extend(
+  /** @lends draw2d.shape.layout.Layout.prototype */
+  {
 
   NAME: "draw2d.shape.layout.Layout",
 
   /**
-   * @constructor
    * Create a new instance
    *
    * @param {Object} [attr] the configuration of the shape
@@ -27,7 +29,7 @@ draw2d.shape.layout.Layout = draw2d.shape.basic.Rectangle.extend({
 
     this._super(extend({bgColor: null, radius: 0, stroke: 0}, attr),
       extend({
-        /** @attr {Number} padding the padding in pixel around the text */
+        // @attr {Number} padding the padding in pixel around the text */
         padding: this.setPadding
       }, setter),
       extend({
@@ -35,17 +37,16 @@ draw2d.shape.layout.Layout = draw2d.shape.basic.Rectangle.extend({
       }, getter))
 
 
-    let _this = this
-    this.resizeListener = function (figure) {
+    this.resizeListener =  figure => {
       // propagate the event to the parent or other listener if existing
       //
-      if (_this.getParent() instanceof draw2d.shape.layout.Layout) {
-        _this.fireEvent("resize")
+      if (this.getParent() instanceof draw2d.shape.layout.Layout) {
+        this.fireEvent("resize")
       }
       // or we are the parent and must consume it self
       else {
-        _this.setDimension(1, 1)
-        _this.fireEvent("resize")
+        this.setDimension(1, 1)
+        this.fireEvent("resize")
       }
     }
 
@@ -83,20 +84,20 @@ draw2d.shape.layout.Layout = draw2d.shape.basic.Rectangle.extend({
 
 
   /**
-   * @method
+   * 
    * Set the padding of the element
    *
-   *      // Alternatively you can use the attr method:
-   *      //
-   *      // set the padding for top,left,bottom,right in one call
-   *      figure.attr({
-   *        padding: 3
-   *      });
+   *     // Alternatively you can use the attr method:
+   *     //
+   *     // set the padding for top,left,bottom,right in one call
+   *     figure.attr({
+   *       padding: 3
+   *     });
    *
-   *      // update the padding left and top
-   *      figure.attr({
-   *        padding: {left:3, top:30}
-   *      });
+   *     // update the padding left and top
+   *     figure.attr({
+   *       padding: {left:3, top:30}
+   *     });
    *
    * @param {Number|Object} padding The new padding
    * @since 4.3.3
@@ -106,7 +107,7 @@ draw2d.shape.layout.Layout = draw2d.shape.basic.Rectangle.extend({
       this.padding = {top: padding, right: padding, bottom: padding, left: padding}
     }
     else {
-      extend(this.padding, padding)
+      this.padding = extend(this.padding, padding)
     }
     this.fireEvent("change:padding", {value: this.padding})
 
@@ -119,10 +120,11 @@ draw2d.shape.layout.Layout = draw2d.shape.basic.Rectangle.extend({
 
 
   /**
-   * @method
+   * 
    * Get the padding of the element.
    *
    * @since 4.3.3
+   * @returns {this}
    **/
   getPadding: function () {
     return this.padding
@@ -130,6 +132,7 @@ draw2d.shape.layout.Layout = draw2d.shape.basic.Rectangle.extend({
 
   /**
    * @inheritdoc
+   * @returns {this}
    */
   setVisible: function (flag) {
     // propagate the visibility to all children too.
@@ -149,11 +152,11 @@ draw2d.shape.layout.Layout = draw2d.shape.basic.Rectangle.extend({
   },
 
   /**
-   * @method
+   * 
    * Returns the Command to perform the specified Request or null.
    *
    * @param {draw2d.command.CommandType} request describes the Command being requested
-   * @return {draw2d.command.Command} null or a Command
+   * @returns {draw2d.command.Command} null or a Command
    * @private
    **/
   createCommand: function (request) {

@@ -1,28 +1,34 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.basic.LineEndResizeHandle
+ * @class
  *
  * Selection handle for connections and normal lines.
  *
  *
- * @inheritable
  * @author Andreas Herz
  * @extends draw2d.shape.basic.LineResizeHandle
  */
-import draw2d from '../../packages'
+draw2d.shape.basic.LineEndResizeHandle = draw2d.shape.basic.LineResizeHandle.extend(
+  /** @lends draw2d.shape.basic.LineEndResizeHandle.prototype */
+  {
 
-draw2d.shape.basic.LineEndResizeHandle = draw2d.shape.basic.LineResizeHandle.extend({
   NAME: "draw2d.shape.basic.LineEndResizeHandle",
 
+  /**
+   *
+   */
   init: function (figure) {
     this._super({owner: figure, index: figure.getVertices().getSize() - 1})
   },
 
 
   /**
-   * @method
+   *
    * Return the Port assigned to this ResizeHandle if the line is an instance of draw2d.Connection
    *
-   * @return {draw2d.Port}
+   * @returns {draw2d.Port}
    */
   getRelatedPort: function () {
     if (this.owner instanceof draw2d.Connection) {
@@ -33,7 +39,7 @@ draw2d.shape.basic.LineEndResizeHandle = draw2d.shape.basic.LineResizeHandle.ext
   },
 
   /**
-   * @method
+   *
    * Return the peer Port assigned to this ResizeHandle if the line is an instance of draw2d.Connection
    *
    * @returns {draw2d.Port}
@@ -48,14 +54,14 @@ draw2d.shape.basic.LineEndResizeHandle = draw2d.shape.basic.LineResizeHandle.ext
 
 
   /**
-   * @method
+   *
    * Called from the framework during a drag&drop operation
    *
    * @param {Number} dx the x difference between the start of the drag drop operation and now
    * @param {Number} dy the y difference between the start of the drag drop operation and now
    * @param {Number} dx2 The x diff since the last call of this dragging operation
    * @param {Number} dy2 The y diff since the last call of this dragging operation
-   * @return {Boolean}
+   * @returns {Boolean}
    * @private
    **/
   onDrag: function (dx, dy, dx2, dy2) {
@@ -76,7 +82,7 @@ draw2d.shape.basic.LineEndResizeHandle = draw2d.shape.basic.LineResizeHandle.ext
   },
 
   /**
-   * @method
+   *
    * Resizehandle has been drop on a InputPort/OutputPort.
    *
    * @param {draw2d.Figure} dropTarget
@@ -97,7 +103,7 @@ draw2d.shape.basic.LineEndResizeHandle = draw2d.shape.basic.LineResizeHandle.ext
   },
 
   /**
-   * @method
+   *
    * Controls the location of the resize handle
    *
    **/

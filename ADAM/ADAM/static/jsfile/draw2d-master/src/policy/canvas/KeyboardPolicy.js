@@ -1,26 +1,28 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.canvas.KeyboardPolicy
+ * @class
  * Default interface for keyboard interaction with the canvas.
  *
  *
  * @author Andreas Herz
  * @extends draw2d.policy.canvas.CanvasPolicy
  */
-import draw2d from '../../packages'
-
-draw2d.policy.canvas.KeyboardPolicy = draw2d.policy.canvas.CanvasPolicy.extend({
+draw2d.policy.canvas.KeyboardPolicy = draw2d.policy.canvas.CanvasPolicy.extend(
+  /** @lends draw2d.policy.canvas.KeyboardPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.canvas.KeyboardPolicy",
 
   /**
-   * @constructor
    */
   init: function (attr, setter, getter) {
     this._super(attr, setter, getter)
   },
 
   /**
-   * @method
+   * 
    * Callback if the user release a key
    *
    * @param {draw2d.Canvas} canvas the related canvas
@@ -34,7 +36,7 @@ draw2d.policy.canvas.KeyboardPolicy = draw2d.policy.canvas.CanvasPolicy.extend({
   },
 
   /**
-   * @method
+   * 
    * Callback if the user press a key down
    *
    * @param {draw2d.Canvas} canvas the related canvas

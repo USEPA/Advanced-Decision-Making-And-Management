@@ -1,31 +1,33 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.figure.ResizeSelectionFeedbackPolicy
+ * @class
  *
  * Selection feedback policy without "marching ant lines" or any other rectangle highlight. Just
  * some resize handles at each corner of the shape.
  *
- * See the example:
  *
- *     @example preview small frame
- *       circle =new draw2d.shape.basic.Circle();
- *       circle.installEditPolicy(new draw2d.policy.ResizeSelectionFeedbackPolicy());
- *       canvas.add(circle,90,50);
+ * @example
+ *      circle =new draw2d.shape.basic.Circle();
+ *      circle.installEditPolicy(new draw2d.policy.ResizeSelectionFeedbackPolicy());
+ *      canvas.add(circle,90,50);
  *
- *       canvas.add(new draw2d.shape.basic.Label({text:"Click on the circle to see the selection feedback"}),20,10);
+ *      canvas.add(new draw2d.shape.basic.Label({text:"Click on the circle to see the selection feedback"}),20,10);
  *
  * @author Andreas Herz
  * @since 4.0.0
  * @extends draw2d.policy.figure.SelectionFeedbackPolicy
  *
  */
-import draw2d from '../../packages'
-
-draw2d.policy.figure.ResizeSelectionFeedbackPolicy = draw2d.policy.figure.SelectionFeedbackPolicy.extend({
+draw2d.policy.figure.ResizeSelectionFeedbackPolicy = draw2d.policy.figure.SelectionFeedbackPolicy.extend(
+  /** @lends draw2d.policy.figure.ResizeSelectionFeedbackPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.figure.ResizeSelectionFeedbackPolicy",
   /**
-   * @constructor
    * Creates a new Router object
+   *
    */
   init: function (attr, setter, getter) {
     this._super(attr, setter, getter)
@@ -33,7 +35,7 @@ draw2d.policy.figure.ResizeSelectionFeedbackPolicy = draw2d.policy.figure.Select
 
 
   /**
-   * @method
+   *
    * Called by the framework of the Policy should show a resize handle for the given shape
    *
    * @param {draw2d.Canvas} canvas the related canvas
@@ -91,7 +93,7 @@ draw2d.policy.figure.ResizeSelectionFeedbackPolicy = draw2d.policy.figure.Select
   },
 
   /**
-   * @method
+   *
    * Callback if the figure has been moved. In this case we must update the position of the
    * resize handles.
    *

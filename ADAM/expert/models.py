@@ -28,46 +28,46 @@ class CaseStudy(models.Model):
     notes = models.CharField(default = '', max_length = 1000)
     # data and results user for the case study
     # supply data
-    supLatLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    supLngLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    supProLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    supCapLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    supBidLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    supNames = ArrayField(base_field=models.CharField(max_length=10), default = [])
+    supLatLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    supLngLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    supProLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    supCapLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    supBidLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    supNames = ArrayField(base_field=models.CharField(max_length=10), default=list)
     #supply results
-    supValueLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
+    supValueLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
 
     # tech site data
-    siteLatLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    siteLngLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    siteTecLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    siteCapLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    siteNames = ArrayField(base_field=models.CharField(max_length=10), default = [])
+    siteLatLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    siteLngLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    siteTecLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    siteCapLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    siteNames = ArrayField(base_field=models.CharField(max_length=10), default=list)
     # tech site results
-    siteTreatLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
+    siteTreatLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
 
     # tech cand data
-    candLatLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    candLngLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    candTecLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    candNames = ArrayField(base_field=models.CharField(max_length=10), default = [])
+    candLatLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    candLngLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    candTecLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    candNames = ArrayField(base_field=models.CharField(max_length=10), default=list)
     # tech cand results
-    candInstallLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    candCapLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
+    candInstallLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    candCapLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
 
     # demand data
-    demLatLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    demLngLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    demProLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    demCapLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    demBidLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    demNames = ArrayField(base_field=models.CharField(max_length=10), default = [])
+    demLatLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    demLngLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    demProLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    demCapLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    demBidLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    demNames = ArrayField(base_field=models.CharField(max_length=10), default=list)
     #demand results
-    demValueLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
+    demValueLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
 
     # Other results
     summary = models.CharField(max_length = 5000, default = '')
-    transportationResults = ArrayField(base_field=models.CharField(max_length=1000), default = []) # list of tech file paths
+    transportationResults = ArrayField(base_field=models.CharField(max_length=1000), default=list) # list of tech file paths
     priceResults = models.CharField(max_length = 5000, default = '') # clearing price path
 
     target_taskid =  models.IntegerField(default = -1)
@@ -177,33 +177,33 @@ class OptTask(models.Model):
 
     # data user for the task (stored in mysql)
     # supply data
-    supLatLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    supLngLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    supProLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    supCapLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    supBidLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    supNames = ArrayField(base_field=models.CharField(max_length=10), default = [])
+    supLatLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    supLngLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    supProLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    supCapLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    supBidLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    supNames = ArrayField(base_field=models.CharField(max_length=10), default=list)
 
     # tech site data
-    siteLatLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    siteLngLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    siteTecLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    siteCapLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    siteNames = ArrayField(base_field=models.CharField(max_length=10), default = [])
+    siteLatLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    siteLngLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    siteTecLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    siteCapLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    siteNames = ArrayField(base_field=models.CharField(max_length=10), default=list)
 
     # tech cand data
-    candLatLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    candLngLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    candTecLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    candNames = ArrayField(base_field=models.CharField(max_length=10), default = [])
+    candLatLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    candLngLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    candTecLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    candNames = ArrayField(base_field=models.CharField(max_length=10), default=list)
 
     # demand data
-    demLatLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    demLngLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    demProLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    demCapLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    demBidLs = ArrayField(base_field=models.CharField(max_length=10), default = [])
-    demNames = ArrayField(base_field=models.CharField(max_length=10), default = [])
+    demLatLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    demLngLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    demProLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    demCapLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    demBidLs = ArrayField(base_field=models.CharField(max_length=10), default=list)
+    demNames = ArrayField(base_field=models.CharField(max_length=10), default=list)
 
     tasktransfile = models.BooleanField(default = True)
 

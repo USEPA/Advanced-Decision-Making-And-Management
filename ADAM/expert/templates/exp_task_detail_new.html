@@ -7,31 +7,31 @@
   {% csrf_token %}
   <br/>
 
-  <div class="card" style = "min-width:950px">
+  <div class="card" style="min-width:950px">
 
     <div class="card-header">
         <div class="row align-items-center">
-          <div class = "col text-left">
-            <div class = "btn-group">
-              <a  class = "btn btn-light" href = '/expert/usermain/'>
-                <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+          <div class="col text-left">
+            <div class="btn-group">
+              <a  class="btn btn-light" href='/expert/usermain/'>
+                <ion-icon name="arrow-back-circle-outline" class="iconpiclarger align-middle"></ion-icon> Dashboard
               </a>
-              <a  class = "btn btn-light" href = '/expert/usermain/task/'>
-                <ion-icon name="list" class = "iconpiclarger align-middle"></ion-icon> Model List
+              <a  class="btn btn-light" href='/expert/usermain/task/'>
+                <ion-icon name="list" class="iconpiclarger align-middle"></ion-icon> Model List
               </a>
             </div>
           </div>
 
-          <div class = "col text-center">
-            <h4 class = "card-title align-vertical text-body" >{{task.task_name}}</h4>
+          <div class="col text-center">
+            <h4 class="card-title align-vertical text-body" >{{task.task_name}}</h4>
           </div>
-          <div class = "col text-right invisible">
-            <div class = "btn-group">
-              <a  class = "btn btn-light" href = '/'>
-                <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+          <div class="col text-right invisible">
+            <div class="btn-group">
+              <a  class="btn btn-light" href='/'>
+                <ion-icon name="exit" class="iconpiclarger align-middle"></ion-icon> Dashboard
               </a>
-              <a  class = "btn btn-light" href = '/expert/usermain/'>
-                <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+              <a  class="btn btn-light" href='/expert/usermain/'>
+                <ion-icon name="arrow-back-circle-outline" class="iconpiclarger align-middle"></ion-icon> Dashboard
               </a>
             </div>
           </div>
@@ -59,80 +59,80 @@
     <h6>Progress:</h6>
 
       {% if '123456' in task.finished_steps %}
-        <div  class = "canvas_hold" id = "canvas_holder" style = "height: 30px">
+        <div  class="canvas_hold" id="canvas_holder" style="height: 30px">
           <div class="progress">
             <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">100%</div>
           </div>
         </div>
       {% elif '12345' in task.finished_steps %}
-        <div  class = "canvas_hold" id = "canvas_holder" style = "height: 30px">
+        <div  class="canvas_hold" id="canvas_holder" style="height: 30px">
           <div class="progress">
             <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 83.3%" aria-valuenow="62.5" aria-valuemin="0" aria-valuemax="100">83.3%</div>
           </div>
         </div>
       {% elif '1234' in task.finished_steps %}
-        <div  class = "canvas_hold" id = "canvas_holder" style = "height: 30px">
+        <div  class="canvas_hold" id="canvas_holder" style="height: 30px">
           <div class="progress">
             <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 66.7%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">66.7%</div>
           </div>
         </div>
       {% elif '123' in task.finished_steps %}
-        <div  class = "canvas_hold" id = "canvas_holder" style = "height: 30px">
+        <div  class="canvas_hold" id="canvas_holder" style="height: 30px">
           <div class="progress">
             <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 50%" aria-valuenow="37.5" aria-valuemin="0" aria-valuemax="100">50%</div>
           </div>
         </div>
       {% elif '12' in task.finished_steps %}
-        <div  class = "canvas_hold" id = "canvas_holder" style = "height: 30px">
+        <div  class="canvas_hold" id="canvas_holder" style="height: 30px">
           <div class="progress">
             <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 33.3%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">33.3%</div>
           </div>
         </div>
       {% elif '1' in task.finished_steps %}
-        <div  class = "canvas_hold" id = "canvas_holder" style = "height: 30px">
+        <div  class="canvas_hold" id="canvas_holder" style="height: 30px">
           <div class="progress">
             <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 16.7%" aria-valuenow="12.5" aria-valuemin="0" aria-valuemax="100">16.7%</div>
           </div>
         </div>
       {% else %}
-        <div  class = "canvas_hold" id = "canvas_holder" style = "height: 30px">
+        <div  class="canvas_hold" id="canvas_holder" style="height: 30px">
           <div class="progress">
             <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
           </div>
         </div>
       {% endif %}
 
-      <div  class = "canvas_hold" style = "height: 100%;">
-      <div class="btn-group btn-group-sm" style = "width: 100%">
-        <button type="button" class="btn btn-light border" style = "width: 16.6%" data-toggle="tooltip" data-placement="top" title="Model Type" onclick="location.href='/expert/usermain/task/{{task.id}}/1'">Step 1</button>
-        <button type="button" class="btn btn-light border" style = "width: 16.6%" data-toggle="tooltip" data-placement="top" title="Supply Data" onclick="location.href='/expert/usermain/task/{{task.id}}/2'">Step 2</button>
-        <button type="button" class="btn btn-light border" style = "width: 16.6%" data-toggle="tooltip" data-placement="top" title="Technology Data" onclick="location.href='/expert/usermain/task/{{task.id}}/3'">Step 3</button>
-        <button type="button" class="btn btn-light border" style = "width: 16.6%" data-toggle="tooltip" data-placement="top" title="Demand Data" onclick="location.href='/expert/usermain/task/{{task.id}}/4'">Step 4</button>
-        <button type="button" class="btn btn-light border" style = "width: 16.6%" data-toggle="tooltip" data-placement="top" title="Transportation" onclick="location.href='/expert/usermain/task/{{task.id}}/5'">Step 5</button>
-        <button type="button" class="btn btn-light border" style = "width: 16.6%" data-toggle="tooltip" data-placement="top" title="Run Model" onclick="location.href='/expert/usermain/task/{{task.id}}/6'">Step 6</button>
+      <div  class="canvas_hold" style="height: 100%;">
+      <div class="btn-group btn-group-sm" style="width: 100%">
+        <button type="button" class="btn btn-light border mx-2" style="width: 16.6%" data-toggle="tooltip" data-placement="top" title="Model Type" onclick="location.href='/expert/usermain/task/{{task.id}}/1'">Step 1</button>
+        <button type="button" class="btn btn-light border mx-2" style="width: 16.6%" data-toggle="tooltip" data-placement="top" title="Supply Data" onclick="location.href='/expert/usermain/task/{{task.id}}/2'">Step 2</button>
+        <button type="button" class="btn btn-light border mx-2" style="width: 16.6%" data-toggle="tooltip" data-placement="top" title="Technology Data" onclick="location.href='/expert/usermain/task/{{task.id}}/3'">Step 3</button>
+        <button type="button" class="btn btn-light border mx-2" style="width: 16.6%" data-toggle="tooltip" data-placement="top" title="Demand Data" onclick="location.href='/expert/usermain/task/{{task.id}}/4'">Step 4</button>
+        <button type="button" class="btn btn-light border mx-2" style="width: 16.6%" data-toggle="tooltip" data-placement="top" title="Transportation" onclick="location.href='/expert/usermain/task/{{task.id}}/5'">Step 5</button>
+        <button type="button" class="btn btn-light border mx-2" style="width: 16.6%" data-toggle="tooltip" data-placement="top" title="Run Model" onclick="location.href='/expert/usermain/task/{{task.id}}/6'">Step 6</button>
       </div>
       </div>
 
       <h6>Options:</h6>
-        <div  class = "canvas_hold" style = "height: 100%;">
-        <div class="btn-group" style = "width: 100%">
-          <button type="button" class="btn btn-light border" style = "width: 20%" data-toggle="tooltip" data-placement="top" title="Clear all assigned data of this model" onclick="reinitilize()">Clear Model Data</button>
-          <button type="button" class="btn btn-light border" style = "width: 20%" data-toggle="tooltip" data-placement="top" title="Delete this model permenantly" onclick="taskdelete()">Delete Model</button>
-          <button type="button" class="btn btn-light border" style = "width: 20%" data-toggle="tooltip" data-placement="top" title="Load data from another model or case study" onclick="loadmodeldata()">Load Model</button>
-          <button type="button" class="btn btn-light border" style = "width: 20%" data-toggle="tooltip" data-placement="top" title="Download data of this model as csv files" onclick="downloadmodel()">Download Model Data</button>
+        <div  class="canvas_hold" style="height: 100%;">
+        <div class="btn-group" style="width: 100%">
+          <button type="button" class="btn btn-light border mx-2" style="width: 20%" data-toggle="tooltip" data-placement="top" title="Clear all assigned data of this model" onclick="reinitilize()">Clear Model Data</button>
+          <button type="button" class="btn btn-light border mx-2" style="width: 20%" data-toggle="tooltip" data-placement="top" title="Delete this model permenantly" onclick="taskdelete()">Delete Model</button>
+          <button type="button" class="btn btn-light border mx-2" style="width: 20%" data-toggle="tooltip" data-placement="top" title="Load data from another model or case study" onclick="loadmodeldata()">Load Model</button>
+          <button type="button" class="btn btn-light border mx-2" style="width: 20%" data-toggle="tooltip" data-placement="top" title="Download data of this model as csv files" onclick="downloadmodel()">Download Model Data</button>
           {% if task.task_status == 'Completed' or task.task_status == 'Error' %}
-          <button type="button" class="btn btn-light border" style = "width: 20%" data-toggle="tooltip" data-placement="top" title="View obtained model results" onclick="viewresults()">View Model Results</button>
+          <button type="button" class="btn btn-light border mx-2" style="width: 20%" data-toggle="tooltip" data-placement="top" title="View obtained model results" onclick="viewresults()">View Model Results</button>
           {% else %}
-          <button type="button" class="btn btn-light border" style = "width: 20%" data-toggle="tooltip" data-placement="top" title="Not available yet" onclick="" disabled>View Model Results</button>
+          <button type="button" class="btn btn-light border mx-2" style="width: 20%" data-toggle="tooltip" data-placement="top" title="Not available yet" onclick="" disabled>View Model Results</button>
           {% endif %}
 
         </div>
         </div>
 
-      <div id = "datacheckreport" style = "display:none">
+      <div id="datacheckreport" style="display:none">
 
       <h4>Feedback:</h4>
-        <div id = "reportcontent">
+        <div id="reportcontent">
           <div>
           </div>
         </div>
@@ -143,8 +143,8 @@
       <br/>
       <h3> Form not Valid! </h3>
       {% endif %}
-      <div id = "overlaycontainer2" style="display:none;z-index: -1">
-        <div id = "overlay">
+      <div id="overlaycontainer2" style="display:none;z-index: -1">
+        <div id="overlay">
           <div class="text-center border rounded" style="position: relative; top: 40%; background: #F7F7F7; width: 40%; left:30%;">
             <h4>Loading...</h4>
             <br/>
@@ -172,9 +172,9 @@
 {% block scripts %}
 <script type="text/javascript">
 function viewresults() {
-  var title = 'Results of ' + "{{task.task_name}}"
-  var content = '<strong> Results Summary </strong>' + "{{task.opttaskresults.summary|linebreaks}}" + '<strong>Download Results</strong>'
-  content +="<br><a class = 'btn btn-light border' href = '{{task.opttaskresults.resultspath}}'>Download</a> <br><br><strong>Visualization</strong> <br><a class = 'btn btn-light border'href = '/expert/usermain/visualization/results/{{task.id}}'>Go</a>"
+  var title='Results of ' + "{{task.task_name}}"
+  var content='<strong> Results Summary </strong>' + "{{task.opttaskresults.summary|linebreaks}}" + '<strong>Download Results</strong>'
+  content +="<br><a class='btn btn-light border' href='{{task.opttaskresults.resultspath}}'>Download</a> <br><br><strong>Visualization</strong> <br><a class='btn btn-light border'href='/expert/usermain/visualization/results/{{task.id}}'>Go</a>"
 
   alertify.confirm(content).set('closable', false).set('onok', null).set('oncancel', null).set('title', title)
 }
@@ -183,8 +183,8 @@ function viewresults() {
 function reinitilize(){
   alertify.confirm('Confirm', 'Reinitialize this task (clear all assigned data)?',
   function() {
-    var el = document.getElementsByName("csrfmiddlewaretoken");
-    csrf_value = el[0].getAttribute("value");
+    var el=document.getElementsByName("csrfmiddlewaretoken");
+    csrf_value=el[0].getAttribute("value");
     jQuery.ajax({
       method: "POST",
       url: "/expert/ajax/reinitilizetask",
@@ -203,8 +203,8 @@ function reinitilize(){
 function taskdelete(){
   alertify.confirm('Confirm', 'Delete this task?',
   function() {
-    var el = document.getElementsByName("csrfmiddlewaretoken");
-    csrf_value = el[0].getAttribute("value");
+    var el=document.getElementsByName("csrfmiddlewaretoken");
+    csrf_value=el[0].getAttribute("value");
     jQuery.ajax({
       method: "POST",
       url: "/expert/ajax/deletetask",
@@ -222,20 +222,20 @@ function taskdelete(){
 
 
 function loadmodeldata(){
-  content = '<strong>This will eliminate currently assigned data</strong>'
-  content += '<br/><br/><label>Choose the model to load data from:</lable><select class = "form-control" id = "modelid">'
+  content='<strong>This will eliminate currently assigned data</strong>'
+  content += '<br/><br/><label>Choose the model to load data from:</lable><select class="form-control" id="modelid">'
     content += '<optgroup label="Your Models">'
     {% for t in user.opttask_set.all%}
      {% if t.id == task.id%}
-        content += '<option value = "{{t.id}}" disabled> {{t.task_name}} </option>'
+        content += '<option value="{{t.id}}" disabled> {{t.task_name}} </option>'
      {% else %}
-        content += '<option value = "{{t.id}}"> {{t.task_name}} </option>'
+        content += '<option value="{{t.id}}"> {{t.task_name}} </option>'
       {% endif %}
     {% endfor %}
     content += '</optgroup><optgroup label="Case Studies">'
     {% for case in casels %}
       {% for s in case.childrencase.all %}
-      content += '<option value = "c{{s.id}}"> {{case.name}} (Scenario: {{s.name}}) </option>'
+      content += '<option value="c{{s.id}}"> {{case.name}} (Scenario: {{s.name}}) </option>'
       {% endfor %}
     {% endfor %}
 
@@ -243,8 +243,8 @@ function loadmodeldata(){
   content += '</optgroup></select><br/>'
   alertify.confirm(content).set('title','Load Data From Model').set('closable', false).set('labels',{ok:'Yes', cancel:'Cancel'}).set('onok', function(){
     $('#overlaycontainer2').css('display','block')
-    var el = document.getElementsByName("csrfmiddlewaretoken");
-    csrf_value = el[0].getAttribute("value");
+    var el=document.getElementsByName("csrfmiddlewaretoken");
+    csrf_value=el[0].getAttribute("value");
     jQuery.ajax({
       method: "POST",
       url: "/expert/ajax/loaddatafrommodel",
@@ -262,10 +262,10 @@ function loadmodeldata(){
 }
 
 function downloadmodel(){
-  content = 'Check the data you want to include: <div class="custom-control custom-checkbox" id ="Checkdiv1" style="display:none"> <input type="checkbox" class="custom-control-input" id="customCheck1"> <label class="custom-control-label" for="customCheck1">Supply Data</label> </div> <div class="custom-control custom-checkbox" id ="Checkdiv2" style="display:none"> <input type="checkbox" class="custom-control-input" id="customCheck2"> <label class="custom-control-label" for="customCheck2">Technology Site Data</label> </div> <div class="custom-control custom-checkbox" id ="Checkdiv3" style="display:none"> <input type="checkbox" class="custom-control-input" id="customCheck3"> <label class="custom-control-label" for="customCheck3">Technology Candidate Data</label> </div> <div class="custom-control custom-checkbox" id ="Checkdiv4" style="display:none"> <input type="checkbox" class="custom-control-input" id="customCheck4"> <label class="custom-control-label" for="customCheck4">Demand Data</label> </div>'
+  content='Check the data you want to include: <div class="custom-control custom-checkbox" id ="Checkdiv1" style="display:none"> <input type="checkbox" class="custom-control-input" id="customCheck1"> <label class="custom-control-label" for="customCheck1">Supply Data</label> </div> <div class="custom-control custom-checkbox" id ="Checkdiv2" style="display:none"> <input type="checkbox" class="custom-control-input" id="customCheck2"> <label class="custom-control-label" for="customCheck2">Technology Site Data</label> </div> <div class="custom-control custom-checkbox" id ="Checkdiv3" style="display:none"> <input type="checkbox" class="custom-control-input" id="customCheck3"> <label class="custom-control-label" for="customCheck3">Technology Candidate Data</label> </div> <div class="custom-control custom-checkbox" id ="Checkdiv4" style="display:none"> <input type="checkbox" class="custom-control-input" id="customCheck4"> <label class="custom-control-label" for="customCheck4">Demand Data</label> </div>'
 
 
-  alarm = alertify.confirm(content).set('title', 'Download Model Data').set('closable', false).set('oncancel', function(){alertify.confirm().destroy();})
+  alarm=alertify.confirm(content).set('title', 'Download Model Data').set('closable', false).set('oncancel', function(){alertify.confirm().destroy();})
   {% if '2' in task.finished_steps %}
     $('#Checkdiv1').css('display','')
   {% endif %}
@@ -280,9 +280,9 @@ function downloadmodel(){
   {% endif %}
 
   alarm.set('onok', function(){
-    var el = document.getElementsByName("csrfmiddlewaretoken");
-    csrf_value = el[0].getAttribute("value");
-    var checkls = JSON.stringify([$("#customCheck1").prop('checked'),$("#customCheck2").prop('checked'),$("#customCheck3").prop('checked'),$("#customCheck4").prop('checked')])
+    var el=document.getElementsByName("csrfmiddlewaretoken");
+    csrf_value=el[0].getAttribute("value");
+    var checkls=JSON.stringify([$("#customCheck1").prop('checked'),$("#customCheck2").prop('checked'),$("#customCheck3").prop('checked'),$("#customCheck4").prop('checked')])
     jQuery.ajax({
       method: "POST",
       url: "/expert/ajax/downloadmodeldata",

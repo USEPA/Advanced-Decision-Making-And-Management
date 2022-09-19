@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.canvas.DefaultKeyboardPolicy
+ * @class
  * Standard keyboard policy. This is the standard installed keyboard policy.
  * <br>
  * <br>
@@ -11,21 +14,20 @@
  * @author Andreas Herz
  * @extends draw2d.policy.canvas.KeyboardPolicy
  */
-import draw2d from '../../packages'
-
-draw2d.policy.canvas.DefaultKeyboardPolicy = draw2d.policy.canvas.KeyboardPolicy.extend({
+draw2d.policy.canvas.DefaultKeyboardPolicy = draw2d.policy.canvas.KeyboardPolicy.extend(
+  /** @lends draw2d.policy.canvas.DefaultKeyboardPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.canvas.DefaultKeyboardPolicy",
 
   /**
-   * @constructor
    */
   init: function () {
     this._super()
   },
 
   /**
-   * @method
+   * 
    * Callback if the user press a key.<br>
    * This implementation checks only if the <b>DEL</b> has been pressed and creates an
    * CommandDelete if this happens.

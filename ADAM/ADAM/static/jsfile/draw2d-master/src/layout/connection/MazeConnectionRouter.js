@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.connection.MazeConnectionRouter
+ * @class
  * <b>BETA VERSION. Not for production!!!<br></b>
  *
  * @inheritable
@@ -7,17 +10,17 @@
  *
  * @extends  draw2d.layout.connection.ConnectionRouter
  */
-import draw2d from '../../packages'
-
 
 let ROUTER_RECTS = null
 
-draw2d.layout.connection.MazeConnectionRouter = draw2d.layout.connection.ConnectionRouter.extend({
+draw2d.layout.connection.MazeConnectionRouter = draw2d.layout.connection.ConnectionRouter.extend(
+  /** @lends draw2d.layout.connection.MazeConnectionRouter.prototype */
+  {
+
   NAME: "draw2d.layout.connection.MazeConnectionRouter",
 
 
   /**
-   * @constructor
    * Creates a new Router object.
    *
    */
@@ -42,7 +45,7 @@ draw2d.layout.connection.MazeConnectionRouter = draw2d.layout.connection.Connect
 
 
   /**
-   * @method
+   * 
    * Callback method if the router has been assigned to a connection.
    *
    * @param {draw2d.Connection} connection The assigned connection
@@ -70,9 +73,9 @@ draw2d.layout.connection.MazeConnectionRouter = draw2d.layout.connection.Connect
   },
 
   /**
-   * @method
+   * 
    * Internal routing algorithm.
-   *      * <p>
+   *     * <p>
    * Possible values:
    * <ul>
    *   <li>up -&gt; 0</li>
@@ -106,9 +109,9 @@ draw2d.layout.connection.MazeConnectionRouter = draw2d.layout.connection.Connect
     // 4. Calculate the shortest path from source to target based on the grid
     //
     let path = this.finder.findPath(
-      fromPt.x >> shift, fromPt.y >> shift,
-      toPt.x >> shift, toPt.y >> shift,
-      grid)
+        Math.max(fromPt.x) >> shift, Math.max(fromPt.y) >> shift,
+        Math.max(toPt.x )>> shift, Math.max(0,toPt.y) >> shift,
+        grid)
 
     // transfer the path from the grid based coordinates back to the real coordinates
     //
@@ -241,11 +244,12 @@ draw2d.layout.connection.MazeConnectionRouter = draw2d.layout.connection.Connect
   },
 
   /**
-   * @method
+   * 
    * Generate a grid base no go map required for the path finding algorithm
    *
    * @param conn
    * @returns {PF.Grid}
+   * @private
    */
   generateNoGoGrid: function (conn, fromPt, fromDir, toPt, toDir) {
     let shift = this.useShift
@@ -333,7 +337,7 @@ draw2d.layout.connection.MazeConnectionRouter = draw2d.layout.connection.Connect
   },
 
   /**
-   * @method
+   * 
    * move the point in the given direction with the given offset
    *
    * @param {draw2d.geo.Point} pt

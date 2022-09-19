@@ -1,19 +1,26 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.basic.GhostVertexResizeHandle
+ * @class
  * ResizeHandle for a vertex edit policy. Click of this kind of resize handles
  * adds a new vertex to the polyline or polygon.
  *
  *
- * @inheritable
  * @author Andreas Herz
  * @extends draw2d.shape.basic.LineResizeHandle
  */
-import draw2d from '../../packages'
-
-draw2d.shape.basic.GhostVertexResizeHandle = draw2d.shape.basic.LineResizeHandle.extend({
+draw2d.shape.basic.GhostVertexResizeHandle = draw2d.shape.basic.LineResizeHandle.extend(
+  /** @lends draw2d.shape.basic.GhostVertexResizeHandle.prototype */
+  {
+  
   NAME: "draw2d.shape.basic.GhostVertexResizeHandle",
 
-  init: function (owner, precursorIndex) {
+    /**
+     *
+     *
+     */
+    init: function (owner, precursorIndex) {
     this.maxOpacity = 0.35
     this.precursorIndex = precursorIndex
 
@@ -29,7 +36,7 @@ draw2d.shape.basic.GhostVertexResizeHandle = draw2d.shape.basic.LineResizeHandle
   },
 
   /**
-   * @method
+   *
    * Set the alpha blending of this figure.
    *
    * @param {Number} percent Value between [0..1].
@@ -42,7 +49,7 @@ draw2d.shape.basic.GhostVertexResizeHandle = draw2d.shape.basic.LineResizeHandle
   },
 
   /**
-   * @method
+   *
    * Called when a user clicks on the element
    *
    * @template
@@ -67,29 +74,29 @@ draw2d.shape.basic.GhostVertexResizeHandle = draw2d.shape.basic.LineResizeHandle
   },
 
   /**
-   * @method
+   *
    * Called from the framework during a drag&drop operation
    *
    * @param {Number} dx the x difference between the start of the drag drop operation and now
    * @param {Number} dy the y difference between the start of the drag drop operation and now
    * @param {Number} dx2 The x diff since the last call of this dragging operation
    * @param {Number} dy2 The y diff since the last call of this dragging operation
-   * @return {Boolean}
+   * @returns {Boolean}
    **/
   onDrag: function (dx, dy, dx2, dy2) {
     return true
   },
 
   /**
-   * @method Called after a drag and drop action.<br>
-   *         Sub classes can override this method to implement additional stuff. Don't forget to call the super implementation via <code>this._super();</code>
+   *  Called after a drag and drop action.<br>
+   *        Sub classes can override this method to implement additional stuff. Don't forget to call the super implementation via <code>this._super();</code>
    *
    * @param {Number} x the x-coordinate of the mouse event
    * @param {Number} y the y-coordinate of the mouse event
    * @param {Boolean} shiftKey true if the shift key has been pressed during this event
    * @param {Boolean} ctrlKey true if the ctrl key has been pressed during the event
    *
-   * @return {Boolean}
+   * @returns {Boolean}
    */
   onDragEnd: function (x, y, shiftKey, ctrlKey) {
     // fire an event
@@ -101,7 +108,7 @@ draw2d.shape.basic.GhostVertexResizeHandle = draw2d.shape.basic.LineResizeHandle
 
 
   /**
-   * @method
+   *
    * Controls the location of the resize handle
    *
    * @template

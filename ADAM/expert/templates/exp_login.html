@@ -5,7 +5,7 @@
 
 <section id="main">
   <br/>
-  <div class="card text-center" style = "width:80%; left:10%; display: block">
+  <div class="card text-center" style="width:80%; left:10%; display: block">
     <div class="card-header">
       <h4>Login to ADAM</h4>
     </div>
@@ -23,11 +23,11 @@
           <br/>
         {% endif %}
 
-        <p>Do not have an account? Register <a href = "/expert/register" style = "text-decoration: underline; text-decoration-color: #700000;"><strong class="text-uppercase" style = "color: #9a0001">here</strong></a>.</p>
+        <p>Do not have an account? Register <a href="/expert/register" style="text-decoration: underline; text-decoration-color: #700000;"><strong class="text-uppercase" style="color: #9a0001">here</strong></a>.</p>
         <br/>
 
-        <div class = "container" style = "width:50%; left:25%">
-          <form method="POST" style = "width:100%;">
+        <div class="container" style="width:50%; left:25%">
+          <form method="POST" style="width:100%;">
             {% csrf_token %}
             {% for field in loginform %}
             <div class="input-group mb-3" >
@@ -39,7 +39,7 @@
             <br/>
             {% endfor %}
 
-            <input type="submit" value="Login" class = "btn btn-light border btn-block" name="user_login">
+            <input type="submit" value="Login" class="btn btn-light border btn-block" name="user_login">
             <br/>
             <br/>
 

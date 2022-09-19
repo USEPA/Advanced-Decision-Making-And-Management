@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.canvas.SnapToGeometryEditPolicy
+ * @class
  *
  * Snapping is based on the existing children of a container. When snapping a shape,
  * the edges of the bounding box will snap to edges of other rectangles generated
@@ -10,9 +13,9 @@
  *
  * @extends draw2d.policy.canvas.SnapToEditPolicy
  */
-import draw2d from '../../packages'
-
-draw2d.policy.canvas.SnapToGeometryEditPolicy = draw2d.policy.canvas.SnapToEditPolicy.extend({
+draw2d.policy.canvas.SnapToGeometryEditPolicy = draw2d.policy.canvas.SnapToEditPolicy.extend(
+  /** @lends draw2d.policy.canvas.SnapToGeometryEditPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.canvas.SnapToGeometryEditPolicy",
 
@@ -20,7 +23,6 @@ draw2d.policy.canvas.SnapToGeometryEditPolicy = draw2d.policy.canvas.SnapToEditP
   FADEOUT_DURATION: 300,
 
   /**
-   * @constructor
    * Creates a new constraint policy for snap to geometry
    *
    */
@@ -35,7 +37,7 @@ draw2d.policy.canvas.SnapToGeometryEditPolicy = draw2d.policy.canvas.SnapToEditP
 
 
   /**
-   * @method
+   * 
    *
    * @param {draw2d.Figure} figure the shape below the mouse or null
    * @param {Number} x the x-coordinate of the mouse down event
@@ -51,7 +53,7 @@ draw2d.policy.canvas.SnapToGeometryEditPolicy = draw2d.policy.canvas.SnapToEditP
   },
 
   /**
-   * @method
+   * 
    * Adjust the coordinates to the canvas neighbours
    *
    * @param {draw2d.Canvas} canvas the related canvas
@@ -155,7 +157,7 @@ draw2d.policy.canvas.SnapToGeometryEditPolicy = draw2d.policy.canvas.SnapToEditP
   },
 
   /**
-   * @method
+   * 
    * calculates the snapped position of the rectangle.
    *
    * @param {draw2d.geo.Rectangle} inputBounds

@@ -1,6 +1,6 @@
 
 /**
- * @class draw2d.policy.connection.ClickConnectionCreatePolicy
+ * @class
  *
  * The ClickConnectionCreatePolicy can be installed into the canvas to override the
  * default connection crate behaviour. Normally you can create connections by drag&drop a port.
@@ -21,23 +21,22 @@
  * <br>
  *
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
- *     // Override the default connection creation.
- *     //
- *     canvas.installEditPolicy( new draw2d.policy.connection.ClickConnectionCreatePolicy());
+ *    // Override the default connection creation.
+ *    //
+ *    canvas.installEditPolicy( new draw2d.policy.connection.ClickConnectionCreatePolicy());
  *
- *     // create and add two Node which contains Ports (In and OUT)
- *     //
- *     var start = new draw2d.shape.node.Start({x:50, y:50});
- *     var endNode   = new draw2d.shape.node.End({x:200, y:70});
+ *    // create and add two Node which contains Ports (In and OUT)
+ *    //
+ *    var start = new draw2d.shape.node.Start({x:50, y:50});
+ *    var endNode   = new draw2d.shape.node.End({x:200, y:70});
  *
- *     // add the two nodes to the canvas
- *     //
- *     canvas.add( start);
- *     canvas.add( endNode);
+ *    // add the two nodes to the canvas
+ *    //
+ *    canvas.add( start);
+ *    canvas.add( endNode);
  *
  *
  * @author Andreas Herz
@@ -45,14 +44,15 @@
  * @extends draw2d.policy.connection.ConnectionCreatePolicy
  * @since 6.1.0
  */
-import draw2d from '../../packages';
+import draw2d from '../../packages'
 
-draw2d.policy.connection.ClickConnectionCreatePolicy = draw2d.policy.connection.ConnectionCreatePolicy.extend({
-
-    NAME : "draw2d.policy.connection.ClickConnectionCreatePolicy",
+draw2d.policy.connection.ClickConnectionCreatePolicy = draw2d.policy.connection.ConnectionCreatePolicy.extend(
+    /** @lends draw2d.policy.connection.ClickConnectionCreatePolicy.prototype */
+    {
+    
+    NAME: "draw2d.policy.connection.ClickConnectionCreatePolicy",
     
     /**
-     * @constructor
      *
      * Creates a new connection create policy instance
      */
@@ -69,7 +69,7 @@ draw2d.policy.connection.ClickConnectionCreatePolicy = draw2d.policy.connection.
     },
 
     /**
-     * @method
+     * 
      * Called by the canvas if the user click on a figure.
      *
      * @param {draw2d.Figure} the figure under the click event. Can be null
@@ -201,7 +201,7 @@ draw2d.policy.connection.ClickConnectionCreatePolicy = draw2d.policy.connection.
 
 
     /**
-     * @method
+     * 
      *
      * @param {draw2d.Canvas} canvas
      * @param {Number} x the x-coordinate of the mouse event
@@ -217,7 +217,7 @@ draw2d.policy.connection.ClickConnectionCreatePolicy = draw2d.policy.connection.
     },
 
     /**
-     * @method
+     * 
      * Callback if the user press a key down
      *
      * @param {draw2d.Canvas} canvas the related canvas

@@ -1,6 +1,9 @@
+import draw2d from 'packages'
+import jsonUtil from 'util/JSONUtil'
+import extend from 'util/extend'
 
 /**
- * @class draw2d.VectorFigure
+ * @class
  * The base class for all vector based figures like {@link draw2d.shape.basic.Rectangle}  or {@link draw2d.shape.basic.Oval}
  * inside a canvas.
  *
@@ -8,16 +11,13 @@
  * @author Andreas Herz
  * @extends draw2d.shape.node.Node
  */
-
-import draw2d from 'packages';
-import jsonUtil from 'util/JSONUtil';
-import extend from 'util/extend';
-
-draw2d.VectorFigure = draw2d.shape.node.Node.extend({
-    NAME : "draw2d.VectorFigure",
+draw2d.VectorFigure = draw2d.shape.node.Node.extend(
+    /** @lends draw2d.VectorFigure.prototype */
+    {
+    
+    NAME: "draw2d.VectorFigure",
 
     /**
-     * @constructor
      * Creates a new figure element which are not assigned to any canvas.
      *
      * @param {Object} [attr] the configuration of the shape
@@ -37,15 +37,15 @@ draw2d.VectorFigure = draw2d.shape.node.Node.extend({
 
         this._super( attr,
             extend({
-                /** @attr {String} dasharray the line pattern see {@link draw2d.shape.basic.Line#setDashArray} for more information*/
+                // @attr {String} dasharray the line pattern see {@link draw2d.shape.basic.Line#setDashArray} for more information*/
                 dasharray : this.setDashArray,
-                /** @attr {Number} radius the radius to render the line edges */
+                // @attr {Number} radius the radius to render the line edges */
                 radius : this.setRadius,
-                /** @attr {String|draw2d.util.Color} bgColor the background color of the shape */
+                // @attr {String|draw2d.util.Color} bgColor the background color of the shape */
                 bgColor: this.setBackgroundColor,
-                /** @attr {String|draw2d.util.Color} color the main color of the shape */
+                // @attr {String|draw2d.util.Color} color the main color of the shape */
                 color  : this.setColor,
-                /** @attr {Number} stroke the stroke width */
+                // @attr {Number} stroke the stroke width */
                 stroke : this.setStroke
             }, setter),
             extend({
@@ -59,7 +59,7 @@ draw2d.VectorFigure = draw2d.shape.node.Node.extend({
     },
 
     /**
-     * @method
+     * 
      * Sets the corner radius or the edges.
      *
      * @param {Number} radius
@@ -75,10 +75,10 @@ draw2d.VectorFigure = draw2d.shape.node.Node.extend({
     },
 
     /**
-     * @method
+     * 
      * Get the corner radius of the edges.
      *
-     * @return {Number}
+     * @returns {Number}
      * @since 4.2.1
      */
     getRadius: function()
@@ -89,13 +89,13 @@ draw2d.VectorFigure = draw2d.shape.node.Node.extend({
 
 
     /**
-     * @method
+     * 
      * Set the line style for this object.
      *
-     *      // Alternatively you can use the attr method:
-     *      figure.attr({
-    *        dash: dashPattern
-    *      });
+     *     // Alternatively you can use the attr method:
+     *     figure.attr({
+    *       dash: dashPattern
+    *     });
      *
      * @param {String} dash can be one of this ["", "-", ".", "-.", "-..", ". ", "- ", "--", "- .", "--.", "--.."]
      */
@@ -110,11 +110,11 @@ draw2d.VectorFigure = draw2d.shape.node.Node.extend({
     },
 
     /**
-     * @method
+     * 
      * Get the line style for this object.
      *
-     *      // Alternatively you can use the attr method:
-     *      figure.attr("dash");
+     *     // Alternatively you can use the attr method:
+     *     figure.attr("dash");
      *
      * @since 5.1.0
      */
@@ -124,7 +124,7 @@ draw2d.VectorFigure = draw2d.shape.node.Node.extend({
     },
 
     /**
-     * @method
+     * 
      * Highlight the element or remove the highlighting
      *
      * @param {Boolean} flag indicates glow/noGlow
@@ -174,6 +174,7 @@ draw2d.VectorFigure = draw2d.shape.node.Node.extend({
         jsonUtil.ensureDefault(attributes,"stroke-width" , this.stroke);
         jsonUtil.ensureDefault(attributes,"fill" ,this.bgColor.rgba());
         jsonUtil.ensureDefault(attributes,"dasharray" , this.dasharray);
+        jsonUtil.ensureDefault(attributes,"stroke-dasharray" , this.dasharray);
 
         this._super(attributes);
 
@@ -182,14 +183,14 @@ draw2d.VectorFigure = draw2d.shape.node.Node.extend({
 
 
    /**
-    * @method
+    * 
     * Set the new background color of the figure. It is possible to hands over
     * <code>null</code> to set the background transparent.
     *
-    *      // Alternatively you can use the attr method:
-    *      figure.attr({
-    *        "bgColor": "#f0f0f0"
-    *      });
+    *     // Alternatively you can use the attr method:
+    *     figure.attr({
+    *       "bgColor": "#f0f0f0"
+    *     });
     *
     * @param {String|draw2d.util.Color} color The new background color of the figure
     **/
@@ -204,13 +205,13 @@ draw2d.VectorFigure = draw2d.shape.node.Node.extend({
     },
 
    /**
-    * @method
+    * 
     * The current used background color.
     *
-    *      // Alternatively you can use the attr method:
-    *      var color =figure.attr("bgColor");
+    *     // Alternatively you can use the attr method:
+    *     var color =figure.attr("bgColor");
     *
-    * @return {draw2d.util.Color}
+    * @returns {draw2d.util.Color}
     */
    getBackgroundColor: function()
    {
@@ -218,13 +219,13 @@ draw2d.VectorFigure = draw2d.shape.node.Node.extend({
    },
 
    /**
-    * @method
+    * 
     * Set the stroke to use.
     *
-    *      // Alternatively you can use the attr method:
-    *      figure.attr({
-    *        "stroke": 2
-    *      });
+    *     // Alternatively you can use the attr method:
+    *     figure.attr({
+    *       "stroke": 2
+    *     });
     *
     * @param {Number} w The new line width of the figure
     **/
@@ -238,7 +239,7 @@ draw2d.VectorFigure = draw2d.shape.node.Node.extend({
    },
 
    /**
-    * @method
+    * 
     * The used line width.
     *
     * @returns {Number}
@@ -249,14 +250,14 @@ draw2d.VectorFigure = draw2d.shape.node.Node.extend({
    },
 
    /**
-    * @method
+    * 
     * Set the foreground color of the figure.
     * This method fires a <i>document dirty</i> event.
     *
-    *      // Alternatively you can use the attr method:
-    *      figure.attr({
-    *        "color": "#f3f3f3"
-    *      });
+    *     // Alternatively you can use the attr method:
+    *     figure.attr({
+    *       "color": "#f3f3f3"
+    *     });
     *
     * @param {String|draw2d.util.Color} color The new color of the line.
     **/
@@ -270,7 +271,7 @@ draw2d.VectorFigure = draw2d.shape.node.Node.extend({
    },
 
    /**
-    * @method
+    * 
     * Get the current used foreground color
     *
     *
@@ -287,15 +288,13 @@ draw2d.VectorFigure = draw2d.shape.node.Node.extend({
     */
    getPersistentAttributes: function()
    {
-       var memento = extend(this._super(), {
+       return  extend(this._super(), {
            bgColor : this.bgColor.rgba(),
            color   : this.color.rgba(),
            stroke  : this.stroke,
            radius  : this.radius,
            dasharray : this.dasharray
        });
-
-       return memento;
    },
 
    /**

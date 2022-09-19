@@ -1,29 +1,31 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.flowchart.Document
+ * @class
  *
  * Typical flowchart <b>Document</b> shape
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
- *     let figure = new draw2d.shape.flowchart.Document({
- *        x:100,
- *        y:60
- *     });
+ *    let figure = new draw2d.shape.flowchart.Document({
+ *       x:100,
+ *       y:60
+ *    });
  *
- *     canvas.add( figure);
+ *    canvas.add( figure);
  *
  * @extends draw2d.VectorFigure
  */
-import draw2d from '../../packages'
+draw2d.shape.flowchart.Document = draw2d.VectorFigure.extend(
+  /** @lends draw2d.shape.flowchart.Document.prototype */
+  {
 
-draw2d.shape.flowchart.Document = draw2d.VectorFigure.extend({
   NAME: "draw2d.shape.flowchart.Document",
 
   /**
    *
-   * @constructor
    * Creates a new figure element which are not assigned to any canvas.
    *
    * @param {Object} [attr] the configuration of the shape

@@ -1,18 +1,19 @@
 
 /**
- * @class draw2d.policy.figure.HBusSelectionFeedbackPolicy
+ * @class
  *
  *
  * @author Andreas Herz
  * @extends draw2d.policy.figure.BusSelectionFeedbackPolicy
  */
-import draw2d from '../../packages';
+import draw2d from '../../packages'
 
-draw2d.policy.figure.HBusSelectionFeedbackPolicy = draw2d.policy.figure.BusSelectionFeedbackPolicy.extend({
-
-    NAME : "draw2d.policy.figure.HBusSelectionFeedbackPolicy",
+draw2d.policy.figure.HBusSelectionFeedbackPolicy = draw2d.policy.figure.BusSelectionFeedbackPolicy.extend(
+    /** @lends draw2d.policy.figure.HBusSelectionFeedbackPolicy.prototype */
+    {
+    
+    NAME: "draw2d.policy.figure.HBusSelectionFeedbackPolicy",
     /**
-     * @constructor
      * Creates a new Router object
      */
     init: function( attr, setter, getter)
@@ -21,7 +22,7 @@ draw2d.policy.figure.HBusSelectionFeedbackPolicy = draw2d.policy.figure.BusSelec
     },
 
     /**
-     * @method
+     * 
      * Callback if the figure has been moved
      *
      * @param figure

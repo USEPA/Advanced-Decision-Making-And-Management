@@ -1,4 +1,4 @@
-import draw2d from '../packages';
+import draw2d from '../packages'
 
 
 draw2d.util.Base64 = {
@@ -93,12 +93,12 @@ draw2d.util.Base64 = {
 
 
       /**
-       * @method
+       * 
        * Base64-encode a string.
        *
        * @param {string} input A string to encode.
        * @param {boolean=} opt_webSafe If true, we should use the alternative alphabet.
-       * @return {string} The base64 encoded string.
+       * @returns {string} The base64 encoded string.
        */
      encode: function(input, opt_webSafe) {
         return draw2d.util.Base64.encodeByteArray( draw2d.util.Base64.stringToByteArray(input), opt_webSafe);
@@ -106,13 +106,13 @@ draw2d.util.Base64 = {
 
 
       /**
-       * @method
+       * 
        * Base64-decode a string.
        *
        * @param {String} input to decode (length not required to be a multiple of 4).
        * @param {boolean=} opt_webSafe True if we should use the
-       *     alternative alphabet.
-       * @return {Array} bytes representing the decoded value.
+       *    alternative alphabet.
+       * @returns {Array} bytes representing the decoded value.
        */
       decode: function(input, opt_webSafe) {
         draw2d.util.Base64.init();
@@ -162,8 +162,8 @@ draw2d.util.Base64 = {
      * Turns a string into an array of bytes; a "byte" being a JS number in the
      * range 0-255.
      * @param {string} str String value to arrify.
-     * @return {!Array.<number>} Array of numbers corresponding to the
-     *     UCS character codes of each character in str.
+     * @returns {!Array.<number>} Array of numbers corresponding to the
+     *    UCS character codes of each character in str.
      */
     stringToByteArray: function(str) {
       var output = [], p = 0;

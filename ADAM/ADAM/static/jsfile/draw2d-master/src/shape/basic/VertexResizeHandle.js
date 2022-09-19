@@ -1,16 +1,19 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.basic.VertexResizeHandle
+ * @class
  *
  * Selection handle for polyline vertices.
  *
  *
- * @inheritable
  * @author Andreas Herz
  * @extends draw2d.ResizeHandle
  */
-import draw2d from '../../packages'
+draw2d.shape.basic.VertexResizeHandle = draw2d.ResizeHandle.extend(
+  /** @lends draw2d.shape.basic.VertexResizeHandle.prototype */
+  {
 
-draw2d.shape.basic.VertexResizeHandle = draw2d.ResizeHandle.extend({
   NAME: "draw2d.shape.basic.VertexResizeHandle",
 
   SNAP_THRESHOLD: 3,
@@ -25,7 +28,6 @@ draw2d.shape.basic.VertexResizeHandle = draw2d.ResizeHandle.extend({
 
 
   /**
-   * @method
    * Called when a user double clicks on the element
    *
    * @template
@@ -39,7 +41,7 @@ draw2d.shape.basic.VertexResizeHandle = draw2d.ResizeHandle.extend({
 
 
   /**
-   * @method
+   *
    * Called if a drag&drop operation starts.<br>
    *
    * @param {Number} x the x-coordinate of the mouse up event
@@ -72,7 +74,7 @@ draw2d.shape.basic.VertexResizeHandle = draw2d.ResizeHandle.extend({
   },
 
   /**
-   * @method
+   *
    * Called from the framework during a drag&drop operation
    *
    * @param {Number} dx the x difference between the start of the drag drop operation and now
@@ -106,8 +108,8 @@ draw2d.shape.basic.VertexResizeHandle = draw2d.ResizeHandle.extend({
   },
 
   /**
-   * @method Called after a drag and drop action.<br>
-   *         Sub classes can override this method to implement additional stuff. Don't forget to call the super implementation via <code>this._super();</code>
+   *  Called after a drag and drop action.<br>
+   *        Sub classes can override this method to implement additional stuff. Don't forget to call the super implementation via <code>this._super();</code>
    *
    * @param {Number} x the x-coordinate of the mouse event
    * @param {Number} y the y-coordinate of the mouse event
@@ -145,7 +147,7 @@ draw2d.shape.basic.VertexResizeHandle = draw2d.ResizeHandle.extend({
 
 
   /**
-   * @method
+   *
    * Controls the location of the resize handle
    *
    * @template
@@ -160,7 +162,7 @@ draw2d.shape.basic.VertexResizeHandle = draw2d.ResizeHandle.extend({
   },
 
   /**
-   * @method
+   *
    * Calculates the angle between the siblings
    *
    * @returns {Number}

@@ -1,66 +1,25 @@
 /* global __dirname, require, module*/
 
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
-
-
 const path = require('path');
 const pkg = require('./package.json');
 
-var FilesToJSON = require('./build/FilesToJSON');
 
 
 let libraryName = pkg.name;
 
-let plugins = [
-  new FilesToJSON({
-    pattern: "./examples/**/*.html",
-    filename: "./dist/examples/index.js"
-  }),
-  new CopyWebpackPlugin([{
-      context: './examples/',
-      from: '**/*',
-      to : __dirname + '/dist/examples'
-    }]),
-  new CopyWebpackPlugin([{
-      context: './examples/',
-      from: '**/*',
-      to : __dirname + '/docs'
-    }]),
-  new CopyWebpackPlugin([{
-      from: './dist/draw2d.js',
-      to: __dirname + '/docs/draw2d.js',
-      toType: 'file'
-    }]),
-  new ReplaceInFileWebpackPlugin([{
-    dir: __dirname + '/dist/examples/',
-    test: /\.html$/,
-    rules: [{
-      search: '../../dist/draw2d.js',
-      replace: '../../draw2d.js'
-    }]
-  }]),
-  new ReplaceInFileWebpackPlugin([{
-    dir: __dirname + '/docs',
-    test: /\.html$/,
-    rules: [{
-      search: '../../dist/draw2d.js',
-      replace: '../draw2d.js'
-    }]
-  }]),
-], outputFile;
+let plugins = [], outputFile;
 
 
 outputFile = libraryName + '.js';
 
-
+let outputPath = process.env.DIR || '/dist'
 const config = {
   entry: __dirname + '/src/index.js',
   devtool: 'source-map',
   mode: 'development',
   output: {
     libraryTarget: 'umd', // make the bundle export
-    path: __dirname + '/dist',
+    path: __dirname + outputPath,
     filename: outputFile,
     library: 'draw2d'
   },

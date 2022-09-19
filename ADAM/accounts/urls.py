@@ -17,7 +17,7 @@ Available functions:
 - Username management
 """
 
-from django.conf.urls import re_path
+from django.urls import re_path
 from accounts.views import login, logout, ProfileView, UserRegistrationView, \
     UserApprovalView, UserDenialView, PasswordResetRequestView, \
     PasswordResetConfirmView, UsernameReminderRequestView

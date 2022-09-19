@@ -14,18 +14,18 @@
 
   <div class="card-header">
       <div class="row align-items-center">
-        <div class = "col text-left">
-          <a  class = "btn btn-light" href = '/expert/usermain/'>
-            <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+        <div class="col text-left">
+          <a  class="btn btn-light" href='/expert/usermain/'>
+            <ion-icon name="arrow-back-circle-outline" class="iconpiclarger align-middle"></ion-icon> Dashboard
           </a>
         </div>
 
-        <div class = "col text-center">
-          <h4 class = "card-title align-vertical text-body" >Visualization Tool</h4>
+        <div class="col text-center">
+          <h4 class="card-title align-vertical text-body" >Visualization Tool</h4>
         </div>
-        <div class = "col text-right invisible">
-          <a  class = "btn btn-light" href = '/'>
-            <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+        <div class="col text-right invisible">
+          <a  class="btn btn-light" href='/'>
+            <ion-icon name="exit" class="iconpiclarger align-middle"></ion-icon> Dashboard
           </a>
         </div>
 
@@ -41,15 +41,15 @@
 
         <!--div class="col-sm-4">
 
-          <div class="card mb-3" style = "border-width: 2; height: 180px;">
+          <div class="card mb-3" style="border-width: 2; height: 180px;">
             <div class="card-header" >
-                  <strong style = "color: #9A0001">Uploaded Data</strong>
+                  <strong style="color: #9A0001">Uploaded Data</strong>
             </div>
 
             <div class="card-body text-center overflow-auto">
-              <div class = "container">
-                <p class = "text-left">Visualize files you have already uploaded.</p>
-              <a href = '/expert/usermain/visualization/geo' class = "btn btn-light border">Go</a>
+              <div class="container">
+                <p class="text-left">Visualize files you have already uploaded.</p>
+              <a href='/expert/usermain/visualization/geo' class="btn btn-light border">Go</a>
               </div>
             </div>
           </div>
@@ -58,15 +58,15 @@
 
         <!--div class="col-sm-4">
 
-          <div class="card mb-3" style = "border-width: 2; height: 180px;">
+          <div class="card mb-3" style="border-width: 2; height: 180px;">
             <div class="card-header" >
-                  <strong style = "color: #9A0001">Model Data</strong>
+                  <strong style="color: #9A0001">Model Data</strong>
             </div>
 
             <div class="card-body text-center overflow-auto">
-              <div class = "container">
+              <div class="container">
 
-                <form method = "GET">
+                <form method="GET">
                   {% for field in taskform2 %}
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
@@ -75,7 +75,7 @@
                       {{ field }}
                     </div>
                   {% endfor %}
-                  <input type="submit" value="Go" class = "btn btn-light border" name="task_selection2">
+                  <input type="submit" value="Go" class="btn btn-light border" name="task_selection2">
                 </form>
                 {% if error %}
                   <br/>
@@ -89,14 +89,14 @@
 
         <div class="col-sm-6">
 
-          <div class="card mb-3" style = "border-width: 2; height: 180px;">
+          <div class="card mb-3" style="border-width: 2; height: 180px;">
             <div class="card-header">
-                  <strong style = "color: #9A0001">Model Data and Result</strong>
+                  <strong style="color: #9A0001">Model Data and Result</strong>
             </div>
 
             <div class="card-body text-center overflow-auto">
-              <div class = "container">
-                <form method = "GET">
+              <div class="container">
+                <form method="GET">
                   {% for field in taskform2 %}
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
@@ -105,7 +105,7 @@
                       {{ field }}
                     </div>
                   {% endfor %}
-                  <input type="submit" value="Go" class = "btn btn-light border" name="task_selection">
+                  <input type="submit" value="Go" class="btn btn-light border" name="task_selection">
                 </form>
                 {% if error %}
                   <br/>
@@ -120,16 +120,16 @@
 
         <div class="col-sm-6">
 
-          <div class="card mb-3" style = "border-width: 2; height: 180px;">
+          <div class="card mb-3" style="border-width: 2; height: 180px;">
             <div class="card-header">
-                  <strong style = "color: #9A0001">Uploading New Data</strong>
+                  <strong style="color: #9A0001">Uploading New Data</strong>
             </div>
 
             <div class="card-body text-center overflow-auto">
-              <div class = "container">
-                <p class = "text-left">Visualize location and flow data by uploading.</p>
+              <div class="container">
+                <p class="text-left">Visualize location and flow data by uploading.</p>
 
-                <a href = '/expert/usermain/visualization/upload' class = "btn btn-light border">Go</a>
+                <a href='/expert/usermain/visualization/upload' class="btn btn-light border">Go</a>
               </div>
             </div>
           </div>

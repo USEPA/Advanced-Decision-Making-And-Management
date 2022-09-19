@@ -4,17 +4,17 @@
 
 
 <section id="main">
-  <div class = 'inline'>
+  <div class='inline'>
   <h1>Results Summary of {{task.task_name}}</h1>
   </div>
   <div class="sub-topnav">
       <!--a href="/"><p>Computational Platform for Scalable Organic Waste Management</p></a-->
     <div class="sub-topnav-right">
-        <a href = '/expert/usermain/' onmouseover="hover(this);" onmouseout="unhover(this);">
-          <img src = "{% static '/figure/account.png' %}" class = 'iconpiclarger' />&nbsp;Dashboard
+        <a href='/expert/usermain/' onmouseover="hover(this);" onmouseout="unhover(this);">
+          <img src="{% static '/figure/account.png' %}" class='iconpiclarger' />&nbsp;Dashboard
         </a>
-        <a href = '/expert/logout/' onmouseover="hover(this);" onmouseout="unhover(this);">
-          <img src = "{% static '/figure/logout.png' %}" class = 'iconpiclarge' />&nbsp;Logout
+        <a href='/expert/logout/' onmouseover="hover(this);" onmouseout="unhover(this);">
+          <img src="{% static '/figure/logout.png' %}" class='iconpiclarge' />&nbsp;Logout
         </a>
     </div>
   </div>
@@ -27,10 +27,10 @@
   <p>{{task.opttaskresults.summary|linebreaks}}</p>
   <br/>
   <h4>Results Files:</h4>
-  <p>You can download your results <a href = '{{task.opttaskresults.resultspath}}'><strong>here</strong></a>.</p>
+  <p>You can download your results <a href='{{task.opttaskresults.resultspath}}'><strong>here</strong></a>.</p>
   <br/>
   <h4>Results Visualization:</h4>
-  <p>You can visualize the results <a href = '/expert/usermain/visualization/results/{{task.id}}'><strong>here</strong></a>.</p>
+  <p>You can visualize the results <a href='/expert/usermain/visualization/results/{{task.id}}'><strong>here</strong></a>.</p>
 
   </div>
   </div>
@@ -46,16 +46,16 @@
 </script>
 <script>
   function hover(element) {
-  pic = element.getElementsByTagName('img')[0]
-  path = pic.src
-  newpath = path.slice(0, -4) + String(2) + '.png'
+  pic=element.getElementsByTagName('img')[0]
+  path=pic.src
+  newpath=path.slice(0, -4) + String(2) + '.png'
   pic.setAttribute('src', newpath);
 }
 
 function unhover(element) {
-  pic = element.getElementsByTagName('img')[0]
-  path = pic.src
-  newpath = path.slice(0, -5) + '.png'
+  pic=element.getElementsByTagName('img')[0]
+  path=pic.src
+  newpath=path.slice(0, -5) + '.png'
   pic.setAttribute('src', newpath);
 }
 </script>

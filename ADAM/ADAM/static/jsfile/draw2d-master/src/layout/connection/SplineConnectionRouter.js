@@ -1,51 +1,54 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.connection.SplineConnectionRouter
+ * @class
  *
  * A ManhattanConnectionRouter with an spline interpolation between the bend points.
  *
- *     @example preview small frame
+ * @example
  *
- *     let createConnection=function(){
- *        let con = new draw2d.Connection();
- *        con.setRouter(new draw2d.layout.connection.SplineConnectionRouter());
- *        return con;
- *     };
+ *    let createConnection=function(){
+ *       let con = new draw2d.Connection();
+ *       con.setRouter(new draw2d.layout.connection.SplineConnectionRouter());
+ *       return con;
+ *    };
  *
- *     // install a custom connection create policy
- *     //
- *     canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
- *            createConnection: createConnection
- *     }));
+ *    // install a custom connection create policy
+ *    //
+ *    canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
+ *           createConnection: createConnection
+ *    }));
  *
- *     // create and add two nodes which contains Ports (In and OUT)
- *     //
- *     let f1 = new draw2d.shape.analog.OpAmp({x:10, y:10});
- *     let f2 = new draw2d.shape.analog.ResistorVertical({angle:90, height:20, x:300, y:150});
+ *    // create and add two nodes which contains Ports (In and OUT)
+ *    //
+ *    let f1 = new draw2d.shape.analog.OpAmp({x:10, y:10});
+ *    let f2 = new draw2d.shape.analog.ResistorVertical({angle:90, height:20, x:300, y:150});
  *
- *     // ...add it to the canvas
- *     //
- *     canvas.add( f1);
- *     canvas.add( f2);
+ *    // ...add it to the canvas
+ *    //
+ *    canvas.add( f1);
+ *    canvas.add( f2);
  *
- *     // first Connection
- *     //
- *     let c = createConnection();
- *     c.setSource(f1.getOutputPort(0));
- *     c.setTarget(f2.getHybridPort(0));
- *     canvas.add(c);
+ *    // first Connection
+ *    //
+ *    let c = createConnection();
+ *    c.setSource(f1.getOutputPort(0));
+ *    c.setTarget(f2.getHybridPort(0));
+ *    canvas.add(c);
  *
  * @inheritable
  * @author Andreas Herz
  * @extends draw2d.layout.connection.ManhattanConnectionRouter
  */
-import draw2d from '../../packages'
-
-draw2d.layout.connection.SplineConnectionRouter = draw2d.layout.connection.ManhattanConnectionRouter.extend({
-
+draw2d.layout.connection.SplineConnectionRouter = draw2d.layout.connection.ManhattanConnectionRouter.extend(
+  /** @lends draw2d.layout.connection.SplineConnectionRouter.prototype */
+  {
+  
   NAME: "draw2d.layout.connection.SplineConnectionRouter",
 
   /**
-   * @constructor Creates a new Router object
+   * Creates a new Router object
    */
   init: function () {
     this._super()
@@ -59,7 +62,7 @@ draw2d.layout.connection.SplineConnectionRouter = draw2d.layout.connection.Manha
 
 
   /**
-   * @method
+   *
    * Callback method if the router has been assigned to a connection.
    *
    * @param {draw2d.Connection} connection The assigned connection

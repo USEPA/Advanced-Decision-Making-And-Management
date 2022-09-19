@@ -1,28 +1,29 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.figure.SlimSelectionFeedbackPolicy
+ * @class
  * Add only very small resize handles to the figure.
  *
  *
- * See the example:
  *
- *     @example preview small frame
- *       circle =new draw2d.shape.basic.Circle();
- *       circle.installEditPolicy(new draw2d.policy.SlimSelectionFeedbackPolicy());
- *       canvas.add(circle,90,50);
+ * @example
+ *      circle =new draw2d.shape.basic.Circle();
+ *      circle.installEditPolicy(new draw2d.policy.SlimSelectionFeedbackPolicy());
+ *      canvas.add(circle,90,50);
  *
- *       canvas.add(new draw2d.shape.basic.Label({text:"Click on the circle to see the selection feedback"}),20,10);
+ *      canvas.add(new draw2d.shape.basic.Label({text:"Click on the circle to see the selection feedback"}),20,10);
  *
  * @author Andreas Herz
  * @extends draw2d.policy.figure.RectangleSelectionFeedbackPolicy
  */
-import draw2d from '../../packages'
-
-draw2d.policy.figure.SlimSelectionFeedbackPolicy = draw2d.policy.figure.RectangleSelectionFeedbackPolicy.extend({
-
+draw2d.policy.figure.SlimSelectionFeedbackPolicy = draw2d.policy.figure.RectangleSelectionFeedbackPolicy.extend(
+  /** @lends draw2d.policy.figure.SlimSelectionFeedbackPolicy.prototype */
+  {
+  
   NAME: "draw2d.policy.figure.SlimSelectionFeedbackPolicy",
 
   /**
-   * @constructor
    * Creates a new Router object
    */
   init: function (attr, setter, getter) {

@@ -1,26 +1,28 @@
-/**
- * @class draw2d.shape.icon.Stop
+import draw2d from '../../packages'
 
- * See the example:
+
+/**
+ * @class
+
  *
- *     @example preview small frame
+ * @example
  *
- *     let icon =  new draw2d.shape.icon.Stop();
+ *    let icon =  new draw2d.shape.icon.Stop();
  *
- *     canvas.add(icon,50,10);
+ *    canvas.add(icon,50,10);
  *
  * @inheritable
  * @author Andreas Herz
  * @extends draw2d.shape.icon.Icon
  */
-import draw2d from '../../packages'
+draw2d.shape.icon.Stop = draw2d.shape.icon.Icon.extend(
+  /** @lends draw2d.shape.icon.Stop.prototype */
+  {
 
-draw2d.shape.icon.Stop = draw2d.shape.icon.Icon.extend({
   NAME: "draw2d.shape.icon.Stop",
 
   /**
    *
-   * @constructor
    * Creates a new icon element which are not assigned to any canvas.
    *
    * @param {Object} attr the configuration of the shape
@@ -31,7 +33,7 @@ draw2d.shape.icon.Stop = draw2d.shape.icon.Icon.extend({
 
   /**
    * @private
-   * @returns
+   * @returns {Object} the raphaelJS path object
    */
   createSet: function () {
     return this.canvas.paper.path("M5.5,5.5h20v20h-20z")

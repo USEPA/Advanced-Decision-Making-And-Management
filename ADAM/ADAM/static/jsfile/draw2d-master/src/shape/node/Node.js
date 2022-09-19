@@ -1,5 +1,9 @@
+import draw2d from '../../packages'
+import extend from '../../util/extend'
+
+
 /**
- * @class draw2d.shape.node.Node
+ * @class
  *
  * A Node is the base class for all figures which can have {@link draw2d.Port}s. A {@link draw2d.Port} is the
  * anchor for a {@link draw2d.Connection} line.<br><br>A {@link draw2d.Port} is a green dot which can
@@ -8,15 +12,13 @@
  * @author Andreas Herz
  * @extends draw2d.Figure
  */
-import draw2d from '../../packages'
-import extend from '../../util/extend'
-
-draw2d.shape.node.Node = draw2d.Figure.extend({
-
+draw2d.shape.node.Node = draw2d.Figure.extend(
+  /** @lends draw2d.shape.node.Node.prototype */
+  {
+  
   NAME: "draw2d.shape.node.Node",
 
   /**
-   * @constructor
    * Creates a new Node element which are not assigned to any canvas.
    *
    * @param {Object} [attr] the configuration of the shape
@@ -41,7 +43,7 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
     this._super(
       extend({width: 50, height: 50}, attr),
       extend({
-        /** @attr {Number} indicate whenever you want persists the ports too */
+        // @attr {Number} indicate whenever you want persists the ports too */
         persistPorts: this.setPersistPorts
       }, setter),
       extend({
@@ -51,7 +53,7 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * Indicates if the node should read/write the ports via the draw2d.Figure.getPersistenAttributes
    * to the JSON object
    *
@@ -66,7 +68,7 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Indicates if the figure writes the ports to the JSON structore too.
    * Default is "false"
    *
@@ -133,13 +135,13 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * Return all ports of the node. The results contains
    * all ports of the children too per default. Set <b>recursive</b>
    * to false to retrieve direct assigned ports only.
    *
    * @param {Boolean} [recursive] indicates if the method should return children ports too. Default is <b>true</b>
-   * @return  {draw2d.util.ArrayList}
+   * @returns  {draw2d.util.ArrayList}
    **/
   getPorts: function (recursive) {
 
@@ -166,10 +168,10 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * Return all input ports of the node.
    *
-   * @return {draw2d.util.ArrayList}
+   * @returns {draw2d.util.ArrayList}
    **/
   getInputPorts: function () {
     return this.inputPorts
@@ -178,10 +180,10 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Return all output ports of the node.
    *
-   * @return {draw2d.util.ArrayList}
+   * @returns {draw2d.util.ArrayList}
    **/
   getOutputPorts: function () {
     return this.outputPorts
@@ -191,7 +193,7 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * Clone the figure. <br>
    * You must override and implement the methods <b>getPersistentAttributes</b> and <b>setPersistentAttributes</b> for your custom
    * figures if the have special attributes.
@@ -230,24 +232,24 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Return the port with the corresponding name.
    *
    *
    * @param {String} portName The name of the port to return.
-   * @return {draw2d.Port} Returns the port with the hands over name or null.
+   * @returns {draw2d.Port} Returns the port with the hands over name or null.
    **/
   getPort: function (portName) {
     return this.getPorts().find(e => e.getName() === portName)
   },
 
   /**
-   * @method
+   *
    * Return the input port with the corresponding name.
    *
    *
    * @param {String/Number} portNameOrIndex The name or numeric index of the port to return.
-   * @return {draw2d.InputPort} Returns the port with the hands over name or null.
+   * @returns {draw2d.InputPort} Returns the port with the hands over name or null.
    **/
   getInputPort: function (portNameOrIndex) {
     if (typeof portNameOrIndex === "number") {
@@ -265,11 +267,11 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Return the output port with the corresponding name.
    *
    * @param {String/Number} portNameOrIndex The name or the numeric index of the port to return.
-   * @return {draw2d.OutputPort} Returns the port with the hands over name or null.
+   * @returns {draw2d.OutputPort} Returns the port with the hands over name or null.
    **/
   getOutputPort: function (portNameOrIndex) {
     if (typeof portNameOrIndex === "number") {
@@ -287,12 +289,12 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Return the input port with the corresponding name.
    *
    *
    * @param {String/Number} portNameOrIndex The name or numeric index of the port to return.
-   * @return {draw2d.InputPort} Returns the port with the hands over name or null.
+   * @returns {draw2d.InputPort} Returns the port with the hands over name or null.
    **/
   getHybridPort: function (portNameOrIndex) {
     if (typeof portNameOrIndex === "number") {
@@ -310,7 +312,7 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Add a port to this node at the given position.<br>
    *
    * @param {draw2d.Port} port The new port to add.
@@ -357,10 +359,11 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Remove all ports of this node
    *
    * @since 5.0.0
+   * @returns {this}
    */
   resetPorts: function () {
     this.getPorts().each((i, port) => this.removePort(port))
@@ -369,10 +372,11 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * Removes a port and all related connections from this node.<br>
    *
    * @param {draw2d.Port} port The port to remove.
+   * @returns {this}
    **/
   removePort: function (port) {
     this.portRelayoutRequired = true
@@ -383,12 +387,13 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
     this.hybridPorts.remove(port)
 
     if (port.getCanvas() !== null) {
-      port.getCanvas().unregisterPort(port)
+      let canvas = port.getCanvas()
+      canvas.unregisterPort(port)
       // remove the related connections of the port too.
-      let connections = port.getConnections()
-      for (let i = 0; i < connections.getSize(); ++i) {
-        port.getCanvas().remove(connections.get(i))
-      }
+      let connections = port.getConnections().clone()
+      connections.each( (i, connection) => {
+        canvas.remove(connection)
+      })
     }
 
     port.setCanvas(null)
@@ -397,7 +402,7 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Create a standard Port for this element. Inherited class can override this
    * method to create its own type of ports.
    *
@@ -436,7 +441,7 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Return all connections related to this node.
    *
    * @returns {draw2d.util.ArrayList}
@@ -458,7 +463,7 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
 
 
   /**
-   * @inheritdoc
+   * @returns {this}
    */
   setCanvas: function (canvas) {
     let oldCanvas = this.canvas
@@ -484,7 +489,7 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
   },
 
   /**
-   * @inheritdoc
+   * @returns {this}
    */
   setRotationAngle: function (angle) {
     this.portRelayoutRequired = true
@@ -496,7 +501,7 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
   },
 
   /**
-   * @inheritdoc
+   * @returns {this}
    */
   setDimension: function (w, h) {
     this.portRelayoutRequired = true
@@ -506,36 +511,39 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Called if the value of any port has been changed
    *
    * @param {draw2d.Port} relatedPort
    * @template
    */
   onPortValueChanged: function (relatedPort) {
-
   },
 
   /**
-   * @inheritdoc
+   * @private
+   * @return {this}
    */
   repaint: function (attributes) {
     if (this.repaintBlocked === true || this.shape === null) {
-      return
+      return this
     }
 
     this._super(attributes)
     this.layoutPorts()
+
+    return this
   },
 
   /**
-   * @method
+   *
    *
    * @private
+   * @returns {this}
    */
   layoutPorts: function () {
     if (this.portRelayoutRequired === false) {
-      return//silently
+      return this//silently
     }
     this.portRelayoutRequired = false
 
@@ -549,11 +557,11 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Returns the Command to perform the specified Request or null.
    *
    * @param {draw2d.command.CommandType} request describes the Command being requested
-   * @return {draw2d.command.Command} null or a Command
+   * @returns {draw2d.command.Command} null or a Command
    * @private
    **/
   createCommand: function (request) {
@@ -571,7 +579,7 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
 
 
   /**
-   * @method
+   *
    * Return an objects with all important attributes for XML or JSON serialization
    *
    * @returns {Object}
@@ -587,7 +595,8 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
         memento.ports.push(extend(port.getPersistentAttributes(), {
           name: port.getName(),
           port: port.NAME,
-          locator: port.getLocator().NAME
+          locator: port.getLocator().NAME,
+          locatorAttr: port.getLocator().attr()
         }))
       })
     }
@@ -596,11 +605,11 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
   },
 
   /**
-   * @method
+   *
    * Read all attributes from the serialized properties and transfer them into the shape.
    *
    * @param {Object} memento
-   * @returns
+   * @returns {this}
    */
   setPersistentAttributes: function (memento) {
     this._super(memento)
@@ -616,11 +625,14 @@ draw2d.shape.node.Node = draw2d.Figure.extend({
       // and restore all ports of the JSON document instead.
       //
       memento.ports.forEach((e) => {
-        let port = eval("new " + e.port + "()")
         let locator = eval("new " + e.locator + "()")
+        if(e.locatorAttr) {
+          locator.attr(e.locatorAttr)
+        }
+
+        let port = eval("new " + e.port + "()")
         port.setPersistentAttributes(e)
         this.addPort(port, locator)
-        port.setName(e.name)
       })
     }
 

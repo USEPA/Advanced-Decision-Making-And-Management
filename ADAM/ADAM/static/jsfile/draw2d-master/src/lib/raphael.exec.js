@@ -1,5 +1,6 @@
-// ┌────────────────────────────────────────────────────────────────────┐ \\
-// │ Raphaël 2.1.0 - JavaScript Vector Library                          │ \\
+
+
+// ┌────────────────────────────────────────────────────────────────────┐ \\// │ Raphaël 2.1.0 - JavaScript Vector Library                          │ \\
 // ├────────────────────────────────────────────────────────────────────┤ \\
 // │ Copyright © 2008-2012 Dmitry Baranovskiy (http://raphaeljs.com)    │ \\
 // │ Copyright © 2008-2012 Sencha Labs (http://sencha.com)              │ \\
@@ -5902,7 +5903,12 @@
                     if (key.substring(0, 6) == "xlink:") {
                         el.setAttributeNS(xlink, key.substring(6), Str(attr[key]));
                     } else {
+                      try {
                         el.setAttribute(key, Str(attr[key]));
+                      }
+                      catch(e){
+                        debugger
+                      }
                     }
                 }
             } else {

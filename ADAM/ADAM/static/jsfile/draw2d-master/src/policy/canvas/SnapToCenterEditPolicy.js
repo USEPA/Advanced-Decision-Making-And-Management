@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.canvas.SnapToCenterEditPolicy
+ * @class
  *
  * Snapping is based on the existing children of a container. When snapping a shape,
  * the center of the bounding box will snap to the center of other figures of the given canvas.
@@ -9,9 +12,9 @@
  * @extends draw2d.policy.canvas.SnapToEditPolicy
  * @since 5.6.4
  */
-import draw2d from '../../packages'
-
-draw2d.policy.canvas.SnapToCenterEditPolicy = draw2d.policy.canvas.SnapToEditPolicy.extend({
+draw2d.policy.canvas.SnapToCenterEditPolicy = draw2d.policy.canvas.SnapToEditPolicy.extend(
+  /** @lends draw2d.policy.canvas.SnapToCenterEditPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.canvas.SnapToCenterEditPolicy",
 
@@ -19,7 +22,6 @@ draw2d.policy.canvas.SnapToCenterEditPolicy = draw2d.policy.canvas.SnapToEditPol
   FADEOUT_DURATION: 500,
 
   /**
-   * @constructor
    * Creates a new constraint policy for snap to geometry
    *
    */
@@ -33,7 +35,7 @@ draw2d.policy.canvas.SnapToCenterEditPolicy = draw2d.policy.canvas.SnapToEditPol
   },
 
   /**
-   * @method
+   *
    *
    * @param {draw2d.Figure} figure the shape below the mouse or null
    * @param {Number} x the x-coordinate of the mouse down event
@@ -48,7 +50,7 @@ draw2d.policy.canvas.SnapToCenterEditPolicy = draw2d.policy.canvas.SnapToEditPol
   },
 
   /**
-   * @method
+   *
    * Adjust the coordinates to the canvas neighbours
    *
    * @param {draw2d.Canvas} canvas the related canvas
@@ -233,7 +235,7 @@ draw2d.policy.canvas.SnapToCenterEditPolicy = draw2d.policy.canvas.SnapToEditPol
   },
 
   /**
-   * @method
+   *
    * Hide the horizontal snapping guides
    *
    * @param {Boolean} fast
@@ -290,7 +292,7 @@ draw2d.policy.canvas.SnapToCenterEditPolicy = draw2d.policy.canvas.SnapToEditPol
   },
 
   /**
-   * @method
+   *
    * Hide the horizontal snapüing guides
    *
    * @param soft

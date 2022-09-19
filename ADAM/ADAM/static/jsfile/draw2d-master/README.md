@@ -8,13 +8,20 @@ kinds.
 The new source code home of my http://www.draw2d.org project. New *home* because I switch the license to MIT.
 
 
-## Demo Page
+## Documentation
+
 https://freegroup.github.io/draw2d/index.html
 
 ## Local Development
 ``` 
 npm install
-yarn dev
+DIR=/examples yarn dev
+
+```
+
+## build
+``` 
+./build.sh
 ```
 
 ## publish new version

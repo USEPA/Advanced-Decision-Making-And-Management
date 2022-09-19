@@ -1,70 +1,72 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.connection.RubberbandRouter
+ * @class
  * Router for direct connections between two ports with a rubber band effect
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
- *     let RubberConnection= draw2d.Connection.extend({
- *         NAME: "RubberConnection",
+ *    let RubberConnection= draw2d.Connection.extend({
+ *        NAME: "RubberConnection",
  *
- *         init:function(attr, setter, getter)
- *         {
- *           this._super(extend({
- *               color: "#33691e",
- *               stroke:1,
- *               outlineStroke:0,
- *               outlineColor:null
- *           },attr),
- *           setter,
- *           getter);
- *
- *
- *           this.setRouter(new draw2d.layout.connection.RubberbandRouter());
- *         },
- *
- *         repaint:function(attributes)
- *         {
- *             if (this.repaintBlocked===true || this.shape === null){
- *                 return;
- *             }
- *             attributes= attributes || {};
- *             // enrich the rendering with a "fill" attribute
- *             if(typeof attributes.fill === "undefined"){
- *             	   attributes.fill = "#aed581";
- *             }
- *             this._super(attributes);
- *        }
- *     });
- *
- *     let createConnection=function(){
- *        let con = new RubberConnection();
- *        return con;
- *     };
- *
- *     // install a custom connection create policy
- *     //
- *     canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
- *            createConnection: createConnection
- *     }));
+ *        init:function(attr, setter, getter)
+ *        {
+ *          this._super(extend({
+ *              color: "#33691e",
+ *              stroke:1,
+ *              outlineStroke:0,
+ *              outlineColor:null
+ *          },attr),
+ *          setter,
+ *          getter);
  *
  *
- *     // create and add two nodes which contains Ports (In and OUT)
- *     //
- *     let start = new draw2d.shape.node.Start();
- *     let end   = new draw2d.shape.node.End();
+ *          this.setRouter(new draw2d.layout.connection.RubberbandRouter());
+ *        },
+ *
+ *        repaint:function(attributes)
+ *        {
+ *            if (this.repaintBlocked===true || this.shape === null){
+ *                return;
+ *            }
+ *            attributes= attributes || {};
+ *            // enrich the rendering with a "fill" attribute
+ *            if(typeof attributes.fill === "undefined"){
+ *            	   attributes.fill = "#aed581";
+ *            }
+ *            this._super(attributes);
+ *       }
+ *    });
+ *
+ *    let createConnection=function(){
+ *       let con = new RubberConnection();
+ *       return con;
+ *    };
+ *
+ *    // install a custom connection create policy
+ *    //
+ *    canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
+ *           createConnection: createConnection
+ *    }));
+ *
+ *
+ *    // create and add two nodes which contains Ports (In and OUT)
+ *    //
+ *    let start = new draw2d.shape.node.Start();
+ *    let end   = new draw2d.shape.node.End();
 
- *     // ...add it to the canvas
- *     canvas.add( start, 50,50);
- *     canvas.add( end, 230,80);
+ *    // ...add it to the canvas
+ *    canvas.add( start, 50,50);
+ *    canvas.add( end, 230,80);
  *
- *     // first Connection
- *     //
- *     let c = createConnection();
- *     c.setSource(start.getOutputPort(0));
- *     c.setTarget(end.getInputPort(0));
- *     canvas.add(c);
+ *    // first Connection
+ *    //
+ *    let c = createConnection();
+ *    c.setSource(start.getOutputPort(0));
+ *    c.setTarget(end.getInputPort(0));
+ *    canvas.add(c);
  *
  *
  * @inheritable
@@ -72,15 +74,15 @@
  *
  * @extends  draw2d.layout.connection.ConnectionRouter
  */
-import draw2d from '../../packages'
-
-draw2d.layout.connection.RubberbandRouter = draw2d.layout.connection.ConnectionRouter.extend({
+draw2d.layout.connection.RubberbandRouter = draw2d.layout.connection.ConnectionRouter.extend(
+  /** @lends draw2d.layout.connection.RubberbandRouter.prototype */
+  {
 
   NAME: "draw2d.layout.connection.RubberbandRouter",
 
   /**
-   * @constructor
    * Creates a new Router object
+   *
    */
   init: function () {
     this._super()
@@ -88,7 +90,7 @@ draw2d.layout.connection.RubberbandRouter = draw2d.layout.connection.ConnectionR
 
 
   /**
-   * @method
+   * 
    * Callback method if the router has been assigned to a connection.
    *
    * @param {draw2d.Connection} connection The assigned connection
@@ -101,7 +103,7 @@ draw2d.layout.connection.RubberbandRouter = draw2d.layout.connection.ConnectionR
   },
 
   /**
-   * @method
+   * 
    * Invalidates the given Connection
    */
   invalidate: function () {

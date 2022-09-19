@@ -1,43 +1,45 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.connection.VertexRouter
+ * @class
  *
  * A Router with unlimited vertices.
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
- *     // Override the default connection type. This is used during drag&drop operations of ports.
- *     //
- *     let createConnection=function(){
- *        // return my special kind of connection
- *        let con = new draw2d.Connection();
- *        con.setRouter(new draw2d.layout.connection.VertexRouter());
- *        return con;
- *     };
+ *    // Override the default connection type. This is used during drag&drop operations of ports.
+ *    //
+ *    let createConnection=function(){
+ *       // return my special kind of connection
+ *       let con = new draw2d.Connection();
+ *       con.setRouter(new draw2d.layout.connection.VertexRouter());
+ *       return con;
+ *    };
  *
- *     // Install a special policy into the canvas to use my own implementation of connection
- *     // if we drag&drop a port
- *     //
- *     canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
- *           createConnection: createConnection
- *     }));
+ *    // Install a special policy into the canvas to use my own implementation of connection
+ *    // if we drag&drop a port
+ *    //
+ *    canvas.installEditPolicy(  new draw2d.policy.connection.DragConnectionCreatePolicy({
+ *          createConnection: createConnection
+ *    }));
  *
- *     // create and add two nodes which contains Ports (In and OUT)
- *     //
- *     let start = new draw2d.shape.node.Start();
- *     let end   = new draw2d.shape.node.End();
+ *    // create and add two nodes which contains Ports (In and OUT)
+ *    //
+ *    let start = new draw2d.shape.node.Start();
+ *    let end   = new draw2d.shape.node.End();
 
- *     // ...add it to the canvas
- *     canvas.add( start, 50,50);
- *     canvas.add( end, 230,80);
+ *    // ...add it to the canvas
+ *    canvas.add( start, 50,50);
+ *    canvas.add( end, 230,80);
  *
- *     // first Connection
- *     //
- *     let c = createConnection();
- *     c.setSource(start.getOutputPort(0));
- *     c.setTarget(end.getInputPort(0));
- *     canvas.add(c);
+ *    // first Connection
+ *    //
+ *    let c = createConnection();
+ *    c.setSource(start.getOutputPort(0));
+ *    c.setTarget(end.getInputPort(0));
+ *    canvas.add(c);
  *
  *
  * @inheritable
@@ -45,15 +47,15 @@
  *
  * @extends  draw2d.layout.connection.ConnectionRouter
  */
-import draw2d from '../../packages'
-
-draw2d.layout.connection.VertexRouter = draw2d.layout.connection.ConnectionRouter.extend({
-
+draw2d.layout.connection.VertexRouter = draw2d.layout.connection.ConnectionRouter.extend(
+  /** @lends draw2d.layout.connection.VertexRouter.prototype */
+  {
+  
   NAME: "draw2d.layout.connection.VertexRouter",
 
   /**
-   * @constructor
    * Creates a new Router object
+   *
    */
   init: function () {
     this._super()
@@ -61,7 +63,7 @@ draw2d.layout.connection.VertexRouter = draw2d.layout.connection.ConnectionRoute
 
 
   /**
-   * @method
+   *
    * Callback method if the router has been assigned to a connection.
    *
    * @param {draw2d.Connection} connection The assigned connection
@@ -73,7 +75,7 @@ draw2d.layout.connection.VertexRouter = draw2d.layout.connection.ConnectionRoute
   },
 
   /**
-   * @method
+   *
    * Invalidates the given Connection
    */
   invalidate: function () {
@@ -102,7 +104,7 @@ draw2d.layout.connection.VertexRouter = draw2d.layout.connection.ConnectionRoute
   },
 
   /**
-   * @method
+   *
    * Callback method for the PolyLine or Connection to check if it possible to remove a vertex from
    * the list. The router can send an veto for this.
    * Per default it is not possible to remove any vertex from the PolyLine exceptional if any interactive
@@ -143,7 +145,7 @@ draw2d.layout.connection.VertexRouter = draw2d.layout.connection.ConnectionRoute
 
 
   /**
-   * @method
+   *
    * Tweak or enrich the polyline persistence data with routing information
    *
    * @since 2.10.0
@@ -163,7 +165,7 @@ draw2d.layout.connection.VertexRouter = draw2d.layout.connection.ConnectionRoute
   },
 
   /**
-   * @method
+   *
    * set the attributes for the polyline with routing information
    *
    * @since 2.10.0
@@ -182,7 +184,7 @@ draw2d.layout.connection.VertexRouter = draw2d.layout.connection.ConnectionRoute
   },
 
   /**
-   * @method
+   *
    *
    * The draw2d.Connection delegates the drag operation to the router. The router can
    * handle the different constraints of the connection and just drag&drop a single segment

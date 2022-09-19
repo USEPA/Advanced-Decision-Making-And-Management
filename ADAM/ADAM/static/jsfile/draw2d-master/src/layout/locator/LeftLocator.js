@@ -1,46 +1,49 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.locator.LeftLocator
+ * @class
  *
  * A LeftLocator is used to place figures to the left of a parent shape.
  *
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
- *
- *     // create a basic figure and add a Label/child via API call
- *     //
- *     let start = new draw2d.shape.node.Start();
- *     start.add(new draw2d.shape.basic.Label({text:"Left Label"}), new draw2d.layout.locator.LeftLocator({
- *      margin:10  // distance to the parent shape
- *     }));
- *     canvas.add( start, 100,50);
+ *    // create a basic figure and add a Label/child via API call
+ *    //
+ *    let start = new draw2d.shape.node.Start();
+ *    start.add(new draw2d.shape.basic.Label({text:"Left Label"}), new draw2d.layout.locator.LeftLocator({
+ *     margin:10  // distance to the parent shape
+ *    }));
+ *    canvas.add( start, 100,50);
  *
  *
  * @author Andreas Herz
  * @extend draw2d.layout.locator.Locator
  */
-import draw2d from '../../packages'
+draw2d.layout.locator.LeftLocator = draw2d.layout.locator.Locator.extend(
+  /** @lends draw2d.layout.locator.LeftLocator.prototype */
+  {
 
-draw2d.layout.locator.LeftLocator = draw2d.layout.locator.Locator.extend({
   NAME: "draw2d.layout.locator.LeftLocator",
 
   /**
-   * @constructor
    * Constructs a locator with associated parent.
    *
-   * @param attr
+   * @param {Object} attr additional init attributes
+   * @param {Object} setter key/value map of injected setter-methods
+   * @param {Object} getter key/value map of injected getter-methods
    */
-  init: function (attr) {
-    this._super()
+  init: function (attr, setter, getter) {
+    this._super(attr, setter,getter)
 
     this.margin = (attr && ("margin" in attr)) ? attr.margin : 5
   },
 
 
   /**
-   * @method
+   *
    * Relocates the given Figure.
    *
    * @param {Number} index child index of the target

@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.layout.VerticalLayout
+ * @class
  * The VerticalLayout class arranges the layout elements in a vertical sequence,
  * left to right, with optional gaps between the elements.
  *
@@ -9,48 +12,47 @@
  * See the example below with and without gap and border settings
  *
  *
- *     @example preview small frame
+ * @example
  *
- *     // first container without any gap and a border of the parent
- *     // container
- *     let label1 =  new draw2d.shape.basic.Label({text:"Label 1"});
- *     let label2 =  new draw2d.shape.basic.Label({text:"Label 2"});
- *     let label3 =  new draw2d.shape.basic.Label({text:"Label 3"});
+ *    // first container without any gap and a border of the parent
+ *    // container
+ *    let label1 =  new draw2d.shape.basic.Label({text:"Label 1"});
+ *    let label2 =  new draw2d.shape.basic.Label({text:"Label 2"});
+ *    let label3 =  new draw2d.shape.basic.Label({text:"Label 3"});
  *
- *     let container1 = new draw2d.shape.layout.VerticalLayout();
+ *    let container1 = new draw2d.shape.layout.VerticalLayout();
  *
- *     container1.add(label1);
- *     container1.add(label2);
- *     container1.add(label3);
- *     container1.setGap(10);
- *     container1.setStroke(2);
- *     canvas.add(container1,50,10);
+ *    container1.add(label1);
+ *    container1.add(label2);
+ *    container1.add(label3);
+ *    container1.setGap(10);
+ *    container1.setStroke(2);
+ *    canvas.add(container1,50,10);
  *
- *     // second container without any gab or border
- *     //
- *     let label11 =  new draw2d.shape.basic.Label({text:"Label 1"});
- *     let label12 =  new draw2d.shape.basic.Label({text:"Label 2"});
- *     let label13 =  new draw2d.shape.basic.Label({text:"Label 3"});
+ *    // second container without any gab or border
+ *    //
+ *    let label11 =  new draw2d.shape.basic.Label({text:"Label 1"});
+ *    let label12 =  new draw2d.shape.basic.Label({text:"Label 2"});
+ *    let label13 =  new draw2d.shape.basic.Label({text:"Label 3"});
  *
- *     let container2 = new draw2d.shape.layout.VerticalLayout();
+ *    let container2 = new draw2d.shape.layout.VerticalLayout();
  *
- *     container2.add(label11);
- *     container2.add(label12);
- *     container2.add(label13);
+ *    container2.add(label11);
+ *    container2.add(label12);
+ *    container2.add(label13);
  *
- *     canvas.add(container2,150,10);
+ *    canvas.add(container2,150,10);
  *
  * @author Andreas Herz
  * @extends draw2d.shape.layout.Layout
  */
-import draw2d from '../../packages'
-
-draw2d.shape.layout.VerticalLayout = draw2d.shape.layout.Layout.extend({
+draw2d.shape.layout.VerticalLayout = draw2d.shape.layout.Layout.extend(
+  /** @lends draw2d.shape.layout.VerticalLayout.prototype */
+  {
 
   NAME: "draw2d.shape.layout.VerticalLayout",
 
   /**
-   * @constructor
    * Create a new instance
    *
    * @param {Object} [attr] the configuration of the shape
@@ -90,7 +92,7 @@ draw2d.shape.layout.VerticalLayout = draw2d.shape.layout.Layout.extend({
     this._super(
       extend({width: 10, height: 10}, attr),
       extend({
-        /** @attr {Number} gap the gap between the children shapes */
+        // @attr {Number} gap the gap between the children shapes */
         gap: this.setGap
       }, setter),
       extend({
@@ -113,7 +115,7 @@ draw2d.shape.layout.VerticalLayout = draw2d.shape.layout.Layout.extend({
 
 
   /**
-   * @method
+   * 
    * Set the gap width between child components within this layout.
    * This will only affect the space between components, not the space around all the components in the layout.
    *

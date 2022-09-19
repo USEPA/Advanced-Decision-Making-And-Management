@@ -13,7 +13,7 @@ Available functions:
 - Team management
 """
 
-from django.conf.urls import re_path
+from django.urls import re_path
 from teams.views import APITeamListView, APITeamDetailView, \
     APITeamMembershipListView, APITeamMembershipDetailView, \
     TeamCreateView, TeamManagementView, TeamEditView, TeamListView

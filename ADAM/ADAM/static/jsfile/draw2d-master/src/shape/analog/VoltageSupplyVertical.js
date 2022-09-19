@@ -1,20 +1,22 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.analog.VoltageSupplyVertical
+ * @class
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
- *     let figure =  new draw2d.shape.analog.VoltageSupplyVertical({x:10, y:10});
+ *    let figure =  new draw2d.shape.analog.VoltageSupplyVertical({x:10, y:10});
  *
- *     canvas.add(figure);
+ *    canvas.add(figure);
  *
  *
  * @extends draw2d.SVGFigure
  */
-import draw2d from '../../packages'
-
-draw2d.shape.analog.VoltageSupplyVertical = draw2d.SVGFigure.extend({
+draw2d.shape.analog.VoltageSupplyVertical = draw2d.SVGFigure.extend(
+  /** @lends draw2d.shape.analog.VoltageSupplyVertical.prototype */
+  {
 
   NAME: "draw2d.shape.analog.VoltageSupplyVertical",
 
@@ -42,7 +44,6 @@ draw2d.shape.analog.VoltageSupplyVertical = draw2d.SVGFigure.extend({
   }),
 
   /**
-   * @constructor
    * Create a new instance
    *
    * @param {Object} [attr] the configuration of the shape

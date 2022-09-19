@@ -1,18 +1,20 @@
+import draw2d from '../packages'
+
+
 /**
- * @class draw2d.command.CommandDeleteGroup
+ * @class
  *
  * Command to remove a group with all related children.
  *
  * @extends draw2d.command.Command
  */
-import draw2d from '../packages'
-
-draw2d.command.CommandDeleteGroup = draw2d.command.Command.extend({
+draw2d.command.CommandDeleteGroup = draw2d.command.Command.extend(
+  /** @lends draw2d.command.CommandDeleteGroup.prototype */
+  {
 
   NAME: "draw2d.command.CommandDeleteGroup",
 
   /**
-   * @constructor
    * Create a delete command for the given figure.
    *
    * @param {draw2d.shape.composite.Group} group
@@ -28,12 +30,12 @@ draw2d.command.CommandDeleteGroup = draw2d.command.Command.extend({
 
 
   /**
-   * @method
+   * 
    * Returns [true] if the command can be execute and the execution of the
    * command modifies the model. e.g.: a CommandMove with [startX,startX] == [endX,endY] should
    * return false. The execution of this Command doesn't modify the model.
    *
-   * @return {Boolean} return try if the command modify the model or make any relevant changes
+   * @returns {Boolean} return try if the command modify the model or make any relevant changes
    **/
   canExecute: function () {
     // we can only delete the shape if a children can be deleted
@@ -50,7 +52,7 @@ draw2d.command.CommandDeleteGroup = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   * 
    * Execute the command the first time
    *
    **/
@@ -59,7 +61,7 @@ draw2d.command.CommandDeleteGroup = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   * 
    * Undo the command
    *
    **/
@@ -69,7 +71,7 @@ draw2d.command.CommandDeleteGroup = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   * 
    *
    * Redo the command after the user has undo this command
    *

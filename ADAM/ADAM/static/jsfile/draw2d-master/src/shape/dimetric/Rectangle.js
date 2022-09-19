@@ -1,29 +1,31 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.dimetric.Rectangle
+ * @class
  * A Rectangle Figure in a dimetric perspective.
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
- *     let d1 =  new draw2d.shape.dimetric.Rectangle({x:10,y:10});
- *     let d2 =  new draw2d.shape.dimetric.Rectangle({x:100,y:10, bgColor:"#f0f000", alpha:0.7, width:100, height:60});
+ *    let d1 =  new draw2d.shape.dimetric.Rectangle({x:10,y:10});
+ *    let d2 =  new draw2d.shape.dimetric.Rectangle({x:100,y:10, bgColor:"#f0f000", alpha:0.7, width:100, height:60});
  *
- *     canvas.add(d1);
- *     canvas.add(d2);
+ *    canvas.add(d1);
+ *    canvas.add(d2);
  *
- *     canvas.setCurrentSelection(d2);
+ *    canvas.setCurrentSelection(d2);
  *
  * @author Andreas Herz
  * @extends draw2d.shape.basic.Polygon
  */
-import draw2d from '../../packages'
+draw2d.shape.dimetric.Rectangle = draw2d.shape.basic.Polygon.extend(
+  /** @lends draw2d.shape.dimetric.Rectangle.prototype */
+  {
 
-draw2d.shape.dimetric.Rectangle = draw2d.shape.basic.Polygon.extend({
   NAME: "draw2d.shape.dimetric.Rectangle",
 
   /**
-   * @constructor
    * Creates a new figure element which are not assigned to any canvas.
    *
    * @param {Object} [attr] the configuration of the shape

@@ -1,21 +1,22 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.shape.analog.OpAmp
+ * @class
  * Hand drawn arrow which points down left
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
+ *    let figure =  new draw2d.shape.analog.OpAmp({x:10, y:10});
  *
- *     let figure =  new draw2d.shape.analog.OpAmp({x:10, y:10});
- *
- *     canvas.add(figure);
+ *    canvas.add(figure);
  *
  *
  * @extends draw2d.SVGFigure
  */
-import draw2d from '../../packages'
-
-draw2d.shape.analog.OpAmp = draw2d.SVGFigure.extend({
+draw2d.shape.analog.OpAmp = draw2d.SVGFigure.extend(
+  /** @lends draw2d.shape.analog.OpAmp.prototype */
+  {
 
   NAME: "draw2d.shape.analog.OpAmp",
 
@@ -32,7 +33,6 @@ draw2d.shape.analog.OpAmp = draw2d.SVGFigure.extend({
   }),
 
   /**
-   * @constructor
    * Create a new instance
    *
    * @param {Object} [attr] the configuration of the shape

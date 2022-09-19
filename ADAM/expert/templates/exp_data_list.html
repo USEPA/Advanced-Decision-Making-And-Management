@@ -10,22 +10,22 @@
   {% csrf_token %}
   <br/>
 
-  <div class="card" style = "min-width:950px">
+  <div class="card" style="min-width:950px">
 
     <div class="card-header">
         <div class="row align-items-center">
-          <div class = "col text-left">
-            <a  class = "btn btn-light" href = '/expert/usermain/'>
-              <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+          <div class="col text-left">
+            <a  class="btn btn-light" href='/expert/usermain/'>
+              <ion-icon name="arrow-back-circle-outline" class="iconpiclarger align-middle"></ion-icon> Dashborad
             </a>
           </div>
 
-          <div class = "col text-center">
-            <h4 class = "card-title align-vertical text-body" >Data List</h4>
+          <div class="col text-center">
+            <h4 class="card-title align-vertical text-body" >Data List</h4>
           </div>
-          <div class = "col text-right invisible">
-            <a  class = "btn btn-light" href = '/'>
-              <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+          <div class="col text-right invisible">
+            <a  class="btn btn-light" href='/'>
+              <ion-icon name="exit" class="iconpiclarger align-middle"></ion-icon> Dashborad
             </a>
           </div>
 
@@ -39,17 +39,17 @@
       </p>
 
       {% if user.datadocument_set.all %}
-      <div  class = "container" style = "width: 60%; left:20%">
-        <div class="btn-group" style = "width: 100%">
+      <div  class="container" style="width: 60%; left:20%">
+        <div class="btn-group" style="width: 100%">
 
-          <button type="button" class = "btn btn-light border btn-block" style = "width: 33.3%" data-toggle="tooltip" data-placement="top" title="Upload new data file" onclick="uploadnew()">Upload Data</button>
-          <button type="button" class="btn btn-light border" style = "width: 33.3%" data-toggle="tooltip" data-placement="top" title="Delete Selected Files" onclick="deleteselected()">Delete Selected</button>
-          <button type="button" class="btn btn-light border" style = "width: 33.3%" data-toggle="tooltip" data-placement="top" title="Download Selected Files" onclick="downloadselected()">Download Selected</button>
+          <button type="button" class="btn btn-light border btn-block" style="width: 33.3%" data-toggle="tooltip" data-placement="top" title="Upload new data file" onclick="uploadnew()">Upload Data</button>
+          <button type="button" class="btn btn-light border mx-2" style="width: 33.3%" data-toggle="tooltip" data-placement="top" title="Delete Selected Files" onclick="deleteselected()">Delete Selected</button>
+          <button type="button" class="btn btn-light border mx-2" style="width: 33.3%" data-toggle="tooltip" data-placement="top" title="Download Selected Files" onclick="downloadselected()">Download Selected</button>
         </div>
       </div>
 
-      <div id = "overlaycontainer2" style="display:none;z-index: 1002">
-        <div id = "overlay">
+      <div id="overlaycontainer2" style="display:none;z-index: 1002">
+        <div id="overlay">
           <div class="text-center border rounded" style="position: relative; top: 40%; background: #F7F7F7; width: 40%; left:30%;">
             <h4>Uploading...</h4>
             <br/>
@@ -65,25 +65,25 @@
 
       <br/>
 
-      <div  class = "row"  style = "width:100%;min-width: 200px;">
-      <table class = "table text-center table-hover table-sm" style = "width:100%;min-width: 200px;">
+      <div  class="row"  style="width:100%;min-width: 200px;">
+      <table class="table text-center table-hover table-sm" style="width:100%;min-width: 200px;">
         <thead>
         <tr>
           <th style="width: 38%">File Name</th>
           <th style="width: 25%">Creation Date</th>
           <th style="width: 18%">
-              <select name="datatype" class = "form-control form-control-sm" id = "datatype" onchange = "updateDoc()" >
-                  <option value = "all"> All </option>
-                  <option value = "sup"> Supply Data </option>
-                  <option value = "dem"> Demand Data </option>
-                  <option value = "site"> Tech-Site Data </option>
-                  <option value = "cand"> Tech-Cand Data </option>
+              <select name="datatype" class="form-control form-control-sm" id="datatype" onchange="updateDoc()" >
+                  <option value="all"> All </option>
+                  <option value="sup"> Supply Data </option>
+                  <option value="dem"> Demand Data </option>
+                  <option value="site"> Tech-Site Data </option>
+                  <option value="cand"> Tech-Cand Data </option>
               </select>
           </th>
           <th style="width: 14%">Options</th>
           <th style="width: 5%">
             <div class="form-check">
-              <input id = "selectall_checkbox" class="form-check-input position-static" type="checkbox" id="node_{{doc.id}}_Checkbox" value="{{doc.id}}" onchange = "selectall()">
+              <input id="selectall_checkbox" class="form-check-input position-static" type="checkbox" id="node_{{doc.id}}_Checkbox" value="{{doc.id}}" onchange="selectall()">
             </div>
           </th>
         </tr>
@@ -91,19 +91,19 @@
         <tbody>
 
         {% for doc in user.datadocument_set.all %}
-         <tr class = "{{doc.datatype}}">
+         <tr class="{{doc.datatype}}">
 
            <td>{{doc.shortfilename}}   </td>
            <td>{{doc.date_upload}} </td>
            <td>{{doc.datatype}} </td>
            <td>
-             <ion-icon name="reader" class = "iconpiclarge renote_dialog" data-toggle="tooltip" data-placement="right" title="{{doc.notes}}" onclick = 'renote({{doc.id}},"{{doc.notes|safe}}")'></ion-icon>
+             <ion-icon name="reader" class="iconpiclarge renote_dialog" data-toggle="tooltip" data-placement="right" title="{{doc.notes}}" onclick='renote({{doc.id}},"{{doc.notes|safe}}")'></ion-icon>
 
-             <ion-icon name="arrow-down-circle" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Download {{doc.shortfilename}}" onclick="window.location.href = '/media/{{doc.docfile}}'"></ion-icon>
+             <ion-icon name="arrow-down-circle" class="iconpiclarge" data-toggle="tooltip" data-placement="right" title="Download {{doc.shortfilename}}" onclick="window.location.href='/media/{{doc.docfile}}'"></ion-icon>
 
-             <ion-icon name="trash" class = "iconpiclarge delete_confirm" data-toggle="tooltip" data-placement="right" title="Delete this file" onclick = "deletefile({{doc.id}})"></ion-icon>
+             <ion-icon name="trash" class="iconpiclarge delete_confirm" data-toggle="tooltip" data-placement="right" title="Delete this file" onclick="deletefile({{doc.id}})"></ion-icon>
 
-             <ion-icon name="create" class = "iconpiclarge rename_dialog" data-toggle="tooltip" data-placement="right" title="Rename this file" onclick = "rename({{doc.id}},'{{doc.shortfilename}}')"></ion-icon>
+             <ion-icon name="create" class="iconpiclarge rename_dialog" data-toggle="tooltip" data-placement="right" title="Rename this file" onclick="rename({{doc.id}},'{{doc.shortfilename}}')"></ion-icon>
            </td>
            <td>
              <div class="form-check">
@@ -118,8 +118,8 @@
       </div>
 
     {% else %}
-    <div  class = "container" style = "width: 30%; left:35%">
-        <button type="button" class = "btn btn-light border btn-block" data-toggle="tooltip" data-placement="top" title="Upload new data file" onclick="uploadnew()">Upload Data</button>
+    <div  class="container" style="width: 30%; left:35%">
+        <button type="button" class="btn btn-light border btn-block" data-toggle="tooltip" data-placement="top" title="Upload new data file" onclick="uploadnew()">Upload Data</button>
     </div>
     <div class="row justify-content-between">
         <div class="col-4">
@@ -132,11 +132,11 @@
 
 
   <div style="display:none;">
-  <div style="text-align: center" class = "uploadform">
+  <div style="text-align: center" class="uploadform">
     <strong>Please refer to the following format</strong>
     <br/>
     <br/>
-    <table width = 100% class = "table text-center" id = "suptemplate" style = "display:">
+    <table width=100% class="table text-center" id="suptemplate" style="display:">
       <thead>
       <tr>
         <th>#</th>
@@ -167,7 +167,7 @@
       </tbody>
     </table>
 
-    <table width = 100% class = "table text-center" id = "demtemplate" style = "display:none">
+    <table width=100% class="table text-center" id="demtemplate" style="display:none">
       <thead>
       <tr>
         <th>#</th>
@@ -198,7 +198,7 @@
       </tbody>
     </table>
 
-    <table width = 100% class = "table text-center" id = "sitetemplate" style = "display:none">
+    <table width=100% class="table text-center" id="sitetemplate" style="display:none">
       <thead>
       <tr>
         <th>#</th>
@@ -226,7 +226,7 @@
       </tbody>
     </table>
 
-    <table width = 100% class = "table text-center" id = "candtemplate" style = "display:none">
+    <table width=100% class="table text-center" id="candtemplate" style="display:none">
       <thead>
       <tr>
         <th>#</th>
@@ -251,9 +251,9 @@
       </tbody>
     </table>
 
-      <div class="card text-center" style = "background-color:#F5F5F5">
+      <div class="card text-center" style="background-color:#F5F5F5">
         <div class="card-body">
-          <h6 class = "card-title">{{dataupload.datafile.label}}</h6>
+          <h6 class="card-title">{{dataupload.datafile.label}}</h6>
           <div class="input-group mb-3 text-center">
           {{dataupload.datatype}}
             <div class="input-group-append" style="flex: 0 0 17.9%;">
@@ -263,7 +263,7 @@
           <div class="input-group mb-3 text-left">
             <div class="custom-file">
               {{dataupload.datafile}}
-                <label class="custom-file-label text-truncate" for="id_datafile" id = 'id_datafile_label'>
+                <label class="custom-file-label text-truncate" for="id_datafile" id='id_datafile_label'>
                   Choose file
                 </label>
             </div>
@@ -274,7 +274,7 @@
 
       </div>
     <br/>
-    <input style="display:none;" id = 'uploadbtm' class = "btn btn-light border" type="submit" value="Upload" name="upload_file"/>
+    <input style="display:none;" id='uploadbtm' class="btn btn-light border" type="submit" value="Upload" name="upload_file"/>
 
     </div>
     </div>

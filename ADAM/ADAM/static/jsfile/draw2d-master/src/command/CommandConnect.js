@@ -1,5 +1,8 @@
+import draw2d from '../packages'
+
+
 /**
- * @class draw2d.command.CommandConnect
+ * @class
  *
  * Connects two ports with a connection.
  *
@@ -8,13 +11,13 @@
  *
  * @extends draw2d.command.Command
  */
-import draw2d from '../packages'
+draw2d.command.CommandConnect = draw2d.command.Command.extend(
+  /** @lends draw2d.command.CommandConnect.prototype */
+  {
 
-draw2d.command.CommandConnect = draw2d.command.Command.extend({
   NAME: "draw2d.command.CommandConnect",
 
   /**
-   * @constructor
    * Create a new CommandConnect objects which can be execute via the CommandStack.
    *
    * @param {draw2d.Port} source the source port for the connection to create
@@ -31,7 +34,7 @@ draw2d.command.CommandConnect = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   *
    * set the connection to use. called by the ConnectionCreatePolicy
    */
   setConnection: function (connection) {
@@ -40,7 +43,7 @@ draw2d.command.CommandConnect = draw2d.command.Command.extend({
 
 
   /**
-   * @method
+   *
    * Returns the fresh created connection if available. Used in the
    * ClickConnectionCreatePolicy to customize the router and vertices.
    *
@@ -52,7 +55,7 @@ draw2d.command.CommandConnect = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   *
    * Execute the command the first time
    *
    **/
@@ -84,7 +87,7 @@ draw2d.command.CommandConnect = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   *
    * Redo the command after the user has undo this command.
    *
    **/
@@ -94,7 +97,7 @@ draw2d.command.CommandConnect = draw2d.command.Command.extend({
   },
 
   /**
-   * @method
+   *
    * Undo the command.
    *
    **/

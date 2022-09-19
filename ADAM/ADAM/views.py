@@ -2,7 +2,6 @@
 # !/usr/bin/env python3
 # coding=utf-8
 # ruiz-mercado.gerardo@epa.gov
-
 """Views for home pages and tutorials"""
 
 # for the main page
@@ -48,13 +47,11 @@ def getdata(request):
     if request.POST:
         data = request.POST
         id = data['id']
-        state = id[6:].capitalize()
-        filename = os.path.join(
-            settings.STATICFILES_DIRS[0], 'maindata/' + id + '.csv')
+        filename = os.path.join(settings.STATIC_ROOT,
+                                'maindata/' + id + '.csv')
         with open(filename, newline='') as csvfile:
             lsdata = list(csv.reader(csvfile))
         ls = lsdata[1:]
-
         return JsonResponse({'id': id, 'ls': ls})
     else:
         return HttpResponse("Invalid request!")
@@ -65,7 +62,7 @@ def getbounds(request):
     if request.POST:
         data = request.POST
         id = data['id']
-        filename = id+'.zip'
+        filename = id + '.zip'
         return JsonResponse({'id': id, 'path': filename})
     else:
         return HttpResponse("Invalid request!")
@@ -168,8 +165,10 @@ def beginsolveeg2(request):
 
         with open(techfilename, 'w') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
-            writer.writerow(['#tech', 'name', 'capmin', 'capmax', 'refprod',
-                             'Kinv', 'Binv', 'Kop', 'Bop'])
+            writer.writerow([
+                '#tech', 'name', 'capmin', 'capmax', 'refprod', 'Kinv', 'Binv',
+                'Kop', 'Bop'
+            ])
             for i in techdata:
                 writer.writerow(i)
 
@@ -180,8 +179,9 @@ def beginsolveeg2(request):
 
         cmd = [
             "/home/bitnami/julia-1.1.1/bin/julia", codepath, nodefilename,
-            supfilename, demfilename, sitefilename, candfilename,
-            prodfilename, techfilename, alphafilename, pseudoID]
+            supfilename, demfilename, sitefilename, candfilename, prodfilename,
+            techfilename, alphafilename, pseudoID
+        ]
         print(cmd)
         p = subprocess.Popen(cmd, stderr=sys.stderr, stdout=sys.stdout)
 
@@ -242,33 +242,46 @@ def eg2_results(request, id):
     with open(prodfilename, newline='') as csvfile:
         data = list(csv.reader(csvfile))
 
-    prodlist = [
-        {'prod_id': data[i][0], 'prodname': data[i][1],
-         'transcost': data[i][2], 'prodnote': ''} for i in range(1, len(data))
-    ]
+    prodlist = [{
+        'prod_id': data[i][0],
+        'prodname': data[i][1],
+        'transcost': data[i][2],
+        'prodnote': ''
+    } for i in range(1, len(data))]
 
     with open(techfilename, newline='') as csvfile:
         data = list(csv.reader(csvfile))
 
     techlist = [{
-        'tech_id': data[i][0], 'techname': data[i][1], 'capmin': data[i][2],
-        'capmax': data[i][3], 'refprod': data[i][4], 'Kinv': data[i][5],
-        'Binv': data[i][6], 'Kop': data[i][7], 'Bop': data[i][8]}
-        for i in range(1, len(data))]
+        'tech_id': data[i][0],
+        'techname': data[i][1],
+        'capmin': data[i][2],
+        'capmax': data[i][3],
+        'refprod': data[i][4],
+        'Kinv': data[i][5],
+        'Binv': data[i][6],
+        'Kop': data[i][7],
+        'Bop': data[i][8]
+    } for i in range(1, len(data))]
 
     with open(alphafilename, newline='') as csvfile:
         data = list(csv.reader(csvfile))
 
-    yieldlist = [data[0][0], data[0][1], data[0][2], data[1][0],
-                 data[1][2], data[1][3], data[2][0], data[2][2], data[2][4]]
+    yieldlist = [
+        data[0][0], data[0][1], data[0][2], data[1][0], data[1][2], data[1][3],
+        data[2][0], data[2][2], data[2][4]
+    ]
 
     with open(nodefilename, newline='') as csvfile:
         data = list(csv.reader(csvfile))
 
-    nodelist = [
-        {'node': data[i][0], 'x': data[i][1], 'y': data[i][2],
-         'cand': 0, name: 'Anon.'} for i in range(1, len(data))
-    ]
+    nodelist = [{
+        'node': data[i][0],
+        'x': data[i][1],
+        'y': data[i][2],
+        'cand': 0,
+        name: 'Anon.'
+    } for i in range(1, len(data))]
 
     with open(supfilename, newline='') as csvfile:
         supdata = list(csv.reader(csvfile))
@@ -294,9 +307,8 @@ def eg2_results(request, id):
         name = transresultnamels[i]
         with open(name, newline='') as csvfile:
             data = list(csv.reader(csvfile))
-        data = [[
-            data[i][j] for j in range(1, len(data[0]))]
-            for i in range(1, len(data))]
+        data = [[data[i][j] for j in range(1, len(data[0]))]
+                for i in range(1, len(data))]
         transresult.append(data)
 
     # except:
@@ -307,13 +319,19 @@ def eg2_results(request, id):
 
     return render(
         request, 'eg2_results.html', {
-            'id': id_string, 'summary': summary, 'proddata': prodlist,
-            'techdata': techlist, 'yielddata': yieldlist, 'nodedata': nodelist,
-            'distdata': distdata, 'supdata': supdata, 'demdata': demdata,
-            'sitedata': sitedata, 'transdata': transdata,
+            'id': id_string,
+            'summary': summary,
+            'proddata': prodlist,
+            'techdata': techlist,
+            'yielddata': yieldlist,
+            'nodedata': nodelist,
+            'distdata': distdata,
+            'supdata': supdata,
+            'demdata': demdata,
+            'sitedata': sitedata,
+            'transdata': transdata,
             'transresult': transresult
-            }
-        )
+        })
 
 
 def contact(request):
@@ -343,5 +361,7 @@ def contact(request):
         form = ContactForm()
         if 'submitted' in request.GET:
             submitted = True
-        return render(request, 'main/contact.html',
-                      {'form': form, 'submitted': submitted})
+        return render(request, 'main/contact.html', {
+            'form': form,
+            'submitted': submitted
+        })

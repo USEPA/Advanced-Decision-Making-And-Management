@@ -1,64 +1,65 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.layout.locator.BottomLocator
+ * @class
  *
  * A bottomLocator is used to place figures at the bottom of a parent shape.
  *
  *
- * See the example:
  *
- *     @example preview small frame
+ * @example
  *
+ *    // create a basic figure and add a Label/child via API call
+ *    //
+ *    let circle = new draw2d.shape.basic.Circle({
+ *        x:100,
+ *        y:50,
+ *        diameter:100,
+ *        stroke: 3,
+ *        color:"#A63343",
+ *        bgColor:"#E65159"
+ *    });
  *
- *     // create a basic figure and add a Label/child via API call
- *     //
- *     var circle = new draw2d.shape.basic.Circle({
- *         x:100,
- *         y:50,
- *         diameter:100,
- *         stroke: 3,
- *         color:"#A63343",
- *         bgColor:"#E65159"
- *     });
- *
- *     circle.add(new draw2d.shape.basic.Label({text:"Bottom Label"}), new draw2d.layout.locator.BottomLocator());
- *     canvas.add( circle);
+ *    circle.add(new draw2d.shape.basic.Label({text:"Bottom Label"}), new draw2d.layout.locator.BottomLocator());
+ *    canvas.add( circle);
  *
  *
  * @author Andreas Herz
  * @extend draw2d.layout.locator.Locator
  */
-import draw2d from '../../packages'
+draw2d.layout.locator.BottomLocator = draw2d.layout.locator.Locator.extend(
+  /** @lends draw2d.layout.locator.BottomLocator.prototype */
+  {
 
-draw2d.layout.locator.BottomLocator = draw2d.layout.locator.Locator.extend({
   NAME: "draw2d.layout.locator.BottomLocator",
 
   /**
-   * @constructor
    *
    *
    */
-  init: function () {
-    this._super()
+  init: function (attr, setter, getter) {
+    this._super(attr, setter, getter)
   },
 
 
   /**
-   * @method
+   * 
    * Relocates the given Figure.
    *
    * @param {Number} index child index of the target
    * @param {draw2d.Figure} target The figure to relocate
    **/
   relocate: function (index, target) {
-    var parent = target.getParent()
-    var boundingBox = parent.getBoundingBox()
+    let parent = target.getParent()
+    let boundingBox = parent.getBoundingBox()
     // I made a wrong decision in the port handling: anchor point
     // is in the center and not topLeft. Now I must correct this flaw here, and there, and...
     // shit happens.
-    var offset = (parent instanceof draw2d.Port) ? boundingBox.w / 2 : 0
+    let offset = (parent instanceof draw2d.Port) ? boundingBox.w / 2 : 0
 
 
-    var targetBoundingBox = target.getBoundingBox()
+    let targetBoundingBox = target.getBoundingBox()
     if (target instanceof draw2d.Port) {
       target.setPosition(boundingBox.w / 2 - offset, boundingBox.h)
     }

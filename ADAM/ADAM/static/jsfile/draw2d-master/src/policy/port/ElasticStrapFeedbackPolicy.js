@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.port.ElasticStrapFeedbackPolicy
+ * @class
  *
  * A draw2d.policy.SelectionFeedbackPolicy that is sensitive to the canvas selection. Subclasses will typically
  * decorate the {@link draw2d.Figure figure} with things like selection handles and/or focus feedback.
@@ -9,14 +12,13 @@
  * @author Andreas Herz
  * @extends draw2d.policy.figure.DragDropEditPolicy
  */
-import draw2d from '../../packages'
-
-draw2d.policy.port.ElasticStrapFeedbackPolicy = draw2d.policy.port.PortFeedbackPolicy.extend({
+draw2d.policy.port.ElasticStrapFeedbackPolicy = draw2d.policy.port.PortFeedbackPolicy.extend(
+  /** @lends draw2d.policy.port.ElasticStrapFeedbackPolicy.prototype */
+  {
 
   NAME: "draw2d.policy.port.ElasticStrapFeedbackPolicy",
 
   /**
-   * @constructor
    * Creates a new Router object
    */
   init: function (attr, setter, getter) {
@@ -25,7 +27,7 @@ draw2d.policy.port.ElasticStrapFeedbackPolicy = draw2d.policy.port.PortFeedbackP
   },
 
   /**
-   * @method
+   *
    * Called by the framework if the related shape has init a drag&drop
    * operation
    *
@@ -35,7 +37,8 @@ draw2d.policy.port.ElasticStrapFeedbackPolicy = draw2d.policy.port.PortFeedbackP
    * @param {Number} y the y-coordinate of the mouse up event
    * @param {Boolean} shiftKey true if the shift key has been pressed during this event
    * @param {Boolean} ctrlKey true if the ctrl key has been pressed during the event
-   * @template
+   *
+   * @returns {Boolean} return <b>false</b> to send a veto to the drag operation
    */
   onDragStart: function (canvas, figure, x, y, shiftKey, ctrlKey) {
     this.connectionLine = new draw2d.shape.basic.Line()
@@ -43,26 +46,28 @@ draw2d.policy.port.ElasticStrapFeedbackPolicy = draw2d.policy.port.PortFeedbackP
     this.connectionLine.getShapeElement()
 
     this.onDrag(canvas, figure)
+
+    return true
   },
 
 
   /**
-   * @method
+   *
    * Called by the framework during drag a figure.
    *
    * @param {draw2d.Canvas} canvas The host canvas
    * @param {draw2d.Figure} figure The related figure
    */
   onDrag: function (canvas, figure) {
-    var x1 = figure.ox + figure.getParent().getAbsoluteX()
-    var y1 = figure.oy + figure.getParent().getAbsoluteY()
+    let x1 = figure.ox + figure.getParent().getAbsoluteX()
+    let y1 = figure.oy + figure.getParent().getAbsoluteY()
 
     this.connectionLine.setStartPosition(x1, y1)
     this.connectionLine.setEndPosition(figure.getAbsoluteX(), figure.getAbsoluteY())
   },
 
   /**
-   * @method
+   *
    * Called by the framework if the drag drop operation ends.
    *
    * @param {draw2d.Canvas} canvas The host canvas
@@ -71,7 +76,6 @@ draw2d.policy.port.ElasticStrapFeedbackPolicy = draw2d.policy.port.PortFeedbackP
    * @param {Number} y the y-coordinate of the mouse event
    * @param {Boolean} shiftKey true if the shift key has been pressed during this event
    * @param {Boolean} ctrlKey true if the ctrl key has been pressed during the event
-   * @template
    */
   onDragEnd: function (canvas, figure, x, y, shiftKey, ctrlKey) {
     this.connectionLine.setCanvas(null)

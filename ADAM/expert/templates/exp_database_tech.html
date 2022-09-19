@@ -12,18 +12,18 @@
 
     <div class="card-header">
         <div class="row align-items-center">
-          <div class = "col text-left">
-            <a  class = "btn btn-light" href = '/expert/usermain/'>
-              <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+          <div class="col text-left">
+            <a  class="btn btn-light" href='/expert/usermain/'>
+              <ion-icon name="arrow-back-circle-outline" class="iconpiclarger align-middle"></ion-icon> Dashboard
             </a>
           </div>
 
-          <div class = "col text-center">
-            <h4 class = "card-title align-vertical text-body" >Technology Database</h4>
+          <div class="col text-center">
+            <h4 class="card-title align-vertical text-body" >Technology Database</h4>
           </div>
-          <div class = "col text-right invisible">
-            <a  class = "btn btn-light" href = '/'>
-              <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+          <div class="col text-right invisible">
+            <a  class="btn btn-light" href='/'>
+              <ion-icon name="exit" class="iconpiclarger align-middle"></ion-icon> Dashborad
             </a>
           </div>
 
@@ -31,27 +31,27 @@
     </div>
 
     <div class="card-body">
-    <form method = "GET">
+    <form method="GET">
       <div class="input-group mb-3">
-        <div class="input-group-prepend" style = "flex: 0 0 3%;">
+        <div class="input-group-prepend" style="flex: 0 0 3%;">
           <span class="input-group-text">
-            <ion-icon name="search" class = "iconpiclarge"></ion-icon>
+            <ion-icon name="search" class="iconpiclarge"></ion-icon>
           </span>
         </div>
       {{  searchform.keywords  }}
       </div>
 
-      <div class="btn-group" style = "width: 38%">
-        <input type="submit" value="Search" class = "btn btn-light border" name = 'search_tech' style = "width: 33.3%">
-        <input type="submit" value="List All Tech" class = "btn btn-light border" name = 'list_tech' style = "width: 33.3%">
-        <button type = 'button' class = "btn btn-light border" style = "width:33.4%" onclick = "AddTechBase()">Add Technology</button>
+      <div class="btn-group">
+        <input type="submit" value="Search" class="btn btn-light border mx-2" name='search_tech'>
+        <input type="submit" value="List All Tech" class="btn btn-light border mx-2" name='list_tech'>
+        <button type='button' class="btn btn-light border mx-2" onclick="AddTechBase()">Add Technology</button>
         {% if admin %}
-        <div class = "btn btn-light border align-middle" data-toggle="popover" data-placement="right" title="Notice" data-html="true" data-content="<p>If you need to edit or delete a <strong>public</strong> technology or do <strong>batch operations</strong>, please go to the admin system.</p>" >
-            <ion-icon name="alert-circle-outline" class = "iconpiclarge" style = "cursor: pointer;" ></ion-icon>
+        <div class="btn btn-light border align-middle" data-toggle="popover" data-placement="right" title="Notice" data-html="true" data-content="<p>If you need to edit or delete a <strong>public</strong> technology or do <strong>batch operations</strong>, please go to the admin system.</p>" >
+            <ion-icon name="alert-circle-outline" class="iconpiclarge" style="cursor: pointer;" ></ion-icon>
         </div>
         {% else %}
-        <div class = "btn btn-light border align-middle" data-toggle="popover" data-placement="right" title="Notice" data-html="true" data-content="<p>If you need to do <strong>batch operations</strong> or <strong>reinitialize</strong> your database, please send us a request.</p>" >
-            <ion-icon name="alert-circle-outline" class = "iconpiclarge" style = "cursor: pointer;" ></ion-icon>
+        <div class="btn btn-light border align-middle" data-toggle="popover" data-placement="right" title="Notice" data-html="true" data-content="<p>If you need to do <strong>batch operations</strong> or <strong>reinitialize</strong> your database, please send us a request.</p>" >
+            <ion-icon name="alert-circle-outline" class="iconpiclarge" style="cursor: pointer;" ></ion-icon>
         </div>
         {% endif %}
       </div>
@@ -67,9 +67,9 @@
           <p>No technology found.</p>
         {% else %}
         <script type="text/javascript">
-          techlist = []
+          techlist=[]
           {% for item in techlist %}
-            data = {id: "{{item.id}}", name: "{{item.name}}", refprod: "{{item.refproduct}}", capmin: "{{item.capmin}}", capmax: "{{item.capmax}}", invfix: "{{item.invcost_fix}}", invpro:"{{item.invcost_pro}}", opfix: "{{item.opcost_fix}}",oppro: "{{item.opcost_pro}}", png: "{{item.pngsrc}}",  note: "{{item.notes}}", transformationset: []}
+            data={id: "{{item.id}}", name: "{{item.name}}", refprod: "{{item.refproduct}}", capmin: "{{item.capmin}}", capmax: "{{item.capmax}}", invfix: "{{item.invcost_fix}}", invpro:"{{item.invcost_pro}}", opfix: "{{item.opcost_fix}}",oppro: "{{item.opcost_pro}}", png: "{{item.pngsrc}}",  note: "{{item.notes}}", transformationset: []}
 
             {% for trans in item.transformation_set.all %}
               data.transformationset.push({prodname: "{{trans.product.name}}", yield: "{{trans.transforming_coefficient}}", prodid: "{{trans.product.id}}"})
@@ -80,7 +80,7 @@
 
         <br/>
         <h4>Searching Results:</h4>
-          <table width = 100% class = "table text-center table-hover">
+          <table width=100% class="table text-center table-hover">
             <thead>
             <tr>
               <th>Tech Name</th>
@@ -94,10 +94,10 @@
               <td>{{tech.name}}</td>
               <td>t{{tech.id}} </td>
               <td>
-                    <ion-icon name="bar-chart" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Detalied information"style = "cursor: pointer" onclick = TechInfo({{tech.id}})></ion-icon>
+                    <ion-icon name="bar-chart" class="iconpiclarge" data-toggle="tooltip" data-placement="right" title="Detalied information"style="cursor: pointer" onclick=TechInfo({{tech.id}})></ion-icon>
                     {% if not tech.public %}
-                    <ion-icon name="trash" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Delete this technology" style = "cursor: pointer" onclick = DeleteTech({{tech.id}})></ion-icon>
-                    <ion-icon name="create" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Edit this technology" style = "cursor: pointer" onclick = EditTech({{tech.id}})></ion-icon>
+                    <ion-icon name="trash" class="iconpiclarge" data-toggle="tooltip" data-placement="right" title="Delete this technology" style="cursor: pointer" onclick=DeleteTech({{tech.id}})></ion-icon>
+                    <ion-icon name="create" class="iconpiclarge" data-toggle="tooltip" data-placement="right" title="Edit this technology" style="cursor: pointer" onclick=EditTech({{tech.id}})></ion-icon>
                     {% endif %}
               </td>
 
@@ -119,11 +119,11 @@
 </section>
 {% endblock content %}
 {% block scripts %}
-<script id = "helper" admin = "{{admin}}" src="{% static 'jsfile/expertgraphedit/TechDataBase.js' %}"></script>
+<script id="helper" admin="{{admin}}" src="{% static 'jsfile/expertgraphedit/TechDataBase.js' %}"></script>
 <script>
-  prodlist = []
+  prodlist=[]
   {% for item in prodlist %}
-    data = {id: "{{item.id}}", name: "{{item.name}}", transcost: "{{item.transcost}}", unit: "{{item.unit}}", note: "{{item.additionalinfo}}", public: "{{item.public}}", transformationset: []}
+    data={id: "{{item.id}}", name: "{{item.name}}", transcost: "{{item.transcost}}", unit: "{{item.unit}}", note: "{{item.additionalinfo}}", public: "{{item.public}}", transformationset: []}
     {% for trans in item.transformation_set.all %}
       data.transformationset.push({techname: "{{trans.technology.name}}", yield: "{{trans.transforming_coefficient}}"})
     {% endfor %}
@@ -133,8 +133,8 @@
 <script type="text/javascript">
 $(function () {
   $('[data-toggle="popover"]').popover();
-  let params = new URLSearchParams(location.search);
-  taskid = params.get('task')
+  let params=new URLSearchParams(location.search);
+  taskid=params.get('task')
   if (taskid) {
     AddTechBase(taskid);
   }

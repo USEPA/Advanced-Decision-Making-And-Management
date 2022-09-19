@@ -6,37 +6,37 @@
   <section id="main">
     <br/>
 
-        <div class="card text-center" style = "min-width:950px">
+        <div class="card text-center" style="min-width:950px">
 
           <div class="card-header">
               <div class="row align-items-center">
-                <div class = "col text-left">
-                  <div class = "btn-group">
-                    <a  class = "btn btn-light btn-sm" href = '/expert/usermain/'>
-                      <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+                <div class="col text-left">
+                  <div class="btn-group">
+                    <a  class="btn btn-light btn-sm" href='/expert/usermain/'>
+                      <ion-icon name="arrow-back-circle-outline" class="iconpiclarger align-middle"></ion-icon> Dashboard
                     </a>
-                    <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/'>
-                      <ion-icon name="list" class = "iconpiclarger align-middle"></ion-icon> Model List
+                    <a  class="btn btn-light btn-sm" href='/expert/usermain/task/'>
+                      <ion-icon name="list" class="iconpiclarger align-middle"></ion-icon> Model List
                     </a>
-                    <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/{{task.id}}'>
-                      <ion-icon name="aperture" class = "iconpiclarger align-middle"></ion-icon> {{task.task_name}}
+                    <a  class="btn btn-light btn-sm" href='/expert/usermain/task/{{task.id}}'>
+                      <ion-icon name="aperture" class="iconpiclarger align-middle"></ion-icon> {{task.task_name}}
                     </a>
                   </div>
                 </div>
 
-                <div class = "col text-center">
-                  <h4 class = "card-title align-vertical text-body" >Run Model</h4>
+                <div class="col text-center">
+                  <h4 class="card-title align-vertical text-body" >Run Model</h4>
                 </div>
-                <div class = "col text-right invisible">
-                  <div class = "btn-group">
-                    <a  class = "btn btn-light btn-sm" href = '/expert/usermain/'>
-                      <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+                <div class="col text-right invisible">
+                  <div class="btn-group">
+                    <a  class="btn btn-light btn-sm" href='/expert/usermain/'>
+                      <ion-icon name="arrow-back-circle-outline" class="iconpiclarger align-middle"></ion-icon> Dashborad
                     </a>
-                    <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/'>
-                      <ion-icon name="list" class = "iconpiclarger align-middle"></ion-icon> Model List
+                    <a  class="btn btn-light btn-sm" href='/expert/usermain/task/'>
+                      <ion-icon name="list" class="iconpiclarger align-middle"></ion-icon> Model List
                     </a>
-                    <a  class = "btn btn-light btn-sm" href = '/expert/usermain/task/{{task.id}}'>
-                      <ion-icon name="aperture" class = "iconpiclarger align-middle"></ion-icon> {{task.task_name}}
+                    <a  class="btn btn-light btn-sm" href='/expert/usermain/task/{{task.id}}'>
+                      <ion-icon name="aperture" class="iconpiclarger align-middle"></ion-icon> {{task.task_name}}
                     </a>
                   </div>
                 </div>
@@ -46,28 +46,28 @@
 
           <div class="card-body">
 
-            <div class = "container text-left egdiv">
+            <div class="container text-left egdiv">
 
-              <p class="card-text" style = "text-align: left">
+              <p class="card-text" style="text-align: left">
                 If all input data has been provided, the following button will be activated.
               </p>
 
-              <p class="card-text" style = "text-align: left">
+              <p class="card-text" style="text-align: left">
                 Click the button to start running your case.
               </p>
 
 
-              <div class = "container text-center" style = "width: 50%;" >
+              <div class="container text-center" style="width: 50%;" >
 
               <br/>
-              <button id = "runbtn" class = "btn btn-light border btn-block" tabindex="-1" role="button" aria-disabled="true" onclick = "" disabled>
-                <ion-icon name="send" class = "iconpiclarger align-middle float-left" style = "black"></ion-icon>
+              <button id="runbtn" class="btn btn-light border btn-block" tabindex="-1" role="button" aria-disabled="true" onclick="" disabled>
+                <ion-icon name="send" class="iconpiclarger align-middle float-left" style="black"></ion-icon>
                 {% if '6' in task.finished_steps %}
                 Rerun the Model
                 {% else %}
                 Run the model
                 {% endif %}
-                <ion-icon name="send" class = "iconpiclarger align-middle float-right" style = "black"></ion-icon>
+                <ion-icon name="send" class="iconpiclarger align-middle float-right" style="black"></ion-icon>
               </button>
               <br/>
               {% if '12345' in task.finished_steps %}
@@ -93,8 +93,8 @@
   </section>
 
 
-  <div id = "overlaycontainer" style="display:none">
-    <div id = "overlay">
+  <div id="overlaycontainer" style="display:none">
+    <div id="overlay">
       <div class="text-center border rounded" style="position: relative; top: 180%; background: #F7F7F7; width: 40%; left:30%">
         <h4>Model is Running...</h4>
         <br/>
@@ -116,11 +116,11 @@ function loadspinner(){
 }
 // function ajax send a post, the server receive post and run the model
 function sendtask() {
-  taskid = {{task.id}}
+  taskid={{task.id}}
   alertify.confirm('Confirm', 'Begin running?',
   function() {
-    var el = document.getElementsByName("csrfmiddlewaretoken");
-    csrf_value = el[0].getAttribute("value");
+    var el=document.getElementsByName("csrfmiddlewaretoken");
+    csrf_value=el[0].getAttribute("value");
     loadspinner()
     jQuery.ajax({
       method: "POST",
@@ -129,7 +129,7 @@ function sendtask() {
       success: function (data) {
         if (data) {
           if (data.msg.length > 0 ) {
-            for (var i = 0; i < data.error.length; i++){
+            for (var i=0; i < data.error.length; i++){
               $("#overlaycontainer").css("display","none");
               alertify.error(data.error[i])
             }

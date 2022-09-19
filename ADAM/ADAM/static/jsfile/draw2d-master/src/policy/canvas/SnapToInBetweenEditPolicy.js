@@ -1,5 +1,8 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.canvas.SnapToInBetweenEditPolicy
+ * @class
  *
  * Snapping is based on the existing children of a container. When snapping a shape,
  * the edges of the bounding box will snap to edges of other rectangles generated
@@ -11,17 +14,16 @@
  * @extends draw2d.policy.canvas.SnapToEditPolicy
  * @since 5.6.4
  */
-import draw2d from '../../packages'
-
-draw2d.policy.canvas.SnapToInBetweenEditPolicy = draw2d.policy.canvas.SnapToEditPolicy.extend({
-
+draw2d.policy.canvas.SnapToInBetweenEditPolicy = draw2d.policy.canvas.SnapToEditPolicy.extend(
+  /** @lends draw2d.policy.canvas.SnapToInBetweenEditPolicy.prototype */
+  {
+  
   NAME: "draw2d.policy.canvas.SnapToInBetweenEditPolicy",
 
   SNAP_THRESHOLD: 5,
   FADEOUT_DURATION: 500,
 
   /**
-   * @constructor
    * Creates a new constraint policy for snap to geometry
    *
    */
@@ -37,7 +39,7 @@ draw2d.policy.canvas.SnapToInBetweenEditPolicy = draw2d.policy.canvas.SnapToEdit
 
 
   /**
-   * @method
+   *
    *
    * @param {draw2d.Canvas} canvas
    * @param {Number} x the x-coordinate of the mouse down event
@@ -53,7 +55,7 @@ draw2d.policy.canvas.SnapToInBetweenEditPolicy = draw2d.policy.canvas.SnapToEdit
   },
 
   /**
-   * @method
+   *
    * Adjust the coordinates to the canvas neighbours
    *
    * @param {draw2d.Canvas} canvas the related canvas
@@ -452,7 +454,7 @@ draw2d.policy.canvas.SnapToInBetweenEditPolicy = draw2d.policy.canvas.SnapToEdit
   },
 
   /**
-   * @method
+   *
    * Hide the horizontal snaping guides
    *
    * @param {Boolean} fast

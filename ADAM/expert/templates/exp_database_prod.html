@@ -13,18 +13,18 @@
 
     <div class="card-header">
         <div class="row align-items-center">
-          <div class = "col text-left">
-            <a  class = "btn btn-light" href = '/expert/usermain/'>
-              <ion-icon name="arrow-back-circle-outline" class = "iconpiclarger align-middle"></ion-icon> Dashboard
+          <div class="col text-left">
+            <a  class="btn btn-light" href='/expert/usermain/'>
+              <ion-icon name="arrow-back-circle-outline" class="iconpiclarger align-middle"></ion-icon> Dashboard
             </a>
           </div>
 
-          <div class = "col text-center">
-            <h4 class = "card-title align-vertical text-body" >Product Database</h4>
+          <div class="col text-center">
+            <h4 class="card-title align-vertical text-body" >Product Database</h4>
           </div>
-          <div class = "col text-right invisible">
-            <a  class = "btn btn-light" href = '/'>
-              <ion-icon name="exit" class = "iconpiclarger align-middle"></ion-icon> Dashborad
+          <div class="col text-right invisible">
+            <a  class="btn btn-light" href='/'>
+              <ion-icon name="exit" class="iconpiclarger align-middle"></ion-icon> Dashborad
             </a>
           </div>
 
@@ -33,26 +33,26 @@
 
     <div class="card-body">
 
-    <form method = "GET">
+    <form method="GET">
       <div class="input-group mb-3">
-        <div class="input-group-prepend" style = "flex: 0 0 3%;">
+        <div class="input-group-prepend" style="flex: 0 0 3%;">
           <span class="input-group-text">
-            <ion-icon name="search" class = "iconpiclarge"></ion-icon>
+            <ion-icon name="search" class="iconpiclarge"></ion-icon>
           </span>
         </div>
           {{ searchform.keywords }}
         </div>
-      <div class="btn-group" style = "width: 38%">
-        <input type="submit" value="Search" class = "btn btn-light border" name = 'search_prod' style = "width: 33.3%">
-        <input type="submit" value="List All Prod" class = "btn btn-light border" name = 'list_prod' style = "width: 33.3%">
-        <button type = 'button' class = "btn btn-light border" style = "width:33.4%" onclick = "AddProdBase()">Add Product</button>
+      <div class="btn-group" style="width: 38%">
+        <input type="submit" value="Search" class="btn btn-light border" name='search_prod' style="width: 33.3%">
+        <input type="submit" value="List All Prod" class="btn btn-light border" name='list_prod' style="width: 33.3%">
+        <button type='button' class="btn btn-light border" style="width:33.4%" onclick="AddProdBase()">Add Product</button>
         {% if admin %}
-        <div class = "btn btn-light border align-middle" data-toggle="popover" data-placement="right" title="Notice" data-html="true" data-content="<p>If you need to edit or delete a <strong>public</strong> product or do <strong>batch operations</strong>, please go to the admin system.</p>" >
-            <ion-icon name="alert-circle-outline" class = "iconpiclarge" style = "cursor: pointer;" ></ion-icon>
+        <div class="btn btn-light border align-middle" data-toggle="popover" data-placement="right" title="Notice" data-html="true" data-content="<p>If you need to edit or delete a <strong>public</strong> product or do <strong>batch operations</strong>, please go to the admin system.</p>" >
+            <ion-icon name="alert-circle-outline" class="iconpiclarge" style="cursor: pointer;" ></ion-icon>
         </div>
         {% else %}
-        <div class = "btn btn-light border align-middle" data-toggle="popover" data-placement="right" title="Notice" data-html="true" data-content="<p>If you need to do <strong>batch operations</strong> or <strong>reinitialize</strong> your database, please send us a request.</p>" >
-            <ion-icon name="alert-circle-outline" class = "iconpiclarge" style = "cursor: pointer;" ></ion-icon>
+        <div class="btn btn-light border align-middle" data-toggle="popover" data-placement="right" title="Notice" data-html="true" data-content="<p>If you need to do <strong>batch operations</strong> or <strong>reinitialize</strong> your database, please send us a request.</p>" >
+            <ion-icon name="alert-circle-outline" class="iconpiclarge" style="cursor: pointer;" ></ion-icon>
         </div>
         {% endif %}
 
@@ -70,9 +70,9 @@
         {% else %}
         <script type="text/javascript">
             $(window).on('load',function () {
-              prodlist = []
+              prodlist=[]
               {% for item in prodlist %}
-                data = {id: "{{item.id}}", name: "{{item.name}}", transcost: "{{item.transcost}}", unit: "{{item.unit}}", note: "{{item.additionalinfo|safe}}", public: "{{item.public}}", transformationset: []}
+                data={id: "{{item.id}}", name: "{{item.name}}", transcost: "{{item.transcost}}", unit: "{{item.unit}}", note: "{{item.additionalinfo|safe}}", public: "{{item.public}}", transformationset: []}
                 {% for trans in item.transformation_set.all %}
                   data.transformationset.push({techname: "{{trans.technology.name}}", yield: "{{trans.transforming_coefficient}}"})
                 {% endfor %}
@@ -83,7 +83,7 @@
 
         <br/>
         <h6>Searching Results:</h6>
-          <table width = 100% class = "table text-center table-hover">
+          <table width=100% class="table text-center table-hover">
             <thead>
             <tr>
               <th>Product Name</th>
@@ -97,10 +97,10 @@
               <td>{{prod.name}}</td>
               <td>p{{prod.id}}</td>
               <td>
-                  <ion-icon name="bar-chart" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Detalied information"style = "cursor: pointer" onclick = ProdInfo({{prod.id}})></ion-icon>
+                  <ion-icon name="bar-chart" class="iconpiclarge" data-toggle="tooltip" data-placement="right" title="Detalied information"style="cursor: pointer" onclick=ProdInfo({{prod.id}})></ion-icon>
                   {% if not prod.public %}
-                  <ion-icon name="trash" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Delete this product" style = "cursor: pointer" onclick = DeleteProd({{prod.id}})></ion-icon>
-                  <ion-icon name="create" class = "iconpiclarge" data-toggle="tooltip" data-placement="right" title="Edit this product" style = "cursor: pointer" onclick = EditProd({{prod.id}})></ion-icon>
+                  <ion-icon name="trash" class="iconpiclarge" data-toggle="tooltip" data-placement="right" title="Delete this product" style="cursor: pointer" onclick=DeleteProd({{prod.id}})></ion-icon>
+                  <ion-icon name="create" class="iconpiclarge" data-toggle="tooltip" data-placement="right" title="Edit this product" style="cursor: pointer" onclick=EditProd({{prod.id}})></ion-icon>
                   {% endif %}
               </td>
             </tr>
@@ -121,13 +121,13 @@
 {% endblock content %}
 
 {% block scripts %}
-<script id = "helper" admin = "{{admin}}" src="{% static 'jsfile/expertgraphedit/ProdDataBase.js' %}"></script>
+<script id="helper" admin="{{admin}}" src="{% static 'jsfile/expertgraphedit/ProdDataBase.js' %}"></script>
 <script type="text/javascript">
   $(function () {
     $('[data-toggle="popover"]').popover();
-    let params = new URLSearchParams(location.search);
-    taskid = params.get('task')
-    type = params.get('type')
+    let params=new URLSearchParams(location.search);
+    taskid=params.get('task')
+    type=params.get('type')
     if (taskid) {
       AddProdBase(taskid);
     }

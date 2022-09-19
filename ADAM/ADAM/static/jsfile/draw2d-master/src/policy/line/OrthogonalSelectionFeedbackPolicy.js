@@ -1,23 +1,25 @@
+import draw2d from '../../packages'
+
+
 /**
- * @class draw2d.policy.line.OrthogonalSelectionFeedbackPolicy
+ * @class
  *
  * Feedback and edit policy for the InteractiveManhattanRouter.
  *
  * @author  Andreas Herz
  * @extends draw2d.policy.line.LineSelectionFeedbackPolicy
  */
-import draw2d from '../../packages'
-
 // do not delete them
 import plugin from "lib/jquery.contextmenu"
 import css from 'css/contextmenu.css'
 
-draw2d.policy.line.OrthogonalSelectionFeedbackPolicy = draw2d.policy.line.LineSelectionFeedbackPolicy.extend({
-
+draw2d.policy.line.OrthogonalSelectionFeedbackPolicy = draw2d.policy.line.LineSelectionFeedbackPolicy.extend(
+  /** @lends draw2d.policy.line.OrthogonalSelectionFeedbackPolicy.prototype */
+  {
+  
   NAME: "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy",
 
   /**
-   * @constructor
    * Creates a new Router object
    */
   init: function (attr, setter, getter) {
@@ -26,7 +28,10 @@ draw2d.policy.line.OrthogonalSelectionFeedbackPolicy = draw2d.policy.line.LineSe
     // The ResizeHandle for the Policy. This is inline to avoid that a user want to use them without
     // the right installed policy.
     //
-    this.ResizeHandle = draw2d.ResizeHandle.extend({
+    this.ResizeHandle = draw2d.ResizeHandle.extend(
+      /** @lends draw2d.policy.line.OrthogonalSelectionFeedbackPolicy.ResizeHandle.prototype */
+      {
+      
       NAME: "draw2d.policy.line.OrthogonalSelectionFeedbackPolicy.ResizeHandle",
 
       init: function (owner, index) {
@@ -36,7 +41,7 @@ draw2d.policy.line.OrthogonalSelectionFeedbackPolicy = draw2d.policy.line.LineSe
 
 
       /**
-       * @method
+       * 
        * Called if a drag&drop operation starts.<br>
        * @param {Number} x the x-coordinate of the mouse up event
        * @param {Number} y the y-coordinate of the mouse up event
@@ -54,7 +59,7 @@ draw2d.policy.line.OrthogonalSelectionFeedbackPolicy = draw2d.policy.line.LineSe
       },
 
       /**
-       * @method
+       * 
        * Called from the framework during a drag&drop operation of the ResizeHandles
        *
        * @param {Number} dx the x difference between the start of the drag drop operation and now
@@ -62,7 +67,7 @@ draw2d.policy.line.OrthogonalSelectionFeedbackPolicy = draw2d.policy.line.LineSe
        * @param {Number} dx2 The x diff since the last call of this dragging operation
        * @param {Number} dy2 The y diff since the last call of this dragging operation
        *
-       * @return {Boolean}
+       * @returns {Boolean}
        **/
       onDrag: function (dx, dy, dx2, dy2) {
         if (this.command == null) {
@@ -332,15 +337,15 @@ draw2d.policy.line.OrthogonalSelectionFeedbackPolicy = draw2d.policy.line.LineSe
       },
 
       /**
-       * @method Called after a drag and drop action.<br>
-       *         Sub classes can override this method to implement additional stuff. Don't forget to call the super implementation via <code>this._super();</code>
+       *  Called after a drag and drop action.<br>
+       *        Sub classes can override this method to implement additional stuff. Don't forget to call the super implementation via <code>this._super();</code>
        *
        * @param {Number} x the x-coordinate of the mouse event
        * @param {Number} y the y-coordinate of the mouse event
        * @param {Boolean} shiftKey true if the shift key has been pressed during this event
        * @param {Boolean} ctrlKey true if the ctrl key has been pressed during the event
        *
-       * @return {Boolean}
+       * @returns {Boolean}
        */
       onDragEnd: function (x, y, shiftKey, ctrlKey) {
         let stack = this.getCanvas().getCommandStack()
@@ -352,7 +357,7 @@ draw2d.policy.line.OrthogonalSelectionFeedbackPolicy = draw2d.policy.line.LineSe
 
 
       /**
-       * @method
+       * 
        * Controls the location of the resize handle
        *
        * @template
@@ -372,7 +377,7 @@ draw2d.policy.line.OrthogonalSelectionFeedbackPolicy = draw2d.policy.line.LineSe
 
 
   /**
-   * @method
+   * 
    *
    * @template
    * @param {draw2d.Connection} connection the selected figure
@@ -395,7 +400,7 @@ draw2d.policy.line.OrthogonalSelectionFeedbackPolicy = draw2d.policy.line.LineSe
 
 
   /**
-   * @method
+   * 
    * remove the segment with the given index.
    * You must check if it possible to remove the segment before. The method didn'T do any consistency checks.
    *
@@ -522,7 +527,7 @@ draw2d.policy.line.OrthogonalSelectionFeedbackPolicy = draw2d.policy.line.LineSe
 
 
   /**
-   * @method
+   * 
    * split the segment with the given index and insert a new segment.
    *
    * @param conn
@@ -667,7 +672,7 @@ draw2d.policy.line.OrthogonalSelectionFeedbackPolicy = draw2d.policy.line.LineSe
   },
 
   /**
-   * @method
+   * 
    * Called if the user press the right mouse on the figure.<br>
    * You can either override the "onContextMenu" method of the figure or install an editor policy and override this method.
    * Booth is valid and possible.

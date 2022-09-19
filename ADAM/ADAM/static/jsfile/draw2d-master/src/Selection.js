@@ -1,5 +1,8 @@
+import draw2d from 'packages'
+
+
 /**
- * @class draw2d.Selection
+ * @class
  *
  * Represents the current selection in the canvas. The selection element is a pure passive element which
  * manage/store the selection.
@@ -7,15 +10,13 @@
  *
  * @author Andreas Herz
  */
-
-import draw2d from 'packages';
-
-draw2d.Selection = Class.extend({
+draw2d.Selection = Class.extend(
+  /** @lends draw2d.Selection.prototype */
+  {
 
   NAME: "draw2d.Selection",
 
   /**
-   * @constructor
    * Creates a new figure element which are not assigned to any canvas.
    *
    */
@@ -25,7 +26,7 @@ draw2d.Selection = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * Reset the current selection
    *
    */
@@ -37,17 +38,17 @@ draw2d.Selection = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * Return the primary selection. This can only one figure at once.
    *
-   * @return {draw2d.Figure} the primary selected figure
+   * @returns {draw2d.Figure} the primary selected figure
    */
   getPrimary: function () {
     return this.primary;
   },
 
   /**
-   * @method
+   * 
    * Set the primary selection.
    *
    * @param {draw2d.Figure} figure The new primary selection
@@ -60,7 +61,7 @@ draw2d.Selection = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * Remove the given figure from the selection (primary,all)
    *
    * @param {draw2d.Figure} figure
@@ -75,7 +76,7 @@ draw2d.Selection = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * Add a figure to the selection. No events are fired or update the selection handle. This method just
    * add the figure to the internal management data structure.
    *
@@ -92,14 +93,14 @@ draw2d.Selection = Class.extend({
 
 
   /**
-   * @method
+   * 
    * return true if the given figure part of the selection.
    *
    * @param {draw2d.Figure} figure The figure to check
    * @param {Boolean} [checkDescendant] Check if the figure provided by the argument is a descendant of the selection whether it is a direct child or nested more deeply.
    *
    * @since 2.2.0
-   * @return {Boolean}
+   * @returns {Boolean}
    */
   contains: function (figure, checkDescendant) {
     if (checkDescendant) {
@@ -115,7 +116,7 @@ draw2d.Selection = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * Return the size of the selection
    *
    * @since 4.8.0
@@ -125,11 +126,11 @@ draw2d.Selection = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * Return the complete selection - including the primary selection.
    *
    * @param {Boolean} [expand] expand all StrongComposite and WeakComposite to get all figures. Didn't expand any SetFigures or LayoutFigures
-   * @return {draw2d.util.ArrayList}
+   * @returns {draw2d.util.ArrayList}
    *
    */
   getAll: function (expand) {
@@ -152,7 +153,7 @@ draw2d.Selection = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * Iterates over the current selection with <b>func</b> as callback handler.
    *
    * @param {Function} func the callback function to call for each element

@@ -1,16 +1,21 @@
-/**
- * @class draw2d.geo.Point Util class for geometrie handling.
- */
 import draw2d from '../packages'
 
 
-draw2d.geo.Point = Class.extend({
+/**
+ * Represents a point (x, y) in 2-dimensional space.
+ *
+ * @class
+ */
 
+draw2d.geo.Point = Class.extend(
+  /** @lends draw2d.geo.Point.prototype */
+  {
+  
   NAME: "draw2d.geo.Point",
 
   /**
-   * @constructor
    * Creates a new Point object with the hands over coordinates.
+   *
    * @param {Number|draw2d.geo.Point} x
    * @param {Number} y
    */
@@ -39,10 +44,11 @@ draw2d.geo.Point = Class.extend({
 
 
   /**
-   * @method
-   * Set the boundary of the rectangle. If set, the rectangle is always inside
-   * the boundary. A setX or setY will always be adjusted.
+   * 
+   * Ensure the boundary of the rectangle. If set, the rectangle keeps always inside
+   * the boundary. It is like a virtual fence.
    *
+   * @returns {this}
    */
   setBoundary: function (bx, by, bw, bh) {
     if (bx instanceof draw2d.geo.Rectangle) {
@@ -63,12 +69,13 @@ draw2d.geo.Point = Class.extend({
 
 
   /**
-   * @method
+   * 
    * @private
+   * @returns {this}
    */
   adjustBoundary: function () {
     if (this.bx === null) {
-      return
+      return this
     }
     this.x = Math.min(Math.max(this.bx, this.x), this.bw)
     this.y = Math.min(Math.max(this.by, this.y), this.bh)
@@ -77,7 +84,7 @@ draw2d.geo.Point = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * Moves this Rectangle horizontally by dx and vertically by dy, then returns
    * this Rectangle for convenience.<br>
    * <br>
@@ -86,7 +93,7 @@ draw2d.geo.Point = Class.extend({
    *
    * @param {Number} dx  Shift along X axis
    * @param {Number} dy  Shift along Y axis
-   *
+   * @returns {this}
    **/
   translate: function (dx, dy) {
     this.x += dx
@@ -97,30 +104,32 @@ draw2d.geo.Point = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * The X value of the point
+   *
    * @since 0.1
-   * @return {Number}
+   * @returns {Number} The x coordinate of the top left corner
    */
   getX: function () {
     return this.x
   },
 
   /**
-   * @method
+   * 
    * The y value of the point
    *
-   * @return {Number}
+   * @returns {Number} The y coordinate of the top left corner
    */
   getY: function () {
     return this.y
   },
 
   /**
-   * @method
+   * 
    * Set the new X value of the point
    *
-   * @param {Number} x the new value
+   * @param {Number} x the new x coordinate of the rect
+   * @returns {this}
    */
   setX: function (x) {
     this.x = x
@@ -130,10 +139,11 @@ draw2d.geo.Point = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * Set the new Y value of the point
    *
-   * @param {Number} y the new value
+   * @param {Number} y the new y coordinate of the rect
+   * @returns {this}
    */
   setY: function (y) {
     this.y = y
@@ -143,11 +153,12 @@ draw2d.geo.Point = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * Set the new x/y coordinates of this point
    *
    * @param {Number|draw2d.geo.Point} x
    * @param {Number} [y]
+   * @returns {this}
    */
   setPosition: function (x, y) {
     if (x instanceof draw2d.geo.Point) {
@@ -164,11 +175,11 @@ draw2d.geo.Point = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * Calculates the relative position of the specified Point to this Point.
    *
    * @param {draw2d.geo.Point} p The reference Point
-   * @return {Number} NORTH, SOUTH, EAST, or WEST, as defined in {@link draw2d.geo.PositionConstants}
+   * @returns {Number} NORTH, SOUTH, EAST, or WEST, as defined in {@link draw2d.geo.PositionConstants}
    */
   getPosition: function (p) {
     let dx = p.x - this.x
@@ -178,29 +189,30 @@ draw2d.geo.Point = Class.extend({
         return draw2d.geo.PositionConstants.WEST
       return draw2d.geo.PositionConstants.EAST
     }
-    if (dy < 0)
+    if (dy < 0) {
       return draw2d.geo.PositionConstants.NORTH
+    }
     return draw2d.geo.PositionConstants.SOUTH
   },
 
   /**
-   * @method
+   * 
    * Compares two points and return [true] if x and y are equals.
    *
    * @param {draw2d.geo.Point} p the point to compare with
    *
-   * @return {Boolean}
+   * @returns {Boolean} True if the given p[x,y] has an exact match with the point
    */
   equals: function (p) {
     return this.x === p.x && this.y === p.y
   },
 
   /**
-   * @method
+   * 
    * Return the distance between this point and the hands over.
    *
    * @param {draw2d.geo.Point} other the point to use
-   * @return {Number}
+   * @returns {Number} The distance to the given point
    */
   distance: function (other) {
     return Math.sqrt((this.x - other.x) * (this.x - other.x) + (this.y - other.y) * (this.y - other.y))
@@ -212,10 +224,10 @@ draw2d.geo.Point = Class.extend({
 
 
   /**
-   * @method
-   * Return the th of the vector from [0,0]
+   * 
+   * Return the length of the vector measured from [0,0]
    *
-   * @return {Number}
+   * @returns {Number} The length of the vector [0,0][x,y]
    * @since 2.10.0
    */
   length: function () {
@@ -223,12 +235,12 @@ draw2d.geo.Point = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * Return a new Point translated with the x/y values of the hands over point.
    *
    * @param {draw2d.geo.Point|Number} x the x translation or the complete point to translate
    * @param {Number} [y] the y translation. Required if x is a simple number instead of a draw2d.geo.Point
-   * @return {draw2d.geo.Point} The new translated point.
+   * @returns {draw2d.geo.Point} A instance of a translated point.
    */
   translated: function (x, y) {
     let other = new draw2d.geo.Point(x, y)
@@ -236,25 +248,26 @@ draw2d.geo.Point = Class.extend({
   },
 
   /**
-   * @method
-   * Return a new Point scaled with the x/y values of the hands over point.
+   * 
+   * Scales this point with the handover factor
    *
-   * @param {Number} factor the factor to scaled the new point.
-   * @return {draw2d.geo.Point} The new translated point.
+   * @param {Number} factor the factor to scaled the point.
+   * @returns {this}
    */
   scale: function (factor) {
     this.x *= factor
     this.y *= factor
     this.adjustBoundary()
+
     return this
   },
 
   /**
-   * @method
-   * Return a new Point scaled with the x/y values of the hands over point.
+   * 
+   * Return a **new** Point scaled with the givben factor
    *
    * @param {Number} factor the factor to scaled the new point.
-   * @return {draw2d.geo.Point} The new translated point.
+   * @returns {draw2d.geo.Point} The new translated point.
    */
   scaled: function (factor) {
     return new draw2d.geo.Point(this.x * factor, this.y * factor)
@@ -266,7 +279,7 @@ draw2d.geo.Point = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * Return an objects with all important attributes for XML or JSON serialization
    *
    * @returns {Object}
@@ -279,20 +292,22 @@ draw2d.geo.Point = Class.extend({
   },
 
   /**
-   * @method
+   * 
    * Read all attributes from the serialized properties and transfer them into the shape.
    *
    * @param {Object} memento
-   * @returns
+   * @returns {this}
    */
   setPersistentAttributes: function (memento) {
     this.x = memento.x
     this.y = memento.y
+
+    return this
   },
 
   /**
-   * @method
-   * substract the given point and return the new point.
+   * 
+   * substract the given point and return the **new** point.
    *
    * @param that
    * @returns {draw2d.geo.Point}
@@ -317,10 +332,10 @@ draw2d.geo.Point = Class.extend({
 
 
   /**
-   * @method
-   * Clone the Point and return them
+   * 
+   * Return a cloned point
    *
-   * @returns
+   * @returns {draw2d.geo.Point}
    */
   clone: function () {
     return new draw2d.geo.Point(this.x, this.y)

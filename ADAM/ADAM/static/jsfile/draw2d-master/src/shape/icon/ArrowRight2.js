@@ -1,26 +1,28 @@
-/**
- * @class draw2d.shape.icon.ArrowRight2
+import draw2d from '../../packages'
 
- * See the example:
+
+/**
+ * @class
+
  *
- *     @example preview small frame
+ * @example
  *
- *     let icon =  new draw2d.shape.icon.ArrowRight2();
+ *    let icon =  new draw2d.shape.icon.ArrowRight2();
  *
- *     canvas.add(icon,50,10);
+ *    canvas.add(icon,50,10);
  *
  * @inheritable
  * @author Andreas Herz
  * @extends draw2d.shape.icon.Icon
  */
-import draw2d from '../../packages'
+draw2d.shape.icon.ArrowRight2 = draw2d.shape.icon.Icon.extend(
+  /** @lends draw2d.shape.icon.ArrowRight2.prototype */
+  {
 
-draw2d.shape.icon.ArrowRight2 = draw2d.shape.icon.Icon.extend({
   NAME: "draw2d.shape.icon.ArrowRight2",
 
   /**
    *
-   * @constructor
    * Creates a new icon element which are not assigned to any canvas.
    *
    * @param {Object} attr the configuration of the shape
@@ -31,7 +33,7 @@ draw2d.shape.icon.ArrowRight2 = draw2d.shape.icon.Icon.extend({
 
   /**
    * @private
-   * @returns
+   * @returns {Object} the raphaelJS path object
    */
   createSet: function () {
     return this.canvas.paper.path("M10.129,22.186 16.316,15.999 10.129,9.812 13.665,6.276 23.389,15.999 13.665,25.725z")
